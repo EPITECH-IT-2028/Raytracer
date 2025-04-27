@@ -10,6 +10,7 @@ add_compile_options(-Wall -Wextra -Werror -std=c++20)
 
 add_executable(raytracer
   src/main.cpp
+  src/Vector3D.cpp
 )
 
 if(APPLE)
