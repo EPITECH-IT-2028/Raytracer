@@ -14,6 +14,7 @@ add_executable(raytracer
   src/maths/Point3D.cpp
   src/Rectangle.cpp
   src/shapes/Sphere.cpp
+  src/shapes/Plane.cpp
   src/Camera.cpp
   src/Scene.cpp
 )
@@ -28,6 +29,9 @@ target_include_directories(raytracer
 if(APPLE)
   set(SFML_DIR "/opt/homebrew/opt/sfml@2/lib/cmake/SFML")
   find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics)
+elseif(UNIX AND NOT APPLE)
+  find_package(SFML 2.5.1 COMPONENTS system window graphics REQUIRED)
   target_link_libraries(raytracer sfml-system sfml-window sfml-graphics)
 endif()
 
