@@ -29,6 +29,8 @@ public:
   Vector3D operator/=(const double &val);
 
   double dot(const Vector3D &vec) const;
+
+  Vector3D &normalize();
 };
 
 } // namespace Math
