@@ -6,6 +6,7 @@
 #include "Scene.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
+#include "Plane.hpp"
 #include "Vector3D.hpp"
 #include <fstream>
 #include <iostream>
