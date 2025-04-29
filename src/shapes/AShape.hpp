@@ -8,8 +8,6 @@ namespace Raytracer {
 
 class AShape : public IShape {
 public:
-  AShape() = default;
-
   Math::Vector3D color;
 
   virtual ~AShape() = default;
