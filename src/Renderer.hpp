@@ -25,7 +25,7 @@ namespace Raytracer {
 
       void writeColor(std::ofstream &file, const Math::Vector3D &color);
 
-      Math::Vector3D rayColor(Ray &r, const Sphere &s,
+      Math::Vector3D rayColor(Ray &r, const IShape &s,
                               const DirectionalLight &light);
 
     private:

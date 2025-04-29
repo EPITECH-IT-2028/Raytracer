@@ -13,12 +13,13 @@ namespace Raytracer {
 
       void addShape(const std::shared_ptr<IShape> &shape);
 
-      std::tuple<double, Math::Vector3D> hits(
+      std::tuple<double, Math::Vector3D, const IShape *> hits(
           const Raytracer::Ray &ray) const override;
 
-      Math::Vector3D getColor() const;
-
-      Math::Point3D getCenter() const;
+      Math::Vector3D getNormal(const Math::Point3D &point) const override {
+        (void)point;
+        return Math::Vector3D(0, 0, 0);
+      }
 
     private:
       std::vector<std::shared_ptr<IShape>> shapes;

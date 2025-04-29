@@ -22,15 +22,11 @@ namespace Raytracer {
 
       ~Sphere() = default;
 
-      std::tuple<double, Math::Vector3D> hits(
+      std::tuple<double, Math::Vector3D, const IShape *> hits(
           const Raytracer::Ray &ray) const override;
 
-      Math::Point3D getCenter() const {
-        return _center;
-      }
-
-      Math::Vector3D getColor() const {
-        return _color;
+      Math::Vector3D getNormal(const Math::Point3D &point) const override {
+        return (point - _center).normalize();
       }
 
     private:

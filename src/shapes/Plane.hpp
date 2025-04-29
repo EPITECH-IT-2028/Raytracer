@@ -5,7 +5,6 @@
 #include "Ray.hpp"
 
 namespace Raytracer {
-
   class Plane : public AShape {
     public:
       Plane(const Math::Point3D &center, const Math::Vector3D &normal,
@@ -21,14 +20,12 @@ namespace Raytracer {
 
       ~Plane() = default;
 
-      std::tuple<double, Math::Vector3D> hits(const Ray &ray) const override;
+      std::tuple<double, Math::Vector3D, const IShape *> hits(
+          const Ray &ray) const override;
 
-      Math::Point3D getCenter() const {
-        return _center;
-      }
-
-      Math::Vector3D getColor() const {
-        return _color;
+      Math::Vector3D getNormal(const Math::Point3D &point) const override {
+        (void)point;
+        return _normal;
       }
 
     private:
