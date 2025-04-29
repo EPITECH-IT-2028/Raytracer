@@ -13,7 +13,8 @@ public:
   ~Point3D() = default;
 
   Point3D operator+(const Vector3D &vec) const;
-  Math::Vector3D operator-(const Point3D &point) const;
+  Point3D operator-(const Vector3D &vec) const;
+  Vector3D operator-(const Point3D &point) const;
 };
 
 } // namespace Math
