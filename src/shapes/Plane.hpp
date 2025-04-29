@@ -1,11 +1,12 @@
 #pragma once
 
+#include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
 
 namespace Raytracer {
 
-class Plane {
+class Plane : public AShape {
 public:
   Math::Point3D center;
   Math::Vector3D normal;
@@ -14,6 +15,7 @@ public:
       : center(center), normal(normal) {}
 
   Plane() : center(Math::Point3D()), normal(Math::Vector3D()) {}
+
   ~Plane() = default;
 
   bool hits(const Raytracer::Ray &ray) const;
