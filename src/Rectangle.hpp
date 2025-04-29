@@ -4,22 +4,26 @@
 
 namespace Raytracer {
 
-class Rectangle3D {
-public:
-  Math::Point3D origin;
-  Math::Vector3D bottom_side;
-  Math::Vector3D left_side;
+  class Rectangle3D {
+    public:
+      Rectangle3D(const Math::Point3D &origin,
+                  const Math::Vector3D &bottom_side,
+                  const Math::Vector3D &left_side)
+          : _origin(origin), _bottom_side(bottom_side), _left_side(left_side) {
+      }
 
-  Rectangle3D(const Math::Point3D &origin, const Math::Vector3D &bottom_side,
-              const Math::Vector3D &left_side)
-      : origin(origin), bottom_side(bottom_side), left_side(left_side) {}
+      Rectangle3D()
+          : _origin(-1, -1, -1), _bottom_side(2, 0, 0), _left_side(0, 2, 0) {
+      }
 
-  Rectangle3D()
-      : origin(-1, -1, -1), bottom_side(2, 0, 0), left_side(0, 2, 0) {}
+      ~Rectangle3D() = default;
 
-  ~Rectangle3D() = default;
+      Math::Point3D pointAt(double u, double v) const;
 
-  Math::Point3D pointAt(double u, double v) const;
-};
+    private:
+      Math::Point3D _origin;
+      Math::Vector3D _bottom_side;
+      Math::Vector3D _left_side;
+  };
 
-} // namespace Raytracer
+}  // namespace Raytracer

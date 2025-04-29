@@ -1,8 +1,8 @@
 #include "Scene.hpp"
-#include "Ray.hpp"
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include "Ray.hpp"
 
 Raytracer::Scene::Scene() {
   _path = "./output.ppm";

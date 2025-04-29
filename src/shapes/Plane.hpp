@@ -6,19 +6,27 @@
 
 namespace Raytracer {
 
-class Plane : public AShape {
-public:
-  Math::Point3D center;
-  Math::Vector3D normal;
+  class Plane : public AShape {
+    public:
+      Plane(const Math::Point3D &center, const Math::Vector3D &normal,
+            const Math::Vector3D &color)
+          : _center(center), _normal(normal), _color(color) {
+      }
 
-  Plane(const Math::Point3D &center, const Math::Vector3D &normal)
-      : center(center), normal(normal) {}
+      Plane()
+          : _center(Math::Point3D()),
+            _normal(Math::Vector3D()),
+            _color(Math::Vector3D(1, 0, 0)) {
+      }
 
-  Plane() : center(Math::Point3D()), normal(Math::Vector3D()) {}
+      ~Plane() = default;
 
-  ~Plane() = default;
+      std::tuple<bool, Math::Vector3D> hits(const Ray &ray) const override;
 
-  bool hits(const Raytracer::Ray &ray) const;
-};
+    private:
+      Math::Point3D _center;
+      Math::Vector3D _normal;
+      Math::Vector3D _color;
+  };
 
-} // namespace Raytracer
+}  // namespace Raytracer

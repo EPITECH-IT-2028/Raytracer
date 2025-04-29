@@ -1,21 +1,23 @@
 #pragma once
 
-#include "AShape.hpp"
 #include <memory>
 #include <vector>
+#include "AShape.hpp"
+#include "Vector3D.hpp"
 
 namespace Raytracer {
 
-class ShapeGroup : public AShape {
-public:
-  ShapeGroup() = default;
+  class ShapeComposite : public AShape {
+    public:
+      ShapeComposite() = default;
 
-  void addShape(const std::shared_ptr<IShape> &shape);
+      void addShape(const std::shared_ptr<IShape> &shape);
 
-  bool hits(const Raytracer::Ray &ray) const override;
+      std::tuple<bool, Math::Vector3D> hits(
+          const Raytracer::Ray &ray) const override;
 
-private:
-  std::vector<std::shared_ptr<IShape>> shapes;
-};
+    private:
+      std::vector<std::shared_ptr<IShape>> shapes;
+  };
 
-} // namespace Raytracer
+}  // namespace Raytracer

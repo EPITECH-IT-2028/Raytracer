@@ -6,19 +6,21 @@
 
 namespace Raytracer {
 
-class Camera {
-public:
-  Math::Point3D origin;
-  Rectangle3D screen;
+  class Camera {
+    public:
+      Math::Point3D origin;
+      Rectangle3D screen;
 
-  Camera() : origin(0, 0, 0), screen(Rectangle3D()) {}
+      Camera() : origin(0, 0, 0), screen(Rectangle3D()) {
+      }
 
-  Camera(const Math::Point3D &origin, const Rectangle3D &screen)
-      : origin(origin), screen(screen) {}
+      Camera(const Math::Point3D &origin, const Rectangle3D &screen)
+          : origin(origin), screen(screen) {
+      }
 
-  ~Camera() = default;
+      ~Camera() = default;
 
-  Ray ray(double u, double v);
-};
+      Ray ray(double u, double v);
+  };
 
-} // namespace Raytracer
+}  // namespace Raytracer
