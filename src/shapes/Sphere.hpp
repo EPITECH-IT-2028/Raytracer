@@ -11,8 +11,7 @@ public:
   Math::Point3D center;
   double radius;
 
-  Sphere(const Math::Point3D &center, double radius,
-         const Math::Vector3D &color)
+  Sphere(const Math::Point3D &center, double radius)
       : center(center), radius(radius) {}
   Sphere() : center(Math::Point3D()), radius(0.0) {}
 

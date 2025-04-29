@@ -14,19 +14,19 @@ public:
 
   // Operator overloads for vector operations
   Vector3D operator+(const Vector3D &vec) const;
-  Vector3D operator+=(const Vector3D &vec);
+  Vector3D &operator+=(const Vector3D &vec);
   Vector3D operator-(const Vector3D &vec) const;
-  Vector3D operator-=(const Vector3D &vec);
+  Vector3D &operator-=(const Vector3D &vec);
   Vector3D operator*(const Vector3D &vec) const;
-  Vector3D operator*=(const Vector3D &vec);
+  Vector3D &operator*=(const Vector3D &vec);
   Vector3D operator/(const Vector3D &vec) const;
-  Vector3D operator/=(const Vector3D &vec);
+  Vector3D &operator/=(const Vector3D &vec);
 
   // Operator overloads for scalar operations
   Vector3D operator*(const double &val) const;
-  Vector3D operator*=(const double &val);
+  Vector3D &operator*=(const double &val);
   Vector3D operator/(const double &val) const;
-  Vector3D operator/=(const double &val);
+  Vector3D &operator/=(const double &val);
 
   double dot(const Vector3D &vec) const;
 
