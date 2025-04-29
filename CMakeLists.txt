@@ -14,6 +14,7 @@ add_executable(raytracer
   src/maths/Point3D.cpp
   src/Rectangle.cpp
   src/shapes/Sphere.cpp
+  src/shapes/Plane.cpp
   src/Camera.cpp
   src/Scene.cpp
 )
