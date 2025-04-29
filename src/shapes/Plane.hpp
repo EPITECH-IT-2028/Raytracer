@@ -21,7 +21,15 @@ namespace Raytracer {
 
       ~Plane() = default;
 
-      std::tuple<bool, Math::Vector3D> hits(const Ray &ray) const override;
+      std::tuple<double, Math::Vector3D> hits(const Ray &ray) const override;
+
+      Math::Point3D getCenter() const {
+        return _center;
+      }
+
+      Math::Vector3D getColor() const {
+        return _color;
+      }
 
     private:
       Math::Point3D _center;

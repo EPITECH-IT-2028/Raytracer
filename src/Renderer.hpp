@@ -2,7 +2,10 @@
 
 #include <fstream>
 #include <iostream>
+#include "DirectionalLight.hpp"
 #include "Point3D.hpp"
+#include "Ray.hpp"
+#include "Sphere.hpp"
 
 namespace Raytracer {
 
@@ -21,6 +24,9 @@ namespace Raytracer {
       void writeHeader(std::ofstream &file);
 
       void writeColor(std::ofstream &file, const Math::Vector3D &color);
+
+      Math::Vector3D rayColor(Ray &r, const Sphere &s,
+                              const DirectionalLight &light);
 
     private:
       int _width;

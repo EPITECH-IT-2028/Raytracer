@@ -1,8 +1,9 @@
-#pragma once
-
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <string>
+#include "DirectionalLight.hpp"
+#include "Ray.hpp"
+#include "Sphere.hpp"
+#include "Vector3D.hpp"
 
 namespace Raytracer {
 

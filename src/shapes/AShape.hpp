@@ -10,7 +10,7 @@ namespace Raytracer {
     public:
       virtual ~AShape() = default;
 
-      virtual std::tuple<bool, Math::Vector3D> hits(
+      virtual std::tuple<double, Math::Vector3D> hits(
           const Raytracer::Ray &ray) const = 0;
   };
 

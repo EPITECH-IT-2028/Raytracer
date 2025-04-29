@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Point3D.hpp"
+
 namespace Raytracer {
 
   class Ray {
@@ -13,6 +14,10 @@ namespace Raytracer {
       }
 
       Ray() : origin(Math::Point3D()), direction(Math::Vector3D()) {
+      }
+
+      Math::Point3D at(double t) const {
+        return origin + direction * t;
       }
 
       ~Ray() = default;

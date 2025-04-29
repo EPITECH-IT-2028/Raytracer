@@ -12,7 +12,7 @@ Raytracer::Scene::Scene() {
   _window.setVerticalSyncEnabled(true);
 }
 
-void Raytracer::Scene::parseBasicsPPM(const std::string &filename) {
+void Raytracer::Scene::parseBasicsPPM(const std::string& filename) {
   std::ifstream file(filename);
   if (!file.is_open()) {
     std::cerr << "Error opening file: " << filename << std::endl;

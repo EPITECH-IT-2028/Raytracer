@@ -2,7 +2,7 @@
 #include <cmath>
 #include "Vector3D.hpp"
 
-std::tuple<bool, Math::Vector3D> Raytracer::Sphere::hits(
+std::tuple<double, Math::Vector3D> Raytracer::Sphere::hits(
     const Raytracer::Ray &ray) const {
   Math::Vector3D oc = ray.origin - _center;
 
@@ -11,12 +11,12 @@ std::tuple<bool, Math::Vector3D> Raytracer::Sphere::hits(
   double c = oc.dot(oc) - _radius * _radius;
   double discriminant = b * b - 4 * a * c;
   if (discriminant < 0) {
-    return {false, _color};
+    return {0.0, _color};
   }
   double t1 = (-b - std::sqrt(discriminant)) / (2 * a);
   double t2 = (-b + std::sqrt(discriminant)) / (2 * a);
   if (t1 < 0 && t2 < 0) {
-    return {false, _color};
+    return {0.0, _color};
   }
-  return {true, _color};
+  return {t1 < t2 ? t1 : t2, _color};
 }

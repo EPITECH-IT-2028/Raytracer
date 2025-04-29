@@ -22,8 +22,16 @@ namespace Raytracer {
 
       ~Sphere() = default;
 
-      std::tuple<bool, Math::Vector3D> hits(
+      std::tuple<double, Math::Vector3D> hits(
           const Raytracer::Ray &ray) const override;
+
+      Math::Point3D getCenter() const {
+        return _center;
+      }
+
+      Math::Vector3D getColor() const {
+        return _color;
+      }
 
     private:
       Math::Point3D _center;
