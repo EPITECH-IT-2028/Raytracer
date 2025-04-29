@@ -1,8 +1,11 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <string>
+#include "DirectionalLight.hpp"
+#include "Vector3D.hpp"
+#include "Sphere.hpp"
+#include "Ray.hpp"
 
 namespace Raytracer {
 
@@ -19,6 +22,8 @@ public:
   void init();
 
   void getImage();
+
+  Math::Vector3D rayColor(Ray& r, const Sphere& s, const DirectionalLight &light);
 
 private:
   std::string _path;
