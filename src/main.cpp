@@ -1,4 +1,5 @@
 #include "Camera.hpp"
+#include "Plane.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
 #include "Rectangle.hpp"
@@ -18,7 +19,8 @@ void writeColor(std::ofstream &file, const Math::Vector3D &color) {
 int main(void) {
   Raytracer::Camera cam;
   Raytracer::Sphere s(Math::Point3D(0, 0, -1), 0.5);
-  Raytracer::Plane p(Math::Point3D(0, 0, -1), 10, 10);
+  Raytracer::Plane p(Math::Point3D(0, -0.5, 0), Math::Vector3D(0, 1, 0));
+
   std::ofstream file("output.ppm");
   int width = 400;
   int height = 400;
@@ -31,13 +33,12 @@ int main(void) {
       double u = i / 400.0;
       double v = j / 400.0;
       Raytracer::Ray ray = cam.ray(u, v);
-      if (p.hits(ray)) {
-        if (s.hits(ray)) {
-          writeColor(file, Math::Vector3D(1, 0, 0));
-        }
-        else {
-          writeColor(file, Math::Vector3D(0, 1, 0));
-        }
+      if (s.hits(ray)) {
+        writeColor(file, Math::Vector3D(1, 0, 0));
+      } else if (p.hits(ray)) {
+        writeColor(file, Math::Vector3D(0, 1, 0));
+      } else {
+        writeColor(file, Math::Vector3D(0, 0, 1));
       }
     }
   }

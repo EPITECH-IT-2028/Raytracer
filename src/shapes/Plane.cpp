@@ -1,17 +1,13 @@
 #include "Plane.hpp"
-#include <cmath>
 
 bool Raytracer::Plane::hits(const Raytracer::Ray &ray) const {
-  double denominator = ray.direction.dot(normal);
-
-  if (std::abs(denominator) < std::numeric_limits<double>::epsilon()) {
+  float denominator = normal.dot(ray.direction);
+  if (denominator == 0) {
     return false;
   }
-
-  Math::Vector3D oc = center - ray.origin;
-  double numerator = oc.dot(normal);
-
-  double t = numerator / denominator;
-
-  return t > 0;
+  float t = (ray.origin - center).dot(normal) / denominator;
+  if (t < 0) {
+    return false;
+  }
+  return true;
 }
