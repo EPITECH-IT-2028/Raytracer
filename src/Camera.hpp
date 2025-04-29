@@ -87,7 +87,7 @@ namespace Raytracer {
         return _viewportUpperLeft;
       }
 
-      const Math::Point3D &getPixel00Location() const {
+      const Math::Point3D &getPixel0Location() const {
         return _pixel0Location;
       }
 

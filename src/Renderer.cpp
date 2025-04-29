@@ -62,7 +62,7 @@ void Raytracer::Renderer::writeInFile(const std::string &path) {
   for (double j = 0; j < cam.getWidth(); j++) {
     for (double i = 0; i < cam.getHeight(); i++) {
       Math::Point3D pixel_center =
-          cam.getPixel00Location() +
+          cam.getPixel0Location() +
           cam.getPixelDeltaU() * static_cast<float>(i) +
           cam.getPixelDeltaV() * static_cast<float>(j);
       Math::Vector3D ray_direction = (pixel_center - cam.origin).normalize();
