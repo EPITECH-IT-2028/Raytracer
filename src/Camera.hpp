@@ -93,6 +93,8 @@ namespace Raytracer {
 
       Ray ray(double u, double v);
 
+      void setLookDirection(Math::Vector3D &direction);
+
     private:
       std::size_t _width;
       std::size_t _height;

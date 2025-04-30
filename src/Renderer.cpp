@@ -2,8 +2,10 @@
 #include <fstream>
 #include <iostream>
 #include "Camera.hpp"
+#include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
+#include "Ray.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 
@@ -43,22 +45,25 @@ void Raytracer::Renderer::writeInFile(const std::string &path) {
   cam.setViewportHeight(2.0);
   cam.setViewportWidth(cam.getViewportHeight());
 
-  Raytracer::Sphere s1(Math::Point3D(0, 0, -1.3), 0.5, Math::Vector3D(1, 1, 0));
-  Raytracer::Sphere s2(Math::Point3D(-1, -0.3, -2.0), 0.5,
-                       Math::Vector3D(0, 0, 1));
-  Raytracer::DirectionalLight light(Math::Vector3D(2, -1, -2).normalize());
-  Raytracer::Plane p(Math::Point3D(0, 0.5, -1), Math::Vector3D(0, 1, 0),
-                     Math::Vector3D(1, 0, 0));
+  cam.origin = Math::Point3D(0, 0, 0);
+
   Raytracer::ShapeComposite group;
+
+  Raytracer::DirectionalLight light1(Math::Vector3D(1, 1, -1).normalize());
+
+  Raytracer::Plane ground(
+      Math::Point3D(0, 1, 0),
+      Math::Vector3D(0, -1, 0),
+      Math::Vector3D(0.8, 0.8, 0.8)
+  );
+  group.addShape(std::make_shared<Raytracer::Plane>(ground));
+  
   std::ofstream file(path);
 
   writeHeader(file);
 
   cam.updateView();
 
-  group.addShape(std::make_shared<Raytracer::Sphere>(s1));
-  group.addShape(std::make_shared<Raytracer::Sphere>(s2));
-  group.addShape(std::make_shared<Raytracer::Plane>(p));
   for (double j = 0; j < cam.getWidth(); j++) {
     for (double i = 0; i < cam.getHeight(); i++) {
       Math::Point3D pixel_center =
@@ -67,7 +72,7 @@ void Raytracer::Renderer::writeInFile(const std::string &path) {
           cam.getPixelDeltaV() * static_cast<float>(j);
       Math::Vector3D ray_direction = (pixel_center - cam.origin).normalize();
       Raytracer::Ray ray(cam.origin, ray_direction);
-      Math::Vector3D color = rayColor(ray, group, light);
+      Math::Vector3D color = rayColor(ray, group, light1);
       writeColor(file, color);
     }
   }
