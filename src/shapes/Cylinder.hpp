@@ -1,10 +1,10 @@
 #pragma once
 
-#include "AShape.hpp" // Assuming AShape defines the interface with virtual hits and getNormal
+#include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 #include "Ray.hpp"
-#include <tuple> // Required for the new hits return type
+#include <tuple>
 
 namespace Raytracer {
 
