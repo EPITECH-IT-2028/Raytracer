@@ -1,13 +1,15 @@
 #include "Plane.hpp"
 
-bool Raytracer::Plane::hits(const Raytracer::Ray &ray) const {
-  float denominator = normal.dot(ray.direction);
+std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
+Raytracer::Plane::hits(const Raytracer::Ray &ray) const {
+  float denominator = _normal.dot(ray.direction);
+
   if (denominator == 0) {
-    return false;
+    return {0.0, _color, this};
   }
-  float t = (ray.origin - center).dot(normal) / denominator;
+  float t = (ray.origin - _center).dot(_normal) / denominator;
   if (t < 0) {
-    return false;
+    return {0.0, _color, this};
   }
-  return true;
+  return {t, _color, this};
 }

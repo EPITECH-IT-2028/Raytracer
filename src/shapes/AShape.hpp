@@ -6,13 +6,14 @@
 
 namespace Raytracer {
 
-class AShape : public IShape {
-public:
-  Math::Vector3D color;
+  class AShape : public IShape {
+    public:
+      virtual ~AShape() = default;
 
-  virtual ~AShape() = default;
+      virtual std::tuple<double, Math::Vector3D, const IShape *> hits(
+          const Raytracer::Ray &ray) const = 0;
 
-  virtual bool hits(const Ray &ray) const = 0;
-};
+      virtual Math::Vector3D getNormal(const Math::Point3D &hitPoint) const = 0;
+  };
 
-} // namespace Raytracer
+}  // namespace Raytracer

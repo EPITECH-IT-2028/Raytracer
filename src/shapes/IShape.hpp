@@ -1,14 +1,18 @@
 #pragma once
 
+#include <iostream>
 #include "Ray.hpp"
 
 namespace Raytracer {
 
-class IShape {
-public:
-  virtual ~IShape() = default;
+  class IShape {
+    public:
+      virtual ~IShape() = default;
 
-  virtual bool hits(const Ray &ray) const = 0;
-};
+      virtual std::tuple<double, Math::Vector3D, const IShape *> hits(
+          const Raytracer::Ray &ray) const = 0;
 
-} // namespace Raytracer
+      virtual Math::Vector3D getNormal(const Math::Point3D &hitPoint) const = 0;
+  };
+
+}  // namespace Raytracer

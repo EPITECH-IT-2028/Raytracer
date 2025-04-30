@@ -19,6 +19,7 @@ add_executable(raytracer
   src/Rectangle.cpp
   src/Camera.cpp
   src/Scene.cpp
+  src/Renderer.cpp
 )
 
 target_include_directories(raytracer

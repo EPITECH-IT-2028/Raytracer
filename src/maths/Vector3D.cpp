@@ -84,7 +84,7 @@ double Math::Vector3D::dot(const Vector3D &vec) const {
   return x * vec.x + y * vec.y + z * vec.z;
 }
 
-double Math::Vector3D::length() const  {
+double Math::Vector3D::length() const {
   double length = std::sqrt(x * x + y * y + z * z);
   return length;
 }

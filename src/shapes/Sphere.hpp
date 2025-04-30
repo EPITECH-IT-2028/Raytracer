@@ -1,26 +1,38 @@
 #pragma once
 
+#include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
 #include "Vector3D.hpp"
 
 namespace Raytracer {
 
-class Sphere {
-public:
-  Math::Point3D center;
-  double radius;
-  Math::Vector3D color;
+  class Sphere : public AShape {
+    public:
+      Sphere(const Math::Point3D &center, double radius,
+             const Math::Vector3D &color)
+          : _center(center), _color(color), _radius(radius) {
+      }
 
-  Sphere(const Math::Point3D &center, double radius)
-      : center(center), radius(radius), color({0,0,0}) {}
-  Sphere(const Math::Point3D &center, double radius, Math::Vector3D color)
-      : center(center), radius(radius), color(color) {}
-  Sphere() : center(Math::Point3D()), radius(0.0) {}
+      Sphere()
+          : _center(Math::Point3D(0, 0, 0)),
+            _color(Math::Vector3D(1, 0, 0)),
+            _radius(1) {
+      }
 
-  ~Sphere() = default;
+      ~Sphere() = default;
 
-  double hits(const Raytracer::Ray &ray) const;
-};
+      std::tuple<double, Math::Vector3D, const IShape *> hits(
+          const Raytracer::Ray &ray) const override;
 
-} // namespace Raytracer
+      Math::Vector3D getNormal(const Math::Point3D &point) const override {
+        return (point - _center).normalize();
+      }
+
+    private:
+      Math::Point3D _center;
+      Math::Vector3D _color;
+      double _radius;
+  };
+
+}  // namespace Raytracer

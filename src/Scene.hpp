@@ -1,38 +1,34 @@
-#pragma once
-
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "DirectionalLight.hpp"
-#include "Vector3D.hpp"
-#include "Sphere.hpp"
 #include "Ray.hpp"
+#include "Sphere.hpp"
+#include "Vector3D.hpp"
 
 namespace Raytracer {
 
-class Scene {
-public:
-  Scene();
+  class Scene {
+    public:
+      Scene();
 
-  ~Scene() = default;
+      ~Scene() = default;
 
-  void render();
+      void render();
 
-  void parseBasicsPPM(const std::string &filename);
+      void parseBasicsPPM(const std::string &filename);
 
-  void init();
+      void init();
 
-  void getImage();
+      void getImage();
 
-  Math::Vector3D rayColor(Ray& r, const Sphere& s, const DirectionalLight &light);
+    private:
+      std::string _path;
+      int _width;
+      int _height;
+      sf::RenderWindow _window;
+      sf::Texture _texture;
+      sf::Sprite _sprite;
+      sf::Image _image;
+  };
 
-private:
-  std::string _path;
-  int _width;
-  int _height;
-  sf::RenderWindow _window;
-  sf::Texture _texture;
-  sf::Sprite _sprite;
-  sf::Image _image;
-};
-
-} // namespace Raytracer
+}  // namespace Raytracer
