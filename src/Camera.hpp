@@ -12,7 +12,7 @@ namespace Raytracer {
       Math::Point3D origin;
       Rectangle3D screen;
       float _yaw = 0;
-      float _pitch = 90;
+      float _pitch = 60;
       Math::Vector3D _right;
       Math::Vector3D _up;
       Math::Vector3D _forward;

@@ -12,10 +12,9 @@ namespace Raytracer {
       Plane(const std::string &axis, double position,
             const Math::Vector3D &color);
 
-      Plane()
-          : _center(Math::Point3D()),
-            _normal(Math::Vector3D(0, 1, 0)),
-            _color(Math::Vector3D(1, 0, 0)) {
+      Plane() : _normal(Math::Vector3D()) {
+        _center = Math::Point3D();
+        _color = Math::Vector3D(1, 0, 0);
       }
 
       ~Plane() = default;
@@ -28,14 +27,8 @@ namespace Raytracer {
         return _normal;
       }
 
-      void translate(const Math::Vector3D &offset) override {
-        _center = _center + offset;
-      }
-
     private:
-      Math::Point3D _center;
       Math::Vector3D _normal;
-      Math::Vector3D _color;
   };
 
 }  // namespace Raytracer
