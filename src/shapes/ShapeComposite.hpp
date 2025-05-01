@@ -21,6 +21,11 @@ namespace Raytracer {
         return Math::Vector3D(0, 0, 0);
       }
 
+      void translate(const Math::Vector3D &offset) override {
+        for (const auto &shape : shapes)
+          shape->translate(offset);
+      }
+
     private:
       std::vector<std::shared_ptr<IShape>> shapes;
   };
