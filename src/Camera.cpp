@@ -27,5 +27,4 @@ void Raytracer::Camera::updateView() {
   _pixel0Location = _viewportCenter - _right * (_viewportWidth * 0.5f) +
                     _up * (_viewportHeight * 0.5f) +
                     (_pixelDeltaU + _pixelDeltaV) * 0.5f;
-  std::cout << "pitch: " << _pitch << " yaw: " << _yaw << std::endl;
 }
