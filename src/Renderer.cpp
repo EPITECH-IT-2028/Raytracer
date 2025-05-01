@@ -25,7 +25,8 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const IShape &shape,
 }
 
 void Raytracer::Renderer::initScene() {
-  Raytracer::Sphere s1(Math::Point3D(0, 0, -1.3), 0.5, Math::Vector3D(1, 1, 0));
+  auto sphere1 = std::make_shared<Raytracer::Sphere>(
+      Math::Point3D(0, 0, -1), 0.5, Math::Vector3D(1, 0, 0));
   Raytracer::Sphere s2(Math::Point3D(-1, -0.3, -2.0), 0.5,
                        Math::Vector3D(0, 0, 1));
   // Raytracer::Sphere p(Math::Point3D(0, -100.5, -1), 100,
@@ -33,7 +34,8 @@ void Raytracer::Renderer::initScene() {
   Raytracer::Cylinder c1(Math::Point3D(1, 0, -1), 0.5, 1,
                          Math::Vector3D(0, 1, 0), Math::Vector3D(1, 0, 0));
 
-  _scene.addShape(std::make_shared<Raytracer::Sphere>(s1));
+  // sphere1->translate(Math::Vector3D(0, 0, -1));
+  _scene.addShape(sphere1);
   _scene.addShape(std::make_shared<Raytracer::Sphere>(s2));
   // _scene.addShape(std::make_shared<Raytracer::Sphere>(p)); // Ground is a
   // sphere HEHE
