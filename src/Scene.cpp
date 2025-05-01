@@ -2,10 +2,9 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "Ray.hpp"
 
-Raytracer::Scene::Scene() {
-  _path = "./output.ppm";
+Raytracer::Scene::Scene(const std::string &outputPath) {
+  _path = outputPath;
   parseBasicsPPM(_path);
   _window.create(sf::VideoMode(_width, _height), "Raytracer");
   _window.setFramerateLimit(60);

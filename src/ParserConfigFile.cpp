@@ -17,7 +17,7 @@ Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename) {
     throw std::runtime_error("[ERROR] - Parsing error in file: " + filename);
   } catch (const ParseException &pex) {
     std::string file = pex.getFile();
-    std::string errorMessage = "[ERROR] - Parse error at " + file  + ";" + std::to_string(pex.getLine()) + " - " + pex.getError();
+    std::string errorMessage = "[ERROR] - Parse error in " + file  + " ; " + std::to_string(pex.getLine()) + " - " + pex.getError();
     throw std::runtime_error(errorMessage);
   }
 }
@@ -27,7 +27,8 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const Setting &roo
     const Setting &resolutionInfo = root["camera"]["resolution"];
     const Setting &positionInfo = root["camera"]["position"];
     const Setting &fovInfo = root["camera"];
-    int width, height, posX, posY, posZ, fov;
+    int width, height, posX, posY, posZ;
+    double fov;
     resolutionInfo.lookupValue("width", width);
     resolutionInfo.lookupValue("height", height);
     positionInfo.lookupValue("x", posX);
@@ -36,18 +37,21 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const Setting &roo
     fov = fovInfo.lookup("fieldOfView");
     camera.setHeight(height);
     camera.setWidth(width);
+    std::cout << camera.getWidth() << std::endl;
     camera.origin.x = posX;
     camera.origin.y = posY;
     camera.origin.z = posZ;
     camera.setFieldOfView(fov);
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
+  } catch (const libconfig::SettingTypeException &nfex) {
+    throw std::runtime_error(nfex.what());
   }
 }
 
-void Raytracer::ParserConfigFile::parsePrimivites(Raytracer::ShapeComposite &sc, const Setting &root) {
+void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc, const Setting &root) {
   try {
-    const Setting &spheresInfo = root["primivites"]["spheres"];
+    const Setting &spheresInfo = root["primitives"]["spheres"];
     // const Setting &planesInfo = root["primivites"]["planes"];
 
     for (int i = 0; i < spheresInfo.getLength(); i ++) {
@@ -58,7 +62,7 @@ void Raytracer::ParserConfigFile::parsePrimivites(Raytracer::ShapeComposite &sc,
       if (newSphere == nullptr) {
         throw std::runtime_error("[ERROR] - Failed during creation of sphere.");
       }
-      int posX, posY, posZ, red, green, blue;
+      double posX, posY, posZ, red, green, blue;
       double radius;
       sphere.lookupValue("x", posX);
       sphere.lookupValue("y", posY);
@@ -82,29 +86,37 @@ void Raytracer::ParserConfigFile::parsePrimivites(Raytracer::ShapeComposite &sc,
     // }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
+  } catch (const libconfig::SettingTypeException &nfex) {
+    throw std::runtime_error(nfex.what());
   }
 }
 
 void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, const Setting &root) {
   try {
     const Setting &directionalsInfo = root["lights"]["directional"];
-
-    for (int i = 0; i < directionalsInfo.getLength(); i ++) {
-      const Setting &directional = directionalsInfo[i]; 
-      _factory.registerLight<DirectionalLight>("directional");
-      auto newDirectional = _factory.create<Raytracer::DirectionalLight>("directional");
-      if (newDirectional == nullptr) {
-        throw std::runtime_error("[ERROR] - Failed during creation of directional light.");
+    
+    std::cout <<directionalsInfo.getLength()<<std::endl;
+    if (directionalsInfo.getLength() > 0) {
+      std::cout <<directionalsInfo.getLength()<<std::endl;
+      for (int i = 0; i < directionalsInfo.getLength(); i++) {
+        const Setting &directional = directionalsInfo[i]; 
+        _factory.registerLight<DirectionalLight>("directional");
+        auto newDirectional = _factory.create<Raytracer::DirectionalLight>("directional");
+        if (newDirectional == nullptr) {
+          throw std::runtime_error("[ERROR] - Failed during creation of directional light.");
+        }
+        double posX, posY, posZ;
+        directional.lookupValue("x", posX);
+        directional.lookupValue("y", posY);
+        directional.lookupValue("z", posZ);
+        Math::Vector3D direction(posX, posY, posZ);
+        newDirectional->direction = direction.normalize();
+        lc.addLight(newDirectional);
       }
-      int posX, posY, posZ;
-      directional.lookupValue("x", posX);
-      directional.lookupValue("y", posY);
-      directional.lookupValue("z", posZ);
-      Math::Vector3D direction(posX, posY, posZ);
-      newDirectional->direction = direction.normalize();
-      lc.addLight(newDirectional);
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
+    throw std::runtime_error(nfex.what());
+  } catch (const libconfig::SettingTypeException &nfex) {
     throw std::runtime_error(nfex.what());
   }
 }
@@ -119,7 +131,7 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera, ShapeComposite
   }
   // PRIMITIVES 
   try {
-    parsePrimivites(sc, root);
+    parsePrimitives(sc, root);
   } catch (const std::runtime_error &error) {
     throw std::runtime_error(error.what());
   }

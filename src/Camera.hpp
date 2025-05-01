@@ -104,9 +104,9 @@ namespace Raytracer {
     private:
       std::size_t _width;
       std::size_t _height;
-      float _zoom;
-      float _viewportHeight;
-      float _viewportWidth;
+      float _zoom = 1.0;
+      float _viewportHeight = 2.0;
+      float _viewportWidth = 2.0;
       float _fieldOfView;
       Math::Vector3D _viewportU;
       Math::Vector3D _viewportV;

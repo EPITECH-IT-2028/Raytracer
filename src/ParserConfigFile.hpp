@@ -22,7 +22,7 @@ public:
 
   void parseConfigFile(Camera &, ShapeComposite &, LightComposite &);
   void parseCamera(Camera &, const Setting &);
-  void parsePrimivites(ShapeComposite &, const Setting &);
+  void parsePrimitives(ShapeComposite &, const Setting &);
   void parseLights(LightComposite &, const Setting &);
 private:
   Config _cfg;

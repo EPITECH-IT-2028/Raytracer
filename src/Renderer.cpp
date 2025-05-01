@@ -35,30 +35,25 @@ void Raytracer::Renderer::writeHeader(std::ofstream &file) {
   file << "255\n";
 }
 
+void Raytracer::Renderer::createOutputFileName(const std::string &inputFileName) {
+  std::string outputFile = inputFileName;
+  outputFile.resize(outputFile.length() - 3);
+  outputFile = outputFile + "ppm";
+  _outfilePath = outputFile;
+}
+
 void Raytracer::Renderer::writeInFile(const std::string &path) {
   Raytracer::Camera cam;
   Raytracer::ShapeComposite sc;
   Raytracer::LightComposite lc;
   Raytracer::ParserConfigFile parser(path);
-
   parser.parseConfigFile(cam, sc, lc);
-  std::string outputFile = path;
-  outputFile.resize(outputFile.length() - 3);
-  outputFile = outputFile + "ppm";
-
-  Raytracer::Sphere s1(Math::Point3D(0, 0, -1.3), 0.5, Math::Vector3D(1, 1, 0));
-  Raytracer::Sphere s2(Math::Point3D(-1, -0.3, -2.0), 0.5,
-                       Math::Vector3D(0, 0, 1));
-  Raytracer::DirectionalLight light(Math::Vector3D(2, -1, -2).normalize());
-  Raytracer::Plane p(Math::Point3D(0, 0.5, -1), Math::Vector3D(0, 1, 0),
-                     Math::Vector3D(1, 0, 0));
-  Raytracer::ShapeComposite group;
-  std::ofstream file(outputFile);
-
+  setWidth(cam.getWidth());
+  setHeight(cam.getHeight());
+  createOutputFileName(path);
+  std::ofstream file(getOutputFilePath());
   writeHeader(file);
-
   cam.updateView();
-
   for (double j = 0; j < cam.getWidth(); j++) {
     for (double i = 0; i < cam.getHeight(); i++) {
       Math::Point3D pixel_center =

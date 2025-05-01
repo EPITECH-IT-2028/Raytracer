@@ -5,7 +5,7 @@ namespace Raytracer {
 
   class Scene {
     public:
-      Scene();
+      Scene(const std::string &);
 
       ~Scene() = default;
 

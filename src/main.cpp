@@ -13,10 +13,10 @@ int main(const int ac, const char **av) {
     return 0;
   }
   Raytracer::Renderer renderer;
-  renderer.writeInFile("./scenes/example.cfg");
-  std::cout << "Rendering complete. Check output.ppm for the result."
+  renderer.writeInFile(av[1]);
+  std::cout << "Rendering complete. Check "+ renderer.getOutputFilePath() +" for the result."
             << std::endl;
-  Raytracer::Scene scene;
+  Raytracer::Scene scene(renderer.getOutputFilePath());
   scene.init();
   scene.render();
   return 0;
