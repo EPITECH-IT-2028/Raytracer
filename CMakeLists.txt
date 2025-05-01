@@ -14,6 +14,7 @@ add_executable(raytracer
   src/maths/Point3D.cpp
   src/shapes/Sphere.cpp
   src/shapes/Plane.cpp
+  src/shapes/Cylinder.cpp
   src/shapes/ShapeComposite.cpp
   src/DirectionalLight.cpp
   src/Rectangle.cpp
