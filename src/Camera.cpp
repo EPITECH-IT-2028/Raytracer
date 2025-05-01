@@ -3,7 +3,6 @@
 #include <cmath>
 #include "Ray.hpp"
 #include "Rectangle.hpp"
-#include <cmath>
 
 Raytracer::Ray Raytracer::Camera::ray(double u, double v) {
   Math::Vector3D direction = screen.pointAt(u, v) - origin;
@@ -11,12 +10,12 @@ Raytracer::Ray Raytracer::Camera::ray(double u, double v) {
 }
 
 void Raytracer::Camera::updateView() {
-  Math::Vector3D worldUp{0, 1, 0};
+  Math::Vector3D world{0, 1, 0};  // Reference vector for the up direction
 
   _forward = Math::Vector3D{std::cos(_pitch) * std::sin(_yaw), std::sin(_pitch),
                             std::cos(_pitch) * std::cos(_yaw)}
-                 .normalize();
-  _right = Math::cross(_forward, worldUp).normalize();
+                 .normalize();  // Where the camera is looking
+  _right = Math::cross(_forward, world).normalize();
   _up = Math::cross(_right, _forward).normalize();
   _viewportCenter = origin + _forward * _zoom;
   _pixelDeltaU = _right * (_viewportWidth / float(_width));

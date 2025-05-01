@@ -30,7 +30,7 @@ namespace Raytracer {
                               const DirectionalLight &light);
 
       void renderToBuffer(std::vector<sf::Color> &framebuffer,
-                          Raytracer::Camera &cam);
+                          Raytracer::Camera &cam, bool isHighQuality);
 
     private:
       int _width;

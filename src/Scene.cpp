@@ -11,6 +11,7 @@ Raytracer::Scene::Scene(int width, int height) {
   _window.create(sf::VideoMode(_width, _height), "Raytracer");
   _window.setFramerateLimit(60);
   _window.setVerticalSyncEnabled(true);
+  _lastMovement = std::chrono::steady_clock::now();
   init();
 }
 
@@ -31,26 +32,59 @@ void Raytracer::Scene::updateImage() {
 }
 
 void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+  bool moved = false;
+
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
     camera.moveForward(0.1f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
     camera.moveForward(-0.1f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
     camera.moveRight(-0.1f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
     camera.moveRight(0.1f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    camera.moveUp(-0.1f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
     camera.moveUp(0.1f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    camera.rotateYaw(-0.10f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    camera.rotateYaw(0.10f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    camera.rotatePitch(-0.10f);
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    camera.rotatePitch(0.10f);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+    camera.moveUp(-0.1f);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    camera.rotateYaw(-0.01f);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    camera.rotateYaw(0.01f);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    camera.rotatePitch(-0.01f);
+    moved = true;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    camera.rotatePitch(0.01f);
+    moved = true;
+  }
+  if (moved) {
+    _lastMovement = std::chrono::steady_clock::now();
+    _isHighQuality = false;
+  } else {
+    auto now = std::chrono::steady_clock::now();
+    auto duration =
+        std::chrono::duration_cast<std::chrono::seconds>(now - _lastMovement);
+    if (duration.count() > _updateQuality && !_isHighQuality) {
+      _isHighQuality = true;
+    }
+  }
 }
 
 void Raytracer::Scene::render() {
@@ -70,7 +104,7 @@ void Raytracer::Scene::render() {
       }
     }
     handleInput(cam);
-    renderer.renderToBuffer(_framebuffer, cam);
+    renderer.renderToBuffer(_framebuffer, cam, _isHighQuality);
     updateImage();
     _window.clear(sf::Color::White);
     _window.draw(_sprite);

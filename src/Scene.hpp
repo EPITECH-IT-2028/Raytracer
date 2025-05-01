@@ -31,6 +31,9 @@ namespace Raytracer {
       sf::Sprite _sprite;
       sf::Image _image;
       std::vector<sf::Color> _framebuffer;
+      std::chrono::time_point<std::chrono::steady_clock> _lastMovement;
+      bool _isHighQuality = true;
+      const float _updateQuality = 0.5f;
   };
 
 }  // namespace Raytracer

@@ -28,18 +28,28 @@ void Raytracer::Renderer::initScene() {
   Raytracer::Sphere s1(Math::Point3D(0, 0, -1.3), 0.5, Math::Vector3D(1, 1, 0));
   Raytracer::Sphere s2(Math::Point3D(-1, -0.3, -2.0), 0.5,
                        Math::Vector3D(0, 0, 1));
-  Raytracer::Plane p("Z", -20, Math::Vector3D(64 / 255.0, 64 / 255.0, 1.0));
-  Raytracer::Cylinder c1(Math::Point3D(0, 0, -1), 0.5, 1,
-                         Math::Vector3D(1, 0, 0), Math::Vector3D(1, 0, 0));
+  // Raytracer::Sphere p(Math::Point3D(0, -100.5, -1), 100,
+  //                     Math::Vector3D(0.8, 0.8, 0.8));
+  Raytracer::Cylinder c1(Math::Point3D(1, 0, -1), 0.5, 1,
+                         Math::Vector3D(0, 1, 0), Math::Vector3D(1, 0, 0));
+
+  _scene.addShape(std::make_shared<Raytracer::Sphere>(s1));
+  _scene.addShape(std::make_shared<Raytracer::Sphere>(s2));
+  // _scene.addShape(std::make_shared<Raytracer::Sphere>(p)); // Ground is a
+  // sphere HEHE
+  _scene.addShape(std::make_shared<Raytracer::Cylinder>(c1));
 }
 
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
-                                         Raytracer::Camera &cam) {
+                                         Raytracer::Camera &cam,
+                                         bool isHighQuality) {
   cam.updateView();
   framebuffer.resize(_width * _height);
 
-  for (double j = 0; j < cam.getWidth(); j++) {
-    for (double i = 0; i < cam.getHeight(); i++) {
+  int step = isHighQuality ? 1 : 2;
+
+  for (double j = 0; j < cam.getWidth(); j += step) {
+    for (double i = 0; i < cam.getHeight(); i += step) {
       Math::Point3D pixel_center =
           cam.getPixel0Location() +
           cam.getPixelDeltaU() * static_cast<float>(i) +
