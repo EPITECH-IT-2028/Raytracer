@@ -98,3 +98,7 @@ Math::Vector3D &Math::Vector3D::normalize() {
   }
   return *this;
 }
+
+Math::Vector3D Math::cross(const Math::Vector3D &A, const Math::Vector3D &B) {
+  return {A.y * B.z - A.z * B.y, A.z * B.x - A.x * B.z, A.x * B.y - A.y * B.x};
+}

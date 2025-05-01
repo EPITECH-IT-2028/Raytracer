@@ -11,13 +11,14 @@ namespace Raytracer {
     public:
       Sphere(const Math::Point3D &center, double radius,
              const Math::Vector3D &color)
-          : _center(center), _color(color), _radius(radius) {
+          : _radius(radius) {
+        _center = center;
+        _color = color;
       }
 
-      Sphere()
-          : _center(Math::Point3D(0, 0, 0)),
-            _color(Math::Vector3D(1, 0, 0)),
-            _radius(1) {
+      Sphere() : _radius(1) {
+        _center = Math::Point3D(0, 0, 0);
+        _color = Math::Vector3D(1, 0, 0);
       }
 
       ~Sphere() = default;
@@ -38,8 +39,6 @@ namespace Raytracer {
       void setRadius(double& radius) { _radius = radius;}
 
     private:
-      Math::Point3D _center;
-      Math::Vector3D _color;
       double _radius;
   };
 

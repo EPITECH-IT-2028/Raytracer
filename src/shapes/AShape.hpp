@@ -14,6 +14,14 @@ namespace Raytracer {
           const Raytracer::Ray &ray) const = 0;
 
       virtual Math::Vector3D getNormal(const Math::Point3D &hitPoint) const = 0;
+
+      virtual void translate(const Math::Vector3D &offset) {
+        _center = _center + offset;
+      }
+
+    protected:
+      Math::Point3D _center;
+      Math::Vector3D _color;
   };
 
 }  // namespace Raytracer
