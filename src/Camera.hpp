@@ -11,13 +11,13 @@ namespace Raytracer {
     public:
       Math::Point3D origin;
       Rectangle3D screen;
-      float _yaw = 0;
-      float _pitch = 60;
+      float _yaw = -157;
+      float _pitch = -11;
       Math::Vector3D _right;
       Math::Vector3D _up;
       Math::Vector3D _forward;
 
-      Camera() : origin(0, 0, 2), screen(Rectangle3D()) {
+      Camera() : origin(0, 0, 0), screen(Rectangle3D()) {
       }
 
       Camera(const Math::Point3D &origin, const Rectangle3D &screen)

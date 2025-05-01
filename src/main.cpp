@@ -2,7 +2,7 @@
 #include "Scene.hpp"
 
 int main(void) {
-  Raytracer::Scene scene(400, 400);
+  Raytracer::Scene scene(800, 600);
   scene.render();
   return 0;
 }

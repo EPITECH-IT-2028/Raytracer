@@ -35,43 +35,43 @@ void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
   bool moved = false;
 
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-    camera.moveForward(0.1f);
+    camera.moveForward(0.10f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-    camera.moveForward(-0.1f);
+    camera.moveForward(-0.10f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-    camera.moveRight(-0.1f);
+    camera.moveRight(-0.10f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-    camera.moveRight(0.1f);
+    camera.moveRight(0.10f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-    camera.moveUp(0.1f);
+    camera.moveUp(0.10f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-    camera.moveUp(-0.1f);
+    camera.moveUp(-0.10f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    camera.rotateYaw(-0.01f);
+    camera.rotateYaw(-1.0f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    camera.rotateYaw(0.01f);
+    camera.rotateYaw(1.0f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    camera.rotatePitch(-0.01f);
+    camera.rotatePitch(-1.0f);
     moved = true;
   }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    camera.rotatePitch(0.01f);
+    camera.rotatePitch(1.0f);
     moved = true;
   }
   if (moved) {

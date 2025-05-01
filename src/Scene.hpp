@@ -10,7 +10,7 @@ namespace Raytracer {
 
   class Scene {
     public:
-      Scene(int width = 400, int height = 400);
+      Scene(int width, int height);
 
       ~Scene() = default;
 
