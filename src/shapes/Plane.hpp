@@ -28,6 +28,10 @@ namespace Raytracer {
         return _normal;
       }
 
+      void translate(const Math::Vector3D &offset) override {
+        _center = _center + offset;
+      }
+
     private:
       Math::Point3D _center;
       Math::Vector3D _normal;
