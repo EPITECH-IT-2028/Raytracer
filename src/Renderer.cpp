@@ -2,8 +2,10 @@
 #include <fstream>
 #include <iostream>
 #include "Camera.hpp"
+#include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
+#include "Ray.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 
@@ -27,12 +29,8 @@ void Raytracer::Renderer::initScene() {
   Raytracer::Sphere s2(Math::Point3D(-1, -0.3, -2.0), 0.5,
                        Math::Vector3D(0, 0, 1));
   Raytracer::Plane p("Z", -20, Math::Vector3D(64 / 255.0, 64 / 255.0, 1.0));
-
-  _scene.addShape(std::make_shared<Raytracer::Sphere>(s1));
-  _scene.addShape(std::make_shared<Raytracer::Sphere>(s2));
-  // _scene.addShape(std::make_shared<Raytracer::Plane>(p));
-
-  _light = Raytracer::DirectionalLight(Math::Vector3D(2, -1, -2).normalize());
+  Raytracer::Cylinder c1(Math::Point3D(0, 0, -1), 0.5, 1,
+                         Math::Vector3D(1, 0, 0), Math::Vector3D(1, 0, 0));
 }
 
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
@@ -40,8 +38,8 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
   cam.updateView();
   framebuffer.resize(_width * _height);
 
-  for (int j = 0; j < _height; j++) {
-    for (int i = 0; i < _width; i++) {
+  for (double j = 0; j < cam.getWidth(); j++) {
+    for (double i = 0; i < cam.getHeight(); i++) {
       Math::Point3D pixel_center =
           cam.getPixel0Location() +
           cam.getPixelDeltaU() * static_cast<float>(i) +
