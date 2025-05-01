@@ -5,6 +5,7 @@
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
 #include "ShapeComposite.hpp"
+#include "ParserConfigFile.hpp"
 #include "Sphere.hpp"
 
 void Raytracer::Renderer::writeColor(std::ofstream &file,
@@ -14,8 +15,7 @@ void Raytracer::Renderer::writeColor(std::ofstream &file,
        << static_cast<int>(color.z * 255) << "\n";
 }
 
-Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const IShape &shape,
-                                             const DirectionalLight &light) {
+Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const ShapeComposite &shape, const LightComposite &light) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
@@ -37,11 +37,14 @@ void Raytracer::Renderer::writeHeader(std::ofstream &file) {
 
 void Raytracer::Renderer::writeInFile(const std::string &path) {
   Raytracer::Camera cam;
-  cam.setWidth(_width);
-  cam.setHeight(_height);
-  cam.setZoom(1.0);
-  cam.setViewportHeight(2.0);
-  cam.setViewportWidth(cam.getViewportHeight());
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+  Raytracer::ParserConfigFile parser(path);
+
+  parser.parseConfigFile(cam, sc, lc);
+  std::string outputFile = path;
+  outputFile.resize(outputFile.length() - 3);
+  outputFile = outputFile + "ppm";
 
   Raytracer::Sphere s1(Math::Point3D(0, 0, -1.3), 0.5, Math::Vector3D(1, 1, 0));
   Raytracer::Sphere s2(Math::Point3D(-1, -0.3, -2.0), 0.5,
@@ -50,15 +53,12 @@ void Raytracer::Renderer::writeInFile(const std::string &path) {
   Raytracer::Plane p(Math::Point3D(0, 0.5, -1), Math::Vector3D(0, 1, 0),
                      Math::Vector3D(1, 0, 0));
   Raytracer::ShapeComposite group;
-  std::ofstream file(path);
+  std::ofstream file(outputFile);
 
   writeHeader(file);
 
   cam.updateView();
 
-  group.addShape(std::make_shared<Raytracer::Sphere>(s1));
-  group.addShape(std::make_shared<Raytracer::Sphere>(s2));
-  group.addShape(std::make_shared<Raytracer::Plane>(p));
   for (double j = 0; j < cam.getWidth(); j++) {
     for (double i = 0; i < cam.getHeight(); i++) {
       Math::Point3D pixel_center =
@@ -67,7 +67,7 @@ void Raytracer::Renderer::writeInFile(const std::string &path) {
           cam.getPixelDeltaV() * static_cast<float>(j);
       Math::Vector3D ray_direction = (pixel_center - cam.origin).normalize();
       Raytracer::Ray ray(cam.origin, ray_direction);
-      Math::Vector3D color = rayColor(ray, group, light);
+      Math::Vector3D color = rayColor(ray, sc, lc);
       writeColor(file, color);
     }
   }

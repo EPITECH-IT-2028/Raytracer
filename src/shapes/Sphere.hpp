@@ -29,6 +29,14 @@ namespace Raytracer {
         return (point - _center).normalize();
       }
 
+      const Math::Point3D& getCenter() const { return _center; };
+      const Math::Vector3D& getColor() const { return _color; };
+      const double& getRadius() const { return _radius; };
+
+      void setCenter(Math::Point3D& center) { _center = center;}
+      void setColor(Math::Vector3D& color) { _color = color;}
+      void setRadius(double& radius) { _radius = radius;}
+
     private:
       Math::Point3D _center;
       Math::Vector3D _color;

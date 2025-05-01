@@ -21,6 +21,8 @@ namespace Raytracer {
         return Math::Vector3D(0, 0, 0);
       }
 
+       const std::vector<std::shared_ptr<IShape>>& getShapes() const { return shapes; };
+
     private:
       std::vector<std::shared_ptr<IShape>> shapes;
   };

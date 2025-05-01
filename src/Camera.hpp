@@ -33,6 +33,10 @@ namespace Raytracer {
         _zoom = z;
       };
 
+      void setFieldOfView(const float &fov) {
+        _fieldOfView = fov;
+      };
+
       void setViewportHeight(const float &vh) {
         _viewportHeight = vh;
       };
@@ -59,6 +63,10 @@ namespace Raytracer {
 
       const float &getViewportWidth() const {
         return _viewportWidth;
+      }
+
+      const float &getFieldOfView() const {
+        return _fieldOfView;
       }
 
       void updateView();
@@ -99,6 +107,7 @@ namespace Raytracer {
       float _zoom;
       float _viewportHeight;
       float _viewportWidth;
+      float _fieldOfView;
       Math::Vector3D _viewportU;
       Math::Vector3D _viewportV;
       Math::Vector3D _pixelDeltaU;

@@ -1,9 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "DirectionalLight.hpp"
-#include "Ray.hpp"
-#include "Sphere.hpp"
-#include "Vector3D.hpp"
 
 namespace Raytracer {
 
