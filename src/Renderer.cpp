@@ -41,7 +41,6 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
                                          Raytracer::Camera &cam,
                                          bool isHighQuality) {
   cam.updateView();
-  framebuffer.resize(_width * _height);
 
   int step = isHighQuality ? 1 : 5;
 
