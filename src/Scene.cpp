@@ -2,11 +2,12 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include "ParserConfigFile.hpp"
 #include "Ray.hpp"
 #include "Renderer.hpp"
 
-Raytracer::Scene::Scene(int width, int height, const std::string &outputPath) {
-  _path = outputPath;
+Raytracer::Scene::Scene(int width, int height, const std::string &inputPath) {
+  _path = inputPath;
   _width = width;
   _height = height;
   _window.create(sf::VideoMode(_width, _height), "Raytracer");
@@ -89,13 +90,8 @@ void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
 }
 
 void Raytracer::Scene::render() {
-  Raytracer::Renderer renderer(_width, _height);
   Raytracer::Camera cam;
-  cam.setWidth(_width);
-  cam.setHeight(_height);
-  cam.setZoom(1.0);
-  cam.setViewportHeight(2.0);
-  cam.setViewportWidth(cam.getViewportHeight());
+  Raytracer::Renderer renderer(_width, _height, _path, cam);
 
   while (_window.isOpen()) {
     sf::Event event;

@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <string>
+#include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "ShapeComposite.hpp"
 
@@ -37,7 +38,6 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const Setting &roo
     fov = fovInfo.lookup("fieldOfView");
     camera.setHeight(height);
     camera.setWidth(width);
-    std::cout << camera.getWidth() << std::endl;
     camera.origin.x = posX;
     camera.origin.y = posY;
     camera.origin.z = posZ;
@@ -52,11 +52,10 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const Setting &roo
 void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc, const Setting &root) {
   try {
     const Setting &spheresInfo = root["primitives"]["spheres"];
-    // const Setting &planesInfo = root["primivites"]["planes"];
-
+    // Parse spheres
     for (int i = 0; i < spheresInfo.getLength(); i ++) {
       const Setting &sphere = spheresInfo[i];
-      const Setting &colorInfo = spheresInfo[i]["color"];
+      const Setting &colorInfo = sphere["color"];
       _factory.registerShape<Sphere>("sphere");
       auto newSphere = _factory.create<Raytracer::Sphere>("sphere");
       if (newSphere == nullptr) {
@@ -78,12 +77,35 @@ void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc,
       newSphere->setCenter(center);
       sc.addShape(newSphere);
     }
-    // for (int i = 0; i < planesInfo.getLength(); i ++) {
-    //   const Setting &planeInfo = planesInfo[i];
-    //   const Setting &colorInfo = planesInfo[i]["color"];
-    //   auto newPlane = _factory.create<Raytracer::Plane>("plane");
-    //   sc.addShape(newPlane)
-    // }
+    
+    // Parse cylinders
+    const Setting &cylindersInfo = root["primitives"]["cylinders"];
+    for (int i = 0; i < cylindersInfo.getLength(); i++) {
+      const Setting &cylinder = cylindersInfo[i];
+      const Setting &colorInfo = cylinder["color"];
+      _factory.registerShape<Cylinder>("cylinder");
+      auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
+      if (newCylinder == nullptr) {
+        throw std::runtime_error("[ERROR] - Failed during creation of cylinder.");
+      }
+      double posX, posY, posZ, red, green, blue;
+      double radius, height;
+      cylinder.lookupValue("x", posX);
+      cylinder.lookupValue("y", posY);
+      cylinder.lookupValue("z", posZ);
+      cylinder.lookupValue("r", radius);
+      cylinder.lookupValue("h", height);
+      colorInfo.lookupValue("r", red);
+      colorInfo.lookupValue("g", green);
+      colorInfo.lookupValue("b", blue);
+      Math::Vector3D color(red, green, blue);
+      Math::Point3D center(posX, posY, posZ);
+      newCylinder->setColor(color);
+      newCylinder->setRadius(radius);
+      newCylinder->setHeight(height);
+      newCylinder->setCenter(center);
+      sc.addShape(newCylinder);
+    }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
   } catch (const libconfig::SettingTypeException &nfex) {
@@ -95,9 +117,7 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, con
   try {
     const Setting &directionalsInfo = root["lights"]["directional"];
     
-    std::cout <<directionalsInfo.getLength()<<std::endl;
     if (directionalsInfo.getLength() > 0) {
-      std::cout <<directionalsInfo.getLength()<<std::endl;
       for (int i = 0; i < directionalsInfo.getLength(); i++) {
         const Setting &directional = directionalsInfo[i]; 
         _factory.registerLight<DirectionalLight>("directional");

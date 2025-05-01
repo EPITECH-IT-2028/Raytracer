@@ -16,27 +16,25 @@
 namespace Raytracer {
 class Renderer {
 public:
-  Renderer(int width, int height) : _width(width), _height(height) {
+  Renderer() = default;
+  Renderer(int width, int height, std::string &inputFilePath, Camera &cam)
+      : _width(width),
+        _height(height),
+        _inputFilePath(inputFilePath),
+        _shapes(ShapeComposite()),
+        _lights(LightComposite()) {
+    initScene(cam);
   }
-
-  class Renderer {
-    public:
-      Renderer(int width, int height)
-          : _width(width),
-            _height(height),
-            _scene(ShapeComposite()),
-            _light(DirectionalLight(Math::Vector3D(2, -1, -2).normalize())) {
-        initScene();
-      }
 
   void writeInFile(const std::string &filename);
 
-      void initScene();
+  void initScene(Camera &camera);
+  Math::Vector3D rayColor(Ray &r, const ShapeComposite &s, const LightComposite &light);
 
-  void createOutputFileName(const std::string &inputFileName);
 
-  const std::string &getOutputFilePath() const { return _outfilePath;}
-      void renderToBuffer(std::vector<sf::Color> &framebuffer,
+  const std::string &getInputFilePath() const { return _inputFilePath;}
+
+  void renderToBuffer(std::vector<sf::Color> &framebuffer,
                           Raytracer::Camera &cam, bool isHighQuality);
 
   void setWidth(const int &width) {_width = width;}
@@ -45,8 +43,8 @@ public:
 private:
   int _width;
   int _height;
-  std::string _outfilePath;
-  ShapeComposite _scene;
-  DirectionalLight _light;
+  std::string _inputFilePath;
+  ShapeComposite _shapes;
+  LightComposite _lights;
 };
 }  // namespace Raytracer
