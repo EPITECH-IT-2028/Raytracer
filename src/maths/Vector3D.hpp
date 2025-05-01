@@ -28,6 +28,9 @@ namespace Math {
       Vector3D &operator*=(const double &val);
       Vector3D operator/(const double &val) const;
       Vector3D &operator/=(const double &val);
+      Vector3D operator-() const {
+        return Vector3D(-x, -y, -z);
+      }
 
       double dot(const Vector3D &vec) const;
 
@@ -35,5 +38,7 @@ namespace Math {
 
       double length() const;
   };
+
+  Vector3D cross(const Vector3D &A, const Vector3D &B);
 
 }  // namespace Math

@@ -1,4 +1,6 @@
 #include "Camera.hpp"
+#include <algorithm>
+#include <cmath>
 #include "Ray.hpp"
 
 Raytracer::Ray Raytracer::Camera::ray(double u, double v) {
@@ -7,13 +9,17 @@ Raytracer::Ray Raytracer::Camera::ray(double u, double v) {
 }
 
 void Raytracer::Camera::updateView() {
-  _viewportU = Math::Vector3D(_viewportWidth, 0, 0);
-  _viewportV = Math::Vector3D(0, -_viewportHeight, 0);
+  Math::Vector3D worldUp{0, 1, 0};
 
-  _pixelDeltaU = _viewportU / static_cast<float>(_width);
-  _pixelDeltaV = _viewportV / static_cast<float>(_height);
-  _viewportCenter = origin + Math::Vector3D(0, 0, -_zoom);
-  _viewportUpperLeft = _viewportCenter - _viewportU / 2.0f - _viewportV / 2.0f;
-  _pixel0Location =
-      _viewportUpperLeft + _pixelDeltaU / 2.0f + _pixelDeltaV / 2.0f;
+  _forward = Math::Vector3D{std::cos(_pitch) * std::sin(_yaw), std::sin(_pitch),
+                            std::cos(_pitch) * std::cos(_yaw)}
+                 .normalize();
+  _right = Math::cross(_forward, worldUp).normalize();
+  _up = Math::cross(_right, _forward).normalize();
+  _viewportCenter = origin + _forward * _zoom;
+  _pixelDeltaU = _right * (_viewportWidth / float(_width));
+  _pixelDeltaV = -_up * (_viewportHeight / float(_height));
+  _pixel0Location = _viewportCenter - _right * (_viewportWidth * 0.5f) +
+                    _up * (_viewportHeight * 0.5f) +
+                    (_pixelDeltaU + _pixelDeltaV) * 0.5f;
 }

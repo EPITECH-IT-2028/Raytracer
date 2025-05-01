@@ -11,8 +11,13 @@ namespace Raytracer {
     public:
       Math::Point3D origin;
       Rectangle3D screen;
+      float _yaw = 0;
+      float _pitch = 90;
+      Math::Vector3D _right;
+      Math::Vector3D _up;
+      Math::Vector3D _forward;
 
-      Camera() : origin(0, 0, 0), screen(Rectangle3D()) {
+      Camera() : origin(0, 0, 2), screen(Rectangle3D()) {
       }
 
       Camera(const Math::Point3D &origin, const Rectangle3D &screen)
@@ -63,14 +68,6 @@ namespace Raytracer {
 
       void updateView();
 
-      const Math::Vector3D &getViewportU() const {
-        return _viewportU;
-      }
-
-      const Math::Vector3D &getViewportV() const {
-        return _viewportV;
-      }
-
       const Math::Vector3D &getPixelDeltaU() const {
         return _pixelDeltaU;
       }
@@ -93,14 +90,33 @@ namespace Raytracer {
 
       Ray ray(double u, double v);
 
+      void rotateYaw(float a) {
+        _yaw += a;
+      }
+
+      void rotatePitch(float a) {
+        _pitch += a;
+        _pitch = std::max(-89.9f, std::min(89.9f, _pitch));
+      }
+
+      void moveForward(float delta) {
+        origin = origin + _forward * delta;
+      }
+
+      void moveRight(float delta) {
+        origin = origin + _right * delta;
+      }
+
+      void moveUp(float delta) {
+        origin = origin + _up * delta;
+      }
+
     private:
       std::size_t _width;
       std::size_t _height;
       float _zoom;
       float _viewportHeight;
       float _viewportWidth;
-      Math::Vector3D _viewportU;
-      Math::Vector3D _viewportV;
       Math::Vector3D _pixelDeltaU;
       Math::Vector3D _pixelDeltaV;
       Math::Point3D _viewportCenter;

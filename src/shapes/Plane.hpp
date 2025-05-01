@@ -5,16 +5,16 @@
 #include "Ray.hpp"
 
 namespace Raytracer {
+
+  // WARNING: The plane is buggy
   class Plane : public AShape {
     public:
-      Plane(const Math::Point3D &center, const Math::Vector3D &normal,
-            const Math::Vector3D &color)
-          : _center(center), _normal(normal), _color(color) {
-      }
+      Plane(const std::string &axis, double position,
+            const Math::Vector3D &color);
 
       Plane()
           : _center(Math::Point3D()),
-            _normal(Math::Vector3D()),
+            _normal(Math::Vector3D(0, 1, 0)),
             _color(Math::Vector3D(1, 0, 0)) {
       }
 
