@@ -125,7 +125,7 @@ namespace Raytracer {
       float _zoom = 2.0;
       float _viewportHeight = 2.0;
       float _viewportWidth = 2.0;
-      float _fieldOfView = 0;
+      float _fieldOfView = 60.0;
       Math::Vector3D _pixelDeltaU;
       Math::Vector3D _pixelDeltaV;
       Math::Point3D _viewportCenter;

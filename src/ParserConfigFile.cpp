@@ -6,6 +6,7 @@
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "ShapeComposite.hpp"
+#include "Sphere.hpp"
 
 Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename) {
   if (!filename.ends_with(".cfg")) {
@@ -13,21 +14,21 @@ Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename) {
   }
   try {
     _cfg.readFile(filename);
-  } catch (const FileIOException &fioex) {
+  } catch (const libconfig::FileIOException &fioex) {
     std::cerr << "I/o error while reading file." << std::endl;
     throw std::runtime_error("[ERROR] - Parsing error in file: " + filename);
-  } catch (const ParseException &pex) {
+  } catch (const libconfig::ParseException &pex) {
     std::string file = pex.getFile();
     std::string errorMessage = "[ERROR] - Parse error in " + file  + " ; " + std::to_string(pex.getLine()) + " - " + pex.getError();
     throw std::runtime_error(errorMessage);
   }
 }
 
-void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const Setting &root) {
+void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const libconfig::Setting &root) {
   try {
-    const Setting &resolutionInfo = root["camera"]["resolution"];
-    const Setting &positionInfo = root["camera"]["position"];
-    const Setting &fovInfo = root["camera"];
+    const libconfig::Setting &resolutionInfo = root["camera"]["resolution"];
+    const libconfig::Setting &positionInfo = root["camera"]["position"];
+    const libconfig::Setting &fovInfo = root["camera"];
     int width, height, posX, posY, posZ;
     double fov;
     resolutionInfo.lookupValue("width", width);
@@ -49,14 +50,14 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const Setting &roo
   }
 }
 
-void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc, const Setting &root) {
+void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {
-    const Setting &spheresInfo = root["primitives"]["spheres"];
     // SPHERES 
-    if (root["primitives"].exists("spheres")) {
+    if (root.exists("primitives") && root["primitives"].exists("spheres")) {
+      const libconfig::Setting &spheresInfo = root["primitives"]["spheres"];
       for (int i = 0; i < spheresInfo.getLength(); i ++) {
-        const Setting &sphere = spheresInfo[i];
-        const Setting &colorInfo = sphere["color"];
+        const libconfig::Setting &sphere = spheresInfo[i];
+        const libconfig::Setting &colorInfo = sphere["color"];
         _factory.registerShape<Sphere>("sphere");
         std::shared_ptr<Sphere> newSphere = _factory.create<Raytracer::Sphere>("sphere");
         if (newSphere == nullptr) {
@@ -74,20 +75,18 @@ void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc,
         Math::Vector3D color(red, green, blue);
         Math::Point3D center(posX, posY, posZ);
         newSphere->setColor(color);
-        std::cout << newSphere->getColor().x << " "<< newSphere->getColor().y << " "<< newSphere->getColor().z << std::endl; 
         newSphere->setRadius(radius);
         newSphere->setCenter(center);
-        std::cout << newSphere->getCenter().x << " "<< newSphere->getCenter().y << " "<< newSphere->getCenter().z << std::endl; 
         sc.addShape(newSphere);
       }
     }
     
     // CYLINDERS 
-    if (root["primitives"].exists("cylinders")) {
-      const Setting &cylindersInfo = root["primitives"]["cylinders"];
+    if (root.exists("primitives") && root["primitives"].exists("cylinders")) {
+      const libconfig::Setting &cylindersInfo = root["primitives"]["cylinders"];
       for (int i = 0; i < cylindersInfo.getLength(); i++) {
-        const Setting &cylinder = cylindersInfo[i];
-        const Setting &colorInfo = cylinder["color"];
+        const libconfig::Setting &cylinder = cylindersInfo[i];
+        const libconfig::Setting &colorInfo = cylinder["color"];
         _factory.registerShape<Cylinder>("cylinder");
         auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
         if (newCylinder == nullptr) {
@@ -119,13 +118,13 @@ void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc,
   }
 }
 
-void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, const Setting &root) {
+void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, const libconfig::Setting &root) {
   try {
     // DIRECTIONALS 
-    if (root["lights"].exists("directional")) {
-      const Setting &directionalsInfo = root["lights"]["directional"];
+    if (root.exists("lights") && root["lights"].exists("directional")) {
+      const libconfig::Setting &directionalsInfo = root["lights"]["directional"];
       for (int i = 0; i < directionalsInfo.getLength(); i++) {
-        const Setting &directional = directionalsInfo[i]; 
+        const libconfig::Setting &directional = directionalsInfo[i]; 
         _factory.registerLight<DirectionalLight>("directional");
         auto newDirectional = _factory.create<Raytracer::DirectionalLight>("directional");
         if (newDirectional == nullptr) {
@@ -148,7 +147,7 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, con
 }
 
 void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera, ShapeComposite &sc, LightComposite &lc) {
-  const Setting &root = _cfg.getRoot();
+  const libconfig::Setting &root = _cfg.getRoot();
   // CAMERA 
   try {
     parseCamera(camera, root);

@@ -8,11 +8,6 @@
 #include <libconfig.h++>
 #include <string>
 
-using libconfig::Config;
-using libconfig::FileIOException;
-using libconfig::ParseException;
-using libconfig::Setting;
-
 namespace Raytracer {
 class ParserConfigFile {
 public:
@@ -21,11 +16,11 @@ public:
   ~ParserConfigFile() = default;
 
   void parseConfigFile(Camera &, ShapeComposite &, LightComposite &);
-  void parseCamera(Camera &, const Setting &);
-  void parsePrimitives(ShapeComposite &, const Setting &);
-  void parseLights(LightComposite &, const Setting &);
+  void parseCamera(Camera &, const libconfig::Setting &);
+  void parsePrimitives(ShapeComposite &, const libconfig::Setting &);
+  void parseLights(LightComposite &, const libconfig::Setting &);
 private:
-  Config _cfg;
+  libconfig::Config _cfg;
   Factory _factory = Factory();
 };
 }

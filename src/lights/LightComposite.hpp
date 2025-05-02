@@ -14,4 +14,4 @@ public:
 private:
   std::vector<std::shared_ptr<ILight>> _lights;
 };
-}
+};

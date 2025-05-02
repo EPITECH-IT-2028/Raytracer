@@ -1,5 +1,4 @@
 #include "Camera.hpp"
-#include <algorithm>
 #include <cmath>
 #include "Ray.hpp"
 #include "Rectangle.hpp"

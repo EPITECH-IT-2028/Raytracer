@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
@@ -36,7 +37,11 @@ namespace Raytracer {
 
       void setCenter(Math::Point3D& center) { _center = center;}
       void setColor(Math::Vector3D& color) { _color = color;}
-      void setRadius(double& radius) { _radius = radius;}
+      void setRadius(double& radius) { 
+        if (radius <= 0)
+          throw std::runtime_error("Radius must be superior to 0");
+        _radius = radius;
+      }
 
     private:
       double _radius;

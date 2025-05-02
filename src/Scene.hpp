@@ -2,15 +2,11 @@
 #include <chrono>
 #include <string>
 #include "Camera.hpp"
-#include "DirectionalLight.hpp"
-#include "Ray.hpp"
-#include "Sphere.hpp"
-#include "Vector3D.hpp"
 
 namespace Raytracer {
 class Scene {
 public:
-  Scene(int width, int height, const std::string &);
+  Scene(int width, int height, const std::string &inputFilePath);
 
   ~Scene() = default;
 
@@ -25,7 +21,7 @@ public:
   void createOutputFileName(const std::string &inputFileName);
 
 private:
-  std::string _path;
+  std::string _inputFilePath;
   int _width;
   int _height;
   sf::RenderWindow _window;
