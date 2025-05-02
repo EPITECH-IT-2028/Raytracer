@@ -16,7 +16,10 @@ add_executable(raytracer
   src/shapes/Plane.cpp
   src/shapes/Cylinder.cpp
   src/shapes/ShapeComposite.cpp
-  src/DirectionalLight.cpp
+  src/lights/DirectionalLight.cpp
+  src/lights/LightComposite.cpp
+  src/ParserConfigFile.cpp
+  src/Factory.cpp
   src/Rectangle.cpp
   src/Camera.cpp
   src/Scene.cpp
@@ -28,6 +31,7 @@ target_include_directories(raytracer
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/maths
     ${CMAKE_SOURCE_DIR}/src/shapes
+    ${CMAKE_SOURCE_DIR}/src/lights
 )
 
 if(APPLE)
@@ -39,10 +43,10 @@ if(APPLE)
     message(FATAL_ERROR "Unknown macOS architecture: ${CMAKE_SYSTEM_PROCESSOR}")
   endif()
   find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
 elseif(UNIX AND NOT APPLE)
   find_package(SFML 2.5.1 COMPONENTS system window graphics REQUIRED)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
 endif()
 
 execute_process(

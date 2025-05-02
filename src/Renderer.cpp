@@ -1,16 +1,12 @@
 #include "Renderer.hpp"
-#include <fstream>
-#include <iostream>
 #include "Camera.hpp"
-#include "Cylinder.hpp"
-#include "DirectionalLight.hpp"
-#include "Plane.hpp"
+#include "ParserConfigFile.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
-#include "Sphere.hpp"
 
-Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const IShape &shape,
-                                             const DirectionalLight &light) {
+Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
+                                             const ShapeComposite &shape,
+                                             const LightComposite &light) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
@@ -24,17 +20,14 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const IShape &shape,
          Math::Vector3D(0.5, 0.7, 1.0) * a;
 }
 
-void Raytracer::Renderer::initScene() {
-  auto sphere1 = std::make_shared<Raytracer::Sphere>(
-      Math::Point3D(0, 0, -1), 0.5, Math::Vector3D(1, 0, 0));
-  Raytracer::Sphere s2(Math::Point3D(-1, -0.3, -2.0), 0.5,
-                       Math::Vector3D(0, 0, 1));
-  Raytracer::Cylinder c1(Math::Point3D(1, 0, -1), 0.5, 1,
-                         Math::Vector3D(0, 1, 0), Math::Vector3D(1, 0, 0));
-
-  _scene.addShape(sphere1);
-  _scene.addShape(std::make_shared<Raytracer::Sphere>(s2));
-  _scene.addShape(std::make_shared<Raytracer::Cylinder>(c1));
+void Raytracer::Renderer::initScene(Camera &camera) {
+  ParserConfigFile parser(_inputFilePath);
+  try {
+    parser.parseConfigFile(camera, _shapes, _lights);
+  } catch (const std::exception &e) {
+    std::cerr << "Error parsing config file: " << e.what() << std::endl;
+    throw;
+  }
 }
 
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
@@ -52,7 +45,7 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
           cam.getPixelDeltaV() * static_cast<float>(j);
       Math::Vector3D ray_direction = (pixel_center - cam.origin).normalize();
       Raytracer::Ray ray(cam.origin, ray_direction);
-      Math::Vector3D color = rayColor(ray, _scene, _light);
+      Math::Vector3D color = rayColor(ray, _shapes, _lights);
       sf::Color pixel_color(static_cast<sf::Uint8>(color.x * 255),
                             static_cast<sf::Uint8>(color.y * 255),
                             static_cast<sf::Uint8>(color.z * 255));

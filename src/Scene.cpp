@@ -1,13 +1,7 @@
 #include "Scene.hpp"
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include "Ray.hpp"
 #include "Renderer.hpp"
 
-Raytracer::Scene::Scene(int width, int height) {
-  _width = width;
-  _height = height;
+Raytracer::Scene::Scene(int width, int height, const std::string &inputPath) : _inputFilePath(inputPath), _width(width), _height(height) {
   _window.create(sf::VideoMode(_width, _height), "Raytracer");
   _window.setFramerateLimit(60);
   _window.setVerticalSyncEnabled(true);
@@ -88,13 +82,8 @@ void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
 }
 
 void Raytracer::Scene::render() {
-  Raytracer::Renderer renderer(_width, _height);
   Raytracer::Camera cam;
-  cam.setWidth(_width);
-  cam.setHeight(_height);
-  cam.setZoom(1.0);
-  cam.setViewportHeight(2.0);
-  cam.setViewportWidth(cam.getViewportHeight());
+  Raytracer::Renderer renderer(_width, _height, _inputFilePath, cam);
 
   while (_window.isOpen()) {
     sf::Event event;
