@@ -20,7 +20,11 @@ public:
 
   void createOutputFileName(const std::string &inputFileName);
 
+      void handleInput(sf::Event &event, Raytracer::Camera &camera);
+
 private:
+      void changeCamQuality();
+      bool _cameraMoved = false;
   std::string _inputFilePath;
   int _width;
   int _height;
