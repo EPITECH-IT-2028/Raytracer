@@ -52,59 +52,65 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const Setting &roo
 void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc, const Setting &root) {
   try {
     const Setting &spheresInfo = root["primitives"]["spheres"];
-    // Parse spheres
-    for (int i = 0; i < spheresInfo.getLength(); i ++) {
-      const Setting &sphere = spheresInfo[i];
-      const Setting &colorInfo = sphere["color"];
-      _factory.registerShape<Sphere>("sphere");
-      auto newSphere = _factory.create<Raytracer::Sphere>("sphere");
-      if (newSphere == nullptr) {
-        throw std::runtime_error("[ERROR] - Failed during creation of sphere.");
+    // SPHERES 
+    if (root["primitives"].exists("spheres")) {
+      for (int i = 0; i < spheresInfo.getLength(); i ++) {
+        const Setting &sphere = spheresInfo[i];
+        const Setting &colorInfo = sphere["color"];
+        _factory.registerShape<Sphere>("sphere");
+        std::shared_ptr<Sphere> newSphere = _factory.create<Raytracer::Sphere>("sphere");
+        if (newSphere == nullptr) {
+          throw std::runtime_error("[ERROR] - Failed during creation of sphere.");
+        }
+        double posX, posY, posZ, radius;
+        double red, green, blue;
+        sphere.lookupValue("x", posX);
+        sphere.lookupValue("y", posY);
+        sphere.lookupValue("z", posZ);
+        sphere.lookupValue("r", radius);
+        colorInfo.lookupValue("r", red);
+        colorInfo.lookupValue("g", green);
+        colorInfo.lookupValue("b", blue);
+        Math::Vector3D color(red, green, blue);
+        Math::Point3D center(posX, posY, posZ);
+        newSphere->setColor(color);
+        std::cout << newSphere->getColor().x << " "<< newSphere->getColor().y << " "<< newSphere->getColor().z << std::endl; 
+        newSphere->setRadius(radius);
+        newSphere->setCenter(center);
+        std::cout << newSphere->getCenter().x << " "<< newSphere->getCenter().y << " "<< newSphere->getCenter().z << std::endl; 
+        sc.addShape(newSphere);
       }
-      double posX, posY, posZ, red, green, blue;
-      double radius;
-      sphere.lookupValue("x", posX);
-      sphere.lookupValue("y", posY);
-      sphere.lookupValue("z", posZ);
-      sphere.lookupValue("r", radius);
-      colorInfo.lookupValue("r", red);
-      colorInfo.lookupValue("g", green);
-      colorInfo.lookupValue("b", blue);
-      Math::Vector3D color(red, green, blue);
-      Math::Point3D center(posX, posY, posZ);
-      newSphere->setColor(color);
-      newSphere->setRadius(radius);
-      newSphere->setCenter(center);
-      sc.addShape(newSphere);
     }
     
-    // Parse cylinders
-    const Setting &cylindersInfo = root["primitives"]["cylinders"];
-    for (int i = 0; i < cylindersInfo.getLength(); i++) {
-      const Setting &cylinder = cylindersInfo[i];
-      const Setting &colorInfo = cylinder["color"];
-      _factory.registerShape<Cylinder>("cylinder");
-      auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
-      if (newCylinder == nullptr) {
-        throw std::runtime_error("[ERROR] - Failed during creation of cylinder.");
+    // CYLINDERS 
+    if (root["primitives"].exists("cylinders")) {
+      const Setting &cylindersInfo = root["primitives"]["cylinders"];
+      for (int i = 0; i < cylindersInfo.getLength(); i++) {
+        const Setting &cylinder = cylindersInfo[i];
+        const Setting &colorInfo = cylinder["color"];
+        _factory.registerShape<Cylinder>("cylinder");
+        auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
+        if (newCylinder == nullptr) {
+          throw std::runtime_error("[ERROR] - Failed during creation of cylinder.");
+        }
+        double posX, posY, posZ, red, green, blue;
+        double radius, height;
+        cylinder.lookupValue("x", posX);
+        cylinder.lookupValue("y", posY);
+        cylinder.lookupValue("z", posZ);
+        cylinder.lookupValue("r", radius);
+        cylinder.lookupValue("h", height);
+        colorInfo.lookupValue("r", red);
+        colorInfo.lookupValue("g", green);
+        colorInfo.lookupValue("b", blue);
+        Math::Vector3D color(red, green, blue);
+        Math::Point3D center(posX, posY, posZ);
+        newCylinder->setColor(color);
+        newCylinder->setRadius(radius);
+        newCylinder->setHeight(height);
+        newCylinder->setCenter(center);
+        sc.addShape(newCylinder);
       }
-      double posX, posY, posZ, red, green, blue;
-      double radius, height;
-      cylinder.lookupValue("x", posX);
-      cylinder.lookupValue("y", posY);
-      cylinder.lookupValue("z", posZ);
-      cylinder.lookupValue("r", radius);
-      cylinder.lookupValue("h", height);
-      colorInfo.lookupValue("r", red);
-      colorInfo.lookupValue("g", green);
-      colorInfo.lookupValue("b", blue);
-      Math::Vector3D color(red, green, blue);
-      Math::Point3D center(posX, posY, posZ);
-      newCylinder->setColor(color);
-      newCylinder->setRadius(radius);
-      newCylinder->setHeight(height);
-      newCylinder->setCenter(center);
-      sc.addShape(newCylinder);
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
@@ -115,9 +121,9 @@ void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc,
 
 void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, const Setting &root) {
   try {
-    const Setting &directionalsInfo = root["lights"]["directional"];
-    
-    if (directionalsInfo.getLength() > 0) {
+    // DIRECTIONALS 
+    if (root["lights"].exists("directional")) {
+      const Setting &directionalsInfo = root["lights"]["directional"];
       for (int i = 0; i < directionalsInfo.getLength(); i++) {
         const Setting &directional = directionalsInfo[i]; 
         _factory.registerLight<DirectionalLight>("directional");

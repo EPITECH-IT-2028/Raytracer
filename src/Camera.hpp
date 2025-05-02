@@ -120,12 +120,12 @@ namespace Raytracer {
       }
 
     private:
-      std::size_t _width;
-      std::size_t _height;
-      float _zoom = 1.0;
+      std::size_t _width = 0;
+      std::size_t _height = 0;
+      float _zoom = 2.0;
       float _viewportHeight = 2.0;
       float _viewportWidth = 2.0;
-      float _fieldOfView;
+      float _fieldOfView = 0;
       Math::Vector3D _pixelDeltaU;
       Math::Vector3D _pixelDeltaV;
       Math::Point3D _viewportCenter;

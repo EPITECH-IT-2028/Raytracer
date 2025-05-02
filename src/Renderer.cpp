@@ -1,14 +1,8 @@
 #include "Renderer.hpp"
-#include <fstream>
-#include <iostream>
 #include "Camera.hpp"
-#include "Cylinder.hpp"
-#include "DirectionalLight.hpp"
-#include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
 #include "ParserConfigFile.hpp"
-#include "Sphere.hpp"
 
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const ShapeComposite &shape, const LightComposite &light) {
   auto [t, color, hitShape] = shape.hits(r);
