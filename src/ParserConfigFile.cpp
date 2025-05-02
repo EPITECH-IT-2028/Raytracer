@@ -1,7 +1,7 @@
 #include "ParserConfigFile.hpp"
+#include <iostream>
 #include <libconfig.h++>
 #include <stdexcept>
-#include <iostream>
 #include <string>
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
@@ -10,21 +10,24 @@
 
 Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename) {
   if (!filename.ends_with(".cfg")) {
-    throw std::runtime_error("[ERROR] - Config file isn't in correct format (needs to be a *.cfg)");
+    throw std::runtime_error(
+        "[ERROR] - Config file isn't in correct format (needs to be a *.cfg)");
   }
   try {
     _cfg.readFile(filename);
   } catch (const libconfig::FileIOException &fioex) {
-    std::cerr << "I/o error while reading file." << std::endl;
     throw std::runtime_error("[ERROR] - Parsing error in file: " + filename);
   } catch (const libconfig::ParseException &pex) {
     std::string file = pex.getFile();
-    std::string errorMessage = "[ERROR] - Parse error in " + file  + " ; " + std::to_string(pex.getLine()) + " - " + pex.getError();
+    std::string errorMessage = "[ERROR] - Parse error in " + file + " ; " +
+                               std::to_string(pex.getLine()) + " - " +
+                               pex.getError();
     throw std::runtime_error(errorMessage);
   }
 }
 
-void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const libconfig::Setting &root) {
+void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
+                                              const libconfig::Setting &root) {
   try {
     const libconfig::Setting &resolutionInfo = root["camera"]["resolution"];
     const libconfig::Setting &positionInfo = root["camera"]["position"];
@@ -50,18 +53,21 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera, const libconfig::S
   }
 }
 
-void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
+void Raytracer::ParserConfigFile::parsePrimitives(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {
-    // SPHERES 
+    // SPHERES
     if (root.exists("primitives") && root["primitives"].exists("spheres")) {
       const libconfig::Setting &spheresInfo = root["primitives"]["spheres"];
-      for (int i = 0; i < spheresInfo.getLength(); i ++) {
+      for (int i = 0; i < spheresInfo.getLength(); i++) {
         const libconfig::Setting &sphere = spheresInfo[i];
         const libconfig::Setting &colorInfo = sphere["color"];
         _factory.registerShape<Sphere>("sphere");
-        std::shared_ptr<Sphere> newSphere = _factory.create<Raytracer::Sphere>("sphere");
+        std::shared_ptr<Sphere> newSphere =
+            _factory.create<Raytracer::Sphere>("sphere");
         if (newSphere == nullptr) {
-          throw std::runtime_error("[ERROR] - Failed during creation of sphere.");
+          throw std::runtime_error(
+              "[ERROR] - Failed during creation of sphere.");
         }
         double posX, posY, posZ, radius;
         double red, green, blue;
@@ -80,8 +86,8 @@ void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc,
         sc.addShape(newSphere);
       }
     }
-    
-    // CYLINDERS 
+
+    // CYLINDERS
     if (root.exists("primitives") && root["primitives"].exists("cylinders")) {
       const libconfig::Setting &cylindersInfo = root["primitives"]["cylinders"];
       for (int i = 0; i < cylindersInfo.getLength(); i++) {
@@ -90,7 +96,8 @@ void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc,
         _factory.registerShape<Cylinder>("cylinder");
         auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
         if (newCylinder == nullptr) {
-          throw std::runtime_error("[ERROR] - Failed during creation of cylinder.");
+          throw std::runtime_error(
+              "[ERROR] - Failed during creation of cylinder.");
         }
         double posX, posY, posZ, red, green, blue;
         double radius, height;
@@ -118,17 +125,21 @@ void Raytracer::ParserConfigFile::parsePrimitives(Raytracer::ShapeComposite &sc,
   }
 }
 
-void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, const libconfig::Setting &root) {
+void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
+                                              const libconfig::Setting &root) {
   try {
-    // DIRECTIONALS 
+    // DIRECTIONALS
     if (root.exists("lights") && root["lights"].exists("directional")) {
-      const libconfig::Setting &directionalsInfo = root["lights"]["directional"];
+      const libconfig::Setting &directionalsInfo =
+          root["lights"]["directional"];
       for (int i = 0; i < directionalsInfo.getLength(); i++) {
-        const libconfig::Setting &directional = directionalsInfo[i]; 
+        const libconfig::Setting &directional = directionalsInfo[i];
         _factory.registerLight<DirectionalLight>("directional");
-        auto newDirectional = _factory.create<Raytracer::DirectionalLight>("directional");
+        auto newDirectional =
+            _factory.create<Raytracer::DirectionalLight>("directional");
         if (newDirectional == nullptr) {
-          throw std::runtime_error("[ERROR] - Failed during creation of directional light.");
+          throw std::runtime_error(
+              "[ERROR] - Failed during creation of directional light.");
         }
         double posX, posY, posZ;
         directional.lookupValue("x", posX);
@@ -146,15 +157,17 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc, con
   }
 }
 
-void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera, ShapeComposite &sc, LightComposite &lc) {
+void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
+                                                  ShapeComposite &sc,
+                                                  LightComposite &lc) {
   const libconfig::Setting &root = _cfg.getRoot();
-  // CAMERA 
+  // CAMERA
   try {
     parseCamera(camera, root);
   } catch (const std::runtime_error &error) {
     throw std::runtime_error(error.what());
   }
-  // PRIMITIVES 
+  // PRIMITIVES
   try {
     parsePrimitives(sc, root);
   } catch (const std::runtime_error &error) {

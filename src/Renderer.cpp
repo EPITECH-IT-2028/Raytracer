@@ -1,10 +1,12 @@
 #include "Renderer.hpp"
 #include "Camera.hpp"
+#include "ParserConfigFile.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
-#include "ParserConfigFile.hpp"
 
-Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const ShapeComposite &shape, const LightComposite &light) {
+Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
+                                             const ShapeComposite &shape,
+                                             const LightComposite &light) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
@@ -20,10 +22,17 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r, const ShapeComposite &shape
 
 void Raytracer::Renderer::initScene(Camera &camera) {
   ParserConfigFile parser(_inputFilePath);
-  parser.parseConfigFile(camera, _shapes, _lights);
+  try {
+    parser.parseConfigFile(camera, _shapes, _lights);
+  } catch (const std::exception &e) {
+    std::cerr << "Error parsing config file: " << e.what() << std::endl;
+    throw;
+  }
 }
 
-void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer, Raytracer::Camera &cam, bool isHighQuality) {
+void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
+                                         Raytracer::Camera &cam,
+                                         bool isHighQuality) {
   cam.updateView();
 
   int step = isHighQuality ? 1 : 5;
