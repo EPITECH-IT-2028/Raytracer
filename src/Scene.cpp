@@ -1,7 +1,8 @@
 #include "Scene.hpp"
 #include "Renderer.hpp"
 
-Raytracer::Scene::Scene(int width, int height, const std::string &inputPath) : _inputFilePath(inputPath), _width(width), _height(height) {
+Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
+    : _inputFilePath(inputPath), _width(width), _height(height) {
   _window.create(sf::VideoMode(_width, _height), "Raytracer");
   _window.setFramerateLimit(60);
   _window.setVerticalSyncEnabled(true);
