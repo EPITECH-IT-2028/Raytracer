@@ -11,5 +11,5 @@ Math::Vector3D Raytracer::DirectionalLight::computeLighting(
   if (shadow > 0.0 && shadowShape != nullptr)
     return objectColor * 0.1;
 
-  return objectColor * normal.dot(-direction);
+  return objectColor * std::max(0.0, normal.dot(-direction));
 }
