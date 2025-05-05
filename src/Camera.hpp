@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <algorithm>
 #include "Point3D.hpp"
 #include "Ray.hpp"
 #include "Rectangle.hpp"
