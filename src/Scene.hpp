@@ -16,8 +16,6 @@ namespace Raytracer {
 
       void updateImage();
 
-      void createOutputFileName(const std::string &inputFileName);
-
       void handleInput(sf::Event &event, Raytracer::Camera &camera);
 
     private:
