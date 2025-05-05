@@ -82,9 +82,8 @@ void Raytracer::Scene::changeCamQuality() {
     _isHighQuality = false;
   } else {
     auto now = std::chrono::steady_clock::now();
-    auto duration =
-        std::chrono::duration_cast<std::chrono::seconds>(now - _lastMovement);
-    if (duration.count() > _qualityUpdateDelay && !_isHighQuality) {
+    std::chrono::duration<float> duration = now - _lastMovement;
+    if (duration.count() > _qualityUpdateDelay.count() && !_isHighQuality) {
       _isHighQuality = true;
     }
   }

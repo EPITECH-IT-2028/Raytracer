@@ -33,6 +33,6 @@ namespace Raytracer {
       std::vector<sf::Color> _framebuffer;
       std::chrono::time_point<std::chrono::steady_clock> _lastMovement;
       bool _isHighQuality = true;
-      const float _qualityUpdateDelay = 0.5f;
+      const std::chrono::duration<float> _qualityUpdateDelay{0.5f};
   };
 }  // namespace Raytracer
