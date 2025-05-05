@@ -6,7 +6,6 @@
 
 namespace Raytracer {
 
-  // WARNING: The plane is buggy
   class Plane : public AShape {
     public:
       Plane(const std::string &axis, double position,
