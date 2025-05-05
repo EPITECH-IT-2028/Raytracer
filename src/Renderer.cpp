@@ -49,7 +49,12 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
       sf::Color pixel_color(static_cast<sf::Uint8>(color.x * 255),
                             static_cast<sf::Uint8>(color.y * 255),
                             static_cast<sf::Uint8>(color.z * 255));
-      framebuffer[j * _width + i] = pixel_color;
+      int endY = j + step;
+      int endX = i + step;
+      for (int blockY = j; blockY < endY; blockY++) {
+        for (int blockX = i; blockX < endX; blockX++)
+          framebuffer[blockY * _width + blockX] = pixel_color;
+      }
     }
   }
 }

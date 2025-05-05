@@ -104,6 +104,7 @@ void Raytracer::Scene::render() {
         _window.close();
     }
     changeCamQuality();
+    std::fill(_framebuffer.begin(), _framebuffer.end(), sf::Color::White);
     renderer.renderToBuffer(_framebuffer, cam, _isHighQuality);
     updateImage();
     _window.clear(sf::Color::White);
