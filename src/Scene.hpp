@@ -5,19 +5,19 @@
 #include "Camera.hpp"
 
 namespace Raytracer {
-class Scene {
-public:
-  Scene(int width, int height, const std::string &inputFilePath);
+  class Scene {
+    public:
+      Scene(int width, int height, const std::string &inputFilePath);
 
   ~Scene();
 
-  void render();
+      void render();
 
-  void init();
+      void init();
 
-  void updateImage();
+      void updateImage();
 
-  void handleInput(Raytracer::Camera &camera);
+      void handleInput(sf::Event &event, Raytracer::Camera &camera);
 
   void createOutputFileName(const std::string &inputFileName);
 
@@ -38,5 +38,8 @@ private:
   std::vector<std::string> _plugins;
   std::vector<void *> _pluginHandles;
   Raytracer::Camera _camera;
-};
+  void changeCamQuality();
+  bool _cameraMoved = false;
+  const std::chrono::duration<float> _qualityUpdateDelay{0.5f};
+  };
 }  // namespace Raytracer
