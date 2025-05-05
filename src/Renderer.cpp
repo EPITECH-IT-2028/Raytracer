@@ -3,6 +3,8 @@
 #include "ParserConfigFile.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
+#include <filesystem>
+#include <dlfcn.h>
 
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
@@ -21,7 +23,7 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
 }
 
 void Raytracer::Renderer::initScene(Camera &camera) {
-  ParserConfigFile parser(_inputFilePath);
+  ParserConfigFile parser(_inputFilePath, _plugins);
   try {
     parser.parseConfigFile(camera, _shapes, _lights);
   } catch (const std::exception &e) {

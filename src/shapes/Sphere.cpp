@@ -1,5 +1,6 @@
 #include "Sphere.hpp"
 #include <cmath>
+#include "IShape.hpp"
 #include "Vector3D.hpp"
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
@@ -19,4 +20,8 @@ Raytracer::Sphere::hits(const Raytracer::Ray &ray) const {
     return {0.0, _color, this};
   }
   return {t1 < t2 ? t1 : t2, _color, this};
+}
+
+extern "C" {
+  Raytracer::IShape *addShape() { return new Raytracer::Sphere(); }
 }

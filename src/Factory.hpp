@@ -5,6 +5,7 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <vector>
 #include "ILight.hpp"
 #include "IShape.hpp"
 
@@ -15,18 +16,22 @@ namespace Raytracer {
       ~Factory() = default;
 
       template <typename T>
-      void registerShape(const std::string& name) {
+      void registerShape(const std::string& name, std::function<T*()> addShape) {
         if constexpr (std::is_base_of_v<IShape, T>) {
-          _shapeFactories[name] = []() { return std::make_shared<T>(); };
+          _shapeFactories[name] = [addShape]() {
+            return std::shared_ptr<IShape>(addShape());
+          };
         } else {
           throw std::runtime_error("T must be derived from IShape");
         }
       }
 
       template <typename T>
-      void registerLight(const std::string& name) {
+      void registerLight(const std::string& name, std::function<T*()> addLight) {
         if constexpr (std::is_base_of_v<ILight, T>) {
-          _lightFactories[name] = []() { return std::make_shared<T>(); };
+          _lightFactories[name] = [addLight]() {
+            return std::shared_ptr<ILight>(addLight());
+          };
         } else {
           throw std::runtime_error("T must be derived from ILight");
         }
@@ -55,6 +60,8 @@ namespace Raytracer {
 
         return nullptr;
       }
+
+      void initFactories(const std::vector<std::string> &plugins);
 
     private:
       std::map<std::string, std::function<std::shared_ptr<IShape>()>>

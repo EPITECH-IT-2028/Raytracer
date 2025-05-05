@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <string>
+#include <vector>
 #include "Camera.hpp"
 
 namespace Raytracer {
@@ -8,7 +9,7 @@ class Scene {
 public:
   Scene(int width, int height, const std::string &inputFilePath);
 
-  ~Scene() = default;
+  ~Scene();
 
   void render();
 
@@ -19,6 +20,8 @@ public:
   void handleInput(Raytracer::Camera &camera);
 
   void createOutputFileName(const std::string &inputFileName);
+
+  void parsePlugins();
 
 private:
   std::string _inputFilePath;
@@ -32,5 +35,8 @@ private:
   std::chrono::time_point<std::chrono::steady_clock> _lastMovement;
   bool _isHighQuality = true;
   const float _updateQuality = 0.5f;
+  std::vector<std::string> _plugins;
+  std::vector<void *> _pluginHandles;
+  Raytracer::Camera _camera;
 };
 }  // namespace Raytracer

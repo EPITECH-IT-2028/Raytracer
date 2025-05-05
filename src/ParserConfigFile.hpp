@@ -11,7 +11,7 @@
 namespace Raytracer {
 class ParserConfigFile {
 public:
-  ParserConfigFile(const std::string &filename);
+  ParserConfigFile(const std::string &filename, const std::vector<std::string> &plugins);
 
   ~ParserConfigFile() = default;
 
@@ -21,6 +21,7 @@ public:
   void parseLights(LightComposite &, const libconfig::Setting &);
 private:
   libconfig::Config _cfg;
+  std::vector<std::string> _plugins;
   Factory _factory = Factory();
 };
 }

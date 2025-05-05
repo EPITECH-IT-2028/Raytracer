@@ -8,7 +8,8 @@
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 
-Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename) {
+Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename, 
+                                              const std::vector<std::string> &plugins) : _plugins(plugins) {
   if (!filename.ends_with(".cfg")) {
     throw std::runtime_error(
         "[ERROR] - Config file isn't in correct format (needs to be a *.cfg)");
@@ -62,7 +63,6 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       for (int i = 0; i < spheresInfo.getLength(); i++) {
         const libconfig::Setting &sphere = spheresInfo[i];
         const libconfig::Setting &colorInfo = sphere["color"];
-        _factory.registerShape<Sphere>("sphere");
         std::shared_ptr<Sphere> newSphere =
             _factory.create<Raytracer::Sphere>("sphere");
         if (newSphere == nullptr) {
@@ -93,7 +93,6 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       for (int i = 0; i < cylindersInfo.getLength(); i++) {
         const libconfig::Setting &cylinder = cylindersInfo[i];
         const libconfig::Setting &colorInfo = cylinder["color"];
-        _factory.registerShape<Cylinder>("cylinder");
         auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
         if (newCylinder == nullptr) {
           throw std::runtime_error(
@@ -134,7 +133,6 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
           root["lights"]["directional"];
       for (int i = 0; i < directionalsInfo.getLength(); i++) {
         const libconfig::Setting &directional = directionalsInfo[i];
-        _factory.registerLight<DirectionalLight>("directional");
         auto newDirectional =
             _factory.create<Raytracer::DirectionalLight>("directional");
         if (newDirectional == nullptr) {
@@ -161,6 +159,7 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
                                                   ShapeComposite &sc,
                                                   LightComposite &lc) {
   const libconfig::Setting &root = _cfg.getRoot();
+  _factory.initFactories(_plugins);
   // CAMERA
   try {
     parseCamera(camera, root);

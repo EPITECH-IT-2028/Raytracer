@@ -29,3 +29,7 @@ Raytracer::Plane::hits(const Raytracer::Ray &ray) const {
   }
   return {t, _color, this};
 }
+
+extern "C" {
+  Raytracer::IShape *addShape() { return new Raytracer::Plane(); }
+}

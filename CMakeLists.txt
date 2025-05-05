@@ -12,9 +12,6 @@ add_executable(raytracer
   src/main.cpp
   src/maths/Vector3D.cpp
   src/maths/Point3D.cpp
-  src/shapes/Sphere.cpp
-  src/shapes/Plane.cpp
-  src/shapes/Cylinder.cpp
   src/shapes/ShapeComposite.cpp
   src/lights/DirectionalLight.cpp
   src/lights/LightComposite.cpp
@@ -25,6 +22,38 @@ add_executable(raytracer
   src/Scene.cpp
   src/Renderer.cpp
 )
+
+add_library(sphere SHARED
+  src/maths/Vector3D.cpp
+  src/maths/Point3D.cpp
+  src/shapes/Sphere.cpp
+)
+
+add_library(plane SHARED
+  src/maths/Vector3D.cpp
+  src/maths/Point3D.cpp
+  src/shapes/Plane.cpp
+)
+
+add_library(cylinder SHARED
+  src/maths/Vector3D.cpp
+  src/maths/Point3D.cpp
+  src/shapes/Cylinder.cpp
+)
+
+add_library(directional SHARED
+  src/lights/DirectionalLight.cpp
+  src/maths/Vector3D.cpp
+  src/maths/Point3D.cpp
+)
+
+set_target_properties(sphere PROPERTIES PREFIX "")
+
+set_target_properties(plane PROPERTIES PREFIX "")
+
+set_target_properties(cylinder PROPERTIES PREFIX "")
+
+set_target_properties(directional PROPERTIES PREFIX "")
 
 target_include_directories(raytracer
   PRIVATE
@@ -44,12 +73,33 @@ if(APPLE)
   endif()
   find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
   target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
+
+  set_target_properties(sphere PROPERTIES SUFFIX ".so")
+  set_target_properties(plane PROPERTIES SUFFIX ".so")
+  set_target_properties(cylinder PROPERTIES SUFFIX ".so")
+  set_target_properties(directional PROPERTIES SUFFIX ".so")
 elseif(UNIX AND NOT APPLE)
   find_package(SFML 2.5.1 COMPONENTS system window graphics REQUIRED)
   target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
 endif()
 
+target_include_directories(sphere PUBLIC src)
+target_include_directories(sphere PUBLIC src/maths)
+
+target_include_directories(plane PUBLIC src)
+target_include_directories(plane PUBLIC src/maths)
+
+target_include_directories(cylinder PUBLIC src)
+target_include_directories(cylinder PUBLIC src/maths)
+
+target_include_directories(directional PUBLIC src)
+target_include_directories(directional PUBLIC src/maths)
+
 execute_process(
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/compile_commands.json ${PROJECT_SOURCE_DIR}
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/sphere.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/plane.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/cylinder.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/directional.so ${PROJECT_SOURCE_DIR}/plugins/
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
