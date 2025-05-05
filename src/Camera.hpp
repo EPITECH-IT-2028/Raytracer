@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <algorithm>
 #include "Point3D.hpp"
 #include "Ray.hpp"
 #include "Rectangle.hpp"
@@ -104,19 +104,19 @@ namespace Raytracer {
 
       void rotatePitch(float a) {
         _pitch += a;
-        _pitch = std::max(-89.9f, std::min(89.9f, _pitch));
+        _pitch = std::clamp(_pitch, -89.9f, 89.9f);
       }
 
-      void moveForward(float delta) {
-        origin = origin + _forward * delta;
+      void moveForward(float a) {
+        origin = origin + _forward * a / 100;
       }
 
-      void moveRight(float delta) {
-        origin = origin + _right * delta;
+      void moveRight(float a) {
+        origin = origin + _right * a / 100;
       }
 
-      void moveUp(float delta) {
-        origin = origin + _up * delta;
+      void moveUp(float a) {
+        origin = origin + _up * a / 100;
       }
 
     private:
