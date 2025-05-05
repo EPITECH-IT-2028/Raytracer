@@ -1,6 +1,8 @@
 #include "Renderer.hpp"
+#include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
+#include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
 
@@ -10,9 +12,9 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
-    Math::Point3D hit_point = r.at(t);
-    Math::Vector3D normal = hitShape->getNormal(hit_point);
-    return light.computeLighting(normal, color);
+    Math::Point3D hitPoint = r.at(t);
+    Math::Vector3D normal = hitShape->getNormal(hitPoint);
+    return light.computeLighting(normal, color, hitPoint, shape);
   }
   Math::Vector3D unit_direction = r.direction.normalize();
   double a = 0.5 * (unit_direction.y + 1.0);
@@ -28,6 +30,8 @@ void Raytracer::Renderer::initScene(Camera &camera) {
     std::cerr << "Error parsing config file: " << e.what() << std::endl;
     throw;
   }
+  _shapes.addShape(
+      std::make_shared<Raytracer::Plane>("Y", -0.7, Math::Vector3D(0, 1, 0)));
 }
 
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
