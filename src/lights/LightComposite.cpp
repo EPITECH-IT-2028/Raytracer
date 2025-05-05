@@ -2,7 +2,7 @@
 
 Math::Vector3D Raytracer::LightComposite::computeLighting(
     const Math::Vector3D& normal, const Math::Vector3D& objectColor,
-    const Math::Point3D& hitPoint, const ShapeComposite& shapes) const {
+    const Math::Point3D& hitPoint, const ShapeComposite& shapes) {
   Math::Vector3D result(0, 0, 0);
   for (const auto& light : _lights) {
     result += light->computeLighting(normal, objectColor, hitPoint, shapes);

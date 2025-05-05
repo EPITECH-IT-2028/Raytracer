@@ -8,7 +8,7 @@
 
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
-                                             const LightComposite &light) {
+                                             LightComposite &light) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {

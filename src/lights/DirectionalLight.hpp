@@ -11,9 +11,9 @@ namespace Raytracer {
       DirectionalLight() = default;
       DirectionalLight(Math::Vector3D direction) : direction(direction) {};
       ~DirectionalLight() = default;
-      Math::Vector3D computeLighting(
-          const Math::Vector3D& normal, const Math::Vector3D& objectColor,
-          const Math::Point3D& hitPoint,
-          const ShapeComposite& shapes) const override;
+      Math::Vector3D computeLighting(const Math::Vector3D& normal,
+                                     const Math::Vector3D& objectColor,
+                                     const Math::Point3D& hitPoint,
+                                     const ShapeComposite& shapes) override;
   };
 }  // namespace Raytracer
