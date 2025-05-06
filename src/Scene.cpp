@@ -34,7 +34,7 @@ void Raytracer::Scene::updateImage() {
   _texture.update(_image);
 }
 
-void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
+void Raytracer::Scene::handleInput() {
   const float moveSpeed = 5.0f;
   const float rotateSpeed = 2.0f;
 
@@ -54,26 +54,26 @@ void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
   }
 
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-    camera.moveForward(moveSpeed);
+    _camera.moveForward(moveSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    camera.moveForward(-moveSpeed);
+    _camera.moveForward(-moveSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-    camera.moveRight(-moveSpeed);
+    _camera.moveRight(-moveSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    camera.moveRight(moveSpeed);
+    _camera.moveRight(moveSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    camera.moveUp(moveSpeed);
+    _camera.moveUp(moveSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
       sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
-    camera.moveUp(-moveSpeed);
+    _camera.moveUp(-moveSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    camera.rotateYaw(rotateSpeed);
+    _camera.rotateYaw(rotateSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    camera.rotateYaw(-rotateSpeed);
+    _camera.rotateYaw(-rotateSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    camera.rotatePitch(rotateSpeed);
+    _camera.rotatePitch(rotateSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    camera.rotatePitch(-rotateSpeed);
+    _camera.rotatePitch(-rotateSpeed);
 }
 
 void Raytracer::Scene::changeCamQuality() {
@@ -116,7 +116,7 @@ void Raytracer::Scene::render() {
         _window.close();
     }
     renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
-    handleInput(cam);
+    handleInput();
     changeCamQuality();
     std::fill(_framebuffer.begin(), _framebuffer.end(), sf::Color::White);
     renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
