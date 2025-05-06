@@ -30,8 +30,6 @@ void Raytracer::Renderer::initScene(Camera &camera) {
     std::cerr << "Error parsing config file: " << e.what() << std::endl;
     throw;
   }
-  _shapes.addShape(
-      std::make_shared<Raytracer::Plane>("Y", -0.7, Math::Vector3D(0, 1, 0)));
 }
 
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
