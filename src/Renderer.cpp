@@ -1,24 +1,26 @@
 #include "Renderer.hpp"
+#include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
-#include "Point3D.hpp"
+#include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
-#include "Vector3D.hpp"
+#include <filesystem>
+#include <dlfcn.h>
 
 Math::Vector3D Raytracer::Renderer::rayColor(
-  Ray &r,
-  const ShapeComposite &shape,
-  const LightComposite &light,
-  const Camera& cameraPos
+    Ray &r,                                         
+    const ShapeComposite &shape,
+    LightComposite &light,
+    const Camera& cameraPos
 ) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
-    Math::Point3D hit_point = r.at(t);
-    Math::Vector3D normal = hitShape->getNormal(hit_point);
-    Math::Vector3D viewDir = (cameraPos.origin - hit_point).normalize();
-    return light.computeLighting(normal, hitShape, viewDir);
+    Math::Point3D hitPoint = r.at(t);
+    Math::Vector3D normal = hitShape->getNormal(hitPoint);
+    Math::Vector3D viewDir = (cameraPos.origin - hitPoint).normalize();
+    return light.computeLighting(normal, color, hitPoint, viewDir, shape);
   }
   Math::Vector3D unit_direction = r.direction.normalize();
   double a = 0.5 * (unit_direction.y + 1.0);
@@ -26,7 +28,7 @@ Math::Vector3D Raytracer::Renderer::rayColor(
 }
 
 void Raytracer::Renderer::initScene(Camera &camera) {
-  ParserConfigFile parser(_inputFilePath);
+  ParserConfigFile parser(_inputFilePath, _plugins);
   try {
     parser.parseConfigFile(camera, _shapes, _lights);
   } catch (const std::exception &e) {
@@ -54,7 +56,12 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
       sf::Color pixel_color(static_cast<sf::Uint8>(color.x * 255),
                             static_cast<sf::Uint8>(color.y * 255),
                             static_cast<sf::Uint8>(color.z * 255));
-      framebuffer[j * _width + i] = pixel_color;
+      int endY = j + step;
+      int endX = i + step;
+      for (int blockY = j; blockY < endY; blockY++) {
+        for (int blockX = i; blockX < endX; blockX++)
+          framebuffer[blockY * _width + blockX] = pixel_color;
+      }
     }
   }
 }

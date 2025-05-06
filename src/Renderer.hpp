@@ -11,20 +11,22 @@ namespace Raytracer {
     public:
       Renderer() = default;
       Renderer(int width, int height, const std::string &inputFilePath,
-               Camera &cam)
+               Camera &cam, const std::vector<std::string> &plugins)
           : _width(width),
             _height(height),
             _inputFilePath(inputFilePath),
             _shapes(ShapeComposite()),
-            _lights(LightComposite()) {
+            _lights(LightComposite()),
+            _plugins(plugins) {
         initScene(cam);
       }
 
       void writeInFile(const std::string &filename);
 
       void initScene(Camera &camera);
+
       Math::Vector3D rayColor(Ray &r, const ShapeComposite &s,
-                              const LightComposite &light, const Camera &cameraPos);
+                              LightComposite &light, const Camera &cameraPos);
 
       const std::string &getInputFilePath() const {
         return _inputFilePath;
@@ -46,5 +48,6 @@ namespace Raytracer {
       std::string _inputFilePath;
       ShapeComposite _shapes;
       LightComposite _lights;
+      std::vector<std::string> _plugins;
   };
 }  // namespace Raytracer

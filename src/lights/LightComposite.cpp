@@ -49,6 +49,7 @@ Math::Vector3D Raytracer::LightComposite::computeLighting(
   return result;
 }
 
-void Raytracer::LightComposite::addLight(const std::shared_ptr<ILight> &newLight) {
+void Raytracer::LightComposite::addLight(
+    const std::shared_ptr<ILight>& newLight) {
   _lights.push_back(newLight);
 }

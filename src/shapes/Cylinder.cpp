@@ -52,3 +52,15 @@ Raytracer::Cylinder::hits(const Raytracer::Ray &ray) const {
 
   return {0.0, _color, this};
 }
+
+extern "C" {
+  Raytracer::IShape *addShape() {
+    try {
+      return new Raytracer::Cylinder();
+    } catch (const std::exception &e) {
+      std::cerr << "[ERROR] - Failed to create cylinder: " << e.what()
+                << std::endl;
+      return nullptr;
+    }
+  }
+}

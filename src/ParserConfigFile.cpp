@@ -2,6 +2,7 @@
 #include <libconfig.h++>
 #include <stdexcept>
 #include <string>
+#include "Plane.hpp"
 #include "AmbientLight.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
@@ -9,7 +10,8 @@
 #include "Sphere.hpp"
 #include "Vector3D.hpp"
 
-Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename) {
+Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename, 
+                                              const std::vector<std::string> &plugins) : _plugins(plugins) {
   if (!filename.ends_with(".cfg")) {
     throw std::runtime_error(
         "[ERROR] - Config file isn't in correct format (needs to be a *.cfg)");
@@ -63,7 +65,6 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       for (int i = 0; i < spheresInfo.getLength(); i++) {
         const libconfig::Setting &sphere = spheresInfo[i];
         const libconfig::Setting &colorInfo = sphere["color"];
-        _factory.registerShape<Sphere>("sphere");
         std::shared_ptr<Sphere> newSphere =
             _factory.create<Raytracer::Sphere>("sphere");
         if (newSphere == nullptr) {
@@ -94,7 +95,6 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       for (int i = 0; i < cylindersInfo.getLength(); i++) {
         const libconfig::Setting &cylinder = cylindersInfo[i];
         const libconfig::Setting &colorInfo = cylinder["color"];
-        _factory.registerShape<Cylinder>("cylinder");
         auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
         if (newCylinder == nullptr) {
           throw std::runtime_error(
@@ -119,6 +119,43 @@ void Raytracer::ParserConfigFile::parsePrimitives(
         sc.addShape(newCylinder);
       }
     }
+
+    // PLANES
+    if (root.exists("primitives") && root["primitives"].exists("planes")) {
+      const libconfig::Setting &planesInfo = root["primitives"]["planes"];
+      for (int i = 0; i < planesInfo.getLength(); i++) {
+        const libconfig::Setting &planeSetting = planesInfo[i];
+        if (planeSetting.getLength() < 3 || !planeSetting[0].isString() || !(planeSetting[1].isNumber()) || !planeSetting.exists("color"))
+            throw std::runtime_error("[ERROR] - Invalid plane format in config: requires axis (string), position (number), and color group.");
+        const std::string axis = planeSetting[0];
+        const double position = planeSetting[1];
+        const libconfig::Setting &colorInfo = planeSetting["color"];
+
+        double red, green, blue;
+        colorInfo.lookupValue("r", red);
+        colorInfo.lookupValue("g", green);
+        colorInfo.lookupValue("b", blue);
+        Math::Vector3D color(red, green, blue);
+
+        auto newPlane = _factory.create<Raytracer::Plane>("plane");
+        if (newPlane == nullptr)
+          throw std::runtime_error("[ERROR] - Failed during creation of plane object.");
+        if (axis == "X") {
+          newPlane->setNormal(Math::Vector3D(1, 0, 0));
+          newPlane->setCenter(Math::Point3D(position, 0, 0));
+        } else if (axis == "Y") {
+          newPlane->setNormal(Math::Vector3D(0, 1, 0));
+          newPlane->setCenter(Math::Point3D(0, position, 0));
+        } else if (axis == "Z") {
+          newPlane->setNormal(Math::Vector3D(0, 0, 1));
+          newPlane->setCenter(Math::Point3D(0, 0, position));
+        } else {
+          throw std::runtime_error("[ERROR] - Invalid axis for plane.");
+        }
+        newPlane->setColor(color);
+        sc.addShape(newPlane);
+      }
+    }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
   } catch (const libconfig::SettingTypeException &nfex) {
@@ -135,7 +172,6 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
           root["lights"]["directional"];
       for (int i = 0; i < directionalsInfo.getLength(); i++) {
         const libconfig::Setting &directional = directionalsInfo[i];
-        _factory.registerLight<DirectionalLight>("directional");
         auto newDirectional =
             _factory.create<Raytracer::DirectionalLight>("directional");
         if (newDirectional == nullptr) {
@@ -187,6 +223,7 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
                                                   ShapeComposite &sc,
                                                   LightComposite &lc) {
   const libconfig::Setting &root = _cfg.getRoot();
+  _factory.initFactories(_plugins);
   // CAMERA
   try {
     parseCamera(camera, root);

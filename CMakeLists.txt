@@ -10,11 +10,6 @@ add_compile_options(-Wall -Wextra -Werror -std=c++20)
 
 add_executable(raytracer
   src/main.cpp
-  src/maths/Vector3D.cpp
-  src/maths/Point3D.cpp
-  src/shapes/Sphere.cpp
-  src/shapes/Plane.cpp
-  src/shapes/Cylinder.cpp
   src/shapes/ShapeComposite.cpp
   src/lights/DirectionalLight.cpp
   src/lights/AmbientLight.cpp
@@ -27,6 +22,39 @@ add_executable(raytracer
   src/Renderer.cpp
 )
 
+add_library(math_objects OBJECT
+  src/maths/Vector3D.cpp
+  src/maths/Point3D.cpp
+)
+
+set_target_properties(math_objects PROPERTIES
+  POSITION_INDEPENDENT_CODE TRUE
+)
+
+add_library(sphere SHARED
+  src/shapes/Sphere.cpp
+)
+
+add_library(plane SHARED
+  src/shapes/Plane.cpp
+)
+
+add_library(cylinder SHARED
+  src/shapes/Cylinder.cpp
+)
+
+add_library(directional SHARED
+  src/lights/DirectionalLight.cpp
+)
+
+set_target_properties(sphere PROPERTIES PREFIX "")
+
+set_target_properties(plane PROPERTIES PREFIX "")
+
+set_target_properties(cylinder PROPERTIES PREFIX "")
+
+set_target_properties(directional PROPERTIES PREFIX "")
+
 target_include_directories(raytracer
   PRIVATE
     ${CMAKE_SOURCE_DIR}/src
@@ -35,22 +63,72 @@ target_include_directories(raytracer
     ${CMAKE_SOURCE_DIR}/src/lights
 )
 
+target_link_libraries(sphere PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(sphere PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
+)
+
+target_link_libraries(plane PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(plane PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
+)
+
+target_link_libraries(cylinder PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(cylinder PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
+)
+
+target_link_libraries(directional PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(directional PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
+)
+
 if(APPLE)
   if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
     set(SFML_DIR "/opt/homebrew/opt/sfml@2/lib/cmake/SFML")
+    target_link_libraries(raytracer config++)
   elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
-    set(CMAKE_PREFIX_PATH "/usr/local/opt/sfml@2" ${CMAKE_PREFIX_PATH})
+    set(SFML_DIR "/usr/local/opt/sfml@2/lib/cmake/SFML")
+    find_path(LIBCONFIGPP_INCLUDE_DIR NAMES libconfig.h++ HINTS /usr/local/opt/libconfig/include)
+    find_library(LIBCONFIGPP_LIBRARY NAMES config++ HINTS /usr/local/opt/libconfig/lib)
+    target_include_directories(raytracer PRIVATE ${LIBCONFIGPP_INCLUDE_DIR})
+    target_link_libraries(raytracer ${LIBCONFIGPP_LIBRARY} $<TARGET_OBJECTS:math_objects>)
   else()
     message(FATAL_ERROR "Unknown macOS architecture: ${CMAKE_SYSTEM_PROCESSOR}")
   endif()
   find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics $<TARGET_OBJECTS:math_objects>)
+
+  set_target_properties(sphere PROPERTIES SUFFIX ".so")
+  set_target_properties(plane PROPERTIES SUFFIX ".so")
+  set_target_properties(cylinder PROPERTIES SUFFIX ".so")
+  set_target_properties(directional PROPERTIES SUFFIX ".so")
 elseif(UNIX AND NOT APPLE)
   find_package(SFML 2.5.1 COMPONENTS system window graphics REQUIRED)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++ $<TARGET_OBJECTS:math_objects>)
 endif()
 
 execute_process(
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/compile_commands.json ${PROJECT_SOURCE_DIR}
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/sphere.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/plane.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/cylinder.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/directional.so ${PROJECT_SOURCE_DIR}/plugins/
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
