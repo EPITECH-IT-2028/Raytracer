@@ -21,8 +21,6 @@ namespace Raytracer {
         initScene(cam);
       }
 
-      ~Renderer() = default;
-
       void writeInFile(const std::string &filename);
 
       void initScene(Camera &camera);

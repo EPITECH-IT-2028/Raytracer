@@ -13,5 +13,13 @@ Raytracer::Plane::hits(const Raytracer::Ray &ray) const {
 }
 
 extern "C" {
-  Raytracer::IShape *addShape() { return new Raytracer::Plane(); }
+  Raytracer::IShape *addShape() {
+    try {
+      return new Raytracer::Plane();
+    } catch (const std::exception &e) {
+      std::cerr << "[ERROR] - Failed to create Plane object: " << e.what()
+                << std::endl;
+      return nullptr;
+    }
+  }
 }

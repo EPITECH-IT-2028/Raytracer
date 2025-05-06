@@ -10,8 +10,6 @@ add_compile_options(-Wall -Wextra -Werror -std=c++20)
 
 add_executable(raytracer
   src/main.cpp
-  src/maths/Vector3D.cpp
-  src/maths/Point3D.cpp
   src/shapes/ShapeComposite.cpp
   src/lights/DirectionalLight.cpp
   src/lights/LightComposite.cpp
@@ -23,28 +21,29 @@ add_executable(raytracer
   src/Renderer.cpp
 )
 
-add_library(sphere SHARED
+add_library(math_objects OBJECT
   src/maths/Vector3D.cpp
   src/maths/Point3D.cpp
+)
+
+set_target_properties(math_objects PROPERTIES
+  POSITION_INDEPENDENT_CODE TRUE
+)
+
+add_library(sphere SHARED
   src/shapes/Sphere.cpp
 )
 
 add_library(plane SHARED
-  src/maths/Vector3D.cpp
-  src/maths/Point3D.cpp
   src/shapes/Plane.cpp
 )
 
 add_library(cylinder SHARED
-  src/maths/Vector3D.cpp
-  src/maths/Point3D.cpp
   src/shapes/Cylinder.cpp
 )
 
 add_library(directional SHARED
   src/lights/DirectionalLight.cpp
-  src/maths/Vector3D.cpp
-  src/maths/Point3D.cpp
 )
 
 set_target_properties(sphere PROPERTIES PREFIX "")
@@ -63,6 +62,34 @@ target_include_directories(raytracer
     ${CMAKE_SOURCE_DIR}/src/lights
 )
 
+target_link_libraries(sphere PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(sphere PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+)
+
+target_link_libraries(plane PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(plane PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+)
+
+target_link_libraries(cylinder PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(cylinder PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+)
+
+target_link_libraries(directional PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(directional PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+)
+
 if(APPLE)
   if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
     set(SFML_DIR "/opt/homebrew/opt/sfml@2/lib/cmake/SFML")
@@ -72,13 +99,12 @@ if(APPLE)
     find_path(LIBCONFIGPP_INCLUDE_DIR NAMES libconfig.h++ HINTS /usr/local/opt/libconfig/include)
     find_library(LIBCONFIGPP_LIBRARY NAMES config++ HINTS /usr/local/opt/libconfig/lib)
     target_include_directories(raytracer PRIVATE ${LIBCONFIGPP_INCLUDE_DIR})
-    target_link_libraries(raytracer ${LIBCONFIGPP_LIBRARY})
+    target_link_libraries(raytracer ${LIBCONFIGPP_LIBRARY} $<TARGET_OBJECTS:math_objects>)
   else()
     message(FATAL_ERROR "Unknown macOS architecture: ${CMAKE_SYSTEM_PROCESSOR}")
   endif()
   find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++ $<TARGET_OBJECTS:math_objects>)
 
   set_target_properties(sphere PROPERTIES SUFFIX ".so")
   set_target_properties(plane PROPERTIES SUFFIX ".so")
@@ -86,20 +112,8 @@ if(APPLE)
   set_target_properties(directional PROPERTIES SUFFIX ".so")
 elseif(UNIX AND NOT APPLE)
   find_package(SFML 2.5.1 COMPONENTS system window graphics REQUIRED)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++ $<TARGET_OBJECTS:math_objects>)
 endif()
-
-target_include_directories(sphere PUBLIC src)
-target_include_directories(sphere PUBLIC src/maths)
-
-target_include_directories(plane PUBLIC src)
-target_include_directories(plane PUBLIC src/maths)
-
-target_include_directories(cylinder PUBLIC src)
-target_include_directories(cylinder PUBLIC src/maths)
-
-target_include_directories(directional PUBLIC src)
-target_include_directories(directional PUBLIC src/maths)
 
 execute_process(
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/compile_commands.json ${PROJECT_SOURCE_DIR}
