@@ -1,5 +1,7 @@
 #include "Scene.hpp"
 #include "Renderer.hpp"
+#include <dlfcn.h>
+#include <filesystem>
 
 Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
     : _inputFilePath(inputPath), _width(width), _height(height) {
@@ -8,6 +10,12 @@ Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
   _window.setVerticalSyncEnabled(true);
   _lastMovement = std::chrono::steady_clock::now();
   init();
+  try {
+    parsePlugins();
+  } catch (const std::exception &e) {
+    std::cerr << "[ERROR] - Failed to parse plugins: " << e.what() << std::endl;
+    throw;
+  }
 }
 
 void Raytracer::Scene::init() {
@@ -90,25 +98,45 @@ void Raytracer::Scene::changeCamQuality() {
   _cameraMoved = false;
 }
 
+void Raytracer::Scene::parsePlugins() {
+  for (const auto &entry : std::filesystem::directory_iterator("./plugins")) {
+    if (entry.path().extension() == ".so")
+      _plugins.push_back(entry.path().string());
+    void *handler = dlopen(entry.path().c_str(), RTLD_LAZY);
+    if (!handler) {
+      std::cerr << "[ERROR] - Failed to load plugin: " << entry.path()
+                << std::endl;
+      continue;
+    }
+    _pluginHandles.push_back(handler);
+  }
+}
+
 void Raytracer::Scene::render() {
-  Raytracer::Camera cam;
-  Raytracer::Renderer renderer(_width, _height, _inputFilePath, cam);
+  Raytracer::Renderer renderer(_width, _height, _inputFilePath, _camera, _plugins);
 
   while (_window.isOpen()) {
     sf::Event event;
     while (_window.pollEvent(event)) {
-      handleInput(event, cam);
+      handleInput(event, _camera);
       if (event.type == sf::Event::Closed ||
           (event.type == sf::Event::KeyPressed &&
            event.key.code == sf::Keyboard::Escape))
         _window.close();
     }
+    renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
     changeCamQuality();
     std::fill(_framebuffer.begin(), _framebuffer.end(), sf::Color::White);
-    renderer.renderToBuffer(_framebuffer, cam, _isHighQuality);
+    renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
     updateImage();
     _window.clear(sf::Color::White);
     _window.draw(_sprite);
     _window.display();
+  }
+}
+
+Raytracer::Scene::~Scene() {
+  for (auto &handle : _pluginHandles) {
+    dlclose(handle);
   }
 }

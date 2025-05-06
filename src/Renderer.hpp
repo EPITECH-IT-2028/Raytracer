@@ -11,12 +11,13 @@ namespace Raytracer {
     public:
       Renderer() = default;
       Renderer(int width, int height, const std::string &inputFilePath,
-               Camera &cam)
+               Camera &cam, const std::vector<std::string> &plugins)
           : _width(width),
             _height(height),
             _inputFilePath(inputFilePath),
             _shapes(ShapeComposite()),
-            _lights(LightComposite()) {
+            _lights(LightComposite()),
+            _plugins(plugins) {
         initScene(cam);
       }
 
@@ -46,5 +47,6 @@ namespace Raytracer {
       std::string _inputFilePath;
       ShapeComposite _shapes;
       LightComposite _lights;
+      std::vector<std::string> _plugins;
   };
 }  // namespace Raytracer
