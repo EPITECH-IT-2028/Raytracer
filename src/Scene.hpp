@@ -17,7 +17,7 @@ namespace Raytracer {
 
       void updateImage();
 
-      void handleInput(Raytracer::Camera &camera);
+      void handleInput();
 
   void createOutputFileName(const std::string &inputFileName);
 
