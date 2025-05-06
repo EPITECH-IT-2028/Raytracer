@@ -35,13 +35,17 @@ public:
         return dir_perp.normalize();
     }
     
+    void setCenter(const Math::Point3D &center) { _center = center; }
+    void setNormal(const Math::Vector3D &normal) { _normal = normal; }
+    void setRadius(double radius) { _radius = radius; }
+    void setHeight(double height) { _height = height; }
+    void setColor(const Math::Vector3D &color) { _color = color; }
 
 private:
     Math::Point3D _center;
     Math::Vector3D _normal;
     double _radius;
     double _height;
-    double _angle;
     Math::Vector3D _color;
 };
 

@@ -4,33 +4,31 @@
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
-    Math::Vector3D oc = ray.origin - _center;
+    double d_dot_v = ray.direction.dot(_normal);
+    double x_dot_v = (ray.origin - _center).dot(_normal);
 
-    double oc_dot_normal = oc.dot(_normal);
-    double dir_dot_normal = ray.direction.dot(_normal);
+    Math::Vector3D d_perp = ray.direction - _normal * d_dot_v;
+    Math::Vector3D x_perp = (ray.origin - _center) - _normal * x_dot_v;
 
-    Math::Vector3D dir_perp = ray.direction - (_normal * dir_dot_normal);
-    Math::Vector3D oc_perp = oc - (_normal * oc_dot_normal);
+    double k = _radius / _height;
+    double k2 = k * k;
 
-    double a = dir_perp.dot(dir_perp);
-    double b = 2.0 * dir_perp.dot(oc_perp);
-    double c = oc_perp.dot(oc_perp) - _radius * _radius;
+    double a = d_perp.dot(d_perp) - k2 * d_dot_v * d_dot_v;
+    double b = 2.0 * (d_perp.dot(x_perp) - k2 * d_dot_v * x_dot_v);
+    double c = x_perp.dot(x_perp) - k2 * x_dot_v * x_dot_v;
 
     double discriminant = b * b - 4 * a * c;
-
     if (discriminant < 0.0) {
         return {0.0, _color, this};
     }
+    double sqrt_disc = sqrt(discriminant);
+    double t1 = (-b - sqrt_disc) / (2.0 * a);
+    double t2 = (-b + sqrt_disc) / (2.0 * a);
 
-    double t1 = (-b - sqrt(discriminant)) / (2.0 * a);
-    double t2 = (-b + sqrt(discriminant)) / (2.0 * a);
+    if (t1 > t2) std::swap(t1, t2);
 
-    if (t1 > t2) {
-        std::swap(t1, t2);
-    }
-
-    double t_plane_A = -oc_dot_normal / dir_dot_normal;
-    double t_plane_B = (_height - oc_dot_normal) / dir_dot_normal;
+    double t_plane_A = -x_dot_v / d_dot_v;
+    double t_plane_B = (_height - x_dot_v) / d_dot_v;
 
     double t3 = std::min(t_plane_A, t_plane_B);
     double t4 = std::max(t_plane_A, t_plane_B);
@@ -41,6 +39,17 @@ Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
     if (final_t_start < final_t_end && final_t_end >= 0) {
         return {final_t_start, _color, this};
     }
-    
     return {0.0, _color, this};
+}
+
+extern "C" {
+  Raytracer::IShape *addShape() {
+    try {
+      return new Raytracer::Cone();
+    } catch (const std::exception &e) {
+      std::cerr << "[ERROR] - Failed to create cone: " << e.what()
+                << std::endl;
+      return nullptr;
+    }
+  }
 }

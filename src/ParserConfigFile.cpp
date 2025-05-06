@@ -4,6 +4,7 @@
 #include <string>
 #include "Plane.hpp"
 #include "Cylinder.hpp"
+#include "Cone.hpp"
 #include "DirectionalLight.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
@@ -115,6 +116,37 @@ void Raytracer::ParserConfigFile::parsePrimitives(
         newCylinder->setHeight(height);
         newCylinder->setCenter(center);
         sc.addShape(newCylinder);
+      }
+    }
+
+    // CONES
+    if (root.exists("primitives") && root["primitives"].exists("cones")) {
+      const libconfig::Setting &conesInfo = root["primitives"]["cones"];
+      for (int i = 0; i < conesInfo.getLength(); i++) {
+        const libconfig::Setting &cone = conesInfo[i];
+        const libconfig::Setting &colorInfo = cone["color"];
+        auto newCone = _factory.create<Raytracer::Cone>("cone");
+        if (newCone == nullptr) {
+          throw std::runtime_error(
+              "[ERROR] - Failed during creation of cone.");
+        }
+        double posX, posY, posZ, red, green, blue;
+        double radius, height;
+        cone.lookupValue("x", posX);
+        cone.lookupValue("y", posY);
+        cone.lookupValue("z", posZ);
+        cone.lookupValue("r", radius);
+        cone.lookupValue("h", height);
+        colorInfo.lookupValue("r", red);
+        colorInfo.lookupValue("g", green);
+        colorInfo.lookupValue("b", blue);
+        Math::Vector3D color(red, green, blue);
+        Math::Point3D center(posX, posY, posZ);
+        newCone->setColor(color);
+        newCone->setRadius(radius);
+        newCone->setHeight(height);
+        newCone->setCenter(center);
+        sc.addShape(newCone);
       }
     }
 
