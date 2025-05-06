@@ -6,12 +6,14 @@
 #include "AmbientLight.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
+#include "Plane.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 #include "Vector3D.hpp"
 
-Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename, 
-                                              const std::vector<std::string> &plugins) : _plugins(plugins) {
+Raytracer::ParserConfigFile::ParserConfigFile(
+    const std::string &filename, const std::vector<std::string> &plugins)
+    : _plugins(plugins) {
   if (!filename.ends_with(".cfg")) {
     throw std::runtime_error(
         "[ERROR] - Config file isn't in correct format (needs to be a *.cfg)");
@@ -125,8 +127,11 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       const libconfig::Setting &planesInfo = root["primitives"]["planes"];
       for (int i = 0; i < planesInfo.getLength(); i++) {
         const libconfig::Setting &planeSetting = planesInfo[i];
-        if (planeSetting.getLength() < 3 || !planeSetting[0].isString() || !(planeSetting[1].isNumber()) || !planeSetting.exists("color"))
-            throw std::runtime_error("[ERROR] - Invalid plane format in config: requires axis (string), position (number), and color group.");
+        if (planeSetting.getLength() < 3 || !planeSetting[0].isString() ||
+            !(planeSetting[1].isNumber()) || !planeSetting.exists("color"))
+          throw std::runtime_error(
+              "[ERROR] - Invalid plane format in config: requires axis "
+              "(string), position (number), and color group.");
         const std::string axis = planeSetting[0];
         const double position = planeSetting[1];
         const libconfig::Setting &colorInfo = planeSetting["color"];
@@ -139,7 +144,8 @@ void Raytracer::ParserConfigFile::parsePrimitives(
 
         auto newPlane = _factory.create<Raytracer::Plane>("plane");
         if (newPlane == nullptr)
-          throw std::runtime_error("[ERROR] - Failed during creation of plane object.");
+          throw std::runtime_error(
+              "[ERROR] - Failed during creation of plane object.");
         if (axis == "X") {
           newPlane->setNormal(Math::Vector3D(1, 0, 0));
           newPlane->setCenter(Math::Point3D(position, 0, 0));
