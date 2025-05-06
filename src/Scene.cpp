@@ -38,6 +38,9 @@ void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
   const float moveSpeed = 5.0f;
   const float rotateSpeed = 2.0f;
 
+  if (!_window.hasFocus())
+    return;
+
   std::array<sf::Keyboard::Key, 11> movementKeys = {
       sf::Keyboard::Z,      sf::Keyboard::S,     sf::Keyboard::Q,
       sf::Keyboard::D,      sf::Keyboard::Space, sf::Keyboard::LShift,
