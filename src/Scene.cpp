@@ -38,18 +38,17 @@ void Raytracer::Scene::handleInput(Raytracer::Camera &camera) {
   const float moveSpeed = 5.0f;
   const float rotateSpeed = 2.0f;
 
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::Q) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::D) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ||
-      sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    _cameraMoved = true;
+  std::array<sf::Keyboard::Key, 11> movementKeys = {
+      sf::Keyboard::Z,      sf::Keyboard::S,     sf::Keyboard::Q,
+      sf::Keyboard::D,      sf::Keyboard::Space, sf::Keyboard::LShift,
+      sf::Keyboard::RShift, sf::Keyboard::Left,  sf::Keyboard::Right,
+      sf::Keyboard::Up,     sf::Keyboard::Down};
+  for (const auto &key : movementKeys) {
+    if (sf::Keyboard::isKeyPressed(key)) {
+      _cameraMoved = true;
+      break;
+    }
+  }
 
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
     camera.moveForward(moveSpeed);
