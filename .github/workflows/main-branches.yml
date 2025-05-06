@@ -13,7 +13,6 @@ jobs:
   push_to_mirror:
     if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos.git'
     name: Push to Mirror Repository
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     container: 
       image: epitechcontent/epitest-docker
