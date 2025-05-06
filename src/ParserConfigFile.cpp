@@ -1,12 +1,13 @@
 #include "ParserConfigFile.hpp"
-#include <iostream>
 #include <libconfig.h++>
 #include <stdexcept>
 #include <string>
+#include "AmbientLight.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
+#include "Vector3D.hpp"
 
 Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename) {
   if (!filename.ends_with(".cfg")) {
@@ -149,6 +150,31 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
         newDirectional->direction = direction.normalize();
         lc.addLight(newDirectional);
       }
+    }
+    // AMBIENT
+    if (root.exists("lights") && root["lights"].exists("ambient")) {
+      const libconfig::Setting &ambientInfo = root["lights"]["ambient"];
+      const libconfig::Setting &colorInfo = root["lights"]["ambient"]["color"];
+      _factory.registerLight<AmbientLight>("ambient");
+      auto newAmbient = _factory.create<AmbientLight>("ambient");
+      if (newAmbient == nullptr) {
+        throw std::runtime_error(
+            "[ERROR] - Failed during creation of ambient light.");
+      }
+      double red, green, blue, intensity;
+      ambientInfo.lookupValue("intensity", intensity);
+      colorInfo.lookupValue("r", red);
+      colorInfo.lookupValue("g", green);
+      colorInfo.lookupValue("b", blue);
+      newAmbient->setColor(Math::Vector3D(red, green, blue));
+      newAmbient->setIntensity(intensity);
+      lc.addLight(newAmbient);
+    }
+    // DIFFUSE
+    if (root.exists("lights") && root["lights"].exists("diffuse")) {
+      const libconfig::Setting &diffuseInfo = root["lights"];
+      double diffuseMultiplier = diffuseInfo.lookup("diffuse");
+      lc.setDiffuse(diffuseMultiplier);
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());

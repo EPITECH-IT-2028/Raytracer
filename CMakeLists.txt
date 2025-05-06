@@ -17,6 +17,7 @@ add_executable(raytracer
   src/shapes/Cylinder.cpp
   src/shapes/ShapeComposite.cpp
   src/lights/DirectionalLight.cpp
+  src/lights/AmbientLight.cpp
   src/lights/LightComposite.cpp
   src/ParserConfigFile.cpp
   src/Factory.cpp

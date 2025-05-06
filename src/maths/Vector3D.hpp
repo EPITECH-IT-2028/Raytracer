@@ -34,9 +34,11 @@ namespace Math {
 
       double dot(const Vector3D &vec) const;
 
-      Vector3D &normalize();
+      const Vector3D &normalize();
+      Vector3D normalized() const;
 
       double length() const;
+      Vector3D reflect(const Math::Vector3D& incident, const Math::Vector3D& normal);
   };
 
   Vector3D cross(const Vector3D &A, const Vector3D &B);
