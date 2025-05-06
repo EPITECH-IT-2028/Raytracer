@@ -1,11 +1,11 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "ILight.hpp"
+#include "ALight.hpp"
 #include "Vector3D.hpp"
 
 namespace Raytracer {
-  class LightComposite : public ILight {
+  class LightComposite : public ALight {
     public:
       LightComposite() = default;
       ~LightComposite() = default;
@@ -21,13 +21,13 @@ namespace Raytracer {
       const std::vector<std::shared_ptr<ILight>>& getLights() const {
         return _lights;
       };
+      
       void setDiffuse(double diffuse) { _diffuse = diffuse;}
       double getDiffuse() const {return _diffuse;}
       const Math::Vector3D reflect(const Math::Vector3D &light, const Math::Vector3D &normal) const;
 
     private:
       std::vector<std::shared_ptr<ILight>> _lights;
-      const std::string _type = "LightComposite";
       double _diffuse = 0;
   };
 };  // namespace Raytracer

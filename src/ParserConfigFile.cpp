@@ -183,7 +183,8 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
         directional.lookupValue("y", posY);
         directional.lookupValue("z", posZ);
         Math::Vector3D direction(posX, posY, posZ);
-        newDirectional->direction = direction.normalize();
+        newDirectional->setDirection(direction.normalize());
+        newDirectional->setType("DirectionalLight");
         lc.addLight(newDirectional);
       }
     }
@@ -191,7 +192,6 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
     if (root.exists("lights") && root["lights"].exists("ambient")) {
       const libconfig::Setting &ambientInfo = root["lights"]["ambient"];
       const libconfig::Setting &colorInfo = root["lights"]["ambient"]["color"];
-      _factory.registerLight<AmbientLight>("ambient");
       auto newAmbient = _factory.create<AmbientLight>("ambient");
       if (newAmbient == nullptr) {
         throw std::runtime_error(
@@ -204,6 +204,8 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
       colorInfo.lookupValue("b", blue);
       newAmbient->setColor(Math::Vector3D(red, green, blue));
       newAmbient->setIntensity(intensity);
+      newAmbient->setType("AmbientLight");
+      std::cout << newAmbient->getColor().x << " " << newAmbient->getColor().y << " " << newAmbient->getColor().z << "\n";
       lc.addLight(newAmbient);
     }
     // DIFFUSE
