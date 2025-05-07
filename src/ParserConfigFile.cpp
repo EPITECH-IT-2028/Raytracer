@@ -99,6 +99,8 @@ void Raytracer::ParserConfigFile::parseSpheres(
       throw std::runtime_error("[ERROR] - Failed during creation of sphere.");
 
     newSphere->setCenter(parsePoint3D(sphere));
+    if (sphere.lookup("r").operator double() <= 0)
+      throw std::runtime_error("[ERROR] - Sphere radius must be positive.");
     newSphere->setRadius(sphere.lookup("r").operator double());
     newSphere->setColor(parseColor(sphere["color"]));
 
@@ -120,6 +122,8 @@ void Raytracer::ParserConfigFile::parseCylinders(
       throw std::runtime_error("[ERROR] - Failed during creation of cylinder.");
 
     newCylinder->setCenter(parsePoint3D(cylinder));
+    if (cylinder.lookup("r").operator double() <= 0)
+      throw std::runtime_error("[ERROR] - Cylinder radius must be positive.");
     newCylinder->setRadius(cylinder.lookup("r").operator double());
     newCylinder->setHeight(cylinder.lookup("h").operator double());
     newCylinder->setColor(parseColor(cylinder["color"]));
