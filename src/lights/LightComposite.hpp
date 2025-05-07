@@ -2,8 +2,8 @@
 #include <memory>
 #include <vector>
 #include "ALight.hpp"
-#include "Vector3D.hpp"
 #include "ShapeComposite.hpp"
+#include "Vector3D.hpp"
 
 namespace Raytracer {
   class LightComposite : public ALight {
@@ -11,7 +11,7 @@ namespace Raytracer {
       LightComposite() = default;
       ~LightComposite() = default;
 
-      void addLight(const std::shared_ptr<ILight>&);
+      void addLight(const std::shared_ptr<ILight> &);
 
       Math::Vector3D computeLighting(const Math::Vector3D &normal,
                                      const Math::Vector3D &objectColor,
@@ -19,13 +19,18 @@ namespace Raytracer {
                                      const Math::Vector3D &viewDir,
                                      const ShapeComposite &shapes) override;
 
-      const std::vector<std::shared_ptr<ILight>>& getLights() const {
+      const std::vector<std::shared_ptr<ILight>> &getLights() const {
         return _lights;
       };
-      
-      void setDiffuse(double diffuse) { _diffuse = diffuse;}
-      double getDiffuse() const {return _diffuse;}
-      const Math::Vector3D reflect(const Math::Vector3D &light, const Math::Vector3D &normal) const;
+
+      void setDiffuse(double diffuse) {
+        _diffuse = diffuse;
+      }
+      double getDiffuse() const {
+        return _diffuse;
+      }
+      const Math::Vector3D reflect(const Math::Vector3D &light,
+                                   const Math::Vector3D &normal) const;
 
     private:
       std::vector<std::shared_ptr<ILight>> _lights;

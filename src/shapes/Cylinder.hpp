@@ -38,12 +38,19 @@ namespace Raytracer {
         _center = _center + offset;
       }
 
+      const double &getRadius() const {
+        return _radius;
+      };
+      const double &getHeight() const {
+        return _height;
+      };
 
-      const double& getRadius() const { return _radius; };
-      const double& getHeight() const { return _height;};
-
-      void setRadius(double& radius) { _radius = radius;}
-      void setHeight(double& h) { _height = h;}
+      void setRadius(double &radius) {
+        _radius = radius;
+      }
+      void setHeight(double &h) {
+        _height = h;
+      }
 
     private:
       Math::Point3D _center;

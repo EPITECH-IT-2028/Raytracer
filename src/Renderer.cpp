@@ -1,19 +1,17 @@
 #include "Renderer.hpp"
+#include <dlfcn.h>
+#include <filesystem>
 #include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
 #include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
-#include <filesystem>
-#include <dlfcn.h>
 
-Math::Vector3D Raytracer::Renderer::rayColor(
-    Ray &r,                                         
-    const ShapeComposite &shape,
-    LightComposite &light,
-    const Camera& cameraPos
-) {
+Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
+                                             const ShapeComposite &shape,
+                                             LightComposite &light,
+                                             const Camera &cameraPos) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
@@ -24,7 +22,8 @@ Math::Vector3D Raytracer::Renderer::rayColor(
   }
   Math::Vector3D unit_direction = r.direction.normalize();
   double a = 0.5 * (unit_direction.y + 1.0);
-  return Math::Vector3D(1.0, 1.0, 1.0) * (1.0 - a) + Math::Vector3D(0.5, 0.7, 1.0) * a;
+  return Math::Vector3D(1.0, 1.0, 1.0) * (1.0 - a) +
+         Math::Vector3D(0.5, 0.7, 1.0) * a;
 }
 
 void Raytracer::Renderer::initScene(Camera &camera) {

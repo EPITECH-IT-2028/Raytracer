@@ -9,7 +9,6 @@ namespace Raytracer {
 
   class Plane : public AShape {
     public:
-
       Plane() : _normal(Math::Vector3D()) {
         _center = Math::Point3D();
         _color = Math::Vector3D(1, 0, 0);
@@ -25,7 +24,9 @@ namespace Raytracer {
         return _normal;
       }
 
-      void setNormal(const Math::Vector3D &normal) {_normal = normal;}
+      void setNormal(const Math::Vector3D &normal) {
+        _normal = normal;
+      }
 
     private:
       Math::Vector3D _normal;
