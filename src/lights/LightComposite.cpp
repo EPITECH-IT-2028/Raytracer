@@ -40,7 +40,7 @@ Math::Vector3D Raytracer::LightComposite::computeLighting(
     specularStrength = std::pow(specularStrength, 32.);
     Math::Vector3D specular = ambientLight->getColor() * specularStrength;
     Math::Vector3D diffuse = ambientLight->getColor() * _diffuse;
-    return result * ((diffuse * 0.5 + specular * 0.5) + ambientLight->getIntensity() * 0.0);
+    return result * ((diffuse * 0.5 + specular * 0.5) * ambientLight->getIntensity());
   }
   return result;
 }
