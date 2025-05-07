@@ -26,14 +26,8 @@ namespace Raytracer {
       std::vector<std::string> _plugins;
       Factory _factory = Factory();
 
-      static Math::Point3D parsePoint3D(const libconfig::Setting &setting,
-                                        const std::string &x_name = "x",
-                                        const std::string &y_name = "y",
-                                        const std::string &z_name = "z");
-      static Math::Vector3D parseVector3D(const libconfig::Setting &setting,
-                                          const std::string &x_name = "x",
-                                          const std::string &y_name = "y",
-                                          const std::string &z_name = "z");
+      static Math::Point3D parsePoint3D(const libconfig::Setting &setting);
+      static Math::Vector3D parseVector3D(const libconfig::Setting &setting);
       static Math::Vector3D parseColor(const libconfig::Setting &colorSetting);
 
       void parseSpheres(ShapeComposite &sc,

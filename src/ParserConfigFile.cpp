@@ -58,37 +58,35 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
 }
 
 Math::Point3D Raytracer::ParserConfigFile::parsePoint3D(
-    const libconfig::Setting &setting, const std::string &x_name,
-    const std::string &y_name, const std::string &z_name) {
+    const libconfig::Setting &setting) {
   float x, y, z;
-  if (!setting.lookupValue(x_name, x) || !setting.lookupValue(y_name, y) ||
-      !setting.lookupValue(z_name, z)) {
+  if (!setting.lookupValue("x", x) || !setting.lookupValue("y", y) ||
+      !setting.lookupValue("z", z))
     throw libconfig::SettingNotFoundException(
         "Missing one or more coordinate fields (x, y, z) for a point/vector.");
-  }
   return {x, y, z};
 }
 
 Math::Vector3D Raytracer::ParserConfigFile::parseVector3D(
-    const libconfig::Setting &setting, const std::string &x_name,
-    const std::string &y_name, const std::string &z_name) {
+    const libconfig::Setting &setting) {
   float x, y, z;
-  if (!setting.lookupValue(x_name, x) || !setting.lookupValue(y_name, y) ||
-      !setting.lookupValue(z_name, z)) {
+  if (!setting.lookupValue("x", x) || !setting.lookupValue("y", y) ||
+      !setting.lookupValue("z", z))
     throw libconfig::SettingNotFoundException(
         "Missing one or more coordinate fields (x, y, z) for a point/vector.");
-  }
   return {x, y, z};
 }
 
 Math::Vector3D Raytracer::ParserConfigFile::parseColor(
-    const libconfig::Setting &colorSetting) {
+    const libconfig::Setting &setting) {
   float r, g, b;
-  if (!colorSetting.lookupValue("r", r) || !colorSetting.lookupValue("g", g) ||
-      !colorSetting.lookupValue("b", b)) {
+  if (!setting.lookupValue("r", r) || !setting.lookupValue("g", g) ||
+      !setting.lookupValue("b", b))
     throw libconfig::SettingNotFoundException(
         "Missing one or more color fields (r, g, b).");
-  }
+  if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1)
+    throw std::runtime_error(
+        "[ERROR] - Color values must be in the range [0, 1].");
   return {r, g, b};
 }
 
