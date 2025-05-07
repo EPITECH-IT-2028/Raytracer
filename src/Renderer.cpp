@@ -19,7 +19,7 @@ Math::Vector3D Raytracer::Renderer::rayColor(
   if (t > 0.0 && hitShape) {
     Math::Point3D hitPoint = r.at(t);
     Math::Vector3D normal = hitShape->getNormal(hitPoint);
-    Math::Vector3D viewDir = (cameraPos.origin - hitPoint).normalize();
+    Math::Vector3D viewDir = (cameraPos.origin - hitPoint).normalized();
     return light.computeLighting(normal, color, hitPoint, viewDir, shape);
   }
   Math::Vector3D unit_direction = r.direction.normalize();

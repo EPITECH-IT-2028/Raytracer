@@ -89,7 +89,7 @@ double Math::Vector3D::length() const {
   return length;
 }
 
-const Math::Vector3D &Math::Vector3D::normalize() {
+Math::Vector3D &Math::Vector3D::normalize() {
   double length = this->length();
   if (length != 0) {
     x /= length;
@@ -109,8 +109,4 @@ Math::Vector3D Math::Vector3D::normalized() const {
 
 Math::Vector3D Math::cross(const Math::Vector3D &A, const Math::Vector3D &B) {
   return {A.y * B.z - A.z * B.y, A.z * B.x - A.x * B.z, A.x * B.y - A.y * B.x};
-}
-
-Math::Vector3D Math::Vector3D::reflect(const Math::Vector3D& incident, const Math::Vector3D& normal) {
-  return incident - (normal * (incident.dot(normal) * 2));
 }

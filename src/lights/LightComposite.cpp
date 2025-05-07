@@ -4,7 +4,8 @@
 #include "Vector3D.hpp"
 
 const Math::Vector3D Raytracer::LightComposite::reflect(const Math::Vector3D &incident, const Math::Vector3D &normal) const {
-  return incident - (normal * (incident.dot(normal) * 2));
+  Math::Vector3D n = normal.normalized();
+  return incident - (n * (incident.dot(normal) * 2));
 }
 
 Math::Vector3D Raytracer::LightComposite::computeLighting(

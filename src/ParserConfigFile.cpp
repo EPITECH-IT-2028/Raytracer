@@ -205,7 +205,6 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
       newAmbient->setColor(Math::Vector3D(red, green, blue));
       newAmbient->setIntensity(intensity);
       newAmbient->setType("AmbientLight");
-      std::cout << newAmbient->getColor().x << " " << newAmbient->getColor().y << " " << newAmbient->getColor().z << "\n";
       lc.addLight(newAmbient);
     }
     // DIFFUSE

@@ -3,6 +3,7 @@
 #include <vector>
 #include "ALight.hpp"
 #include "Vector3D.hpp"
+#include "ShapeComposite.hpp"
 
 namespace Raytracer {
   class LightComposite : public ALight {
