@@ -35,8 +35,6 @@ namespace Raytracer {
         return _radius;
       };
 
-      void setCenter(const Math::Point3D& center) { _center = center;}
-      void setColor(const Math::Vector3D& color) { _color = color;}
       void setRadius(double radius) {
         if (radius <= 0)
           throw std::runtime_error("Radius must be superior to 0");
