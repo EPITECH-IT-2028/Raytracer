@@ -94,6 +94,8 @@ void Raytracer::Scene::parsePlugins() {
   for (const auto &entry : std::filesystem::directory_iterator("./plugins")) {
     if (entry.path().extension() == ".so")
       _plugins.push_back(entry.path().string());
+    else
+     continue;
     void *handler = dlopen(entry.path().c_str(), RTLD_LAZY);
     if (!handler) {
       std::cerr << "[ERROR] - Failed to load plugin: " << entry.path()
