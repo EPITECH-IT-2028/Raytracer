@@ -45,5 +45,9 @@ namespace Raytracer {
 
       void parseDirectionalLights(LightComposite &lc,
                                   const libconfig::Setting &lightsSetting);
+      void parseAmbientLight(LightComposite &lc,
+                             const libconfig::Setting &ambientInfo);
+      void parseDiffuseLight(LightComposite &lc,
+                             const libconfig::Setting &diffuseInfo);
   };
 }  // namespace Raytracer
