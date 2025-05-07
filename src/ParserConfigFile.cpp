@@ -58,114 +58,145 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
   }
 }
 
+Math::Point3D Raytracer::ParserConfigFile::parsePoint3D(
+    const libconfig::Setting &setting, const std::string &x_name,
+    const std::string &y_name, const std::string &z_name) {
+  float x, y, z;
+  if (!setting.lookupValue(x_name, x) || !setting.lookupValue(y_name, y) ||
+      !setting.lookupValue(z_name, z)) {
+    throw libconfig::SettingNotFoundException(
+        "Missing one or more coordinate fields (x, y, z) for a point/vector.");
+  }
+  return {x, y, z};
+}
+
+Math::Vector3D Raytracer::ParserConfigFile::parseVector3D(
+    const libconfig::Setting &setting, const std::string &x_name,
+    const std::string &y_name, const std::string &z_name) {
+  float x, y, z;
+  if (!setting.lookupValue(x_name, x) || !setting.lookupValue(y_name, y) ||
+      !setting.lookupValue(z_name, z)) {
+    throw libconfig::SettingNotFoundException(
+        "Missing one or more coordinate fields (x, y, z) for a point/vector.");
+  }
+  return {x, y, z};
+}
+
+Math::Vector3D Raytracer::ParserConfigFile::parseColor(
+    const libconfig::Setting &colorSetting) {
+  float r, g, b;
+  if (!colorSetting.lookupValue("r", r) || !colorSetting.lookupValue("g", g) ||
+      !colorSetting.lookupValue("b", b)) {
+    throw libconfig::SettingNotFoundException(
+        "Missing one or more color fields (r, g, b).");
+  }
+  return {r, g, b};
+}
+
+void Raytracer::ParserConfigFile::parseSpheres(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &spheresSetting) {
+  for (int i = 0; i < spheresSetting.getLength(); i++) {
+    const libconfig::Setting &sphere = spheresSetting[i];
+    auto newSphere = _factory.create<Raytracer::Sphere>("sphere");
+    if (!newSphere)
+      throw std::runtime_error("[ERROR] - Failed during creation of sphere.");
+
+    newSphere->setCenter(parsePoint3D(sphere));
+    newSphere->setRadius(sphere.lookup("r").operator double());
+    newSphere->setColor(parseColor(sphere["color"]));
+
+    // Optional options
+    if (sphere.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(sphere["translate"]);
+      newSphere->translate(translation);
+    }
+    sc.addShape(newSphere);
+  }
+}
+
+void Raytracer::ParserConfigFile::parseCylinders(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &cylindersSetting) {
+  for (int i = 0; i < cylindersSetting.getLength(); i++) {
+    const libconfig::Setting &cylinder = cylindersSetting[i];
+    auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
+    if (!newCylinder)
+      throw std::runtime_error("[ERROR] - Failed during creation of cylinder.");
+
+    newCylinder->setCenter(parsePoint3D(cylinder));
+    newCylinder->setRadius(cylinder.lookup("r").operator double());
+    newCylinder->setHeight(cylinder.lookup("h").operator double());
+    newCylinder->setColor(parseColor(cylinder["color"]));
+
+    // Optional options
+    if (cylinder.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(cylinder["translate"]);
+      newCylinder->translate(translation);
+    }
+    sc.addShape(newCylinder);
+  }
+}
+
+void Raytracer::ParserConfigFile::parsePlanes(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &planesSettings) {
+  for (int i = 0; i < planesSettings.getLength(); i++) {
+    const libconfig::Setting &plane = planesSettings[i];
+    auto newPlane = _factory.create<Raytracer::Plane>("plane");
+    if (!newPlane)
+      throw std::runtime_error("[ERROR] - Failed during creation of plane.");
+
+    newPlane->setCenter(parsePoint3D(plane));
+    newPlane->setNormal(parseVector3D(plane["normal"]));
+    newPlane->setColor(parseColor(plane["color"]));
+
+    // Optional options
+    if (plane.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(plane["translate"]);
+      newPlane->translate(translation);
+    }
+    sc.addShape(newPlane);
+  }
+}
+
 void Raytracer::ParserConfigFile::parsePrimitives(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {
     // SPHERES
-    if (root.exists("primitives") && root["primitives"].exists("spheres")) {
-      const libconfig::Setting &spheresInfo = root["primitives"]["spheres"];
-      for (int i = 0; i < spheresInfo.getLength(); i++) {
-        const libconfig::Setting &sphere = spheresInfo[i];
-        const libconfig::Setting &colorInfo = sphere["color"];
-        std::shared_ptr<Sphere> newSphere =
-            _factory.create<Raytracer::Sphere>("sphere");
-        if (newSphere == nullptr) {
-          throw std::runtime_error(
-              "[ERROR] - Failed during creation of sphere.");
-        }
-        double posX, posY, posZ, radius;
-        double red, green, blue;
-        sphere.lookupValue("x", posX);
-        sphere.lookupValue("y", posY);
-        sphere.lookupValue("z", posZ);
-        sphere.lookupValue("r", radius);
-        colorInfo.lookupValue("r", red);
-        colorInfo.lookupValue("g", green);
-        colorInfo.lookupValue("b", blue);
-        Math::Vector3D color(red, green, blue);
-        Math::Point3D center(posX, posY, posZ);
-        newSphere->setColor(color);
-        newSphere->setRadius(radius);
-        newSphere->setCenter(center);
-        sc.addShape(newSphere);
-      }
-    }
+    if (root.exists("primitives") && root["primitives"].exists("spheres"))
+      parseSpheres(sc, root["primitives"]["spheres"]);
 
     // CYLINDERS
-    if (root.exists("primitives") && root["primitives"].exists("cylinders")) {
-      const libconfig::Setting &cylindersInfo = root["primitives"]["cylinders"];
-      for (int i = 0; i < cylindersInfo.getLength(); i++) {
-        const libconfig::Setting &cylinder = cylindersInfo[i];
-        const libconfig::Setting &colorInfo = cylinder["color"];
-        auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
-        if (newCylinder == nullptr) {
-          throw std::runtime_error(
-              "[ERROR] - Failed during creation of cylinder.");
-        }
-        double posX, posY, posZ, red, green, blue;
-        double radius, height;
-        cylinder.lookupValue("x", posX);
-        cylinder.lookupValue("y", posY);
-        cylinder.lookupValue("z", posZ);
-        cylinder.lookupValue("r", radius);
-        cylinder.lookupValue("h", height);
-        colorInfo.lookupValue("r", red);
-        colorInfo.lookupValue("g", green);
-        colorInfo.lookupValue("b", blue);
-        Math::Vector3D color(red, green, blue);
-        Math::Point3D center(posX, posY, posZ);
-        newCylinder->setColor(color);
-        newCylinder->setRadius(radius);
-        newCylinder->setHeight(height);
-        newCylinder->setCenter(center);
-        sc.addShape(newCylinder);
-      }
-    }
+    if (root.exists("primitives") && root["primitives"].exists("cylinders"))
+      parseCylinders(sc, root["primitives"]["cylinders"]);
 
     // PLANES
-    if (root.exists("primitives") && root["primitives"].exists("planes")) {
-      const libconfig::Setting &planesInfo = root["primitives"]["planes"];
-      for (int i = 0; i < planesInfo.getLength(); i++) {
-        const libconfig::Setting &planeSetting = planesInfo[i];
-        if (planeSetting.getLength() < 3 || !planeSetting[0].isString() ||
-            !(planeSetting[1].isNumber()) || !planeSetting.exists("color"))
-          throw std::runtime_error(
-              "[ERROR] - Invalid plane format in config: requires axis "
-              "(string), position (number), and color group.");
-        const std::string axis = planeSetting[0];
-        const double position = planeSetting[1];
-        const libconfig::Setting &colorInfo = planeSetting["color"];
-
-        double red, green, blue;
-        colorInfo.lookupValue("r", red);
-        colorInfo.lookupValue("g", green);
-        colorInfo.lookupValue("b", blue);
-        Math::Vector3D color(red, green, blue);
-
-        auto newPlane = _factory.create<Raytracer::Plane>("plane");
-        if (newPlane == nullptr)
-          throw std::runtime_error(
-              "[ERROR] - Failed during creation of plane object.");
-        if (axis == "X") {
-          newPlane->setNormal(Math::Vector3D(1, 0, 0));
-          newPlane->setCenter(Math::Point3D(position, 0, 0));
-        } else if (axis == "Y") {
-          newPlane->setNormal(Math::Vector3D(0, 1, 0));
-          newPlane->setCenter(Math::Point3D(0, position, 0));
-        } else if (axis == "Z") {
-          newPlane->setNormal(Math::Vector3D(0, 0, 1));
-          newPlane->setCenter(Math::Point3D(0, 0, position));
-        } else {
-          throw std::runtime_error("[ERROR] - Invalid axis for plane.");
-        }
-        newPlane->setColor(color);
-        sc.addShape(newPlane);
-      }
-    }
+    if (root.exists("primitives") && root["primitives"].exists("planes"))
+      parsePlanes(sc, root["primitives"]["planes"]);
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
   } catch (const libconfig::SettingTypeException &nfex) {
     throw std::runtime_error(nfex.what());
+  }
+}
+
+void Raytracer::ParserConfigFile::parseDirectionalLights(
+    Raytracer::LightComposite &lc, const libconfig::Setting &lightsSetting) {
+  for (int i = 0; i < lightsSetting.getLength(); i++) {
+    const libconfig::Setting &light = lightsSetting[i];
+    auto newDirectional =
+        _factory.create<Raytracer::DirectionalLight>("directional");
+    if (newDirectional == nullptr) {
+      throw std::runtime_error(
+          "[ERROR] - Failed during creation of directional light.");
+    }
+
+    double posX, posY, posZ;
+    light.lookupValue("x", posX);
+    light.lookupValue("y", posY);
+    light.lookupValue("z", posZ);
+
+    Math::Vector3D direction(posX, posY, posZ);
+    newDirectional->direction = direction.normalize();
+    lc.addLight(newDirectional);
   }
 }
 
@@ -219,6 +250,8 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
       double diffuseMultiplier = diffuseInfo.lookup("diffuse");
       lc.setDiffuse(diffuseMultiplier);
     }
+    //if (root.exists("lights") && root["lights"].exists("directional"))
+    //  parseDirectionalLights(lc, root["lights"]["directional"]);
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
   } catch (const libconfig::SettingTypeException &nfex) {
@@ -231,18 +264,21 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
                                                   LightComposite &lc) {
   const libconfig::Setting &root = _cfg.getRoot();
   _factory.initFactories(_plugins);
+
   // CAMERA
   try {
     parseCamera(camera, root);
   } catch (const std::runtime_error &error) {
     throw std::runtime_error(error.what());
   }
+
   // PRIMITIVES
   try {
     parsePrimitives(sc, root);
   } catch (const std::runtime_error &error) {
     throw std::runtime_error(error.what());
   }
+
   // LIGHTS
   try {
     parseLights(lc, root);
