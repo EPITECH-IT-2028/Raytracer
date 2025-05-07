@@ -26,8 +26,6 @@ namespace Raytracer {
       }
 
       void setNormal(const Math::Vector3D &normal) {_normal = normal;}
-      void setColor(const Math::Vector3D &color) {_color = color;}
-      void setCenter(const Math::Point3D &center) {_center = center;}
 
     private:
       Math::Vector3D _normal;

@@ -18,15 +18,10 @@ namespace Raytracer {
 
       virtual const Math::Point3D &getCenter() const = 0; 
       virtual const Math::Vector3D &getColor() const = 0;
-      virtual const Math::Vector3D &getAmbient() const = 0;
-      virtual const Math::Vector3D &getSpecular() const = 0; 
-      virtual const Math::Vector3D &getDiffuse() const = 0;
       virtual double getShininess() const = 0;
 
       virtual void setCenter(const Math::Point3D &center) = 0;
       virtual void setColor(const Math::Vector3D &color) = 0; 
-      virtual void setAmbient(const Math::Vector3D &ambient)= 0;
-      virtual void setSpecular(const Math::Vector3D &specular)= 0;
       virtual void setShininess(double shininess) = 0; 
   };
 
