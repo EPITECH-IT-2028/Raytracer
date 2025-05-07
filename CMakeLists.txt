@@ -73,6 +73,8 @@ target_link_libraries(sphere PRIVATE $<TARGET_OBJECTS:math_objects>)
 target_include_directories(sphere PUBLIC
   ${CMAKE_SOURCE_DIR}/src
   ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
 )
 
 target_link_libraries(plane PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -80,6 +82,8 @@ target_link_libraries(plane PRIVATE $<TARGET_OBJECTS:math_objects>)
 target_include_directories(plane PUBLIC
   ${CMAKE_SOURCE_DIR}/src
   ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
 )
 
 target_link_libraries(cylinder PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -87,6 +91,8 @@ target_link_libraries(cylinder PRIVATE $<TARGET_OBJECTS:math_objects>)
 target_include_directories(cylinder PUBLIC
   ${CMAKE_SOURCE_DIR}/src
   ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
 )
 
 target_link_libraries(cone PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -101,6 +107,8 @@ target_link_libraries(directional PRIVATE $<TARGET_OBJECTS:math_objects>)
 target_include_directories(directional PUBLIC
   ${CMAKE_SOURCE_DIR}/src
   ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
 )
 
 if(APPLE)
@@ -117,7 +125,7 @@ if(APPLE)
     message(FATAL_ERROR "Unknown macOS architecture: ${CMAKE_SYSTEM_PROCESSOR}")
   endif()
   find_package(SFML 2.6 COMPONENTS system window graphics REQUIRED)
-  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++ $<TARGET_OBJECTS:math_objects>)
+  target_link_libraries(raytracer sfml-system sfml-window sfml-graphics $<TARGET_OBJECTS:math_objects>)
 
   set_target_properties(sphere PROPERTIES SUFFIX ".so")
   set_target_properties(plane PROPERTIES SUFFIX ".so")

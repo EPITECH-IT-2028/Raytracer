@@ -1,6 +1,8 @@
 #include "Renderer.hpp"
+#include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
+#include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
 #include <filesystem>
@@ -8,13 +10,13 @@
 
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
-                                             const LightComposite &light) {
+                                             LightComposite &light) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
-    Math::Point3D hit_point = r.at(t);
-    Math::Vector3D normal = hitShape->getNormal(hit_point);
-    return light.computeLighting(normal, color);
+    Math::Point3D hitPoint = r.at(t);
+    Math::Vector3D normal = hitShape->getNormal(hitPoint);
+    return light.computeLighting(normal, color, hitPoint, shape);
   }
   Math::Vector3D unit_direction = r.direction.normalize();
   double a = 0.5 * (unit_direction.y + 1.0);

@@ -34,54 +34,46 @@ void Raytracer::Scene::updateImage() {
   _texture.update(_image);
 }
 
-void Raytracer::Scene::handleInput(sf::Event &event,
-                                   Raytracer::Camera &camera) {
-  if (event.type == sf::Event::KeyPressed) {
-    switch (event.key.code) {
-      case sf::Keyboard::Z:
-        camera.moveForward(5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::S:
-        camera.moveForward(-5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::Q:
-        camera.moveRight(-5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::D:
-        camera.moveRight(5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::Space:
-        camera.moveUp(5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::LShift:
-        camera.moveUp(-5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::Left:
-        camera.rotateYaw(5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::Right:
-        camera.rotateYaw(-5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::Up:
-        camera.rotatePitch(5.0f);
-        _cameraMoved = true;
-        break;
-      case sf::Keyboard::Down:
-        camera.rotatePitch(-5.0f);
-        _cameraMoved = true;
-        break;
-      default:
-        break;
+void Raytracer::Scene::handleInput() {
+  const float moveSpeed = 5.0f;
+  const float rotateSpeed = 2.0f;
+
+  if (!_window.hasFocus())
+    return;
+
+  std::array<sf::Keyboard::Key, 11> movementKeys = {
+      sf::Keyboard::Z,      sf::Keyboard::S,     sf::Keyboard::Q,
+      sf::Keyboard::D,      sf::Keyboard::Space, sf::Keyboard::LShift,
+      sf::Keyboard::RShift, sf::Keyboard::Left,  sf::Keyboard::Right,
+      sf::Keyboard::Up,     sf::Keyboard::Down};
+  for (const auto &key : movementKeys) {
+    if (sf::Keyboard::isKeyPressed(key)) {
+      _cameraMoved = true;
+      break;
     }
   }
+
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    _camera.moveForward(moveSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    _camera.moveForward(-moveSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+    _camera.moveRight(-moveSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    _camera.moveRight(moveSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    _camera.moveUp(moveSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+      sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+    _camera.moveUp(-moveSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    _camera.rotateYaw(rotateSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    _camera.rotateYaw(-rotateSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    _camera.rotatePitch(rotateSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    _camera.rotatePitch(-rotateSpeed);
 }
 
 void Raytracer::Scene::changeCamQuality() {
@@ -118,13 +110,13 @@ void Raytracer::Scene::render() {
   while (_window.isOpen()) {
     sf::Event event;
     while (_window.pollEvent(event)) {
-      handleInput(event, _camera);
       if (event.type == sf::Event::Closed ||
           (event.type == sf::Event::KeyPressed &&
            event.key.code == sf::Keyboard::Escape))
         _window.close();
     }
     renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
+    handleInput();
     changeCamQuality();
     std::fill(_framebuffer.begin(), _framebuffer.end(), sf::Color::White);
     renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);

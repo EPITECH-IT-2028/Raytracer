@@ -24,8 +24,9 @@ namespace Raytracer {
       void writeInFile(const std::string &filename);
 
       void initScene(Camera &camera);
+
       Math::Vector3D rayColor(Ray &r, const ShapeComposite &s,
-                              const LightComposite &light);
+                              LightComposite &light);
 
       const std::string &getInputFilePath() const {
         return _inputFilePath;
