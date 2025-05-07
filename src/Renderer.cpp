@@ -1,22 +1,24 @@
 #include "Renderer.hpp"
+#include <dlfcn.h>
+#include <filesystem>
 #include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
 #include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
-#include <filesystem>
-#include <dlfcn.h>
 
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
-                                             LightComposite &light) {
+                                             LightComposite &light,
+                                             const Camera &cameraPos) {
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
     Math::Point3D hitPoint = r.at(t);
     Math::Vector3D normal = hitShape->getNormal(hitPoint);
-    return light.computeLighting(normal, color, hitPoint, shape);
+    Math::Vector3D viewDir = (cameraPos.origin - hitPoint).normalized();
+    return light.computeLighting(normal, color, hitPoint, viewDir, shape);
   }
   Math::Vector3D unit_direction = r.direction.normalize();
   double a = 0.5 * (unit_direction.y + 1.0);
@@ -49,7 +51,7 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
           cam.getPixelDeltaV() * static_cast<float>(j);
       Math::Vector3D ray_direction = (pixel_center - cam.origin).normalize();
       Raytracer::Ray ray(cam.origin, ray_direction);
-      Math::Vector3D color = rayColor(ray, _shapes, _lights);
+      Math::Vector3D color = rayColor(ray, _shapes, _lights, cam);
       sf::Color pixel_color(static_cast<sf::Uint8>(color.x * 255),
                             static_cast<sf::Uint8>(color.y * 255),
                             static_cast<sf::Uint8>(color.z * 255));

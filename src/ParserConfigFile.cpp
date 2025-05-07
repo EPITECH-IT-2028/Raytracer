@@ -3,10 +3,12 @@
 #include <stdexcept>
 #include <string>
 #include "Plane.hpp"
+#include "AmbientLight.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
+#include "Vector3D.hpp"
 
 Raytracer::ParserConfigFile::ParserConfigFile(const std::string &filename, 
                                               const std::vector<std::string> &plugins) : _plugins(plugins) {
@@ -181,9 +183,35 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
         directional.lookupValue("y", posY);
         directional.lookupValue("z", posZ);
         Math::Vector3D direction(posX, posY, posZ);
-        newDirectional->direction = direction.normalize();
+        newDirectional->setDirection(direction.normalize());
+        newDirectional->setType("DirectionalLight");
         lc.addLight(newDirectional);
       }
+    }
+    // AMBIENT
+    if (root.exists("lights") && root["lights"].exists("ambient")) {
+      const libconfig::Setting &ambientInfo = root["lights"]["ambient"];
+      const libconfig::Setting &colorInfo = root["lights"]["ambient"]["color"];
+      auto newAmbient = _factory.create<AmbientLight>("ambient");
+      if (newAmbient == nullptr) {
+        throw std::runtime_error(
+            "[ERROR] - Failed during creation of ambient light.");
+      }
+      double red, green, blue, intensity;
+      ambientInfo.lookupValue("intensity", intensity);
+      colorInfo.lookupValue("r", red);
+      colorInfo.lookupValue("g", green);
+      colorInfo.lookupValue("b", blue);
+      newAmbient->setColor(Math::Vector3D(red, green, blue));
+      newAmbient->setIntensity(intensity);
+      newAmbient->setType("AmbientLight");
+      lc.addLight(newAmbient);
+    }
+    // DIFFUSE
+    if (root.exists("lights") && root["lights"].exists("diffuse")) {
+      const libconfig::Setting &diffuseInfo = root["lights"];
+      double diffuseMultiplier = diffuseInfo.lookup("diffuse");
+      lc.setDiffuse(diffuseMultiplier);
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());

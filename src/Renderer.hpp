@@ -26,7 +26,7 @@ namespace Raytracer {
       void initScene(Camera &camera);
 
       Math::Vector3D rayColor(Ray &r, const ShapeComposite &s,
-                              LightComposite &light);
+                              LightComposite &light, const Camera &cameraPos);
 
       const std::string &getInputFilePath() const {
         return _inputFilePath;
