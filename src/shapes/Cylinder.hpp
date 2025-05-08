@@ -12,19 +12,19 @@ namespace Raytracer {
     public:
       Cylinder(const Math::Point3D &center, double radius, double height,
                const Math::Vector3D &normal, const Math::Vector3D &color)
-          : _center(center),
-            _normal(normal),
+          : _normal(normal),
             _radius(radius),
-            _height(height),
-            _color(color) {
+            _height(height) {
+        _center = center;
+        _color = color;
       }
 
       Cylinder()
-          : _center(Math::Point3D(0, 0, 0)),
-            _normal(Math::Vector3D(0, 1, 0)),
+          : _normal(Math::Vector3D(0, 1, 0)),
             _radius(1.0),
-            _height(2.0),
-            _color(Math::Vector3D(0, 0, 1)) {
+            _height(2.0) {
+        _center = Math::Point3D(0, 0, 0);
+        _color = Math::Vector3D(1, 0, 0);
       }
 
       ~Cylinder() = default;
@@ -38,23 +38,24 @@ namespace Raytracer {
         _center = _center + offset;
       }
 
+      const double &getRadius() const {
+        return _radius;
+      };
+      const double &getHeight() const {
+        return _height;
+      };
 
-      const Math::Point3D& getCenter() const { return _center; };
-      const Math::Vector3D& getColor() const { return _color; };
-      const double& getRadius() const { return _radius; };
-      const double& getHeight() const { return _height;};
-
-      void setCenter(Math::Point3D& center) { _center = center;}
-      void setColor(Math::Vector3D& color) { _color = color;}
-      void setRadius(double& radius) { _radius = radius;}
-      void setHeight(double& h) { _height = h;}
+      void setRadius(double &radius) {
+        _radius = radius;
+      }
+      void setHeight(double &h) {
+        _height = h;
+      }
 
     private:
-      Math::Point3D _center;
       Math::Vector3D _normal;
       double _radius;
       double _height;
-      Math::Vector3D _color;
   };
 
 }  // namespace Raytracer

@@ -2,133 +2,125 @@
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 #include <cmath>
-
-// std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
-// Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
-//     double d_dot_v = ray.direction.dot(_normal);
-//     double x_dot_v = (ray.origin - _center).dot(_normal);
-
-//     Math::Vector3D d_perp = ray.direction - _normal * d_dot_v;
-//     Math::Vector3D x_perp = (ray.origin - _center) - _normal * x_dot_v;
-
-//     double k = _radius / _height;
-//     double k2 = k * k;
-
-//     double a = d_perp.dot(d_perp) - k2 * d_dot_v * d_dot_v;
-//     double b = 2.0 * (d_perp.dot(x_perp) - k2 * d_dot_v * x_dot_v);
-//     double c = x_perp.dot(x_perp) - k2 * x_dot_v * x_dot_v;
-
-//     double discriminant = b * b - 4 * a * c;
-//     if (discriminant < 0.0) {
-//         return {0.0, _color, this};
-//     }
-//     double sqrt_disc = sqrt(discriminant);
-//     double t1 = (-b - sqrt_disc) / (2.0 * a);
-//     double t2 = (-b + sqrt_disc) / (2.0 * a);
-
-//     if (t1 > t2) std::swap(t1, t2);
-
-//     double t_plane_A = -x_dot_v / d_dot_v;
-//     double t_plane_B = (_height - x_dot_v) / d_dot_v;
-
-//     double t3 = std::min(t_plane_A, t_plane_B);
-//     double t4 = std::max(t_plane_A, t_plane_B);
-
-//     double final_t_start = std::max(t1, t3);
-//     double final_t_end = std::min(t2, t4);
-
-//     if (final_t_start < final_t_end && final_t_end >= 0) {
-//         return {final_t_start, _color, this};
-//     }
-//     return {0.0, _color, this};
-// }
+#include "Vector3D.hpp"
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
-    double height_ = _height;
-    Math::Vector3D normal_ = _normal;
+  double cone_height = _height;
+  Math::Vector3D cone_axis = _normal;
 
-    if (_height <= 0.0) {
-      height_ *= -1.0;
-      normal_ = -_normal;
-    }
-
-    double d_dot_v = ray.direction.dot(_normal);
-    double x_dot_v = (ray.origin - _center).dot(_normal);
-
-    Math::Vector3D d_perp = ray.direction - _normal * d_dot_v;
-    Math::Vector3D x_perp = (ray.origin - _center) - _normal * x_dot_v;
-
-    double k = _radius / _height;
-    double k2 = k * k;
-
-    double a = d_perp.dot(d_perp) - k2 * d_dot_v * d_dot_v;
-    double b = 2.0 * (d_perp.dot(x_perp) - k2 * d_dot_v * x_dot_v);
-    double c = x_perp.dot(x_perp) - k2 * x_dot_v * x_dot_v;
-
-    double discriminant = b * b - 4 * a * c;
-    double best_t = -1.0;
-    Math::Vector3D normal;
-
-    if (discriminant >= 0.0) {
+  if (_height < 0) {
+      cone_height = -_height;
+      cone_axis = -_normal;
+  }
+  
+  Math::Vector3D oc = ray.origin - _center;
+  double oc_dot_normal = oc.dot(cone_axis);
+  Math::Vector3D oc_perp = oc - cone_axis * oc_dot_normal;
+  
+  double dir_dot_normal = ray.direction.dot(cone_axis);
+  Math::Vector3D dir_perp = ray.direction - cone_axis * dir_dot_normal;
+  
+  double tan = _radius / cone_height;
+  double tan2 = tan * tan;
+  
+  double a = dir_perp.dot(dir_perp) - tan2 * dir_dot_normal * dir_dot_normal;
+  double b = 2.0 * (dir_perp.dot(oc_perp) - tan2 * dir_dot_normal * (oc_dot_normal - cone_height));
+  double c = oc_perp.dot(oc_perp) - tan2 * (oc_dot_normal - cone_height) * (oc_dot_normal - cone_height);
+  
+  double t_side = 0.0;
+  double discriminant = b * b - 4 * a * c;
+  
+  if (discriminant >= 0.0) {
       double sqrt_disc = sqrt(discriminant);
       double t1 = (-b - sqrt_disc) / (2.0 * a);
       double t2 = (-b + sqrt_disc) / (2.0 * a);
-      if (t1 > t2) std::swap(t1, t2);
-
-      for (double t : {t1, t2}) {
-          if (t < 0.0) continue;
-          Math::Point3D p = ray.origin + ray.direction * t;
-          double m = (p - _center).dot(_normal);
-          if (m >= 0.0 && m <= _height) {
-              best_t = t;
-              normal = (p - _center) - _normal * (m * (1.0 + k2));
-              normal = normal.normalize();
-              break;
+      
+      if (t1 > 0 && t2 > 0) {
+          t_side = std::min(t1, t2);
+      } else if (t1 > 0) {
+          t_side = t1;
+      } else if (t2 > 0) {
+          t_side = t2;
+      }
+      
+      if (t_side > 0) {
+          Math::Point3D hit_point = ray.origin + ray.direction * t_side;
+          Math::Vector3D cp = hit_point - _center;
+          double height_pos = cp.dot(cone_axis);
+          
+          if (height_pos < 0 || height_pos > cone_height) {
+              t_side = 0.0;
           }
       }
   }
-
-    // === Cap sommet (m = 0) ===
-    if (d_dot_v != 0.0) {
-        double t_top = -x_dot_v / d_dot_v;
-        if (t_top >= 0.0) {
-            Math::Point3D p = ray.origin + ray.direction * t_top;
-            // On considère que si on frappe le plan au bon endroit, on touche le sommet
-            double dist_to_center = (p - _center).length();
-            if (dist_to_center <= 1e-6) {
-                if (best_t < 0 || t_top < best_t) {
-                    best_t = t_top;
-                    normal = -_normal; // direction opposée à l'axe
-                }
-            }
-        }
-
-        // === Cap base (m = _height) ===
-        double t_base = (_height - x_dot_v) / d_dot_v;
-        if (t_base >= 0.0) {
-            Math::Point3D p = ray.origin + ray.direction * t_base;
-            Math::Vector3D v = p - _center;
-            double m = v.dot(_normal);
-            Math::Vector3D v_perp = v - _normal * m;
-
-            double r_at_m = m * k;
-            if (v_perp.dot(v_perp) <= r_at_m * r_at_m) {
-                if (best_t < 0 || t_base < best_t) {
-                    best_t = t_base;
-                    normal = _normal; // normal sortante
-                }
-            }
-        }
-    }
-
-    if (best_t >= 0.0) {
-        return {best_t, normal, this};
-    }
-
-    return {0.0, Math::Vector3D(), this};
+  
+  double t_base = 0.0;
+  if (std::abs(dir_dot_normal) > 0) {
+      double t_plane = -oc_dot_normal / dir_dot_normal;
+      
+      if (t_plane > 0) {
+          Math::Point3D hit_point = ray.origin + ray.direction * t_plane;
+          Math::Vector3D cp = hit_point - _center;
+          Math::Vector3D cp_perp = cp - cone_axis * cp.dot(cone_axis);
+          
+          if (cp_perp.length() <= _radius) {
+              t_base = t_plane;
+          }
+      }
+  }
+  
+  double final_t = 0.0;
+  
+  if (t_side > 0 && t_base > 0) {
+      final_t = std::min(t_side, t_base);
+  } else if (t_side > 0) {
+      final_t = t_side;
+  } else if (t_base > 0) {
+      final_t = t_base;
+  }
+  
+  if (final_t <= 0) {
+      return {0.0, _color, this};
+  }
+  
+  return {final_t, _color, this};
 }
 
+Math::Vector3D Raytracer::Cone::getNormal(const Math::Point3D &hit_point) const {
+  double cone_height = _height;
+  Math::Vector3D cone_axis = _normal;
+  if (_height < 0) {
+      cone_height = -_height;
+      cone_axis = -_normal;
+  }
+  
+  Math::Vector3D cp = hit_point - _center;
+  
+  double height_pos = cp.dot(cone_axis);
+  
+  if (std::abs(height_pos) < 0.0001)
+      return -cone_axis;
+  
+  Math::Point3D pos_on_axis = _center + cone_axis * height_pos;
+  Math::Vector3D radial_dir = hit_point - pos_on_axis;
+  
+  if (radial_dir.length() < 0.0001) {
+      return cone_axis;
+  }
+  
+  radial_dir = radial_dir.normalize();
+  
+  double tan = _radius / cone_height;
+  double tan2 = tan * tan;
+  double sin_angle = tan / std::sqrt(1 + tan2);
+  double cos_angle = 1 / std::sqrt(1 + tan2);
+  
+  Math::Vector3D side_normal = radial_dir * cos_angle + cone_axis * sin_angle;
+  side_normal = side_normal.normalize();
+  
+  return side_normal;
+}
 
 extern "C" {
   Raytracer::IShape *addShape() {

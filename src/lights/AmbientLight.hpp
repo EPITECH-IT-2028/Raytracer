@@ -4,10 +4,10 @@
 #include "Vector3D.hpp"
 
 namespace Raytracer {
-  class DirectionalLight : public ALight {
+  class AmbientLight : public ALight {
     public:
-      DirectionalLight() = default;
-      ~DirectionalLight() = default;
+      AmbientLight() = default;
+      ~AmbientLight() = default;
 
       Math::Vector3D computeLighting(const Math::Vector3D &normal,
                                      const Math::Vector3D &objectColor,

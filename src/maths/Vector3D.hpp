@@ -35,6 +35,7 @@ namespace Math {
       double dot(const Vector3D &vec) const;
 
       Vector3D &normalize();
+      Vector3D normalized() const;
 
       double length() const;
   };
