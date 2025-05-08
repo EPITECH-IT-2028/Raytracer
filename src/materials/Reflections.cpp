@@ -7,15 +7,19 @@ Math::Vector3D Raytracer::Reflections::computeMaterial(
     const Raytracer::ShapeComposite &shapes, Raytracer::LightComposite &lights,
     const Raytracer::Camera &camera, int depth,
     RayColorFunc rayColorFunc) const {
+  if (depth <= 0) {
+    return color;
+  }
+
   Math::Vector3D reflectedDir = -viewDir + normal * (2 * viewDir.dot(normal));
   reflectedDir.normalize();
 
   Raytracer::Ray reflectedRay(hitPoint + reflectedDir * 0.001, reflectedDir);
 
   Math::Vector3D reflectedColor =
-      rayColorFunc(reflectedRay, shapes, lights, camera, depth);
+      rayColorFunc(reflectedRay, shapes, lights, camera, depth - 1);
 
-  return color * (1.0 - 0.9) + reflectedColor * 0.9;
+  return color * (1.0f - 0.9f) + reflectedColor * 0.9f;
 }
 
 extern "C" {
