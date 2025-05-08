@@ -242,7 +242,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
   try {
     // SPHERES
     if (root.exists("primitives") && root["primitives"].exists("spheres")) {
-      static const std::vector<std::string> allowedSettings = {
+      static const std::unordered_set<std::string> allowedSettings = {
           "x", "y", "z", "r", "color", "translate"};
       checkSettings(root["primitives"]["spheres"], allowedSettings);
       parseSpheres(sc, root["primitives"]["spheres"]);
@@ -250,7 +250,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
 
     // CYLINDERS
     if (root.exists("primitives") && root["primitives"].exists("cylinders")) {
-      static const std::vector<std::string> allowedSettings = {
+      static const std::unordered_set<std::string> allowedSettings = {
           "x", "y", "z", "r", "h", "color", "translate"};
       checkSettings(root["primitives"]["cylinders"], allowedSettings);
       parseCylinders(sc, root["primitives"]["cylinders"]);
@@ -258,7 +258,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
 
     // CONES
     if (root.exists("primitives") && root["primitives"].exists("cones")) {
-      static const std::vector<std::string> allowedSettings = {
+      static const std::unordered_set<std::string> allowedSettings = {
           "x", "y", "z", "r", "h", "color", "translate"};
       checkSettings(root["primitives"]["cones"], allowedSettings);
       parseCones(sc, root["primitives"]["cones"]);
@@ -266,7 +266,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
 
     // PLANES
     if (root.exists("primitives") && root["primitives"].exists("planes")) {
-      static const std::vector<std::string> allowedSettings = {
+      static const std::unordered_set<std::string> allowedSettings = {
           "normal", "offset", "color"};
       checkSettings(root["primitives"]["planes"], allowedSettings);
       parsePlanes(sc, root["primitives"]["planes"]);
@@ -333,7 +333,7 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
   try {
     // AMBIENT
     if (root.exists("lights") && root["lights"].exists("ambient")) {
-      static const std::vector<std::string> allowedSettings = {"intensity",
+      static const std::unordered_set<std::string> allowedSettings = {"intensity",
                                                                "color"};
       checkSettings(root["lights"]["ambient"], allowedSettings);
       parseAmbientLight(lc, root["lights"]["ambient"]);
@@ -345,7 +345,7 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
 
     // DIRECTIONALS
     if (root.exists("lights") && root["lights"].exists("directional")) {
-      static const std::vector<std::string> allowedSettings = {"x", "y", "z",
+      static const std::unordered_set<std::string> allowedSettings = {"x", "y", "z",
                                                                "color"};
       checkSettings(root["lights"]["directional"], allowedSettings);
       parseDirectionalLights(lc, root["lights"]["directional"]);
@@ -361,7 +361,7 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
 
 void Raytracer::ParserConfigFile::checkSettings(
     const libconfig::Setting &settings,
-    const std::vector<std::string> &allowedSettings) const {
+    const std::unordered_set<std::string> &allowedSettings) const {
   if (settings.isList() || settings.isArray()) {
     for (int i = 0; i < settings.getLength(); i++) {
       const libconfig::Setting &object = settings[i];
@@ -369,8 +369,7 @@ void Raytracer::ParserConfigFile::checkSettings(
         for (int j = 0; j < object.getLength(); j++) {
           const libconfig::Setting &setting = object[j];
           std::string settingName = setting.getName();
-          if (std::find(allowedSettings.begin(), allowedSettings.end(),
-                        settingName) == allowedSettings.end()) {
+          if (allowedSettings.find(settingName) == allowedSettings.end()) {
             throw ParseError(std::string("Unknown setting '") + settingName +
                              "' found in object configuration at " +
                              setting.getPath());
@@ -382,8 +381,7 @@ void Raytracer::ParserConfigFile::checkSettings(
     for (int j = 0; j < settings.getLength(); j++) {
       const libconfig::Setting &setting = settings[j];
       std::string settingName = setting.getName();
-      if (std::find(allowedSettings.begin(), allowedSettings.end(),
-                    settingName) == allowedSettings.end()) {
+      if (allowedSettings.find(settingName) == allowedSettings.end()) {
         throw ParseError(std::string("Unknown setting '") + settingName +
                          "' found in object configuration at " +
                          setting.getPath());

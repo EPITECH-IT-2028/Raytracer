@@ -2,6 +2,7 @@
 
 #include <libconfig.h++>
 #include <string>
+#include <unordered_set>
 #include "Camera.hpp"
 #include "Factory.hpp"
 #include "LightComposite.hpp"
@@ -48,6 +49,6 @@ namespace Raytracer {
       void parseDiffuseLight(LightComposite &lc,
                              const libconfig::Setting &diffuseInfo);
       void checkSettings(const libconfig::Setting &setting,
-                         const std::vector<std::string> &requiredFields) const;
+                         const std::unordered_set<std::string> &requiredFields) const;
   };
 }  // namespace Raytracer
