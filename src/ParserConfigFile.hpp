@@ -36,6 +36,8 @@ namespace Raytracer {
                         const libconfig::Setting &spheresSetting);
       void parseCylinders(ShapeComposite &sc,
                           const libconfig::Setting &cylindersSetting);
+      void parseCones(ShapeComposite &sc,
+                          const libconfig::Setting &conesSetting);
       void parsePlanes(ShapeComposite &sc,
                        const libconfig::Setting &planesSetting);
 

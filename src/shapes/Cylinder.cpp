@@ -2,14 +2,6 @@
 #include <cmath>
 #include "Vector3D.hpp"
 
-Math::Vector3D Raytracer::Cylinder::getNormal(
-    const Math::Point3D &point) const {
-  Math::Vector3D oc = point - _center;
-  double oc_dot_normal = oc.dot(_normal);
-  Math::Vector3D oc_perp = oc - (_normal * oc_dot_normal);
-  return oc_perp.normalize();
-}
-
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Cylinder::hits(const Raytracer::Ray &ray) const {
   Math::Vector3D oc = ray.origin - _center;
@@ -51,6 +43,21 @@ Raytracer::Cylinder::hits(const Raytracer::Ray &ray) const {
   }
 
   return {0.0, _color, this};
+}
+
+Math::Vector3D Raytracer::Cylinder::getNormal(const Math::Point3D &point) const {
+  Math::Vector3D oc = point - _center;
+
+  double oc_dot_normal = oc.dot(_normal);
+
+  if (oc_dot_normal <= 0.0001) {
+    return -_normal;
+  } else if (oc_dot_normal >= (_height - 0.0001)) {
+    return _normal;
+  }
+
+  Math::Vector3D oc_perp = (oc - (_normal * oc_dot_normal)) / _radius;
+  return oc_perp.normalize();
 }
 
 extern "C" {
