@@ -45,7 +45,7 @@ namespace Raytracer {
           if (it != _shapeFactories.end()) {
             return std::static_pointer_cast<T>(it->second());
           } else {
-            throw std::runtime_error("Shape is not registred");
+            throw std::runtime_error("Shape is not registered");
           }
         }
         // Check if T is a light type
@@ -54,7 +54,7 @@ namespace Raytracer {
           if (it != _lightFactories.end()) {
             return std::static_pointer_cast<T>(it->second());
           } else {
-            throw std::runtime_error("Light is not registred");
+            throw std::runtime_error("Light is not registered");
           }
         }
 
@@ -68,5 +68,6 @@ namespace Raytracer {
           _shapeFactories;
       std::map<std::string, std::function<std::shared_ptr<ILight>()>>
           _lightFactories;
+      std::vector<void*> _pluginHandles;
   };
 }  // namespace Raytracer
