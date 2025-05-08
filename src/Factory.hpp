@@ -16,7 +16,8 @@ namespace Raytracer {
       ~Factory() = default;
 
       template <typename T>
-      void registerShape(const std::string& name, std::function<T*()> addShape) {
+      void registerShape(const std::string& name,
+                         std::function<T*()> addShape) {
         if constexpr (std::is_base_of_v<IShape, T>) {
           _shapeFactories[name] = [addShape]() {
             return std::shared_ptr<IShape>(addShape());
@@ -27,13 +28,26 @@ namespace Raytracer {
       }
 
       template <typename T>
-      void registerLight(const std::string& name, std::function<T*()> addLight) {
+      void registerLight(const std::string& name,
+                         std::function<T*()> addLight) {
         if constexpr (std::is_base_of_v<ILight, T>) {
           _lightFactories[name] = [addLight]() {
             return std::shared_ptr<ILight>(addLight());
           };
         } else {
           throw std::runtime_error("T must be derived from ILight");
+        }
+      }
+
+      template <typename T>
+      void registerMaterial(const std::string& name,
+                            std::function<T*()> addMaterial) {
+        if constexpr (std::is_base_of_v<IMaterials, T>) {
+          _materialFactories[name] = [addMaterial]() {
+            return std::shared_ptr<IMaterials>(addMaterial());
+          };
+        } else {
+          throw std::runtime_error("T must be derived from IMaterials");
         }
       }
 
@@ -57,16 +71,26 @@ namespace Raytracer {
             throw std::runtime_error("Light is not registred");
           }
         }
-
+        // Check if T is a material type
+        else if constexpr (std::is_base_of_v<IMaterials, T>) {
+          auto it = _materialFactories.find(type);
+          if (it != _materialFactories.end()) {
+            return std::static_pointer_cast<T>(it->second());
+          } else {
+            throw std::runtime_error("Material is not registred");
+          }
+        }
         return nullptr;
       }
 
-      void initFactories(const std::vector<std::string> &plugins);
+      void initFactories(const std::vector<std::string>& plugins);
 
     private:
       std::map<std::string, std::function<std::shared_ptr<IShape>()>>
           _shapeFactories;
       std::map<std::string, std::function<std::shared_ptr<ILight>()>>
           _lightFactories;
+      std::map<std::string, std::function<std::shared_ptr<IMaterials>()>>
+          _materialFactories;
   };
 }  // namespace Raytracer

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Ray.hpp"
+#include "materials/IMaterials.hpp"
 
 namespace Raytracer {
 
@@ -13,6 +14,9 @@ namespace Raytracer {
           const Raytracer::Ray &ray) const = 0;
 
       virtual Math::Vector3D getNormal(const Math::Point3D &hitPoint) const = 0;
+
+      virtual std::shared_ptr<IMaterials> getMaterial() const = 0;
+      virtual void setMaterial(std::shared_ptr<IMaterials> material) = 0;
 
       virtual void translate(const Math::Vector3D &offset) = 0;
 
