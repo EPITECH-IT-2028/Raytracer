@@ -26,6 +26,8 @@ namespace Raytracer {
       std::vector<std::string> _plugins;
       Factory _factory = Factory();
 
+      static std::tuple<float, float, float> parseCoordinates(
+          const libconfig::Setting &setting);
       static Math::Point3D parsePoint3D(const libconfig::Setting &setting);
       static Math::Vector3D parseVector3D(const libconfig::Setting &setting);
       static Math::Vector3D parseColor(const libconfig::Setting &colorSetting);

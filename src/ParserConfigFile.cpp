@@ -2,6 +2,7 @@
 #include <libconfig.h++>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 #include "AmbientLight.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
@@ -57,7 +58,7 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
   }
 }
 
-Math::Point3D Raytracer::ParserConfigFile::parsePoint3D(
+std::tuple<float, float, float> Raytracer::ParserConfigFile::parseCoordinates(
     const libconfig::Setting &setting) {
   float x, y, z;
   if (!setting.lookupValue("x", x) || !setting.lookupValue("y", y) ||
@@ -67,13 +68,15 @@ Math::Point3D Raytracer::ParserConfigFile::parsePoint3D(
   return {x, y, z};
 }
 
+Math::Point3D Raytracer::ParserConfigFile::parsePoint3D(
+    const libconfig::Setting &setting) {
+  auto [x, y, z] = parseCoordinates(setting);
+  return {x, y, z};
+}
+
 Math::Vector3D Raytracer::ParserConfigFile::parseVector3D(
     const libconfig::Setting &setting) {
-  float x, y, z;
-  if (!setting.lookupValue("x", x) || !setting.lookupValue("y", y) ||
-      !setting.lookupValue("z", z))
-    throw libconfig::SettingNotFoundException(
-        "Missing one or more coordinate fields (x, y, z) for a point/vector.");
+  auto [x, y, z] = parseCoordinates(setting);
   return {x, y, z};
 }
 
