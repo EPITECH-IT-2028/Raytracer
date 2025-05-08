@@ -2,7 +2,8 @@
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 #include <cmath>
-#include "Vector3D.hpp"
+
+const double eps = 1e-6;
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
@@ -21,12 +22,12 @@ Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
   double dir_dot_normal = ray.direction.dot(cone_axis);
   Math::Vector3D dir_perp = ray.direction - cone_axis * dir_dot_normal;
   
-  double tan = _radius / cone_height;
-  double tan2 = tan * tan;
+  double tan_angle = _radius / cone_height;
+  double tan_angle2 = tan_angle * tan_angle;
   
-  double a = dir_perp.dot(dir_perp) - tan2 * dir_dot_normal * dir_dot_normal;
-  double b = 2.0 * (dir_perp.dot(oc_perp) - tan2 * dir_dot_normal * (oc_dot_normal - cone_height));
-  double c = oc_perp.dot(oc_perp) - tan2 * (oc_dot_normal - cone_height) * (oc_dot_normal - cone_height);
+  double a = dir_perp.dot(dir_perp) - tan_angle2 * dir_dot_normal * dir_dot_normal;
+  double b = 2.0 * (dir_perp.dot(oc_perp) - tan_angle2 * dir_dot_normal * (oc_dot_normal - cone_height));
+  double c = oc_perp.dot(oc_perp) - tan_angle2 * (oc_dot_normal - cone_height) * (oc_dot_normal - cone_height);
   
   double t_side = 0.0;
   double discriminant = b * b - 4 * a * c;
@@ -56,7 +57,7 @@ Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
   }
   
   double t_base = 0.0;
-  if (std::abs(dir_dot_normal) > 0) {
+  if (std::abs(dir_dot_normal) > eps) {
       double t_plane = -oc_dot_normal / dir_dot_normal;
       
       if (t_plane > 0) {
@@ -99,22 +100,22 @@ Math::Vector3D Raytracer::Cone::getNormal(const Math::Point3D &hit_point) const 
   
   double height_pos = cp.dot(cone_axis);
   
-  if (std::abs(height_pos) < 0.0001)
+  if (std::abs(height_pos) < eps)
       return -cone_axis;
   
   Math::Point3D pos_on_axis = _center + cone_axis * height_pos;
   Math::Vector3D radial_dir = hit_point - pos_on_axis;
   
-  if (radial_dir.length() < 0.0001) {
+  if (radial_dir.length() < eps) {
       return cone_axis;
   }
   
   radial_dir = radial_dir.normalize();
   
-  double tan = _radius / cone_height;
-  double tan2 = tan * tan;
-  double sin_angle = tan / std::sqrt(1 + tan2);
-  double cos_angle = 1 / std::sqrt(1 + tan2);
+  double tan_angle = _radius / cone_height;
+  double tan_angle2 = tan_angle * tan_angle;
+  double sin_angle = tan_angle / std::sqrt(1 + tan_angle2);
+  double cos_angle = 1 / std::sqrt(1 + tan_angle2);
   
   Math::Vector3D side_normal = radial_dir * cos_angle + cone_axis * sin_angle;
   side_normal = side_normal.normalize();

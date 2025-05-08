@@ -105,6 +105,8 @@ target_link_libraries(cone PRIVATE $<TARGET_OBJECTS:math_objects>)
 target_include_directories(cone PUBLIC
   ${CMAKE_SOURCE_DIR}/src
   ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
 )
 
 target_link_libraries(directional PRIVATE $<TARGET_OBJECTS:math_objects>)
