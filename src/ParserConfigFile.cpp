@@ -185,15 +185,10 @@ void Raytracer::ParserConfigFile::parseDirectionalLights(
     const libconfig::Setting &directional = lightsSetting[i];
     auto newDirectional =
         _factory.create<Raytracer::DirectionalLight>("directional");
-    if (newDirectional == nullptr) {
+    if (newDirectional == nullptr)
       throw std::runtime_error(
           "[ERROR] - Failed during creation of directional light.");
-    }
-    double posX, posY, posZ;
-    directional.lookupValue("x", posX);
-    directional.lookupValue("y", posY);
-    directional.lookupValue("z", posZ);
-    Math::Vector3D direction(posX, posY, posZ);
+    Math::Vector3D direction = parseVector3D(directional);
     newDirectional->setDirection(direction.normalize());
     newDirectional->setType("DirectionalLight");
     lc.addLight(newDirectional);
@@ -202,39 +197,29 @@ void Raytracer::ParserConfigFile::parseDirectionalLights(
 
 void Raytracer::ParserConfigFile::parseAmbientLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &ambientInfo) {
-  try {
-    const libconfig::Setting &colorInfo = ambientInfo["color"];
-    auto newAmbient = _factory.create<AmbientLight>("ambient");
-    if (newAmbient == nullptr) {
-      throw std::runtime_error(
-          "[ERROR] - Failed during creation of ambient light.");
-    }
-    double red, green, blue, intensity;
-    ambientInfo.lookupValue("intensity", intensity);
-    colorInfo.lookupValue("r", red);
-    colorInfo.lookupValue("g", green);
-    colorInfo.lookupValue("b", blue);
-    newAmbient->setColor(Math::Vector3D(red, green, blue));
-    newAmbient->setIntensity(intensity);
-    newAmbient->setType("AmbientLight");
-    lc.addLight(newAmbient);
-  } catch (const libconfig::SettingNotFoundException &nfex) {
-    throw std::runtime_error(nfex.what());
-  } catch (const libconfig::SettingTypeException &nfex) {
-    throw std::runtime_error(nfex.what());
-  }
+  const libconfig::Setting &colorInfo = ambientInfo["color"];
+  auto newAmbient = _factory.create<AmbientLight>("ambient");
+  if (newAmbient == nullptr)
+    throw std::runtime_error(
+        "[ERROR] - Failed during creation of ambient light.");
+  Math::Vector3D color = parseColor(colorInfo);
+  newAmbient->setColor(color);
+  double intensity = ambientInfo.lookup("intensity");
+  if (intensity < 0 || intensity > 1)
+    throw std::runtime_error(
+        "[ERROR] - Ambient light intensity must be in the range [0, 1].");
+  newAmbient->setIntensity(intensity);
+  newAmbient->setType("AmbientLight");
+  lc.addLight(newAmbient);
 }
 
 void Raytracer::ParserConfigFile::parseDiffuseLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &diffuseInfo) {
-  try {
-    double diffuseMultiplier = diffuseInfo;
-    lc.setDiffuse(diffuseMultiplier);
-  } catch (const libconfig::SettingNotFoundException &nfex) {
-    throw std::runtime_error(nfex.what());
-  } catch (const libconfig::SettingTypeException &nfex) {
-    throw std::runtime_error(nfex.what());
-  }
+  double diffuseMultiplier = diffuseInfo;
+  if (diffuseMultiplier < 0 || diffuseMultiplier > 1)
+    throw std::runtime_error(
+        "[ERROR] - Diffuse light multiplier must be in the range [0, 1].");
+  lc.setDiffuse(diffuseMultiplier);
 }
 
 void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
