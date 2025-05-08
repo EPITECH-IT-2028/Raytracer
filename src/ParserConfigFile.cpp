@@ -179,22 +179,6 @@ void Raytracer::ParserConfigFile::parsePrimitives(
   }
 }
 
-void Raytracer::ParserConfigFile::parseDirectionalLights(
-    Raytracer::LightComposite &lc, const libconfig::Setting &lightsSetting) {
-  for (int i = 0; i < lightsSetting.getLength(); i++) {
-    const libconfig::Setting &directional = lightsSetting[i];
-    auto newDirectional =
-        _factory.create<Raytracer::DirectionalLight>("directional");
-    if (newDirectional == nullptr)
-      throw std::runtime_error(
-          "[ERROR] - Failed during creation of directional light.");
-    Math::Vector3D direction = parseVector3D(directional);
-    newDirectional->setDirection(direction.normalize());
-    newDirectional->setType("DirectionalLight");
-    lc.addLight(newDirectional);
-  }
-}
-
 void Raytracer::ParserConfigFile::parseAmbientLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &ambientInfo) {
   const libconfig::Setting &colorInfo = ambientInfo["color"];
@@ -220,6 +204,22 @@ void Raytracer::ParserConfigFile::parseDiffuseLight(
     throw std::runtime_error(
         "[ERROR] - Diffuse light multiplier must be in the range [0, 1].");
   lc.setDiffuse(diffuseMultiplier);
+}
+
+void Raytracer::ParserConfigFile::parseDirectionalLights(
+    Raytracer::LightComposite &lc, const libconfig::Setting &lightsSetting) {
+  for (int i = 0; i < lightsSetting.getLength(); i++) {
+    const libconfig::Setting &directional = lightsSetting[i];
+    auto newDirectional =
+        _factory.create<Raytracer::DirectionalLight>("directional");
+    if (newDirectional == nullptr)
+      throw std::runtime_error(
+          "[ERROR] - Failed during creation of directional light.");
+    Math::Vector3D direction = parseVector3D(directional);
+    newDirectional->setDirection(direction.normalize());
+    newDirectional->setType("DirectionalLight");
+    lc.addLight(newDirectional);
+  }
 }
 
 void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
