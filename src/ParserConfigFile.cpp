@@ -240,10 +240,6 @@ void Raytracer::ParserConfigFile::parseDiffuseLight(
 void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
                                               const libconfig::Setting &root) {
   try {
-    // DIRECTIONALS
-    if (root.exists("lights") && root["lights"].exists("directional"))
-      parseDirectionalLights(lc, root["lights"]["directional"]);
-
     // AMBIENT
     if (root.exists("lights") && root["lights"].exists("ambient"))
       parseAmbientLight(lc, root["lights"]["ambient"]);
@@ -251,6 +247,10 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
     // DIFFUSE
     if (root.exists("lights") && root["lights"].exists("diffuse"))
       parseDiffuseLight(lc, root["lights"]["diffuse"]);
+
+    // DIRECTIONALS
+    if (root.exists("lights") && root["lights"].exists("directional"))
+      parseDirectionalLights(lc, root["lights"]["directional"]);
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw std::runtime_error(nfex.what());
   } catch (const libconfig::SettingTypeException &nfex) {
