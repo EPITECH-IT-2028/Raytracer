@@ -11,6 +11,15 @@
 #include "Vector3D.hpp"
 #include "materials/Reflections.hpp"
 
+/**
+ * @brief Constructs a ParserConfigFile to load and validate a raytracer configuration file.
+ *
+ * Attempts to read the specified `.cfg` file using libconfig and prepares the parser with the provided plugin list.
+ * Throws a std::runtime_error if the file does not have a `.cfg` extension, cannot be read, or contains parse errors.
+ *
+ * @param filename Path to the configuration file (must end with `.cfg`).
+ * @param plugins List of plugin identifiers to be used by the parser.
+ */
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)
     : _plugins(plugins) {
@@ -58,6 +67,16 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
   }
 }
 
+/**
+ * @brief Parses and adds primitive shapes from the configuration to the scene.
+ *
+ * Reads sphere, cylinder, and plane definitions from the configuration root and creates corresponding shape objects using the factory. Each shape's properties such as position, size, color, and optional material (for spheres) are set based on the configuration. The created shapes are added to the provided ShapeComposite.
+ *
+ * @param sc The composite object to which parsed shapes are added.
+ * @param root The root configuration setting containing primitive definitions.
+ *
+ * @throws std::runtime_error If required settings are missing, have invalid types, or object creation fails.
+ */
 void Raytracer::ParserConfigFile::parsePrimitives(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {

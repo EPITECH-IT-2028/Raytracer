@@ -13,7 +13,12 @@ namespace Raytracer {
 
   class IMaterials {
     public:
-      virtual ~IMaterials() = default;
+      /**
+ * @brief Virtual destructor for the IMaterials interface.
+ *
+ * Ensures proper cleanup of resources in derived material classes.
+ */
+virtual ~IMaterials() = default;
 
       using RayColorFunc = std::function<Math::Vector3D(
           Raytracer::Ray &, const Raytracer::ShapeComposite &,

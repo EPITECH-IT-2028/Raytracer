@@ -13,9 +13,23 @@ namespace Raytracer {
   class Factory {
     public:
       Factory() = default;
-      ~Factory() = default;
+      /**
+ * @brief Destroys the Factory instance.
+ *
+ * Cleans up resources used by the Factory. Default destructor; no custom cleanup is performed.
+ */
+~Factory() = default;
 
       template <typename T>
+      /**
+       * @brief Registers a factory function for creating shape instances of type T.
+       *
+       * Associates the given name with a factory function that produces shared pointers to objects of type T, which must inherit from IShape. Throws a runtime error if T does not derive from IShape.
+       *
+       * @tparam T The shape type to register, must inherit from IShape.
+       * @param name The unique string identifier for the shape type.
+       * @param addShape A function that returns a raw pointer to a new instance of T.
+       */
       void registerShape(const std::string& name,
                          std::function<T*()> addShape) {
         if constexpr (std::is_base_of_v<IShape, T>) {
@@ -28,6 +42,15 @@ namespace Raytracer {
       }
 
       template <typename T>
+      /**
+       * @brief Registers a factory function for creating light objects of type T.
+       *
+       * Associates the given name with a factory function that constructs instances of T, which must inherit from ILight. Throws a runtime error if T does not derive from ILight.
+       *
+       * @tparam T The light type to register, must inherit from ILight.
+       * @param name The unique string identifier for the light type.
+       * @param addLight A function that returns a raw pointer to a new instance of T.
+       */
       void registerLight(const std::string& name,
                          std::function<T*()> addLight) {
         if constexpr (std::is_base_of_v<ILight, T>) {
@@ -40,6 +63,15 @@ namespace Raytracer {
       }
 
       template <typename T>
+      /**
+       * @brief Registers a material factory function under a given name.
+       *
+       * Associates the specified name with a factory function that creates instances of type T, which must inherit from IMaterials. Throws a runtime error if T does not derive from IMaterials.
+       *
+       * @tparam T The material type to register, must inherit from IMaterials.
+       * @param name The unique string identifier for the material type.
+       * @param addMaterial A function that returns a raw pointer to a new instance of T.
+       */
       void registerMaterial(const std::string& name,
                             std::function<T*()> addMaterial) {
         if constexpr (std::is_base_of_v<IMaterials, T>) {
@@ -52,6 +84,17 @@ namespace Raytracer {
       }
 
       template <typename T>
+      /**
+       * @brief Creates an instance of a registered shape, light, or material by type name.
+       *
+       * Looks up the factory function for the specified type name and returns a shared pointer to the created object.
+       * The template parameter T must inherit from IShape, ILight, or IMaterials. Throws a runtime error if the type is not registered.
+       *
+       * @param type The string identifier of the registered type to instantiate.
+       * @return std::shared_ptr<T> Shared pointer to the created object, or nullptr if T does not inherit from a supported base class.
+       *
+       * @throws std::runtime_error If the requested type is not registered.
+       */
       std::shared_ptr<T> create(const std::string& type) {
         // Check if T is a shape type
         if constexpr (std::is_base_of_v<IShape, T>) {

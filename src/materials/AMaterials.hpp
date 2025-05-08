@@ -6,8 +6,18 @@ namespace Raytracer {
 
   class AMaterials : public IMaterials {
     public:
-      AMaterials() = default;
-      virtual ~AMaterials() = default;
+      /**
+ * @brief Constructs an AMaterials object.
+ *
+ * Initializes the abstract material base class for use in ray tracing material computations.
+ */
+AMaterials() = default;
+      /**
+ * @brief Virtual destructor for the AMaterials abstract base class.
+ *
+ * Ensures proper cleanup of derived material classes through base class pointers.
+ */
+virtual ~AMaterials() = default;
 
       virtual Math::Vector3D computeMaterial(
           const Math::Vector3D &normal, const Math::Vector3D &viewDir,

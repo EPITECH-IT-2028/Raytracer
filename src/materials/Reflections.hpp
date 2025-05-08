@@ -6,8 +6,16 @@ namespace Raytracer {
 
   class Reflections : public AMaterials {
     public:
-      Reflections() = default;
-      ~Reflections() override = default;
+      /**
+ * @brief Constructs a Reflections material instance with default settings.
+ */
+Reflections() = default;
+      /**
+ * @brief Destroys the Reflections material instance.
+ *
+ * Ensures proper cleanup of resources when a Reflections object is deleted.
+ */
+~Reflections() override = default;
 
       Math::Vector3D computeMaterial(const Math::Vector3D &normal,
                                      const Math::Vector3D &viewDir,

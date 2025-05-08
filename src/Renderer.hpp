@@ -29,6 +29,11 @@ namespace Raytracer {
                               LightComposite &light, const Camera &cameraPos,
                               int depth);
 
+      /**
+       * @brief Returns the input file path used for scene initialization.
+       *
+       * @return Reference to the input file path string.
+       */
       const std::string &getInputFilePath() const {
         return _inputFilePath;
       }

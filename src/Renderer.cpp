@@ -6,6 +6,18 @@
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
 
+/**
+ * @brief Computes the color seen along a ray in the scene, supporting recursive material shading and sky gradient.
+ *
+ * Calculates the visible color for a given ray by determining intersections with scene shapes, applying lighting and material effects, and supporting recursive shading up to a specified depth. Returns a sky color gradient if no intersection occurs or the recursion depth limit is reached.
+ *
+ * @param r The ray for which to compute the color.
+ * @param shape The collection of scene shapes to test for intersections.
+ * @param light The scene's lighting configuration.
+ * @param cameraPos The camera's position and orientation.
+ * @param depth The remaining recursion depth for material effects.
+ * @return Math::Vector3D The computed color as a 3D vector.
+ */
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
                                              LightComposite &light,
@@ -39,6 +51,15 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
   return sky;
 }
 
+/**
+ * @brief Initializes the scene by parsing the configuration file and loading shapes and lights.
+ *
+ * Populates the provided camera, as well as the renderer's shape and light composites, using the configuration file and available plugins.
+ *
+ * @param camera Reference to the camera object to be initialized.
+ *
+ * @throws std::exception If parsing the configuration file fails.
+ */
 void Raytracer::Renderer::initScene(Camera &camera) {
   ParserConfigFile parser(_inputFilePath, _plugins);
   try {
@@ -49,6 +70,15 @@ void Raytracer::Renderer::initScene(Camera &camera) {
   }
 }
 
+/**
+ * @brief Renders the scene into the provided framebuffer using ray tracing.
+ *
+ * Fills the framebuffer with colors computed by tracing rays from the camera through each pixel. The rendering quality and pixel stepping are determined by the `isHighQuality` flag, with block rendering used for lower quality to improve performance.
+ *
+ * @param framebuffer Output vector to be filled with pixel colors.
+ * @param cam Camera used to generate rays for each pixel.
+ * @param isHighQuality If true, renders every pixel; otherwise, renders in larger blocks for faster, lower-quality output.
+ */
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
                                          Raytracer::Camera &cam,
                                          bool isHighQuality) {

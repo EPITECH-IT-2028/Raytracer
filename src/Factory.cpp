@@ -3,6 +3,13 @@
 #include <filesystem>
 #include <string>
 
+/**
+ * @brief Initializes and registers plugin factories from a list of shared library paths.
+ *
+ * Attempts to dynamically load each plugin file and register its factory function for shapes, lights, or materials, based on the available exported symbols. If a plugin does not provide any recognized factory function, it is ignored. Throws a runtime error if a plugin cannot be loaded.
+ *
+ * @param plugins List of file paths to plugin shared libraries.
+ */
 void Raytracer::Factory::initFactories(
     const std::vector<std::string> &plugins) {
   for (const auto &plugin : plugins) {
