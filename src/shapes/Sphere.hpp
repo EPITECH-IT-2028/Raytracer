@@ -35,7 +35,7 @@ namespace Raytracer {
         return _radius;
       };
 
-      void setRadius(double &radius) {
+      void setRadius(double radius) {
         if (radius <= 0)
           throw std::runtime_error("Radius must be superior to 0");
         _radius = radius;
