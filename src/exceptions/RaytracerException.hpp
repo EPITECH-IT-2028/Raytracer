@@ -16,7 +16,7 @@ namespace Raytracer {
   class ParseError : public RaytracerError {
     public:
       explicit ParseError(const std::string& message)
-          : RaytracerError("ConfigError: " + message) {
+          : RaytracerError("ParseError: " + message) {
       }
   };
 
@@ -31,7 +31,7 @@ namespace Raytracer {
       static std::string formatMessage(const std::string& msg,
                                        const std::string& file, int line_num) {
         std::ostringstream oss;
-        oss << "ParseError: " << msg;
+        oss << "ConfigError: " << msg;
         if (!file.empty()) {
           oss << " in file \'" << file << "\'";
           if (line_num != -1) {
