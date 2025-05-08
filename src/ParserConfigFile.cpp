@@ -186,12 +186,14 @@ void Raytracer::ParserConfigFile::parseAmbientLight(
   if (newAmbient == nullptr)
     throw std::runtime_error(
         "[ERROR] - Failed during creation of ambient light.");
+
   Math::Vector3D color = parseColor(colorInfo);
-  newAmbient->setColor(color);
   double intensity = ambientInfo.lookup("intensity");
   if (intensity < 0 || intensity > 1)
     throw std::runtime_error(
         "[ERROR] - Ambient light intensity must be in the range [0, 1].");
+
+  newAmbient->setColor(color);
   newAmbient->setIntensity(intensity);
   newAmbient->setType("AmbientLight");
   lc.addLight(newAmbient);
@@ -203,6 +205,7 @@ void Raytracer::ParserConfigFile::parseDiffuseLight(
   if (diffuseMultiplier < 0 || diffuseMultiplier > 1)
     throw std::runtime_error(
         "[ERROR] - Diffuse light multiplier must be in the range [0, 1].");
+
   lc.setDiffuse(diffuseMultiplier);
 }
 
@@ -216,6 +219,7 @@ void Raytracer::ParserConfigFile::parseDirectionalLights(
       throw std::runtime_error(
           "[ERROR] - Failed during creation of directional light.");
     Math::Vector3D direction = parseVector3D(directional);
+
     newDirectional->setDirection(direction.normalize());
     newDirectional->setType("DirectionalLight");
     lc.addLight(newDirectional);
