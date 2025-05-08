@@ -1,5 +1,5 @@
 #include <cstring>
-#include "Renderer.hpp"
+#include <iostream>
 #include "Scene.hpp"
 
 int main(int ac, char **av) {

@@ -1,34 +1,34 @@
 #include "ParserConfigFile.hpp"
 #include <libconfig.h++>
-#include <stdexcept>
+#include <set>
 #include <string>
 #include <tuple>
 #include "AmbientLight.hpp"
-#include "Cylinder.hpp"
 #include "Cone.hpp"
+#include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 #include "Vector3D.hpp"
+#include "exceptions/RaytracerException.hpp"
 
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)
     : _plugins(plugins) {
   if (!filename.ends_with(".cfg")) {
-    throw std::runtime_error(
-        "[ERROR] - Config file isn't in correct format (needs to be a *.cfg)");
+    throw ParseError(
+        "Config file isn't in correct format (needs to be a *.cfg)");
   }
   try {
-    _cfg.readFile(filename);
+    _cfg.readFile(filename.c_str());
   } catch (const libconfig::FileIOException &fioex) {
-    throw std::runtime_error("[ERROR] - Parsing error in file: " + filename);
+    throw ConfigError(
+        std::string("I/O error reading config file: ") + fioex.what(),
+        filename);
   } catch (const libconfig::ParseException &pex) {
-    std::string file = pex.getFile();
-    std::string errorMessage = "[ERROR] - Parse error in " + file + " ; " +
-                               std::to_string(pex.getLine()) + " - " +
-                               pex.getError();
-    throw std::runtime_error(errorMessage);
+    throw ConfigError(pex.getError(), pex.getFile() ? pex.getFile() : filename,
+                      pex.getLine());
   }
 }
 
@@ -53,9 +53,11 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
     camera.origin.z = posZ;
     camera.setFieldOfView(fov);
   } catch (const libconfig::SettingNotFoundException &nfex) {
-    throw std::runtime_error(nfex.what());
-  } catch (const libconfig::SettingTypeException &nfex) {
-    throw std::runtime_error(nfex.what());
+    throw ParseError(std::string("Camera config: ") + nfex.getPath() +
+                     " not found or invalid.");
+  } catch (const libconfig::SettingTypeException &stex) {
+    throw ParseError(std::string("Camera config: ") + stex.getPath() +
+                     " has incorrect type.");
   }
 }
 
@@ -64,8 +66,9 @@ std::tuple<float, float, float> Raytracer::ParserConfigFile::parseCoordinates(
   float x, y, z;
   if (!setting.lookupValue("x", x) || !setting.lookupValue("y", y) ||
       !setting.lookupValue("z", z))
-    throw libconfig::SettingNotFoundException(
-        "Missing one or more coordinate fields (x, y, z) for a point/vector.");
+    throw ParseError(
+        std::string("Missing coordinate field(s) (x, y, or z) in setting: ") +
+        setting.getPath());
   return {x, y, z};
 }
 
@@ -86,11 +89,13 @@ Math::Vector3D Raytracer::ParserConfigFile::parseColor(
   float r, g, b;
   if (!setting.lookupValue("r", r) || !setting.lookupValue("g", g) ||
       !setting.lookupValue("b", b))
-    throw libconfig::SettingNotFoundException(
-        "Missing one or more color fields (r, g, b).");
+    throw ParseError(
+        std::string("Missing color field(s) (r, g, or b) in setting: ") +
+        setting.getPath());
   if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1)
-    throw std::runtime_error(
-        "[ERROR] - Color values must be in the range [0, 1].");
+    throw ParseError(
+        std::string("Color values out of range [0, 1] in setting: ") +
+        setting.getPath());
   return {r, g, b};
 }
 
@@ -100,11 +105,18 @@ void Raytracer::ParserConfigFile::parseSpheres(
     const libconfig::Setting &sphere = spheresSetting[i];
     auto newSphere = _factory.create<Raytracer::Sphere>("sphere");
     if (!newSphere)
-      throw std::runtime_error("[ERROR] - Failed during creation of sphere.");
+      throw ParseError("Failed to create sphere object from factory.");
+    if (!sphere.exists("r"))
+      throw ParseError(std::string("Sphere radius not found at ") +
+                       sphere.getPath());
+    if (!sphere.exists("color"))
+      throw ParseError(std::string("Sphere color not found at ") +
+                       sphere.getPath());
 
     newSphere->setCenter(parsePoint3D(sphere));
     if (sphere.lookup("r").operator double() <= 0)
-      throw std::runtime_error("[ERROR] - Sphere radius must be positive.");
+      throw ParseError(std::string("Sphere radius must be positive at ") +
+                       sphere.getPath());
     newSphere->setRadius(sphere.lookup("r").operator double());
     newSphere->setColor(parseColor(sphere["color"]));
 
@@ -123,11 +135,21 @@ void Raytracer::ParserConfigFile::parseCylinders(
     const libconfig::Setting &cylinder = cylindersSetting[i];
     auto newCylinder = _factory.create<Raytracer::Cylinder>("cylinder");
     if (!newCylinder)
-      throw std::runtime_error("[ERROR] - Failed during creation of cylinder.");
+      throw ParseError("Failed to create cylinder object from factory.");
+    if (!cylinder.exists("r"))
+      throw ParseError(std::string("Cylinder radius not found at ") +
+                       cylinder.getPath());
+    if (!cylinder.exists("h"))
+      throw ParseError(std::string("Cylinder height not found at ") +
+                       cylinder.getPath());
+    if (!cylinder.exists("color"))
+      throw ParseError(std::string("Cylinder color not found at ") +
+                       cylinder.getPath());
 
     newCylinder->setCenter(parsePoint3D(cylinder));
     if (cylinder.lookup("r").operator double() <= 0)
-      throw std::runtime_error("[ERROR] - Cylinder radius must be positive.");
+      throw ParseError(std::string("Cylinder radius must be positive at ") +
+                       cylinder.getPath());
     newCylinder->setRadius(cylinder.lookup("r").operator double());
     newCylinder->setHeight(cylinder.lookup("h").operator double());
     newCylinder->setColor(parseColor(cylinder["color"]));
@@ -147,11 +169,21 @@ void Raytracer::ParserConfigFile::parseCones(
     const libconfig::Setting &cone = conesSetting[i];
     auto newCone = _factory.create<Raytracer::Cone>("cone");
     if (!newCone)
-      throw std::runtime_error("[ERROR] - Failed during creation of cone.");
+      throw ParseError("Failed to create cone object from factory.");
+    if (!cone.exists("r"))
+      throw ParseError(std::string("Cone radius not found at ") +
+                       cone.getPath());
+    if (!cone.exists("h"))
+      throw ParseError(std::string("Cone height not found at ") +
+                       cone.getPath());
+    if (!cone.exists("color"))
+      throw ParseError(std::string("Cone color not found at ") +
+                       cone.getPath());
 
     newCone->setCenter(parsePoint3D(cone));
     if (cone.lookup("r").operator double() <= 0)
-      throw std::runtime_error("[ERROR] - Cone radius must be positive.");
+      throw ParseError(std::string("Cone radius must be positive at ") +
+                       cone.getPath());
     newCone->setRadius(cone.lookup("r").operator double());
     newCone->setHeight(cone.lookup("h").operator double());
     newCone->setColor(parseColor(cone["color"]));
@@ -171,7 +203,16 @@ void Raytracer::ParserConfigFile::parsePlanes(
     const libconfig::Setting &plane = planesSettings[i];
     auto newPlane = _factory.create<Raytracer::Plane>("plane");
     if (!newPlane)
-      throw std::runtime_error("[ERROR] - Failed during creation of plane.");
+      throw ParseError("Failed to create plane object from factory.");
+    if (!plane.exists("normal"))
+      throw ParseError(std::string("Plane normal not found at ") +
+                       plane.getPath());
+    if (!plane.exists("offset"))
+      throw ParseError(std::string("Plane offset not found at ") +
+                       plane.getPath());
+    if (!plane.exists("color"))
+      throw ParseError(std::string("Plane color not found at ") +
+                       plane.getPath());
 
     Math::Vector3D normal = {0, 0, 0};
     std::string newNormal = plane.lookup("normal").operator std::string();
@@ -182,8 +223,8 @@ void Raytracer::ParserConfigFile::parsePlanes(
     else if (newNormal == "Z" || newNormal == "z")
       normal = {0, 0, 1};
     else
-      throw std::runtime_error(
-          "[ERROR] - Plane normal must be one of the following: X, Y or Z.");
+      throw ParseError(std::string("Plane normal must be X, Y, or Z at ") +
+                       plane.getPath());
     newPlane->setNormal(normal);
 
     /*
@@ -216,9 +257,11 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     if (root.exists("primitives") && root["primitives"].exists("planes"))
       parsePlanes(sc, root["primitives"]["planes"]);
   } catch (const libconfig::SettingNotFoundException &nfex) {
-    throw std::runtime_error(nfex.what());
-  } catch (const libconfig::SettingTypeException &nfex) {
-    throw std::runtime_error(nfex.what());
+    throw ParseError(std::string("Primitives config: ") + nfex.getPath() +
+                     " not found or invalid.");
+  } catch (const libconfig::SettingTypeException &stex) {
+    throw ParseError(std::string("Primitives config: ") + stex.getPath() +
+                     " has incorrect type.");
   }
 }
 
@@ -227,14 +270,14 @@ void Raytracer::ParserConfigFile::parseAmbientLight(
   const libconfig::Setting &colorInfo = ambientInfo["color"];
   auto newAmbient = _factory.create<AmbientLight>("ambient");
   if (newAmbient == nullptr)
-    throw std::runtime_error(
-        "[ERROR] - Failed during creation of ambient light.");
+    throw ParseError("Failed to create ambient light object from factory.");
 
   Math::Vector3D color = parseColor(colorInfo);
   double intensity = ambientInfo.lookup("intensity");
   if (intensity < 0 || intensity > 1)
-    throw std::runtime_error(
-        "[ERROR] - Ambient light intensity must be in the range [0, 1].");
+    throw ParseError(
+        std::string("Ambient light intensity out of range [0, 1] at ") +
+        ambientInfo.getPath());
 
   newAmbient->setColor(color);
   newAmbient->setIntensity(intensity);
@@ -246,8 +289,9 @@ void Raytracer::ParserConfigFile::parseDiffuseLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &diffuseInfo) {
   double diffuseMultiplier = diffuseInfo;
   if (diffuseMultiplier < 0 || diffuseMultiplier > 1)
-    throw std::runtime_error(
-        "[ERROR] - Diffuse light multiplier must be in the range [0, 1].");
+    throw ParseError(
+        std::string("Diffuse light multiplier out of range [0, 1] at ") +
+        diffuseInfo.getPath());
 
   lc.setDiffuse(diffuseMultiplier);
 }
@@ -259,8 +303,8 @@ void Raytracer::ParserConfigFile::parseDirectionalLights(
     auto newDirectional =
         _factory.create<Raytracer::DirectionalLight>("directional");
     if (newDirectional == nullptr)
-      throw std::runtime_error(
-          "[ERROR] - Failed during creation of directional light.");
+      throw ParseError(
+          "Failed to create directional light object from factory.");
     Math::Vector3D direction = parseVector3D(directional);
 
     newDirectional->setDirection(direction.normalize());
@@ -284,9 +328,11 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
     if (root.exists("lights") && root["lights"].exists("directional"))
       parseDirectionalLights(lc, root["lights"]["directional"]);
   } catch (const libconfig::SettingNotFoundException &nfex) {
-    throw std::runtime_error(nfex.what());
-  } catch (const libconfig::SettingTypeException &nfex) {
-    throw std::runtime_error(nfex.what());
+    throw ParseError(std::string("Lights config: ") + nfex.getPath() +
+                     " not found or invalid.");
+  } catch (const libconfig::SettingTypeException &stex) {
+    throw ParseError(std::string("Lights config: ") + stex.getPath() +
+                     " has incorrect type.");
   }
 }
 
@@ -299,21 +345,33 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
   // CAMERA
   try {
     parseCamera(camera, root);
-  } catch (const std::runtime_error &error) {
-    throw std::runtime_error(error.what());
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during camera parsing: ") +
+        cfgex.what());
   }
 
   // PRIMITIVES
   try {
     parsePrimitives(sc, root);
-  } catch (const std::runtime_error &error) {
-    throw std::runtime_error(error.what());
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during primitives parsing: ") +
+        cfgex.what());
   }
 
   // LIGHTS
   try {
     parseLights(lc, root);
-  } catch (const std::runtime_error &error) {
-    throw std::runtime_error(error.what());
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during lights parsing: ") +
+        cfgex.what());
   }
 }

@@ -31,7 +31,7 @@ void Raytracer::Renderer::initScene(Camera &camera) {
   try {
     parser.parseConfigFile(camera, _shapes, _lights);
   } catch (const std::exception &e) {
-    std::cerr << "Error parsing config file: " << e.what() << std::endl;
+    std::cerr << e.what() << std::endl;
     throw;
   }
 }
