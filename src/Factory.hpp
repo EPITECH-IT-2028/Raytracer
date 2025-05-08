@@ -68,6 +68,5 @@ namespace Raytracer {
           _shapeFactories;
       std::map<std::string, std::function<std::shared_ptr<ILight>()>>
           _lightFactories;
-      std::vector<void*> _pluginHandles;
   };
 }  // namespace Raytracer
