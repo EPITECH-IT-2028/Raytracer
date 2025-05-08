@@ -1,4 +1,5 @@
 #include "ParserConfigFile.hpp"
+#include <algorithm>
 #include <libconfig.h++>
 #include <string>
 #include <tuple>
@@ -333,8 +334,8 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
   try {
     // AMBIENT
     if (root.exists("lights") && root["lights"].exists("ambient")) {
-      static const std::unordered_set<std::string> allowedSettings = {"intensity",
-                                                               "color"};
+      static const std::unordered_set<std::string> allowedSettings = {
+          "intensity", "color"};
       checkSettings(root["lights"]["ambient"], allowedSettings);
       parseAmbientLight(lc, root["lights"]["ambient"]);
     }
@@ -345,8 +346,8 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
 
     // DIRECTIONALS
     if (root.exists("lights") && root["lights"].exists("directional")) {
-      static const std::unordered_set<std::string> allowedSettings = {"x", "y", "z",
-                                                               "color"};
+      static const std::unordered_set<std::string> allowedSettings = {
+          "x", "y", "z", "color"};
       checkSettings(root["lights"]["directional"], allowedSettings);
       parseDirectionalLights(lc, root["lights"]["directional"]);
     }
