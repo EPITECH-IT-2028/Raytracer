@@ -1,6 +1,5 @@
 #include "ParserConfigFile.hpp"
 #include <libconfig.h++>
-#include <set>
 #include <string>
 #include <tuple>
 #include "AmbientLight.hpp"

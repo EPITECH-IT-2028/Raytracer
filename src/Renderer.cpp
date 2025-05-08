@@ -1,10 +1,7 @@
 #include "Renderer.hpp"
 #include <dlfcn.h>
-#include <filesystem>
-#include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
-#include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
 
