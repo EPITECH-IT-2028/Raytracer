@@ -141,6 +141,30 @@ void Raytracer::ParserConfigFile::parseCylinders(
   }
 }
 
+void Raytracer::ParserConfigFile::parseCones(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &conesSetting) {
+  for (int i = 0; i < conesSetting.getLength(); i++) {
+    const libconfig::Setting &cone = conesSetting[i];
+    auto newCone = _factory.create<Raytracer::Cone>("cone");
+    if (!newCone)
+      throw std::runtime_error("[ERROR] - Failed during creation of cone.");
+
+    newCone->setCenter(parsePoint3D(cone));
+    if (cone.lookup("r").operator double() <= 0)
+      throw std::runtime_error("[ERROR] - Cone radius must be positive.");
+    newCone->setRadius(cone.lookup("r").operator double());
+    newCone->setHeight(cone.lookup("h").operator double());
+    newCone->setColor(parseColor(cone["color"]));
+
+    // Optional options
+    if (cone.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(cone["translate"]);
+      newCone->translate(translation);
+    }
+    sc.addShape(newCone);
+  }
+}
+
 void Raytracer::ParserConfigFile::parsePlanes(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &planesSettings) {
   for (int i = 0; i < planesSettings.getLength(); i++) {
@@ -174,35 +198,8 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       parseCylinders(sc, root["primitives"]["cylinders"]);
 
     // CONES
-    if (root.exists("primitives") && root["primitives"].exists("cones")) {
-      const libconfig::Setting &conesInfo = root["primitives"]["cones"];
-      for (int i = 0; i < conesInfo.getLength(); i++) {
-        const libconfig::Setting &cone = conesInfo[i];
-        const libconfig::Setting &colorInfo = cone["color"];
-        auto newCone = _factory.create<Raytracer::Cone>("cone");
-        if (newCone == nullptr) {
-          throw std::runtime_error(
-              "[ERROR] - Failed during creation of cone.");
-        }
-        double posX, posY, posZ, red, green, blue;
-        double radius, height;
-        cone.lookupValue("x", posX);
-        cone.lookupValue("y", posY);
-        cone.lookupValue("z", posZ);
-        cone.lookupValue("r", radius);
-        cone.lookupValue("h", height);
-        colorInfo.lookupValue("r", red);
-        colorInfo.lookupValue("g", green);
-        colorInfo.lookupValue("b", blue);
-        Math::Vector3D color(red, green, blue);
-        Math::Point3D center(posX, posY, posZ);
-        newCone->setColor(color);
-        newCone->setRadius(radius);
-        newCone->setHeight(height);
-        newCone->setCenter(center);
-        sc.addShape(newCone);
-      }
-    }
+    if (root.exists("primitives") && root["primitives"].exists("cones"))
+      parseCones(sc, root["primitives"]["cones"]);
 
     // PLANES
     if (root.exists("primitives") && root["primitives"].exists("planes"))
