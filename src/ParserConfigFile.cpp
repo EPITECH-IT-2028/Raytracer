@@ -185,6 +185,9 @@ void Raytracer::ParserConfigFile::parseCones(
       throw ParseError(std::string("Cone radius must be positive at ") +
                        cone.getPath());
     newCone->setRadius(cone.lookup("r").operator double());
+    if (cone.lookup("h").operator double() <= 0)
+      throw ParseError(std::string("Cone height must be positive at ") +
+                       cone.getPath());
     newCone->setHeight(cone.lookup("h").operator double());
     newCone->setColor(parseColor(cone["color"]));
 
