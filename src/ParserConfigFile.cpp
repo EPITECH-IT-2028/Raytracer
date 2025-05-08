@@ -333,16 +333,24 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
                                               const libconfig::Setting &root) {
   try {
     // AMBIENT
-    if (root.exists("lights") && root["lights"].exists("ambient"))
+    if (root.exists("lights") && root["lights"].exists("ambient")) {
+      static const std::vector<std::string> allowedSettings = {"intensity",
+                                                               "color"};
+      checkSettings(root["lights"]["ambient"], allowedSettings);
       parseAmbientLight(lc, root["lights"]["ambient"]);
+    }
 
     // DIFFUSE
     if (root.exists("lights") && root["lights"].exists("diffuse"))
       parseDiffuseLight(lc, root["lights"]["diffuse"]);
 
     // DIRECTIONALS
-    if (root.exists("lights") && root["lights"].exists("directional"))
+    if (root.exists("lights") && root["lights"].exists("directional")) {
+      static const std::vector<std::string> allowedSettings = {"x", "y", "z",
+                                                               "color"};
+      checkSettings(root["lights"]["directional"], allowedSettings);
       parseDirectionalLights(lc, root["lights"]["directional"]);
+    }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw ParseError(std::string("Lights config: ") + nfex.getPath() +
                      " not found or invalid.");
