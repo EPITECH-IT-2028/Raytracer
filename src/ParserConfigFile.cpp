@@ -242,20 +242,36 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {
     // SPHERES
-    if (root.exists("primitives") && root["primitives"].exists("spheres"))
+    if (root.exists("primitives") && root["primitives"].exists("spheres")) {
+      static const std::vector<std::string> allowedSettings = {
+          "x", "y", "z", "r", "color", "translate"};
+      checkSettings(root["primitives"]["spheres"], allowedSettings);
       parseSpheres(sc, root["primitives"]["spheres"]);
+    }
 
     // CYLINDERS
-    if (root.exists("primitives") && root["primitives"].exists("cylinders"))
+    if (root.exists("primitives") && root["primitives"].exists("cylinders")) {
+      static const std::vector<std::string> allowedSettings = {
+          "x", "y", "z", "r", "h", "color", "translate"};
+      checkSettings(root["primitives"]["cylinders"], allowedSettings);
       parseCylinders(sc, root["primitives"]["cylinders"]);
+    }
 
     // CONES
-    if (root.exists("primitives") && root["primitives"].exists("cones"))
+    if (root.exists("primitives") && root["primitives"].exists("cones")) {
+      static const std::vector<std::string> allowedSettings = {
+          "x", "y", "z", "r", "h", "color", "translate"};
+      checkSettings(root["primitives"]["cones"], allowedSettings);
       parseCones(sc, root["primitives"]["cones"]);
+    }
 
     // PLANES
-    if (root.exists("primitives") && root["primitives"].exists("planes"))
+    if (root.exists("primitives") && root["primitives"].exists("planes")) {
+      static const std::vector<std::string> allowedSettings = {
+          "normal", "offset", "color"};
+      checkSettings(root["primitives"]["planes"], allowedSettings);
       parsePlanes(sc, root["primitives"]["planes"]);
+    }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw ParseError(std::string("Primitives config: ") + nfex.getPath() +
                      " not found or invalid.");
@@ -333,6 +349,39 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
   } catch (const libconfig::SettingTypeException &stex) {
     throw ParseError(std::string("Lights config: ") + stex.getPath() +
                      " has incorrect type.");
+  }
+}
+
+void Raytracer::ParserConfigFile::checkSettings(
+    const libconfig::Setting &settings,
+    const std::vector<std::string> &allowedSettings) const {
+  if (settings.isList() || settings.isArray()) {
+    for (int i = 0; i < settings.getLength(); i++) {
+      const libconfig::Setting &object = settings[i];
+      if (object.isGroup()) {
+        for (int j = 0; j < object.getLength(); j++) {
+          const libconfig::Setting &setting = object[j];
+          std::string settingName = setting.getName();
+          if (std::find(allowedSettings.begin(), allowedSettings.end(),
+                        settingName) == allowedSettings.end()) {
+            throw ParseError(std::string("Unknown setting '") + settingName +
+                             "' found in object configuration at " +
+                             setting.getPath());
+          }
+        }
+      }
+    }
+  } else if (settings.isGroup()) {
+    for (int j = 0; j < settings.getLength(); j++) {
+      const libconfig::Setting &setting = settings[j];
+      std::string settingName = setting.getName();
+      if (std::find(allowedSettings.begin(), allowedSettings.end(),
+                    settingName) == allowedSettings.end()) {
+        throw ParseError(std::string("Unknown setting '") + settingName +
+                         "' found in object configuration at " +
+                         setting.getPath());
+      }
+    }
   }
 }
 
