@@ -12,7 +12,7 @@ Math::Vector3D Raytracer::DirectionalLight::computeLighting(
   auto [shadow, _, shadowShape] = shapes.hits(shadowRay);
   float lightIntensity;
 
-  if (shadow > 0.0) {
+  if (shadow > 0.0 && shadowShape != nullptr) {
     lightIntensity = 0.1;
   } else {
     lightIntensity = 0.1 + 0.9 * std::max(0.0, normal.dot(-getDirection()));
