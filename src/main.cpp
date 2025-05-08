@@ -17,6 +17,7 @@ int main(int ac, char **av) {
     Raytracer::Scene scene(800, 600, av[1]);
     scene.render();
   } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
     return 84;
   } catch (...) {
     std::cerr << "[ERROR] - Unknown error occurred." << std::endl;

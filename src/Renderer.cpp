@@ -25,12 +25,7 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
 
 void Raytracer::Renderer::initScene(Camera &camera) {
   ParserConfigFile parser(_inputFilePath, _plugins);
-  try {
-    parser.parseConfigFile(camera, _shapes, _lights);
-  } catch (const std::exception &e) {
-    std::cerr << e.what() << std::endl;
-    throw;
-  }
+  parser.parseConfigFile(camera, _shapes, _lights);
 }
 
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
