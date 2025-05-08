@@ -12,19 +12,19 @@ namespace Raytracer {
     public:
       Cone(const Math::Point3D &center, double radius, double height,
            const Math::Vector3D &normal, const Math::Vector3D &color)
-          : _center(center),
-            _normal(normal),
+          : _normal(normal),
             _radius(radius),
-            _height(height),
-            _color(color) {
+            _height(height) {
+        _center = center;
+        _color = color;
       }
 
       Cone()
-          : _center(Math::Point3D(0, 0, 0)),
-            _normal(Math::Vector3D(0, 1, 0)),
+          : _normal(Math::Vector3D(0, 1, 0)),
             _radius(1.0),
-            _height(2.0),
-            _color(Math::Vector3D(0, 0, 1)) {
+            _height(2.0) {
+        _center = Math::Point3D(0, 0, 0);
+        _color = Math::Vector3D(1, 0, 0);
       }
 
       ~Cone() = default;
@@ -32,20 +32,16 @@ namespace Raytracer {
       std::tuple<double, Math::Vector3D, const IShape *> hits(
           const Raytracer::Ray &ray) const override;
 
-      Math::Vector3D getNormal(const Math::Point3D &point) const override {
-        Math::Vector3D oc = point - _center;
-        double oc_dot_normal = oc.dot(_normal);
-        Math::Vector3D dir_perp = oc - (_normal * oc_dot_normal);
-        return dir_perp.normalize();
-      }
+      Math::Vector3D getNormal(const Math::Point3D &point) const override;
+    
+    void setNormal(const Math::Vector3D &normal) { _normal = normal; }
+    void setRadius(double radius) { _radius = radius; }
+    void setHeight(double height) { _height = height; }
 
-    private:
-      Math::Point3D _center;
-      Math::Vector3D _normal;
-      double _radius;
-      double _height;
-      double _angle;
-      Math::Vector3D _color;
-  };
+private:
+    Math::Vector3D _normal;
+    double _radius;
+    double _height;
+};
 
 }  // namespace Raytracer

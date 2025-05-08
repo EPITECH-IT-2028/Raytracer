@@ -42,6 +42,10 @@ add_library(cylinder SHARED
   src/shapes/Cylinder.cpp
 )
 
+add_library(cone SHARED
+  src/shapes/Cone.cpp
+)
+
 add_library(directional SHARED
   src/lights/DirectionalLight.cpp
 )
@@ -59,6 +63,8 @@ set_target_properties(sphere PROPERTIES PREFIX "")
 set_target_properties(plane PROPERTIES PREFIX "")
 
 set_target_properties(cylinder PROPERTIES PREFIX "")
+
+set_target_properties(cone PROPERTIES PREFIX "")
 
 set_target_properties(directional PROPERTIES PREFIX "")
 
@@ -103,6 +109,15 @@ target_include_directories(cylinder PUBLIC
   ${CMAKE_SOURCE_DIR}/src/shapes
   ${CMAKE_SOURCE_DIR}/src/lights
   ${CMAKE_SOURCE_DIR}/src/materials
+)
+
+target_link_libraries(cone PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(cone PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
 )
 
 target_link_libraries(directional PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -151,6 +166,7 @@ if(APPLE)
   set_target_properties(sphere PROPERTIES SUFFIX ".so")
   set_target_properties(plane PROPERTIES SUFFIX ".so")
   set_target_properties(cylinder PROPERTIES SUFFIX ".so")
+  set_target_properties(cone PROPERTIES SUFFIX ".so")
   set_target_properties(directional PROPERTIES SUFFIX ".so")
   set_target_properties(ambient PROPERTIES SUFFIX ".so")
   set_target_properties(reflection PROPERTIES SUFFIX ".so")
@@ -164,6 +180,7 @@ execute_process(
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/sphere.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/plane.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/cylinder.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/cone.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/directional.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/ambient.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/reflection.so ${PROJECT_SOURCE_DIR}/plugins/
