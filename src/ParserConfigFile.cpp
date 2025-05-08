@@ -174,7 +174,7 @@ void Raytracer::ParserConfigFile::parsePlanes(
       throw std::runtime_error("[ERROR] - Failed during creation of plane.");
 
     Math::Vector3D normal = {0, 0, 0};
-    std::string newNormal = plane.lookup("string").operator std::string();
+    std::string newNormal = plane.lookup("normal").operator std::string();
     if (newNormal == "X" || newNormal == "x")
       normal = {1, 0, 0};
     else if (newNormal == "Y" || newNormal == "y")
@@ -188,7 +188,7 @@ void Raytracer::ParserConfigFile::parsePlanes(
 
     /*
     Offset not supported yet in the plane class
-    float center = plane.lookup("double").operator double();
+    float center = plane.lookup("offset").operator double();
     Math::Point3D newCenter = {0, center, 0};
     newPlane->setCenter({0, center, 0});
     */
