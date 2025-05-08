@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <functional>
 #include "Camera.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
@@ -10,6 +10,7 @@ namespace Raytracer {
   class ShapeComposite;
   class LightComposite;
   class Camera;
+  class Ray;
 
   class IMaterials {
     public:
