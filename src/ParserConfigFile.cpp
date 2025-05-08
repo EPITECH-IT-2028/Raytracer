@@ -207,9 +207,9 @@ void Raytracer::ParserConfigFile::parsePlanes(
     if (!plane.exists("normal"))
       throw ParseError(std::string("Plane normal not found at ") +
                        plane.getPath());
-    if (!plane.exists("offset"))
-      throw ParseError(std::string("Plane offset not found at ") +
-                       plane.getPath());
+    // if (!plane.exists("offset"))
+    //   throw ParseError(std::string("Plane offset not found at ") +
+    //                    plane.getPath());
     if (!plane.exists("color"))
       throw ParseError(std::string("Plane color not found at ") +
                        plane.getPath());
