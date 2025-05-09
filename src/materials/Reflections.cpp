@@ -1,4 +1,5 @@
 #include "Reflections.hpp"
+#include <iostream>
 #include "Vector3D.hpp"
 
 Math::Vector3D Raytracer::Reflections::computeMaterial(

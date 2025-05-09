@@ -50,5 +50,6 @@ namespace Raytracer {
       ShapeComposite _shapes;
       LightComposite _lights;
       std::vector<std::string> _plugins;
+      int _maxDepth = 5;
   };
 }  // namespace Raytracer

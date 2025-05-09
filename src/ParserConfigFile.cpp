@@ -4,14 +4,14 @@
 #include <string>
 #include <tuple>
 #include "AmbientLight.hpp"
-#include "Cylinder.hpp"
 #include "Cone.hpp"
+#include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
+#include "Reflections.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 #include "Vector3D.hpp"
-#include "materials/Reflections.hpp"
 
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)

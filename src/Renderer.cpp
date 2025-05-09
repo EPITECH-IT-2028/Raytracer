@@ -1,5 +1,6 @@
 #include "Renderer.hpp"
 #include <dlfcn.h>
+#include <iostream>
 #include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
@@ -64,7 +65,7 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
           cam.getPixelDeltaV() * static_cast<float>(j);
       Math::Vector3D ray_direction = (pixel_center - cam.origin).normalize();
       Raytracer::Ray ray(cam.origin, ray_direction);
-      Math::Vector3D color = rayColor(ray, _shapes, _lights, cam, 5);
+      Math::Vector3D color = rayColor(ray, _shapes, _lights, cam, _maxDepth);
       sf::Color pixel_color(static_cast<sf::Uint8>(color.x * 255),
                             static_cast<sf::Uint8>(color.y * 255),
                             static_cast<sf::Uint8>(color.z * 255));
