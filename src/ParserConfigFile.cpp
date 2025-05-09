@@ -200,9 +200,18 @@ void Raytracer::ParserConfigFile::parsePlanes(
     if (!newPlane)
       throw std::runtime_error("[ERROR] - Failed during creation of plane.");
 
-    newPlane->setCenter(parsePoint3D(plane));
-    newPlane->setNormal(parseVector3D(plane["normal"]));
-    newPlane->setColor(parseColor(plane["color"]));
+    Math::Vector3D normal = {0, 0, 0};
+    std::string newNormal = plane.lookup("normal").operator std::string();
+    if (newNormal == "X" || newNormal == "x")
+      normal = {1, 0, 0};
+    else if (newNormal == "Y" || newNormal == "y")
+      normal = {0, 1, 0};
+    else if (newNormal == "Z" || newNormal == "z")
+      normal = {0, 0, 1};
+    else
+      throw std::runtime_error(
+          "[ERROR] - Plane normal must be one of the following: X, Y or Z.");
+    newPlane->setNormal(normal);
 
     // Optional options
     if (plane.exists("translate")) {
@@ -218,6 +227,13 @@ void Raytracer::ParserConfigFile::parsePlanes(
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
     }
+    /*
+    Offset not supported yet in the plane class
+    float center = plane.lookup("offset").operator double();
+    Math::Point3D newCenter = {0, center, 0};
+    newPlane->setCenter({0, center, 0});
+    */
+    newPlane->setColor(parseColor(plane["color"]));
     sc.addShape(newPlane);
   }
 }

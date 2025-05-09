@@ -41,5 +41,6 @@ private:
   void changeCamQuality();
   bool _cameraMoved = false;
   const std::chrono::duration<float> _qualityUpdateDelay{0.5f};
+  bool _userQuit = false;
   };
 }  // namespace Raytracer

@@ -74,6 +74,8 @@ void Raytracer::Scene::handleInput() {
     _camera.rotatePitch(rotateSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     _camera.rotatePitch(-rotateSpeed);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    _userQuit = true;
 }
 
 void Raytracer::Scene::changeCamQuality() {
@@ -119,6 +121,8 @@ void Raytracer::Scene::render() {
     }
     renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
     handleInput();
+    if (_userQuit)
+      return;
     changeCamQuality();
     std::fill(_framebuffer.begin(), _framebuffer.end(), sf::Color::White);
     renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
