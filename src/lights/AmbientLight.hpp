@@ -9,10 +9,9 @@ namespace Raytracer {
       AmbientLight() = default;
       ~AmbientLight() = default;
 
-      Math::Vector3D computeLighting(const Math::Vector3D &normal,
-                                     const Math::Vector3D &objectColor,
-                                     const Math::Point3D &hitPoint,
-                                     const Math::Vector3D &viewDir,
-                                     const ShapeComposite &shapes) override;
+      Math::Vector3D computeLighting(
+          const Math::Vector3D &normal, const Math::Vector3D &objectColor,
+          const Math::Point3D &hitPoint, const Math::Vector3D &viewDir,
+          const ShapeComposite &shapes) const override;
   };
 }  // namespace Raytracer

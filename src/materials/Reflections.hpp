@@ -14,7 +14,7 @@ namespace Raytracer {
                                      const Math::Point3D &hitPoint,
                                      const Math::Vector3D &color,
                                      const Raytracer::ShapeComposite &shapes,
-                                     Raytracer::LightComposite &lights,
+                                     const Raytracer::LightComposite &lights,
                                      const Raytracer::Camera &camera, int depth,
                                      RayColorFunc rayColorFunc) const override;
   };

@@ -5,9 +5,9 @@
 Math::Vector3D Raytracer::Reflections::computeMaterial(
     const Math::Vector3D &normal, const Math::Vector3D &viewDir,
     const Math::Point3D &hitPoint, const Math::Vector3D &color,
-    const Raytracer::ShapeComposite &shapes, Raytracer::LightComposite &lights,
-    const Raytracer::Camera &camera, int depth,
-    RayColorFunc rayColorFunc) const {
+    const Raytracer::ShapeComposite &shapes,
+    const Raytracer::LightComposite &lights, const Raytracer::Camera &camera,
+    int depth, RayColorFunc rayColorFunc) const {
   if (depth <= 0) {
     return color;
   }

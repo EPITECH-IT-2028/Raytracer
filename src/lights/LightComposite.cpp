@@ -12,7 +12,7 @@ const Math::Vector3D Raytracer::LightComposite::reflect(
 Math::Vector3D Raytracer::LightComposite::computeLighting(
     const Math::Vector3D &normal, const Math::Vector3D &objectColor,
     const Math::Point3D &hitPoint, const Math::Vector3D &viewDir,
-    const ShapeComposite &shapes) {
+    const ShapeComposite &shapes) const {
   Math::Vector3D result(0, 0, 0);
   std::shared_ptr<ILight> ambientLight;
   std::shared_ptr<ILight> directionalLight;

@@ -1,5 +1,6 @@
 #include "Sphere.hpp"
 #include <cmath>
+#include <iostream>
 #include "IShape.hpp"
 #include "Vector3D.hpp"
 

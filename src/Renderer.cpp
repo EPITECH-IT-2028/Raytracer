@@ -9,7 +9,7 @@
 
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
-                                             LightComposite &light,
+                                             const LightComposite &light,
                                              const Camera &cameraPos,
                                              int depth) {
   Math::Vector3D unit_direction = r.direction.normalize();
@@ -32,7 +32,7 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
           normal, viewDir, hitPoint, computeColor, shape, light, cameraPos,
           depth - 1,
           [this](Raytracer::Ray &r, const Raytracer::ShapeComposite &s,
-                 Raytracer::LightComposite &l, const Raytracer::Camera &c,
+                 const Raytracer::LightComposite &l, const Raytracer::Camera &c,
                  int d) { return this->rayColor(r, s, l, c, d); });
     }
     return computeColor;

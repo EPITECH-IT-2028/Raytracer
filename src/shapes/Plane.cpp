@@ -1,4 +1,5 @@
 #include "Plane.hpp"
+#include <iostream>
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Plane::hits(const Raytracer::Ray &ray) const {

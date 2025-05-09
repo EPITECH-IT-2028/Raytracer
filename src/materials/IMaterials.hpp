@@ -26,7 +26,7 @@ namespace Raytracer {
        */
       using RayColorFunc = std::function<Math::Vector3D(
           Raytracer::Ray &, const Raytracer::ShapeComposite &,
-          Raytracer::LightComposite &, const Raytracer::Camera &, int)>;
+          const Raytracer::LightComposite &, const Raytracer::Camera &, int)>;
 
       /*
        * @brief Computes the color of a material at a given hit point.
@@ -45,7 +45,8 @@ namespace Raytracer {
           const Math::Vector3D &normal, const Math::Vector3D &viewDir,
           const Math::Point3D &hitPoint, const Math::Vector3D &color,
           const Raytracer::ShapeComposite &shapes,
-          Raytracer::LightComposite &lights, const Raytracer::Camera &camera,
-          int depth, RayColorFunc rayColorFunc) const = 0;
+          const Raytracer::LightComposite &lights,
+          const Raytracer::Camera &camera, int depth,
+          RayColorFunc rayColorFunc) const = 0;
   };
 }  // namespace Raytracer
