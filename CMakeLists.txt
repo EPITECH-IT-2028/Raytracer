@@ -327,6 +327,7 @@ if(BUILD_TESTING)
          ${CMAKE_SOURCE_DIR}/src/maths
          ${CMAKE_SOURCE_DIR}/src/shapes
          ${CMAKE_SOURCE_DIR}/src/lights
+         ${CMAKE_SOURCE_DIR}/src/materials
      )
 
      target_link_libraries(run_parser_tests PRIVATE
