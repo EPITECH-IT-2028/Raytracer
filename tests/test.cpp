@@ -79,3 +79,13 @@ TEST_F(ParserConfigFileTest, TestParseLights) {
 
   EXPECT_EQ(lc.getLights().size(), 2);
 }
+
+TEST_F(ParserConfigFileTest, TestParseInvalidConfig) {
+  _cfgFile = "tests/test_scenes/invalid.cfg";
+  Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
+  Raytracer::Camera camera;
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+}
