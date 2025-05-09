@@ -6,8 +6,11 @@ class ParserConfigFileTest : public ::testing::Test {
   protected:
     void SetUp() override {
       // _cfgFile = "tests/test_scenes/camera_setup.cfg";
-      _plugins = {"plugins/sphere.so", "plugins/cylinder.so",
-                  "plugins/cone.so", "plugins/plane.so"};
+      _plugins = {
+          "plugins/ambient.so",     "plugins/cone.so",  "plugins/cylinder.so",
+          "plugins/directional.so", "plugins/plane.so", "plugins/reflection.so",
+          "plugins/sphere.so",
+      };
     }
 
     void TearDown() override {
@@ -56,4 +59,23 @@ TEST_F(ParserConfigFileTest, TestParsePrimitives) {
   }
 
   EXPECT_EQ(sc.getShapes().size(), 4);
+}
+
+TEST_F(ParserConfigFileTest, TestParseLights) {
+  _cfgFile = "tests/test_scenes/parseLights.cfg";
+  Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
+  Raytracer::Camera camera;
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+
+  try {
+    parser.parseConfigFile(camera, sc, lc);
+  } catch (const Raytracer::ParseError &e) {
+    FAIL() << "Failed to parse lights configuration: " << e.what();
+  } catch (const Raytracer::ConfigError &e) {
+    FAIL() << "Failed to parse lights configuration (ConfigError): "
+           << e.what();
+  }
+
+  EXPECT_EQ(lc.getLights().size(), 2);
 }
