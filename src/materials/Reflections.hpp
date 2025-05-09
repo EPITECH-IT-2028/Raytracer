@@ -4,9 +4,14 @@
 
 namespace Raytracer {
 
+  /*
+   * @brief Reflections class
+   * This class is used to compute the reflection of light on a surface.
+   */
   class Reflections : public AMaterials {
     public:
       Reflections() = default;
+
       ~Reflections() override = default;
 
       Math::Vector3D computeMaterial(const Math::Vector3D &normal,

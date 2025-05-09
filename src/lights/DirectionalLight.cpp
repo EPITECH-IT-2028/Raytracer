@@ -1,4 +1,5 @@
 #include "DirectionalLight.hpp"
+#include <algorithm>
 #include <iostream>
 #include "Vector3D.hpp"
 
