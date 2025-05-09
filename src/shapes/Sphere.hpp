@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stdexcept>
 #include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
@@ -36,8 +35,6 @@ namespace Raytracer {
       };
 
       void setRadius(double radius) {
-        if (radius <= 0)
-          throw std::runtime_error("Radius must be superior to 0");
         _radius = radius;
       }
 
