@@ -1,5 +1,6 @@
 compile_commands.json
 raytracer
+run_parser_tests
 output.ppm
 vgcore*
 .build
