@@ -207,9 +207,9 @@ void Raytracer::ParserConfigFile::parsePlanes(
     if (!plane.exists("normal"))
       throw ParseError(std::string("Plane normal not found at ") +
                        plane.getPath());
-    // if (!plane.exists("offset"))
-    //   throw ParseError(std::string("Plane offset not found at ") +
-    //                    plane.getPath());
+    if (!plane.exists("offset"))
+      throw ParseError(std::string("Plane offset not found at ") +
+                       plane.getPath());
     if (!plane.exists("color"))
       throw ParseError(std::string("Plane color not found at ") +
                        plane.getPath());
@@ -227,12 +227,9 @@ void Raytracer::ParserConfigFile::parsePlanes(
                        plane.getPath());
     newPlane->setNormal(normal);
 
-    /*
-    Offset not supported yet in the plane class
     float center = plane.lookup("offset").operator double();
     Math::Point3D newCenter = {0, center, 0};
     newPlane->setCenter({0, center, 0});
-    */
     newPlane->setColor(parseColor(plane["color"]));
     sc.addShape(newPlane);
   }
