@@ -101,7 +101,7 @@ void Raytracer::Scene::parsePlugins() {
       continue;
     void *handler = dlopen(entry.path().c_str(), RTLD_LAZY);
     if (!handler) {
-      std::cerr << "[ERROR] - Failed to load plugin: " << entry.path()
+      std::cerr << "[WARNING] - Failed to load plugin: " << entry.path()
                 << std::endl;
       continue;
     }

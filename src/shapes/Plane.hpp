@@ -30,8 +30,6 @@ namespace Raytracer {
 
     private:
       Math::Vector3D _normal;
-      Math::Vector3D _color;
-      Math::Point3D _center;
   };
 
 }  // namespace Raytracer

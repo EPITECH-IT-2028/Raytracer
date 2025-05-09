@@ -9,9 +9,8 @@ void Raytracer::Factory::initFactories(
     std::string pluginName = plugin.substr(plugin.find_last_of('/') + 1);
     pluginName = pluginName.substr(0, pluginName.find_last_of('.'));
     void *handle = dlopen(plugin.c_str(), RTLD_LAZY);
-    if (!handle) {
-      throw std::runtime_error("Failed to load plugin: " + plugin);
-    }
+    if (!handle)
+      continue;
     using AddShapeFunc = Raytracer::IShape *(*)();
     AddShapeFunc addShape = (AddShapeFunc)dlsym(handle, "addShape");
     if (addShape) {
