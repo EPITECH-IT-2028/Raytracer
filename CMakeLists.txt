@@ -366,6 +366,19 @@ if(BUILD_TESTING)
      # Add a custom target to run the tests
      find_program(GCOVR_EXECUTABLE NAMES gcovr)
      if(GCOVR_EXECUTABLE)
+         set(COVERAGE_DEPENDENCIES
+             raytracer
+             math_objects
+             sphere
+             plane
+             cylinder
+             cone
+             directional
+             ambient
+             reflection
+             run_parser_tests
+         )
+
          add_custom_target(coverage
              COMMAND $<TARGET_FILE:run_parser_tests>
              COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_html
@@ -381,7 +394,7 @@ if(BUILD_TESTING)
                      ${CMAKE_BINARY_DIR}
              WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
              COMMENT "Generating code coverage report in .build/coverage_html/index.html. Run 'open .build/coverage_html/index.html' to view."
-             DEPENDS run_parser_tests
+             DEPENDS ${COVERAGE_DEPENDENCIES}
          )
      else()
          message(WARNING "gcovr not found. Coverage target 'coverage' will not be available. Please install gcovr (e.g., sudo dnf install gcovr).")
