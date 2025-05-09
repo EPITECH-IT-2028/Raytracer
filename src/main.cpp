@@ -1,5 +1,5 @@
 #include <cstring>
-#include "Renderer.hpp"
+#include <iostream>
 #include "Scene.hpp"
 
 int main(int ac, char **av) {
@@ -12,7 +12,16 @@ int main(int ac, char **av) {
     std::cout << helpMessage << std::endl;
     return 0;
   }
-  Raytracer::Scene scene(800, 600, av[1]);
-  scene.render();
+
+  try {
+    Raytracer::Scene scene(800, 600, av[1]);
+    scene.render();
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
+    return 84;
+  } catch (...) {
+    std::cerr << "[ERROR] - Unknown error occurred." << std::endl;
+    return 84;
+  }
   return 0;
 }

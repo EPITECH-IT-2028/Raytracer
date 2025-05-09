@@ -1,10 +1,7 @@
 #include "Renderer.hpp"
 #include <dlfcn.h>
-#include <filesystem>
-#include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
-#include "Plane.hpp"
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
 
@@ -28,12 +25,7 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
 
 void Raytracer::Renderer::initScene(Camera &camera) {
   ParserConfigFile parser(_inputFilePath, _plugins);
-  try {
-    parser.parseConfigFile(camera, _shapes, _lights);
-  } catch (const std::exception &e) {
-    std::cerr << "Error parsing config file: " << e.what() << std::endl;
-    throw;
-  }
+  parser.parseConfigFile(camera, _shapes, _lights);
 }
 
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
