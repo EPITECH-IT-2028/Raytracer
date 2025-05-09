@@ -12,7 +12,8 @@ namespace Raytracer {
       virtual Math::Vector3D computeLighting(
           const Math::Vector3D &normal, const Math::Vector3D &objectColor,
           const Math::Point3D &hitPoint, const Math::Vector3D &viewDir,
-          const ShapeComposite &shapes) override = 0;
+          const ShapeComposite &shapes) const override = 0;
+
       void setIntensity(double intensity) {
         _intensity = intensity;
       };

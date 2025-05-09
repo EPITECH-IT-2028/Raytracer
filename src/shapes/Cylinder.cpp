@@ -1,5 +1,6 @@
 #include "Cylinder.hpp"
 #include <cmath>
+#include <iostream>
 #include "Vector3D.hpp"
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
@@ -45,7 +46,8 @@ Raytracer::Cylinder::hits(const Raytracer::Ray &ray) const {
   return {0.0, _color, this};
 }
 
-Math::Vector3D Raytracer::Cylinder::getNormal(const Math::Point3D &point) const {
+Math::Vector3D Raytracer::Cylinder::getNormal(
+    const Math::Point3D &point) const {
   Math::Vector3D oc = point - _center;
 
   double oc_dot_normal = oc.dot(_normal);

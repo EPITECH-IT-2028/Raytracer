@@ -24,27 +24,39 @@ namespace Raytracer {
       const Math::Point3D &getCenter() const override {
         return _center;
       }
+
       const Math::Vector3D &getColor() const override {
         return _color;
       }
+
       double getShininess() const override {
         return _shininess;
+      }
+
+      std::shared_ptr<IMaterials> getMaterial() const override {
+        return _material;
       }
 
       void setCenter(const Math::Point3D &center) override {
         _center = center;
       }
+
       void setColor(const Math::Vector3D &color) override {
         _color = color;
       }
+
       void setShininess(double shininess) override {
         _shininess = shininess;
+      }
+      void setMaterial(std::shared_ptr<IMaterials> material) override {
+        _material = material;
       }
 
     protected:
       Math::Point3D _center;
       Math::Vector3D _color;
       double _shininess = 32.;
+      std::shared_ptr<IMaterials> _material;
   };
 
 }  // namespace Raytracer

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <iostream>
+#include <memory>
 #include "Ray.hpp"
+#include "materials/IMaterials.hpp"
 
 namespace Raytracer {
 
@@ -19,10 +20,12 @@ namespace Raytracer {
       virtual const Math::Point3D &getCenter() const = 0;
       virtual const Math::Vector3D &getColor() const = 0;
       virtual double getShininess() const = 0;
+      virtual std::shared_ptr<IMaterials> getMaterial() const = 0;
 
       virtual void setCenter(const Math::Point3D &center) = 0;
       virtual void setColor(const Math::Vector3D &color) = 0;
       virtual void setShininess(double shininess) = 0;
+      virtual void setMaterial(std::shared_ptr<IMaterials> material) = 0;
   };
 
 }  // namespace Raytracer

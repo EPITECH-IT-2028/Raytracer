@@ -1,11 +1,12 @@
 #include "AmbientLight.hpp"
+#include <iostream>
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 
 Math::Vector3D Raytracer::AmbientLight::computeLighting(
     const Math::Vector3D &normal, const Math::Vector3D &objectColor,
     const Math::Point3D &hitPoint, const Math::Vector3D &viewDir,
-    const ShapeComposite &shapes) {
+    const ShapeComposite &shapes) const {
   (void)normal;
   (void)viewDir;
   (void)hitPoint;

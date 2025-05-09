@@ -18,6 +18,7 @@ add_executable(raytracer
   src/Camera.cpp
   src/Scene.cpp
   src/Renderer.cpp
+
 )
 
 add_library(math_objects OBJECT
@@ -53,6 +54,10 @@ add_library(ambient SHARED
   src/lights/AmbientLight.cpp
 )
 
+add_library(reflection SHARED
+  src/materials/Reflections.cpp
+)
+
 set_target_properties(sphere PROPERTIES PREFIX "")
 
 set_target_properties(plane PROPERTIES PREFIX "")
@@ -65,12 +70,15 @@ set_target_properties(directional PROPERTIES PREFIX "")
 
 set_target_properties(ambient PROPERTIES PREFIX "")
 
+set_target_properties(reflection PROPERTIES PREFIX "")
+
 target_include_directories(raytracer
   PRIVATE
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/src/maths
     ${CMAKE_SOURCE_DIR}/src/shapes
     ${CMAKE_SOURCE_DIR}/src/lights
+    ${CMAKE_SOURCE_DIR}/src/materials
 )
 
 target_link_libraries(sphere PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -80,6 +88,7 @@ target_include_directories(sphere PUBLIC
   ${CMAKE_SOURCE_DIR}/src/maths
   ${CMAKE_SOURCE_DIR}/src/shapes
   ${CMAKE_SOURCE_DIR}/src/lights
+  ${CMAKE_SOURCE_DIR}/src/materials
 )
 
 target_link_libraries(plane PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -89,6 +98,7 @@ target_include_directories(plane PUBLIC
   ${CMAKE_SOURCE_DIR}/src/maths
   ${CMAKE_SOURCE_DIR}/src/shapes
   ${CMAKE_SOURCE_DIR}/src/lights
+  ${CMAKE_SOURCE_DIR}/src/materials
 )
 
 target_link_libraries(cylinder PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -98,6 +108,7 @@ target_include_directories(cylinder PUBLIC
   ${CMAKE_SOURCE_DIR}/src/maths
   ${CMAKE_SOURCE_DIR}/src/shapes
   ${CMAKE_SOURCE_DIR}/src/lights
+  ${CMAKE_SOURCE_DIR}/src/materials
 )
 
 target_link_libraries(cone PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -127,6 +138,15 @@ target_include_directories(ambient PUBLIC
   ${CMAKE_SOURCE_DIR}/src/lights
 )
 
+target_link_libraries(reflection PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(reflection PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
+)
+
 if(APPLE)
   if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
     set(SFML_DIR "/opt/homebrew/opt/sfml@2/lib/cmake/SFML")
@@ -149,6 +169,7 @@ if(APPLE)
   set_target_properties(cone PROPERTIES SUFFIX ".so")
   set_target_properties(directional PROPERTIES SUFFIX ".so")
   set_target_properties(ambient PROPERTIES SUFFIX ".so")
+  set_target_properties(reflection PROPERTIES SUFFIX ".so")
 elseif(UNIX AND NOT APPLE)
   find_package(SFML 2.5.1 COMPONENTS system window graphics REQUIRED)
   target_link_libraries(raytracer sfml-system sfml-window sfml-graphics config++ $<TARGET_OBJECTS:math_objects>)
@@ -162,5 +183,6 @@ execute_process(
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/cone.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/directional.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/ambient.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/reflection.so ${PROJECT_SOURCE_DIR}/plugins/
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )

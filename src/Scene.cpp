@@ -1,7 +1,8 @@
 #include "Scene.hpp"
-#include "Renderer.hpp"
 #include <dlfcn.h>
 #include <filesystem>
+#include <iostream>
+#include "Renderer.hpp"
 
 Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
     : _inputFilePath(inputPath), _width(width), _height(height) {
@@ -97,7 +98,7 @@ void Raytracer::Scene::parsePlugins() {
     if (entry.path().extension() == ".so")
       _plugins.push_back(entry.path().string());
     else
-     continue;
+      continue;
     void *handler = dlopen(entry.path().c_str(), RTLD_LAZY);
     if (!handler) {
       std::cerr << "[WARNING] - Failed to load plugin: " << entry.path()
@@ -109,7 +110,8 @@ void Raytracer::Scene::parsePlugins() {
 }
 
 void Raytracer::Scene::render() {
-  Raytracer::Renderer renderer(_width, _height, _inputFilePath, _camera, _plugins);
+  Raytracer::Renderer renderer(_width, _height, _inputFilePath, _camera,
+                               _plugins);
 
   while (_window.isOpen()) {
     sf::Event event;

@@ -1,5 +1,4 @@
 #include "ParserConfigFile.hpp"
-#include <algorithm>
 #include <libconfig.h++>
 #include <string>
 #include <tuple>
@@ -8,6 +7,7 @@
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
+#include "Reflections.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 #include "Vector3D.hpp"
@@ -84,6 +84,14 @@ Math::Vector3D Raytracer::ParserConfigFile::parseVector3D(
   return {x, y, z};
 }
 
+std::string Raytracer::ParserConfigFile::parseString(
+    const libconfig::Setting &setting) {
+  std::string str;
+  if (!setting.lookupValue("type", str))
+    throw libconfig::SettingNotFoundException("Missing 'type' field.");
+  return str;
+}
+
 Math::Vector3D Raytracer::ParserConfigFile::parseColor(
     const libconfig::Setting &setting) {
   float r, g, b;
@@ -125,6 +133,16 @@ void Raytracer::ParserConfigFile::parseSpheres(
       Math::Vector3D translation = parseVector3D(sphere["translate"]);
       newSphere->translate(translation);
     }
+    if (sphere.exists("material")) {
+      std::string materialName = parseString(sphere["material"]);
+      if (materialName == "reflective") {
+        newSphere->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
+      }
+    }
     sc.addShape(newSphere);
   }
 }
@@ -158,6 +176,15 @@ void Raytracer::ParserConfigFile::parseCylinders(
     if (cylinder.exists("translate")) {
       Math::Vector3D translation = parseVector3D(cylinder["translate"]);
       newCylinder->translate(translation);
+    }
+    if (cylinder.exists("material")) {
+      std::string materialName = parseString(cylinder["material"]);
+      if (materialName == "reflective") {
+        newCylinder->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
     }
     sc.addShape(newCylinder);
   }
@@ -227,6 +254,20 @@ void Raytracer::ParserConfigFile::parsePlanes(
                        plane.getPath());
     newPlane->setNormal(normal);
 
+    // Optional options
+    if (plane.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(plane["translate"]);
+      newPlane->translate(translation);
+    }
+    if (plane.exists("material")) {
+      std::string materialName = parseString(plane["material"]);
+      if (materialName == "reflective") {
+        newPlane->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
+    }
     float center = plane.lookup("offset").operator double();
     Math::Point3D newCenter = {0, center, 0};
     newPlane->setCenter({0, center, 0});
@@ -241,7 +282,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     // SPHERES
     if (root.exists("primitives") && root["primitives"].exists("spheres")) {
       static const std::unordered_set<std::string> allowedSettings = {
-          "x", "y", "z", "r", "color", "translate"};
+          "x", "y", "z", "r", "color", "translate", "material"};
       checkSettings(root["primitives"]["spheres"], allowedSettings);
       parseSpheres(sc, root["primitives"]["spheres"]);
     }
@@ -249,7 +290,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     // CYLINDERS
     if (root.exists("primitives") && root["primitives"].exists("cylinders")) {
       static const std::unordered_set<std::string> allowedSettings = {
-          "x", "y", "z", "r", "h", "color", "translate"};
+          "x", "y", "z", "r", "h", "color", "translate", "material"};
       checkSettings(root["primitives"]["cylinders"], allowedSettings);
       parseCylinders(sc, root["primitives"]["cylinders"]);
     }
@@ -257,7 +298,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     // CONES
     if (root.exists("primitives") && root["primitives"].exists("cones")) {
       static const std::unordered_set<std::string> allowedSettings = {
-          "x", "y", "z", "r", "h", "color", "translate"};
+          "x", "y", "z", "r", "h", "color", "translate", "material"};
       checkSettings(root["primitives"]["cones"], allowedSettings);
       parseCones(sc, root["primitives"]["cones"]);
     }
@@ -265,7 +306,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     // PLANES
     if (root.exists("primitives") && root["primitives"].exists("planes")) {
       static const std::unordered_set<std::string> allowedSettings = {
-          "normal", "offset", "color"};
+          "normal", "offset", "color", "translate", "material"};
       checkSettings(root["primitives"]["planes"], allowedSettings);
       parsePlanes(sc, root["primitives"]["planes"]);
     }

@@ -1,5 +1,6 @@
 #include "Renderer.hpp"
 #include <dlfcn.h>
+#include <memory>
 #include "Camera.hpp"
 #include "ParserConfigFile.hpp"
 #include "Ray.hpp"
@@ -7,20 +8,35 @@
 
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
-                                             LightComposite &light,
-                                             const Camera &cameraPos) {
+                                             const LightComposite &light,
+                                             const Camera &cameraPos,
+                                             int depth) {
+  Math::Vector3D unit_direction = r.direction.normalize();
+  double a = 0.5 * (unit_direction.y + 1.0);
+  Math::Vector3D sky(Math::Vector3D(1.0, 1.0, 1.0) * (1.0 - a) +
+                     Math::Vector3D(0.5, 0.7, 1.0) * a);
+  if (depth <= 0) {
+    return sky;
+  }
   auto [t, color, hitShape] = shape.hits(r);
 
   if (t > 0.0 && hitShape) {
     Math::Point3D hitPoint = r.at(t);
     Math::Vector3D normal = hitShape->getNormal(hitPoint);
     Math::Vector3D viewDir = (cameraPos.origin - hitPoint).normalized();
-    return light.computeLighting(normal, color, hitPoint, viewDir, shape);
+    Math::Vector3D computeColor =
+        light.computeLighting(normal, color, hitPoint, viewDir, shape);
+    if (auto material = hitShape->getMaterial()) {
+      return material->computeMaterial(
+          normal, viewDir, hitPoint, computeColor, shape, light, cameraPos,
+          depth - 1,
+          [this](Raytracer::Ray &r, const Raytracer::ShapeComposite &s,
+                 const Raytracer::LightComposite &l, const Raytracer::Camera &c,
+                 int d) { return this->rayColor(r, s, l, c, d); });
+    }
+    return computeColor;
   }
-  Math::Vector3D unit_direction = r.direction.normalize();
-  double a = 0.5 * (unit_direction.y + 1.0);
-  return Math::Vector3D(1.0, 1.0, 1.0) * (1.0 - a) +
-         Math::Vector3D(0.5, 0.7, 1.0) * a;
+  return sky;
 }
 
 void Raytracer::Renderer::initScene(Camera &camera) {
@@ -43,7 +59,7 @@ void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
           cam.getPixelDeltaV() * static_cast<float>(j);
       Math::Vector3D ray_direction = (pixel_center - cam.origin).normalize();
       Raytracer::Ray ray(cam.origin, ray_direction);
-      Math::Vector3D color = rayColor(ray, _shapes, _lights, cam);
+      Math::Vector3D color = rayColor(ray, _shapes, _lights, cam, _maxDepth);
       sf::Color pixel_color(static_cast<sf::Uint8>(color.x * 255),
                             static_cast<sf::Uint8>(color.y * 255),
                             static_cast<sf::Uint8>(color.z * 255));

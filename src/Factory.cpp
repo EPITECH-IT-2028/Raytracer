@@ -1,9 +1,10 @@
 #include "Factory.hpp"
-#include <filesystem>
 #include <dlfcn.h>
+#include <filesystem>
 #include <string>
 
-void Raytracer::Factory::initFactories(const std::vector<std::string> &plugins) {
+void Raytracer::Factory::initFactories(
+    const std::vector<std::string> &plugins) {
   for (const auto &plugin : plugins) {
     std::string pluginName = plugin.substr(plugin.find_last_of('/') + 1);
     pluginName = pluginName.substr(0, pluginName.find_last_of('.'));
@@ -20,6 +21,12 @@ void Raytracer::Factory::initFactories(const std::vector<std::string> &plugins) 
     AddLightFunc addLight = (AddLightFunc)dlsym(handle, "addLight");
     if (addLight) {
       registerLight<Raytracer::ILight>(pluginName, addLight);
+      continue;
+    }
+    using AddMaterialFunc = Raytracer::IMaterials *(*)();
+    AddMaterialFunc addMaterial = (AddMaterialFunc)dlsym(handle, "addMaterial");
+    if (addMaterial) {
+      registerMaterial<Raytracer::IMaterials>(pluginName, addMaterial);
       continue;
     }
     dlclose(handle);
