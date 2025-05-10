@@ -82,7 +82,23 @@ TEST_F(ParserConfigFileTest, TestParseLights) {
 }
 
 TEST_F(ParserConfigFileTest, TestParseInvalidConfig) {
-  _cfgFile = "tests/test_scenes/invalid.cfg";
+  _cfgFile = "tests/test_scenes/invalidConfig.cfg";
+
+  EXPECT_THROW(Raytracer::ParserConfigFile parser(_cfgFile, _plugins);, Raytracer::ConfigError);
+}
+
+TEST_F(ParserConfigFileTest, TestParseMissingField) {
+  _cfgFile = "tests/test_scenes/missingField.cfg";
+  Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
+  Raytracer::Camera camera;
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+}
+
+TEST_F(ParserConfigFileTest, TestParseInvalidField) {
+  _cfgFile = "tests/test_scenes/invalidField.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
