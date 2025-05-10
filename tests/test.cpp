@@ -106,3 +106,43 @@ TEST_F(ParserConfigFileTest, TestParseInvalidField) {
 
   EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
 }
+
+TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig1) {
+  _cfgFile = "tests/test_scenes/incompleteCamera1.cfg";
+  Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
+  Raytracer::Camera camera;
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+}
+
+TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig2) {
+  _cfgFile = "tests/test_scenes/incompleteCamera2.cfg";
+  Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
+  Raytracer::Camera camera;
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+}
+
+TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig3) {
+  _cfgFile = "tests/test_scenes/incompleteCamera3.cfg";
+  Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
+  Raytracer::Camera camera;
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+}
+
+TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig4) {
+  _cfgFile = "tests/test_scenes/incompleteCamera4.cfg";
+  Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
+  Raytracer::Camera camera;
+  Raytracer::ShapeComposite sc;
+  Raytracer::LightComposite lc;
+
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+}
