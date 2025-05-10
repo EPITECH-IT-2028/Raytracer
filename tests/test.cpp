@@ -1,16 +1,17 @@
 #include <gtest/gtest.h>
+#include <filesystem>
 #include "ParserConfigFile.hpp"
 #include "exceptions/RaytracerException.hpp"
 
 class ParserConfigFileTest : public ::testing::Test {
   protected:
     void SetUp() override {
-      // _cfgFile = "tests/test_scenes/camera_setup.cfg";
-      _plugins = {
-          "plugins/ambient.so",     "plugins/cone.so",  "plugins/cylinder.so",
-          "plugins/directional.so", "plugins/plane.so", "plugins/reflection.so",
-          "plugins/sphere.so",
-      };
+      for (const auto &entry :
+           std::filesystem::directory_iterator("./plugins")) {
+        if (entry.is_regular_file() && entry.path().extension() == ".so") {
+          _plugins.push_back(entry.path().string());
+        }
+      }
     }
 
     void TearDown() override {
