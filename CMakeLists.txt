@@ -380,6 +380,7 @@ if(BUILD_TESTING)
          )
 
          add_custom_target(coverage
+             COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -exec ${CMAKE_COMMAND} -E remove {} +
              COMMAND $<TARGET_FILE:run_parser_tests>
              COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_html
              COMMAND ${GCOVR_EXECUTABLE}
