@@ -303,109 +303,109 @@ if(BUILD_TESTING)
       add_link_options(--coverage)
     endif()
 
-     include(FetchContent)
-     FetchContent_Declare(
-         googletest
-         GIT_REPOSITORY https://github.com/google/googletest.git
-         GIT_TAG v1.17.0
-     )
-     FetchContent_MakeAvailable(googletest)
+    include(FetchContent)
+    FetchContent_Declare(
+      googletest
+      GIT_REPOSITORY https://github.com/google/googletest.git
+      GIT_TAG v1.17.0
+    )
+    FetchContent_MakeAvailable(googletest)
 
-     file(COPY tests/ DESTINATION ${CMAKE_BINARY_DIR}/tests)
-     file(COPY ${CMAKE_SOURCE_DIR}/plugins DESTINATION ${CMAKE_BINARY_DIR}/plugins)
+    file(COPY tests/ DESTINATION ${CMAKE_BINARY_DIR}/tests)
+    file(COPY ${CMAKE_SOURCE_DIR}/plugins DESTINATION ${CMAKE_BINARY_DIR}/plugins)
 
-     add_executable(run_parser_tests
-         tests/camera/parseCamera.cpp
-         tests/camera/missingFields/missingFields.cpp
-         tests/camera/missingFields/position/missingPositionFields.cpp
-         tests/camera/missingFields/resolution/missingResolutionFields.cpp
-         tests/camera/missingFields/rotation/missingRotationFields.cpp
+    add_executable(run_parser_tests
+      tests/camera/parseCamera.cpp
+      tests/camera/missingFields/missingFields.cpp
+      tests/camera/missingFields/position/missingPositionFields.cpp
+      tests/camera/missingFields/resolution/missingResolutionFields.cpp
+      tests/camera/missingFields/rotation/missingRotationFields.cpp
 
-         tests/primitives/parsePrimitives.cpp
+      tests/primitives/parsePrimitives.cpp
 
-         tests/lights/parseLights.cpp
-         src/ParserConfigFile.cpp
-         src/Factory.cpp
-         src/lights/LightComposite.cpp
-         src/shapes/ShapeComposite.cpp
-     )
+      tests/lights/parseLights.cpp
+      src/ParserConfigFile.cpp
+      src/Factory.cpp
+      src/lights/LightComposite.cpp
+      src/shapes/ShapeComposite.cpp
+    )
 
-     target_include_directories(run_parser_tests PRIVATE
-         ${CMAKE_SOURCE_DIR}/src
-         ${CMAKE_SOURCE_DIR}/src/maths
-         ${CMAKE_SOURCE_DIR}/src/shapes
-         ${CMAKE_SOURCE_DIR}/src/lights
-         ${CMAKE_SOURCE_DIR}/src/materials
-     )
+    target_include_directories(run_parser_tests PRIVATE
+      ${CMAKE_SOURCE_DIR}/src
+      ${CMAKE_SOURCE_DIR}/src/maths
+      ${CMAKE_SOURCE_DIR}/src/shapes
+      ${CMAKE_SOURCE_DIR}/src/lights
+      ${CMAKE_SOURCE_DIR}/src/materials
+    )
 
-     target_link_libraries(run_parser_tests PRIVATE
-         GTest::gtest_main
-         $<TARGET_OBJECTS:math_objects>
-     )
+    target_link_libraries(run_parser_tests PRIVATE
+      GTest::gtest_main
+      $<TARGET_OBJECTS:math_objects>
+    )
 
-     if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-         target_compile_options(run_parser_tests PRIVATE --coverage)
-         target_link_libraries(run_parser_tests PRIVATE --coverage)
-     endif()
+    if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+      target_compile_options(run_parser_tests PRIVATE --coverage)
+      target_link_libraries(run_parser_tests PRIVATE --coverage)
+    endif()
 
-     if(APPLE)
-         if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
-             target_link_libraries(run_parser_tests PRIVATE config++)
-             # target_include_directories(run_parser_tests PRIVATE /opt/homebrew/include)
-         elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
-             if(LIBCONFIGPP_INCLUDE_DIR)
-                 target_include_directories(run_parser_tests PRIVATE ${LIBCONFIGPP_INCLUDE_DIR})
-             else()
-                 message(WARNING "libconfig.h++ include directory not found for x86_64 macOS tests. Check LIBCONFIGPP_INCLUDE_DIR.")
-             endif()
-             if(LIBCONFIGPP_LIBRARY)
-                 target_link_libraries(run_parser_tests PRIVATE ${LIBCONFIGPP_LIBRARY})
-             else()
-                 message(WARNING "libconfig++ library not found for x86_64 macOS tests. Check LIBCONFIGPP_LIBRARY.")
-             endif()
-         endif()
-     elseif(UNIX AND NOT APPLE)
-         target_link_libraries(run_parser_tests PRIVATE config++)
-     endif()
+    if(APPLE)
+      if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
+        target_link_libraries(run_parser_tests PRIVATE config++)
+        # target_include_directories(run_parser_tests PRIVATE /opt/homebrew/include)
+        elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
+          if(LIBCONFIGPP_INCLUDE_DIR)
+            target_include_directories(run_parser_tests PRIVATE ${LIBCONFIGPP_INCLUDE_DIR})
+            else()
+              message(WARNING "libconfig.h++ include directory not found for x86_64 macOS tests. Check LIBCONFIGPP_INCLUDE_DIR.")
+            endif()
+            if(LIBCONFIGPP_LIBRARY)
+              target_link_libraries(run_parser_tests PRIVATE ${LIBCONFIGPP_LIBRARY})
+            else()
+              message(WARNING "libconfig++ library not found for x86_64 macOS tests. Check LIBCONFIGPP_LIBRARY.")
+            endif()
+        endif()
+      elseif(UNIX AND NOT APPLE)
+        target_link_libraries(run_parser_tests PRIVATE config++)
+    endif()
 
-     include(GoogleTest)
-     gtest_discover_tests(run_parser_tests)
+    include(GoogleTest)
+    gtest_discover_tests(run_parser_tests)
 
-     # Add a custom target to run the tests
-     find_program(GCOVR_EXECUTABLE NAMES gcovr)
-     if(GCOVR_EXECUTABLE)
-         set(COVERAGE_DEPENDENCIES
-             raytracer
-             math_objects
-             sphere
-             plane
-             cylinder
-             cone
-             directional
-             ambient
-             reflection
-             run_parser_tests
-         )
+    # Add a custom target to run the tests
+    find_program(GCOVR_EXECUTABLE NAMES gcovr)
+    if(GCOVR_EXECUTABLE)
+        set(COVERAGE_DEPENDENCIES
+            raytracer
+            math_objects
+            sphere
+            plane
+            cylinder
+            cone
+            directional
+            ambient
+            reflection
+            run_parser_tests
+        )
 
-         add_custom_target(coverage
-             COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -exec ${CMAKE_COMMAND} -E remove {} +
-             COMMAND $<TARGET_FILE:run_parser_tests>
-             COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_html
-             COMMAND ${GCOVR_EXECUTABLE}
-                     -r .
-                     --html --html-details
-                     -o ${CMAKE_BINARY_DIR}/coverage_html/index.html
-                     --filter "'src/.*'"
-                     --exclude "'src/main.cpp'"
-                     # --exclude "'src/shapes/.*'"
-                     # --exclude "'src/lights/.*'"
-                     # --exclude "'src/maths/.*'"
-                     ${CMAKE_BINARY_DIR}
-             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-             COMMENT "Generating code coverage report in .build/coverage_html/index.html. Run 'open .build/coverage_html/index.html' to view."
-             DEPENDS ${COVERAGE_DEPENDENCIES}
-         )
-     else()
-         message(WARNING "gcovr not found. Coverage target 'coverage' will not be available. Please install gcovr (e.g., sudo dnf install gcovr).")
-     endif()
+        add_custom_target(coverage
+            COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -exec ${CMAKE_COMMAND} -E remove {} +
+            COMMAND $<TARGET_FILE:run_parser_tests>
+            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_html
+            COMMAND ${GCOVR_EXECUTABLE}
+                    -r .
+                    --html --html-details
+                    -o ${CMAKE_BINARY_DIR}/coverage_html/index.html
+                    --filter "'src/.*'"
+                    --exclude "'src/main.cpp'"
+                    # --exclude "'src/shapes/.*'"
+                    # --exclude "'src/lights/.*'"
+                    # --exclude "'src/maths/.*'"
+                    ${CMAKE_BINARY_DIR}
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Generating code coverage report in .build/coverage_html/index.html. Run 'open .build/coverage_html/index.html' to view."
+            DEPENDS ${COVERAGE_DEPENDENCIES}
+        )
+    else()
+        message(WARNING "gcovr not found. Coverage target 'coverage' will not be available. Please install gcovr (e.g., sudo dnf install gcovr).")
+    endif()
  endif()
