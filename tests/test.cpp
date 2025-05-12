@@ -108,7 +108,7 @@ TEST_F(ParserConfigFileTest, TestParseInvalidField) {
 }
 
 TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig1) {
-  _cfgFile = "tests/test_scenes/incompleteCamera1.cfg";
+  _cfgFile = "tests/test_scenes/camera/missingResolution.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
@@ -118,7 +118,7 @@ TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig1) {
 }
 
 TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig2) {
-  _cfgFile = "tests/test_scenes/incompleteCamera2.cfg";
+  _cfgFile = "tests/test_scenes/camera/missingPosition.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
@@ -128,7 +128,7 @@ TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig2) {
 }
 
 TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig3) {
-  _cfgFile = "tests/test_scenes/incompleteCamera3.cfg";
+  _cfgFile = "tests/test_scenes/camera/missingRotation.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
@@ -138,7 +138,7 @@ TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig3) {
 }
 
 TEST_F(ParserConfigFileTest, TestParseIncompleteCameraConfig4) {
-  _cfgFile = "tests/test_scenes/incompleteCamera4.cfg";
+  _cfgFile = "tests/test_scenes/camera/missingFOV.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
