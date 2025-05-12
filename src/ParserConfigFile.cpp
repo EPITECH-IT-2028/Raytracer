@@ -6,8 +6,8 @@
 #include "Cone.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
-#include "PointLight.hpp"
 #include "Plane.hpp"
+#include "PointLight.hpp"
 #include "Reflections.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
@@ -345,14 +345,17 @@ void Raytracer::ParserConfigFile::parsePointLight(
   for (int i = 0; i < pointInfo.getLength(); i++) {
     const libconfig::Setting &point = pointInfo[i];
     const libconfig::Setting &colorInfo = point["color"];
-    auto newPoint =
-        _factory.create<Raytracer::PointLight>("point");
+    auto newPoint = _factory.create<Raytracer::PointLight>("point");
     if (newPoint == nullptr)
-      throw ParseError(
-          "Failed to create point light object from factory.");
+      throw ParseError("Failed to create point light object from factory.");
     Math::Point3D position = parsePoint3D(point);
     Math::Vector3D color = parseColor(colorInfo);
     double intensity = point.lookup("intensity");
+    if (intensity < 0) {
+      throw ParseError(
+          "Failed to set intensity. Intensity must be over 0 but it was : " +
+          std::to_string(intensity));
+    }
     newPoint->setIntensity(intensity);
     newPoint->setPosition(position);
     newPoint->setColor(color);
