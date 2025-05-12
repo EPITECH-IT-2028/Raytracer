@@ -320,6 +320,9 @@ if(BUILD_TESTING)
       tests/camera/missingFields/position/missingPositionFields.cpp
       tests/camera/missingFields/resolution/missingResolutionFields.cpp
       tests/camera/missingFields/rotation/missingRotationFields.cpp
+      tests/camera/invalidFields/position/invalidPositionFields.cpp
+      tests/camera/invalidFields/resolution/invalidResolutionFields.cpp
+      tests/camera/invalidFields/rotation/invalidRotationFields.cpp
 
       tests/primitives/parsePrimitives.cpp
 
