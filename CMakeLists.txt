@@ -327,6 +327,13 @@ if(BUILD_TESTING)
       tests/primitives/parsePrimitives.cpp
 
       tests/lights/parseLights.cpp
+      tests/lights/missingFields/missingFields.cpp
+      tests/lights/missingFields/ambient/missingFields.cpp
+      tests/lights/missingFields/directional/missingFields.cpp
+      tests/lights/invalidFields/ambient/invalidFields.cpp
+      tests/lights/invalidFields/directional/invalidFields.cpp
+      tests/lights/invalidFields/invalidDiffuse.cpp
+
       src/ParserConfigFile.cpp
       src/Factory.cpp
       src/lights/LightComposite.cpp
