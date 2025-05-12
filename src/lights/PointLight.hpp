@@ -15,6 +15,7 @@ class PointLight : public ALight {
     void setPosition(const Math::Point3D &position) {
         _position = position;
     }
+    Math::Point3D &getPosition() { return _position;};
   private:
     Math::Point3D _position;
 };
