@@ -22,8 +22,8 @@ class ParserConfigFileTest : public ::testing::Test {
     std::vector<std::string> _plugins;
 };
 
-TEST_F(ParserConfigFileTest, TestParseCamera) {
-  _cfgFile = "tests/test_scenes/camera/parseCamera.cfg";
+TEST_F(ParserConfigFileTest, TestParsePrimitives) {
+  _cfgFile = "tests/primitives/parsePrimitives.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
@@ -32,13 +32,11 @@ TEST_F(ParserConfigFileTest, TestParseCamera) {
   try {
     parser.parseConfigFile(camera, sc, lc);
   } catch (const Raytracer::ParseError &e) {
-    FAIL() << "Failed to parse camera configuration: " << e.what();
+    FAIL() << "Failed to parse primitives configuration: " << e.what();
   } catch (const Raytracer::ConfigError &e) {
-    FAIL() << "Failed to parse camera configuration (ConfigError): "
+    FAIL() << "Failed to parse primitives configuration (ConfigError): "
            << e.what();
   }
 
-  EXPECT_EQ(camera.getWidth(), 400);
-  EXPECT_EQ(camera.getHeight(), 400);
-  EXPECT_DOUBLE_EQ(camera.getFieldOfView(), 45.0);
+  EXPECT_EQ(sc.getShapes().size(), 4);
 }
