@@ -311,15 +311,19 @@ if(BUILD_TESTING)
      )
      FetchContent_MakeAvailable(googletest)
 
-     file(COPY tests/test_scenes DESTINATION ${CMAKE_BINARY_DIR}/tests)
+     file(COPY tests/ DESTINATION ${CMAKE_BINARY_DIR}/tests)
      file(COPY ${CMAKE_SOURCE_DIR}/plugins DESTINATION ${CMAKE_BINARY_DIR}/plugins)
 
      add_executable(run_parser_tests
-         tests/test_scenes/camera/parseCamera.cpp
-         tests/test_scenes/camera/missingFields/missingFields.cpp
-         tests/test_scenes/camera/missingFields/resolution/missingResolutionFields.cpp
-         tests/test_scenes/primitives/parsePrimitives.cpp
-         tests/test_scenes/lights/parseLights.cpp
+         tests/camera/parseCamera.cpp
+         tests/camera/missingFields/missingFields.cpp
+         tests/camera/missingFields/position/missingPositionFields.cpp
+         tests/camera/missingFields/resolution/missingResolutionFields.cpp
+         tests/camera/missingFields/rotation/missingRotationFields.cpp
+
+         tests/primitives/parsePrimitives.cpp
+
+         tests/lights/parseLights.cpp
          src/ParserConfigFile.cpp
          src/Factory.cpp
          src/lights/LightComposite.cpp
