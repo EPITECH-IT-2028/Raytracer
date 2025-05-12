@@ -6,6 +6,7 @@
 #include "Cone.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
+#include "PointLight.hpp"
 #include "Plane.hpp"
 #include "Reflections.hpp"
 #include "ShapeComposite.hpp"
@@ -339,6 +340,25 @@ void Raytracer::ParserConfigFile::parseAmbientLight(
   lc.addLight(newAmbient);
 }
 
+void Raytracer::ParserConfigFile::parsePointLight(
+    Raytracer::LightComposite &lc, const libconfig::Setting &pointInfo) {
+  for (int i = 0; i < pointInfo.getLength(); i++) {
+    const libconfig::Setting &point = pointInfo[i];
+    const libconfig::Setting &colorInfo = point["color"];
+    auto newPoint =
+        _factory.create<Raytracer::PointLight>("point");
+    if (newPoint == nullptr)
+      throw ParseError(
+          "Failed to create point light object from factory.");
+    Math::Point3D position = parsePoint3D(point);
+    Math::Vector3D color = parseColor(colorInfo);
+    newPoint->setPosition(position);
+    newPoint->setColor(color);
+    newPoint->setType("PointLight");
+    lc.addLight(newPoint);
+  }
+}
+
 void Raytracer::ParserConfigFile::parseDiffuseLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &diffuseInfo) {
   double diffuseMultiplier = diffuseInfo;
@@ -377,7 +397,12 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
       checkSettings(root["lights"]["ambient"], allowedSettings);
       parseAmbientLight(lc, root["lights"]["ambient"]);
     }
-
+    if (root.exists("lights") && root["lights"].exists("point")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "color", "x", "y", "z"};
+      checkSettings(root["lights"]["point"], allowedSettings);
+      parsePointLight(lc, root["lights"]["point"]);
+    }
     // DIFFUSE
     if (root.exists("lights") && root["lights"].exists("diffuse"))
       parseDiffuseLight(lc, root["lights"]["diffuse"]);

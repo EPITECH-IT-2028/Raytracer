@@ -49,6 +49,8 @@ namespace Raytracer {
                              const libconfig::Setting &ambientInfo);
       void parseDiffuseLight(LightComposite &lc,
                              const libconfig::Setting &diffuseInfo);
+      void parsePointLight(LightComposite &lc,
+                           const libconfig::Setting &diffuseInfo);
       void checkSettings(const libconfig::Setting &setting,
                          const std::unordered_set<std::string> &requiredFields) const;
   };

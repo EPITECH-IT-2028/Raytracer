@@ -16,6 +16,7 @@ Math::Vector3D Raytracer::LightComposite::computeLighting(
   Math::Vector3D result(0, 0, 0);
   std::shared_ptr<ILight> ambientLight;
   std::shared_ptr<ILight> directionalLight;
+  std::shared_ptr<ILight> pointLight;
 
   for (auto &light : _lights) {
     if (light->getType() == "AmbientLight") {
@@ -29,6 +30,14 @@ Math::Vector3D Raytracer::LightComposite::computeLighting(
   for (const auto &light : _lights) {
     if (light->getType() == "DirectionalLight") {
       directionalLight = light;
+      result = result + light->computeLighting(normal, objectColor, hitPoint,
+                                               viewDir, shapes);
+    }
+  }
+
+  for (const auto &light : _lights) {
+    if (light->getType() == "PointLight") {
+      pointLight = light;
       result = result + light->computeLighting(normal, objectColor, hitPoint,
                                                viewDir, shapes);
     }
