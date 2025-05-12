@@ -14,12 +14,12 @@ Math::Vector3D Raytracer::PointLight::computeLighting(
   Math::Point3D shadowOrigin = hitPoint + normal * 0.001;
   Raytracer::Ray shadowRay(shadowOrigin, -getDirection().normalize());
   auto [shadow, _, shadowShape] = shapes.hits(shadowRay);
-  float lightIntensity;
+  double lightIntensity;
 
   if (shadow > 0.0 && shadowShape != nullptr) {
-    lightIntensity = 0.1f;
+    lightIntensity = 0.1f * getIntensity();
   } else {
-    lightIntensity = 0.1f + 0.9f * std::max(0.0, normal.dot(lightDir));
+    lightIntensity = (0.1f + 0.9f * std::max(0.0, normal.dot(lightDir))) * getIntensity();
   }
   return objectColor * lightIntensity * _color;
 }

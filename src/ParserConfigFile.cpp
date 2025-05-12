@@ -352,6 +352,8 @@ void Raytracer::ParserConfigFile::parsePointLight(
           "Failed to create point light object from factory.");
     Math::Point3D position = parsePoint3D(point);
     Math::Vector3D color = parseColor(colorInfo);
+    double intensity = point.lookup("intensity");
+    newPoint->setIntensity(intensity);
     newPoint->setPosition(position);
     newPoint->setColor(color);
     newPoint->setType("PointLight");
@@ -399,7 +401,7 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
     }
     if (root.exists("lights") && root["lights"].exists("point")) {
       static const std::unordered_set<std::string> allowedSettings = {
-          "color", "x", "y", "z"};
+          "color", "x", "y", "z", "intensity"};
       checkSettings(root["lights"]["point"], allowedSettings);
       parsePointLight(lc, root["lights"]["point"]);
     }
