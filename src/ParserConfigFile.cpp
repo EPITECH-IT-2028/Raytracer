@@ -4,6 +4,7 @@
 #include <tuple>
 #include "AmbientLight.hpp"
 #include "Cone.hpp"
+#include "Object.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
@@ -12,6 +13,85 @@
 #include "Sphere.hpp"
 #include "Vector3D.hpp"
 #include "exceptions/RaytracerException.hpp"
+#include <iostream>
+#include <vector>
+#define TINYOBJLOADER_IMPLEMENTATION
+#include "tiny_obj_loader.h"
+
+void Raytracer::ParserConfigFile::parseObj(const std::string &obj_file, Object &object) {
+          tinyobj::attrib_t attrib;
+          std::vector<tinyobj::shape_t> shapes;
+          std::vector<tinyobj::material_t> materials;
+          std::string warn, err;
+
+          bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, obj_file.c_str(), nullptr);
+
+          if (!warn.empty()) {
+              std::cerr << "TinyObjLoader warning: " << warn << std::endl;
+          }
+          if (!err.empty()) {
+              throw std::runtime_error("TinyObjLoader error: " + err);
+          }
+          if (!success) {
+              throw std::runtime_error("Failed to load .obj file: " + obj_file);
+          }
+
+          std::vector<Object::Face> faces;
+          std::vector<Math::Point3D> vertices;
+          std::vector<Math::Vector3D> normals;
+          std::unordered_map<std::string, Object::Mtl> materials2;        
+
+          for (size_t i = 0; i < attrib.vertices.size() / 3; i++) {
+              double x = attrib.vertices[3 * i + 0];
+              double y = attrib.vertices[3 * i + 1];
+              double z = attrib.vertices[3 * i + 2];
+              vertices.emplace_back(Math::Point3D(x, y, z));
+          }
+
+          for (size_t i = 0; i < attrib.normals.size() / 3; i++) {
+              double x = attrib.normals[3 * i + 0];
+              double y = attrib.normals[3 * i + 1];
+              double z = attrib.normals[3 * i + 2];
+              normals.emplace_back(Math::Vector3D(x, y, z));
+          }
+
+          for (const auto &material : materials) {
+              Object::Mtl mtl;
+              mtl.ambient = Math::Vector3D(material.ambient[0], material.ambient[1], material.ambient[2]);
+              mtl.diffuse = Math::Vector3D(material.diffuse[0], material.diffuse[1], material.diffuse[2]);
+              mtl.specular = Math::Vector3D(material.specular[0], material.specular[1], material.specular[2]);
+              mtl.shininess = material.shininess;
+              mtl.transparency = material.dissolve;
+              mtl.illumination = material.illum;
+              materials2[material.name] = mtl;
+          }
+
+          for (const auto &shape : shapes) {
+              for (size_t i = 0; i < shape.mesh.indices.size(); i += 3) {
+                  Object::Face face;
+
+                  for (size_t j = 0; j < 3; j++) {
+                      int vertex_index = shape.mesh.indices[i + j].vertex_index;
+                      face.vertex.push_back(vertex_index);
+
+                      int normal_index = shape.mesh.indices[i + j].normal_index;
+                      if (normal_index >= 0) {
+                          face.normal.push_back(normal_index);
+                      }
+                  }
+
+                  int material_id = shape.mesh.material_ids[i / 3];
+                  if (material_id >= 0 && material_id<static_cast<int>(materials.size())) {
+                      face.material_name = materials[material_id].name;
+                  }
+                  faces.push_back(face);
+              }
+          }
+          object.setVertices(vertices);
+          object.setNormals(normals);
+          object.setFaces(faces);
+          object.setMaterials(materials2);
+      }
 
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)
@@ -276,6 +356,25 @@ void Raytracer::ParserConfigFile::parsePlanes(
   }
 }
 
+void Raytracer::ParserConfigFile::parseObjects(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &objectsSetting) {
+  for (int i = 0; i < objectsSetting.getLength(); i++) {
+    const libconfig::Setting &object = objectsSetting[i];
+    auto newObject = _factory.create<Raytracer::Object>("object");
+    if (!newObject)
+      throw ParseError("Failed to create object from factory.");
+    if (!object.exists("obj_file"))
+      throw ParseError(std::string("Object file not found at ") +
+                       object.getPath());
+    if (!object.exists("mtl_file"))
+      throw ParseError(std::string("Material file not found at ") +
+                       object.getPath());
+    parseObj(object.lookup("obj_file").operator std::string(),
+              *newObject);
+    sc.addShape(newObject);
+  }
+}
+
 void Raytracer::ParserConfigFile::parsePrimitives(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {
@@ -309,6 +408,16 @@ void Raytracer::ParserConfigFile::parsePrimitives(
           "normal", "offset", "color", "translate", "material"};
       checkSettings(root["primitives"]["planes"], allowedSettings);
       parsePlanes(sc, root["primitives"]["planes"]);
+    }
+
+    // OBJECTS
+    if (root.exists("primitives") && root["primitives"].exists("objects")) {
+      std::cout << "[INFO] - Parsing objects..." << std::endl;
+      static const std::unordered_set<std::string> allowedSettings = {
+          "obj_file", "mtl_file"};
+      checkSettings(root["primitives"]["objects"], allowedSettings);
+      parseObjects(sc, root["primitives"]["objects"]);
+      std::cout << "[INFO] - End parsing objects..." << std::endl;
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw ParseError(std::string("Primitives config: ") + nfex.getPath() +
