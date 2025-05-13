@@ -3,6 +3,8 @@ name: Mirror
 on:
   push:
     branches:
+  pull_request:
+    branches:
 
 env:
   MIRROR_URL: "git@github.com:EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos.git"
@@ -24,10 +26,8 @@ jobs:
       - name: Build project
         run: cmake --build .build
 
-
-
   push_to_mirror:
-    if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos.git'
+    if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos.git' && github.ref_name == 'main'
     name: Push to Mirror Repository
     runs-on: ubuntu-latest
     container: 
