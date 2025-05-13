@@ -53,6 +53,8 @@ namespace Raytracer {
                        const libconfig::Setting &planesSetting);
       void parseObjects(ShapeComposite &sc,
                         const libconfig::Setting &objectsSetting);
+      void parseTriangles(ShapeComposite &sc,
+                        const libconfig::Setting &objectsSetting);
 
       void parseDirectionalLights(LightComposite &lc,
                                   const libconfig::Setting &lightsSetting);

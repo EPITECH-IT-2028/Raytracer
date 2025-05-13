@@ -17,6 +17,7 @@
 #include "exceptions/RaytracerException.hpp"
 #include <iostream>
 #include <vector>
+#include "Triangle.hpp"
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 
@@ -435,6 +436,40 @@ void Raytracer::ParserConfigFile::parseObjects(
   }
 }
 
+void Raytracer::ParserConfigFile::parseTriangles(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &trianglesSetting) {
+  for (int i = 0; i < trianglesSetting.getLength(); i++) {
+    const libconfig::Setting &triangle = trianglesSetting[i];
+    auto newTriangle = _factory.create<Raytracer::Triangle>("triangle");
+    if (!newTriangle)
+      throw ParseError("Failed to create triangle object from factory.");
+    if (!triangle.exists("p1"))
+      throw ParseError(std::string("Triangle p1 not found at ") +
+                       triangle.getPath());
+    if (!triangle.exists("p2"))
+      throw ParseError(std::string("Triangle p2 not found at ") +
+                       triangle.getPath());
+    if (!triangle.exists("p3"))
+      throw ParseError(std::string("Triangle p3 not found at ") +
+                       triangle.getPath());
+    if (!triangle.exists("color"))
+      throw ParseError(std::string("Triangle color not found at ") +
+                       triangle.getPath());
+
+    newTriangle->setP1(parsePoint3D(triangle["p1"]));
+    newTriangle->setP2(parsePoint3D(triangle["p2"]));
+    newTriangle->setP3(parsePoint3D(triangle["p3"]));
+    newTriangle->setColor(parseColor(triangle["color"]));
+
+    // Optional options
+    if (triangle.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(triangle["translate"]);
+      newTriangle->translate(translation);
+    }
+    sc.addShape(newTriangle);
+  }
+}
+
 void Raytracer::ParserConfigFile::parsePrimitives(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {
@@ -492,6 +527,14 @@ void Raytracer::ParserConfigFile::parsePrimitives(
           "obj_file"};
       checkSettings(root["primitives"]["objects"], allowedSettings);
       parseObjects(sc, root["primitives"]["objects"]);
+    }
+
+    // TRIANGLES
+    if (root.exists("primitives") && root["primitives"].exists("triangles")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "p1", "p2", "p3", "color", "translate", "material"};
+      checkSettings(root["primitives"]["triangles"], allowedSettings);
+      parseTriangles(sc, root["primitives"]["triangles"]);
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw ParseError(std::string("Primitives config: ") + nfex.getPath() +
