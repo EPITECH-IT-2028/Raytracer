@@ -37,7 +37,7 @@ namespace Raytracer {
     private:
       libconfig::Config _cfg;
       std::vector<std::string> _plugins;
-      std::vector<std::string> _fileAlreadyParse;
+      std::unordered_set<std::string> _fileAlreadyParse;
       Factory _factory = Factory();
       std::string _currentFilePath;
   

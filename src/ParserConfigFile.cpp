@@ -17,8 +17,7 @@
 
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)
-    : _plugins(plugins) {
-  _currentFilePath = filename;
+    : _plugins(plugins), _currentFilePath(filename) {
   if (!filename.ends_with(".cfg")) {
     throw ParseError(
         "Config file isn't in correct format (needs to be a *.cfg)");
@@ -471,12 +470,12 @@ void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
     const libconfig::Setting &scenes = root["scenes"]["scenesPaths"];
     for (const auto &scene : scenes) {
       std::string path = scene.lookup("path");
-      for (auto scene : _fileAlreadyParse) {
-        if (scene == path) {
+      for (const auto &alreadyParsed : _fileAlreadyParse) {
+        if (alreadyParsed == path) {
           throw ParseError("Import loop detected. File \"" + path + "\" is already imported into the current scene.");
         }
       }
-      _fileAlreadyParse.push_back(path);
+      _fileAlreadyParse.insert(path);
       ParserConfigFile parser(path, _plugins);
       parser._fileAlreadyParse = _fileAlreadyParse;
       parser.parseConfigFile(sc, lc);
