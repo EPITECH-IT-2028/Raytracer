@@ -402,6 +402,7 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
       checkSettings(root["lights"]["ambient"], allowedSettings);
       parseAmbientLight(lc, root["lights"]["ambient"]);
     }
+    // POINT
     if (root.exists("lights") && root["lights"].exists("point")) {
       static const std::unordered_set<std::string> allowedSettings = {
           "color", "x", "y", "z", "intensity"};
@@ -411,7 +412,6 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
     // DIFFUSE
     if (root.exists("lights") && root["lights"].exists("diffuse"))
       parseDiffuseLight(lc, root["lights"]["diffuse"]);
-
     // DIRECTIONALS
     if (root.exists("lights") && root["lights"].exists("directional")) {
       static const std::unordered_set<std::string> allowedSettings = {
