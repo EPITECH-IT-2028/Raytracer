@@ -34,6 +34,13 @@ Math::Vector3D Raytracer::LightComposite::computeLighting(
     }
   }
 
+  for (const auto &light : _lights) {
+    if (light->getType() == "PointLight") {
+      result = result + light->computeLighting(normal, objectColor, hitPoint,
+                                               viewDir, shapes);
+    }
+  }
+
   if (directionalLight.get() && ambientLight.get()) {
     Math::Vector3D reflectSource =
         reflect(-directionalLight->getDirection(), normal);

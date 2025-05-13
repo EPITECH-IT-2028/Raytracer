@@ -6,3 +6,5 @@ vgcore*
 .vscode
 .cache
 *.so
+.idea
+cmake-build-debug
