@@ -9,3 +9,4 @@ vgcore*
 *.so
 .idea
 cmake-build-debug
+.DS_Store
