@@ -18,7 +18,6 @@ add_executable(raytracer
   src/Camera.cpp
   src/Scene.cpp
   src/Renderer.cpp
-
 )
 
 add_library(math_objects OBJECT
@@ -46,6 +45,10 @@ add_library(cone SHARED
   src/shapes/Cone.cpp
 )
 
+add_library(object SHARED
+  src/shapes/Object.cpp
+)
+
 add_library(directional SHARED
   src/lights/DirectionalLight.cpp
 )
@@ -71,6 +74,8 @@ set_target_properties(cylinder PROPERTIES PREFIX "")
 
 set_target_properties(cone PROPERTIES PREFIX "")
 
+set_target_properties(object PROPERTIES PREFIX "")
+
 set_target_properties(directional PROPERTIES PREFIX "")
 
 set_target_properties(ambient PROPERTIES PREFIX "")
@@ -86,6 +91,7 @@ target_include_directories(raytracer
     ${CMAKE_SOURCE_DIR}/src/shapes
     ${CMAKE_SOURCE_DIR}/src/lights
     ${CMAKE_SOURCE_DIR}/src/materials
+    ${CMAKE_SOURCE_DIR}/include
 )
 
 target_link_libraries(sphere PRIVATE $<TARGET_OBJECTS:math_objects>)
@@ -121,6 +127,15 @@ target_include_directories(cylinder PUBLIC
 target_link_libraries(cone PRIVATE $<TARGET_OBJECTS:math_objects>)
 
 target_include_directories(cone PUBLIC
+  ${CMAKE_SOURCE_DIR}/src
+  ${CMAKE_SOURCE_DIR}/src/maths
+  ${CMAKE_SOURCE_DIR}/src/shapes
+  ${CMAKE_SOURCE_DIR}/src/lights
+)
+
+target_link_libraries(object PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(object PUBLIC
   ${CMAKE_SOURCE_DIR}/src
   ${CMAKE_SOURCE_DIR}/src/maths
   ${CMAKE_SOURCE_DIR}/src/shapes
@@ -183,6 +198,7 @@ if(APPLE)
   set_target_properties(plane PROPERTIES SUFFIX ".so")
   set_target_properties(cylinder PROPERTIES SUFFIX ".so")
   set_target_properties(cone PROPERTIES SUFFIX ".so")
+  set_target_properties(object PROPERTIES SUFFIX ".so")
   set_target_properties(directional PROPERTIES SUFFIX ".so")
   set_target_properties(ambient PROPERTIES SUFFIX ".so")
   set_target_properties(point PROPERTIES SUFFIX ".so")
@@ -198,6 +214,7 @@ execute_process(
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/plane.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/cylinder.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/cone.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/object.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/directional.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/ambient.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/point.so ${PROJECT_SOURCE_DIR}/plugins/

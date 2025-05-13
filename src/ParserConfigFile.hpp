@@ -6,6 +6,8 @@
 #include "Camera.hpp"
 #include "Factory.hpp"
 #include "LightComposite.hpp"
+#include "Object.hpp"
+#include "Ray.hpp"
 #include "ShapeComposite.hpp"
 #include "string"
 
@@ -51,6 +53,10 @@ namespace Raytracer {
 
       void parseInternal(ShapeComposite &, LightComposite &, const libconfig::Setting &);
 
+      void parseMtl(const std::string &mtl_file, Object &object);
+
+      void parseObj(const std::string &obj_file, Object &object);
+
       void parseSpheres(ShapeComposite &sc,
                         const libconfig::Setting &spheresSetting);
       void parseCylinders(ShapeComposite &sc,
@@ -59,6 +65,8 @@ namespace Raytracer {
                       const libconfig::Setting &conesSetting);
       void parsePlanes(ShapeComposite &sc,
                        const libconfig::Setting &planesSetting);
+      void parseObjects(ShapeComposite &sc,
+                        const libconfig::Setting &objectsSetting);
 
       void parseDirectionalLights(LightComposite &lc,
                                   const libconfig::Setting &lightsSetting);
