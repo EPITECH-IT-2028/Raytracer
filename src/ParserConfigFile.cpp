@@ -4,8 +4,10 @@
 #include <tuple>
 #include "AmbientLight.hpp"
 #include "Cone.hpp"
+#include "ConeInf.hpp"
 #include "Object.hpp"
 #include "Cylinder.hpp"
+#include "CylinderInf.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
 #include "Reflections.hpp"
@@ -270,6 +272,37 @@ void Raytracer::ParserConfigFile::parseCylinders(
   }
 }
 
+void Raytracer::ParserConfigFile::parseCylindersInf(
+    Raytracer::ShapeComposite &sc,
+    const libconfig::Setting &cylindersInfSetting) {
+  for (int i = 0; i < cylindersInfSetting.getLength(); i++) {
+    const libconfig::Setting &cylinder = cylindersInfSetting[i];
+    auto newCylinder = _factory.create<Raytracer::CylinderInf>("cylinderInf");
+    if (!newCylinder)
+      throw ParseError("Failed to create cylinder object from factory.");
+    if (!cylinder.exists("r"))
+      throw ParseError(std::string("Cylinder radius not found at ") +
+                       cylinder.getPath());
+    if (!cylinder.exists("color"))
+      throw ParseError(std::string("Cylinder color not found at ") +
+                       cylinder.getPath());
+
+    newCylinder->setCenter(parsePoint3D(cylinder));
+    if (cylinder.lookup("r").operator double() <= 0)
+      throw ParseError(std::string("Cylinder radius must be positive at ") +
+                       cylinder.getPath());
+    newCylinder->setRadius(cylinder.lookup("r").operator double());
+    newCylinder->setColor(parseColor(cylinder["color"]));
+
+    // Optional options
+    if (cylinder.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(cylinder["translate"]);
+      newCylinder->translate(translation);
+    }
+    sc.addShape(newCylinder);
+  }
+}
+
 void Raytracer::ParserConfigFile::parseCones(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &conesSetting) {
   for (int i = 0; i < conesSetting.getLength(); i++) {
@@ -293,6 +326,36 @@ void Raytracer::ParserConfigFile::parseCones(
                        cone.getPath());
     newCone->setRadius(cone.lookup("r").operator double());
     newCone->setHeight(cone.lookup("h").operator double());
+    newCone->setColor(parseColor(cone["color"]));
+
+    // Optional options
+    if (cone.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(cone["translate"]);
+      newCone->translate(translation);
+    }
+    sc.addShape(newCone);
+  }
+}
+
+void Raytracer::ParserConfigFile::parseConesInf(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &conesInfSetting) {
+  for (int i = 0; i < conesInfSetting.getLength(); i++) {
+    const libconfig::Setting &cone = conesInfSetting[i];
+    auto newCone = _factory.create<Raytracer::ConeInf>("coneInf");
+    if (!newCone)
+      throw ParseError("Failed to create cone object from factory.");
+    if (!cone.exists("a"))
+      throw ParseError(std::string("Cone angle not found at ") +
+                       cone.getPath());
+    if (!cone.exists("color"))
+      throw ParseError(std::string("Cone color not found at ") +
+                       cone.getPath());
+
+    newCone->setCenter(parsePoint3D(cone));
+    if (cone.lookup("a").operator double() <= 0)
+      throw ParseError(std::string("Cone angle must be positive at ") +
+                       cone.getPath());
+    newCone->setAngle(cone.lookup("a").operator double());
     newCone->setColor(parseColor(cone["color"]));
 
     // Optional options
@@ -391,12 +454,28 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       parseCylinders(sc, root["primitives"]["cylinders"]);
     }
 
+    // CYLINDERSINF
+    if (root.exists("primitives") && root["primitives"].exists("cylindersInf")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "x", "y", "z", "r", "color", "translate", "material"};
+      checkSettings(root["primitives"]["cylindersInf"], allowedSettings);
+      parseCylindersInf(sc, root["primitives"]["cylindersInf"]);
+    }
+
     // CONES
     if (root.exists("primitives") && root["primitives"].exists("cones")) {
       static const std::unordered_set<std::string> allowedSettings = {
           "x", "y", "z", "r", "h", "color", "translate", "material"};
       checkSettings(root["primitives"]["cones"], allowedSettings);
       parseCones(sc, root["primitives"]["cones"]);
+    }
+
+    // CONESINF
+    if (root.exists("primitives") && root["primitives"].exists("conesInf")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "x", "y", "z", "a", "color", "translate", "material"};
+      checkSettings(root["primitives"]["conesInf"], allowedSettings);
+      parseConesInf(sc, root["primitives"]["conesInf"]);
     }
 
     // PLANES
