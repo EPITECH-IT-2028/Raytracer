@@ -37,7 +37,10 @@ namespace Raytracer {
     private:
       libconfig::Config _cfg;
       std::vector<std::string> _plugins;
+      std::vector<std::string> _fileAlreadyParse;
       Factory _factory = Factory();
+      std::string _currentFilePath;
+  
 
       static std::tuple<float, float, float> parseCoordinates(
           const libconfig::Setting &setting);
@@ -45,6 +48,8 @@ namespace Raytracer {
       static Math::Vector3D parseVector3D(const libconfig::Setting &setting);
       static Math::Vector3D parseColor(const libconfig::Setting &colorSetting);
       static std::string parseString(const libconfig::Setting &setting);
+
+      void parseInternal(ShapeComposite &, LightComposite &, const libconfig::Setting &);
 
       void parseSpheres(ShapeComposite &sc,
                         const libconfig::Setting &spheresSetting);
