@@ -1,15 +1,17 @@
 # Raytracer :white_circle: :sunny:
-Raytracer is a project we've done for Epitech. The goal of this project is simple : do a raytracer.
+Raytracer is a project we've done at Epitech. The goal of this project is simple : do a raytracer.
 
 ## Setup 
-### 1. Install libconfig 
+### 1. Install libconfig & SFML
 - On Ubuntu:
 ```bash
 sudo apt-get install libconfig++-dev
+sudo apt-get install libsfml-dev
 ```
 - On MacOs:
 ```bash
 brew install libconfig
+brew install sfml@2 
 ```
 
 ### 2. Compile the project with CMake 
