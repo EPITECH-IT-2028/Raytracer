@@ -337,6 +337,10 @@ if(BUILD_TESTING)
       tests/primitives/cones/missingFields/color/missingColor.cpp
       tests/primitives/cones/invalidFields/position/invalidPosition.cpp
       tests/primitives/cones/invalidFields/color/invalidColor.cpp
+      tests/primitives/planes/missingFields/missingFields.cpp
+      tests/primitives/planes/missingFields/color/missingColor.cpp
+      tests/primitives/planes/invalidFields/invalidFields.cpp
+      tests/primitives/planes/invalidFields/color/invalidColor.cpp
 
       tests/lights/parseLights.cpp
       tests/lights/missingFields/missingFields.cpp
