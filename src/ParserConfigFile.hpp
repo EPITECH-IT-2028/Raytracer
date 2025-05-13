@@ -17,10 +17,22 @@ namespace Raytracer {
 
       ~ParserConfigFile() = default;
 
+      /**
+       * Main parsing function used throughout the project.
+       * Parses camera, primitives, lights, and scenes from the config file.
+       */
       void parseConfigFile(Camera &, ShapeComposite &, LightComposite &);
+      
+      /**
+       * Secondary parsing function used specifically by parseScenes.
+       * Parses only primitives and lights (no camera) when loading scenes referenced
+       * by other config files.
+       */
+      void parseConfigFile(ShapeComposite &, LightComposite &);
       void parseCamera(Camera &, const libconfig::Setting &);
       void parsePrimitives(ShapeComposite &, const libconfig::Setting &);
       void parseLights(LightComposite &, const libconfig::Setting &);
+      void parseScenes(ShapeComposite &, LightComposite &, const libconfig::Setting &);
 
     private:
       libconfig::Config _cfg;

@@ -1,4 +1,5 @@
 #include "ParserConfigFile.hpp"
+#include <iostream>
 #include <libconfig.h++>
 #include <string>
 #include <tuple>
@@ -6,6 +7,7 @@
 #include "Cone.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
+#include "LightComposite.hpp"
 #include "Plane.hpp"
 #include "Reflections.hpp"
 #include "ShapeComposite.hpp"
@@ -429,6 +431,23 @@ void Raytracer::ParserConfigFile::checkSettings(
   }
 }
 
+void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
+                                              LightComposite &lc,
+                                              const libconfig::Setting &root) {
+  if (root.exists("scenes")) {
+    static const std::unordered_set<std::string> allowedSettings = {
+        "scenesPaths"};
+    checkSettings(root["scenes"], allowedSettings);
+    const libconfig::Setting &scenes = root["scenes"]["scenesPaths"];
+    for (const auto &scene : scenes) {
+      std::string path = scene.lookup("path");
+      std::cout << path << std::endl;
+      ParserConfigFile parser(path, _plugins);
+      parser.parseConfigFile(sc, lc);
+    }
+  }
+}
+
 void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
                                                   ShapeComposite &sc,
                                                   LightComposite &lc) {
@@ -445,6 +464,44 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
         std::string("General libconfig error during camera parsing: ") +
         cfgex.what());
   }
+
+  // PRIMITIVES
+  try {
+    parsePrimitives(sc, root);
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during primitives parsing: ") +
+        cfgex.what());
+  }
+
+  // LIGHTS
+  try {
+    parseLights(lc, root);
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during lights parsing: ") +
+        cfgex.what());
+  }
+
+  try {
+    parseScenes(sc, lc, root);
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during scenes parsing: ") +
+        cfgex.what());
+  }
+}
+
+void Raytracer::ParserConfigFile::parseConfigFile(ShapeComposite &sc,
+                                                  LightComposite &lc) {
+  const libconfig::Setting &root = _cfg.getRoot();
+  _factory.initFactories(_plugins);
 
   // PRIMITIVES
   try {
