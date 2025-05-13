@@ -1,14 +1,20 @@
 # Raytracer :white_circle: :sunny:
+
 Raytracer is a project we've done at Epitech. The goal of this project is simple : do a raytracer.
 
 ## Setup 
+
 ### 1. Install libconfig & SFML
+
 - On Ubuntu:
+
 ```bash
 sudo apt-get install libconfig++-dev
 sudo apt-get install libsfml-dev
 ```
+
 - On MacOs:
+
 ```bash
 brew install libconfig
 brew install sfml@2 
@@ -23,9 +29,11 @@ cmake -B .build && cmake --build .build
 ```bash
 ./raytracer ./scenes/example.cfg
 ```
+
 ## Features
 
-#### Lights: 
+#### Lights
+
 - [x] Directional lights
 - [x] Ambient lights
 - [x] Point lights
@@ -34,7 +42,8 @@ cmake -B .build && cmake --build .build
 - [x] Multiple point lights
 - [x] Drop shadows
 
-#### Primitives:
+#### Primitives
+
 - [x] Spheres
 - [x] Planes 
 - [x] .OBJ files
@@ -48,14 +57,16 @@ cmake -B .build && cmake --build .build
 - [ ] Tanglecube
 - [ ] Torus
 
-#### Materials:
+#### Materials
+
 - [x] Reflections
 - [x] Refractions
 - [x] Transparency
 - [x] Flat colors 
 - [x] Phong reflection
 
-#### Transformations:
+#### Transformations
+
 - [x] Translations
 - [x] Rotations
 - [ ] Scale
@@ -63,11 +74,14 @@ cmake -B .build && cmake --build .build
 - [ ] Transformation matrix 
 - [ ] Scene 
 
-#### Bonus:
+#### Bonus
+
 - [x] Free cam
 
 # Contributing
+
 If you want to contribute to the project, please create a new branch and make a pull request.
+
 ## Authors
 - [@Etienne](https://github.com/Etiennelbre)
 - [@Arthur](https://github.com/ZifFiji)
