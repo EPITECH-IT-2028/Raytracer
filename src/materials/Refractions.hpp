@@ -14,6 +14,8 @@ namespace Raytracer {
 
       ~Refractions() override = default;
 
+      float getBaseColorRatio() const { return 0.1f; }
+
       Math::Vector3D computeMaterial(const Math::Vector3D &normal,
                                      const Math::Vector3D &viewDir,
                                      const Math::Point3D &hitPoint,

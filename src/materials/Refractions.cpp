@@ -38,7 +38,8 @@ Math::Vector3D Raytracer::Refractions::computeMaterial(
     refractedDir.normalize();
     Raytracer::Ray refractedRay(hitPoint + refractedDir * 0.001f, refractedDir);
     Math::Vector3D refractedColor = rayColorFunc(refractedRay, shapes, lights, camera, depth - 1);
-    return color * 0.1f + refractedColor * 0.9f;
+    const float baseColorRatio = getBaseColorRatio();
+    return color * baseColorRatio + refractedColor * (1.0f - baseColorRatio);
 }
 
 extern "C" {
