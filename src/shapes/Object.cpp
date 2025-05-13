@@ -14,6 +14,11 @@
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Object::hits(
     const Raytracer::Ray &ray) const {
+    double eps = 0.0001;
+    double closest_t = 0.0;
+    Math::Vector3D closest_color = {0.0, 0.0, 0.0};
+    bool hit = false;
+
     for (const auto &face : _faces) {
       Math::Point3D v0 = _vertices[face.vertex[0]];
       Math::Point3D v1 = _vertices[face.vertex[1]];
@@ -24,7 +29,7 @@ std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Object:
       Math::Vector3D h = Math::cross(ray.direction, edge2);
       double a = edge1.dot(h);
 
-      if (a > -0.0001 && a < 0.0001)
+      if (a > -eps && a < eps)
         continue;
 
       double f = 1.0 / a;
@@ -42,12 +47,22 @@ std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Object:
 
       double t = f * edge2.dot(q);
 
-      if (t > 0.0001) {
-        Math::Vector3D color = _materials.at(face.material_name).diffuse;
-        return {t, color, this};
+      if (t > eps && (t < closest_t || closest_t == 0.0)) {
+        closest_t = t;
+        hit = true;
+
+        if (_materials.find(face.material_name) != _materials.end()) {
+          const Mtl &material = _materials.at(face.material_name);
+          closest_color = material.diffuse;
+        } else {
+          closest_color = {1.0, 1.0, 1.0};
+        }
       }
     }
-    return {0.0, Math::Vector3D(0.0, 0.0, 0.0), this};
+    if (hit)
+      return {closest_t, closest_color, this};
+    else
+      return {0.0, Math::Vector3D(0.0, 0.0, 0.0), this};
 }
 
 extern "C" {

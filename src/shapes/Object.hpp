@@ -33,7 +33,7 @@ namespace Raytracer {
       };
 
       Object() 
-          : _obj_file(""), _vertices(), _faces(), _materials() {}
+          : _obj_file{}, _vertices{}, _faces{}, _materials{} {}
 
       ~Object() = default;
 

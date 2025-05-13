@@ -366,9 +366,6 @@ void Raytracer::ParserConfigFile::parseObjects(
     if (!object.exists("obj_file"))
       throw ParseError(std::string("Object file not found at ") +
                        object.getPath());
-    if (!object.exists("mtl_file"))
-      throw ParseError(std::string("Material file not found at ") +
-                       object.getPath());
     parseObj(object.lookup("obj_file").operator std::string(),
               *newObject);
     sc.addShape(newObject);
@@ -412,12 +409,10 @@ void Raytracer::ParserConfigFile::parsePrimitives(
 
     // OBJECTS
     if (root.exists("primitives") && root["primitives"].exists("objects")) {
-      std::cout << "[INFO] - Parsing objects..." << std::endl;
       static const std::unordered_set<std::string> allowedSettings = {
-          "obj_file", "mtl_file"};
+          "obj_file"};
       checkSettings(root["primitives"]["objects"], allowedSettings);
       parseObjects(sc, root["primitives"]["objects"]);
-      std::cout << "[INFO] - End parsing objects..." << std::endl;
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw ParseError(std::string("Primitives config: ") + nfex.getPath() +
