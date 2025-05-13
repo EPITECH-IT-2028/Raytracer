@@ -325,7 +325,6 @@ if(BUILD_TESTING)
       tests/camera/invalidFields/rotation/invalidRotationFields.cpp
 
       tests/primitives/parsePrimitives.cpp
-      tests/primitives/spheres/missingFields/missingFields.cpp
       tests/primitives/spheres/missingFields/position/missingPosition.cpp
       tests/primitives/spheres/missingFields/color/missingColor.cpp
       tests/primitives/spheres/invalidFields/position/invalidPosition.cpp
