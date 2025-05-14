@@ -4,7 +4,6 @@
 #include <vector>
 #include "Camera.hpp"
 
-
 namespace Raytracer {
   class Scene {
     public:
@@ -20,16 +19,36 @@ namespace Raytracer {
 
       void handleInput();
 
-      void createOutputFileName();
-
-      void createPPMFile();
-
       void parsePlugins();
 
-      void writeColor(std::ofstream &file, sf::Color color);
     private:
+      /*
+       * This function is used to create the output file name thanks to the
+       * input one.
+       */
+      void createPPMFile();
+
+      /*
+       * This function is used to write colors of the image in the output file
+       */
+      void writeColor(std::ofstream &file, sf::Color color);
+
+      /*
+       * This function is used to create the name of output file name thanks to
+       * the input one.
+       */
+      void createOutputFileName();
+
+      /*
+       * This attribut is used to keep the input file during the program.
+       */
       std::string _inputFilePath;
+
+      /*
+       * This attribut is used to keep the output file during the program.
+       */
       std::string _outputFilePath;
+
       int _width;
       int _height;
       sf::RenderWindow _window;

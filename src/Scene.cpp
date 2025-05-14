@@ -6,7 +6,7 @@
 #include "Renderer.hpp"
 #include "exceptions/RaytracerException.hpp"
 
-#define EXTENSION_LENGHT 4
+#define EXTENSION_LENGTH 4
 
 Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
     : _inputFilePath(inputPath), _width(width), _height(height) {
@@ -60,13 +60,16 @@ void Raytracer::Scene::createOutputFileName() {
   }
   outputFileName = _inputFilePath.substr(
       indexCompleteFileName,
-      _inputFilePath.length() - indexCompleteFileName - EXTENSION_LENGHT);
+      _inputFilePath.length() - indexCompleteFileName - EXTENSION_LENGTH);
   for (const auto &entry :
        std::filesystem::directory_iterator("./screenshots/")) {
     std::string path = entry.path();
     if (path.find(outputFileName)) {
       counterScreenshotFileName++;
     }
+  }
+  if (!std::filesystem::exists("./screenshots")) {
+    std::filesystem::create_directory("./screenshots");
   }
   outputFileName =
       "./screenshots/" + outputFileName +
@@ -80,10 +83,13 @@ void Raytracer::Scene::createOutputFileName() {
 void Raytracer::Scene::createPPMFile() {
   createOutputFileName();
   std::ofstream outputFile(_outputFilePath);
+  if (!outputFile.is_open()) {
+    throw RaytracerError("Error while opening the ouputfile.");
+  }
   outputFile << "P3\n";
   outputFile << _width << " " << _height << "\n";
   outputFile << "255\n";
-  for (auto color : _framebuffer) {
+  for (const auto& color : _framebuffer) {
     writeColor(outputFile, color);
   }
   outputFile.close();
