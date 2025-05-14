@@ -6,6 +6,7 @@
 #include "Camera.hpp"
 #include "Factory.hpp"
 #include "LightComposite.hpp"
+#include "Object.hpp"
 #include "ShapeComposite.hpp"
 #include "string"
 
@@ -17,15 +18,30 @@ namespace Raytracer {
 
       ~ParserConfigFile() = default;
 
+      /**
+       * Main parsing function used throughout the project.
+       * Parses camera, primitives, lights, and scenes from the config file.
+       */
       void parseConfigFile(Camera &, ShapeComposite &, LightComposite &);
+      
+      /**
+       * Secondary parsing function used specifically by parseScenes.
+       * Parses only primitives and lights (no camera) when loading scenes referenced
+       * by other config files.
+       */
+      void parseConfigFile(ShapeComposite &, LightComposite &);
       void parseCamera(Camera &, const libconfig::Setting &);
       void parsePrimitives(ShapeComposite &, const libconfig::Setting &);
       void parseLights(LightComposite &, const libconfig::Setting &);
+      void parseScenes(ShapeComposite &, LightComposite &, const libconfig::Setting &);
 
     private:
       libconfig::Config _cfg;
       std::vector<std::string> _plugins;
+      std::unordered_set<std::string> _fileAlreadyParse;
       Factory _factory = Factory();
+      std::string _currentFilePath;
+  
 
       static std::tuple<float, float, float> parseCoordinates(
           const libconfig::Setting &setting);
@@ -34,14 +50,28 @@ namespace Raytracer {
       static Math::Vector3D parseColor(const libconfig::Setting &colorSetting);
       static std::string parseString(const libconfig::Setting &setting);
 
+      void parseInternal(ShapeComposite &, LightComposite &, const libconfig::Setting &);
+
+      void parseMtl(const std::string &mtl_file, Object &object);
+
+      void parseObj(const std::string &obj_file, Object &object);
+
       void parseSpheres(ShapeComposite &sc,
                         const libconfig::Setting &spheresSetting);
       void parseCylinders(ShapeComposite &sc,
                           const libconfig::Setting &cylindersSetting);
+      void parseCylindersInf(ShapeComposite &sc,
+                             const libconfig::Setting &cylindersInfSetting);
       void parseCones(ShapeComposite &sc,
                       const libconfig::Setting &conesSetting);
+      void parseConesInf(ShapeComposite &sc,
+                         const libconfig::Setting &conesInfSetting);
       void parsePlanes(ShapeComposite &sc,
                        const libconfig::Setting &planesSetting);
+      void parseObjects(ShapeComposite &sc,
+                        const libconfig::Setting &objectsSetting);
+      void parseTriangles(ShapeComposite &sc,
+                          const libconfig::Setting &trianglesSetting);
 
       void parseDirectionalLights(LightComposite &lc,
                                   const libconfig::Setting &lightsSetting);
@@ -49,7 +79,10 @@ namespace Raytracer {
                              const libconfig::Setting &ambientInfo);
       void parseDiffuseLight(LightComposite &lc,
                              const libconfig::Setting &diffuseInfo);
-      void checkSettings(const libconfig::Setting &setting,
-                         const std::unordered_set<std::string> &requiredFields) const;
+      void parsePointLight(LightComposite &lc,
+                           const libconfig::Setting &pointInfo);
+      void checkSettings(
+          const libconfig::Setting &setting,
+          const std::unordered_set<std::string> &requiredFields) const;
   };
 }  // namespace Raytracer
