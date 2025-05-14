@@ -1,27 +1,21 @@
-#include <algorithm>
-#include <fstream>
-#include <limits>
-#include <sstream>
-#include <string>
 #include <tuple>
-#include <vector>
-#include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
 #include "Vector3D.hpp"
 #include "Triangle.hpp"
 #include <iostream>
 
+#define EPS 1e-6
+
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Triangle::hits(
     const Raytracer::Ray &ray) const {
-    double eps = 0.0001;
 
     Math::Vector3D edge1 = _p2 - _p1;
     Math::Vector3D edge2 = _p3 - _p1;
     Math::Vector3D h = Math::cross(ray.direction, edge2);
     double a = edge1.dot(h);
 
-    if (a > -eps && a < eps)
+    if (a > -EPS && a < EPS)
       return {0.0, _color, this};
 
     double f = 1.0 / a;
@@ -39,7 +33,7 @@ std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Triangl
 
     double t = f * edge2.dot(q);
 
-    if (t > eps)
+    if (t > EPS)
       return {t, _color, this};
     return {0.0, _color, this};
 }

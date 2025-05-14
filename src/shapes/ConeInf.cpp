@@ -4,7 +4,7 @@
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 
-const double eps = 1e-6;
+#define EPS 1e-6
 
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::ConeInf::hits(const Raytracer::Ray &ray) const {
@@ -34,14 +34,14 @@ Raytracer::ConeInf::hits(const Raytracer::Ray &ray) const {
   double t2 = (-b + sqrt_disc) / (2.0 * a);
 
   double final_t = 0.0;
-  if (t1 > eps && t2 > eps)
+  if (t1 > EPS && t2 > EPS)
     final_t = std::min(t1, t2);
-  else if (t1 > eps)
+  else if (t1 > EPS)
     final_t = t1;
-  else if (t2 > eps)
+  else if (t2 > EPS)
     final_t = t2;
 
-  if (final_t <= eps)
+  if (final_t <= EPS)
     return {0.0, _color, this};
 
   return {final_t, _color, this};
