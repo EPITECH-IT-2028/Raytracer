@@ -29,7 +29,7 @@ TEST_F(ParserConfigFileTest, InvalidCameraPositionFields) {
   Raytracer::ShapeComposite sc;
   Raytracer::LightComposite lc;
 
-  EXPECT_EQ(camera.origin.x, 0);
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
 
   _cfgFile = "tests/camera/invalidFields/position/invalidY.cfg";
   Raytracer::ParserConfigFile parser2(_cfgFile, _plugins);
@@ -37,7 +37,7 @@ TEST_F(ParserConfigFileTest, InvalidCameraPositionFields) {
   Raytracer::ShapeComposite sc2;
   Raytracer::LightComposite lc2;
 
-  EXPECT_EQ(camera2.origin.y, 0);
+  EXPECT_THROW(parser2.parseConfigFile(camera2, sc2, lc2), Raytracer::ParseError);
 
   _cfgFile = "tests/camera/invalidFields/position/invalidZ.cfg";
   Raytracer::ParserConfigFile parser3(_cfgFile, _plugins);
@@ -45,5 +45,5 @@ TEST_F(ParserConfigFileTest, InvalidCameraPositionFields) {
   Raytracer::ShapeComposite sc3;
   Raytracer::LightComposite lc3;
 
-  EXPECT_EQ(camera3.origin.z, 0);
+  EXPECT_THROW(parser3.parseConfigFile(camera3, sc3, lc3), Raytracer::ParseError);
 }

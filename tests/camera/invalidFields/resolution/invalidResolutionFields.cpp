@@ -29,7 +29,7 @@ TEST_F(ParserConfigFileTest, InvalidCameraResolutionFields) {
   Raytracer::ShapeComposite sc;
   Raytracer::LightComposite lc;
 
-  EXPECT_EQ(camera.getWidth(), 0);
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
 
   _cfgFile = "tests/camera/invalidFields/resolution/invalidHeight.cfg";
   Raytracer::ParserConfigFile parser2(_cfgFile, _plugins);
@@ -37,5 +37,5 @@ TEST_F(ParserConfigFileTest, InvalidCameraResolutionFields) {
   Raytracer::ShapeComposite sc2;
   Raytracer::LightComposite lc2;
 
-  EXPECT_EQ(camera2.getHeight(), 0);
+  EXPECT_THROW(parser2.parseConfigFile(camera2, sc2, lc2), Raytracer::ParseError);
 }

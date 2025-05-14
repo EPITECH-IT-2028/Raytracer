@@ -29,7 +29,7 @@ TEST_F(ParserConfigFileTest, MissingCameraRotationFields) {
   Raytracer::ShapeComposite sc;
   Raytracer::LightComposite lc;
 
-  EXPECT_EQ(camera._pitch, -11);
+  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
 
   _cfgFile = "tests/camera/missingFields/rotation/missingY.cfg";
   Raytracer::ParserConfigFile parser2(_cfgFile, _plugins);
@@ -37,7 +37,7 @@ TEST_F(ParserConfigFileTest, MissingCameraRotationFields) {
   Raytracer::ShapeComposite sc2;
   Raytracer::LightComposite lc2;
 
-  EXPECT_EQ(camera2._yaw, -157);
+  EXPECT_THROW(parser2.parseConfigFile(camera2, sc2, lc2), Raytracer::ParseError);
 
   /*
    * [TODO]: Implement the missing rotation fields
@@ -47,6 +47,6 @@ TEST_F(ParserConfigFileTest, MissingCameraRotationFields) {
    * Raytracer::ShapeComposite sc3;
    * Raytracer::LightComposite lc3;
 
-   * EXPECT_EQ(camera3._roll, 0);
+   * EXPECT_THROW(parser3.parseConfigFile(camera3, sc3, lc3), Raytracer::ParseError);
   */
 }
