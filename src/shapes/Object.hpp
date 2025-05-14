@@ -59,8 +59,6 @@ namespace Raytracer {
       Math::Vector3D getNormal(
           const Math::Point3D &hitPoint) const override {(void)hitPoint; return Math::Vector3D(0, 0, 0);};
 
-      bool intersectsBoundingBox(const Raytracer::Ray &ray) const;
-      
     private:
       std::string _obj_file;
       std::vector<Math::Point3D> _vertices;

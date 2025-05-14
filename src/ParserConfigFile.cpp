@@ -10,6 +10,7 @@
 #include "CylinderInf.hpp"
 #include "DirectionalLight.hpp"
 #include "Plane.hpp"
+#include "PointLight.hpp"
 #include "Reflections.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
@@ -278,8 +279,8 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
     const libconfig::Setting &cylindersInfSetting) {
   for (int i = 0; i < cylindersInfSetting.getLength(); i++) {
     const libconfig::Setting &cylinder = cylindersInfSetting[i];
-    auto newCylinder = _factory.create<Raytracer::CylinderInf>("cylinderInf");
-    if (!newCylinder)
+    auto newCylinderInf = _factory.create<Raytracer::CylinderInf>("cylinderInf");
+    if (!newCylinderInf)
       throw ParseError("Failed to create cylinder object from factory.");
     if (!cylinder.exists("r"))
       throw ParseError(std::string("Cylinder radius not found at ") +
@@ -288,19 +289,28 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
       throw ParseError(std::string("Cylinder color not found at ") +
                        cylinder.getPath());
 
-    newCylinder->setCenter(parsePoint3D(cylinder));
+    newCylinderInf->setCenter(parsePoint3D(cylinder));
     if (cylinder.lookup("r").operator double() <= 0)
       throw ParseError(std::string("Cylinder radius must be positive at ") +
                        cylinder.getPath());
-    newCylinder->setRadius(cylinder.lookup("r").operator double());
-    newCylinder->setColor(parseColor(cylinder["color"]));
+    newCylinderInf->setRadius(cylinder.lookup("r").operator double());
+    newCylinderInf->setColor(parseColor(cylinder["color"]));
 
     // Optional options
     if (cylinder.exists("translate")) {
       Math::Vector3D translation = parseVector3D(cylinder["translate"]);
-      newCylinder->translate(translation);
+      newCylinderInf->translate(translation);
     }
-    sc.addShape(newCylinder);
+    if (cylinder.exists("material")) {
+      std::string materialName = parseString(cylinder["material"]);
+      if (materialName == "reflective") {
+        newCylinderInf->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
+    }
+    sc.addShape(newCylinderInf);
   }
 }
 
@@ -334,6 +344,15 @@ void Raytracer::ParserConfigFile::parseCones(
       Math::Vector3D translation = parseVector3D(cone["translate"]);
       newCone->translate(translation);
     }
+    if (cone.exists("material")) {
+      std::string materialName = parseString(cone["material"]);
+      if (materialName == "reflective") {
+        newCone->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
+    }
     sc.addShape(newCone);
   }
 }
@@ -342,8 +361,8 @@ void Raytracer::ParserConfigFile::parseConesInf(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &conesInfSetting) {
   for (int i = 0; i < conesInfSetting.getLength(); i++) {
     const libconfig::Setting &cone = conesInfSetting[i];
-    auto newCone = _factory.create<Raytracer::ConeInf>("coneInf");
-    if (!newCone)
+    auto newConeInf = _factory.create<Raytracer::ConeInf>("coneInf");
+    if (!newConeInf)
       throw ParseError("Failed to create cone object from factory.");
     if (!cone.exists("a"))
       throw ParseError(std::string("Cone angle not found at ") +
@@ -352,19 +371,28 @@ void Raytracer::ParserConfigFile::parseConesInf(
       throw ParseError(std::string("Cone color not found at ") +
                        cone.getPath());
 
-    newCone->setCenter(parsePoint3D(cone));
+    newConeInf->setCenter(parsePoint3D(cone));
     if (cone.lookup("a").operator double() <= 0)
       throw ParseError(std::string("Cone angle must be positive at ") +
                        cone.getPath());
-    newCone->setAngle(cone.lookup("a").operator double());
-    newCone->setColor(parseColor(cone["color"]));
+    newConeInf->setAngle(cone.lookup("a").operator double());
+    newConeInf->setColor(parseColor(cone["color"]));
 
     // Optional options
     if (cone.exists("translate")) {
       Math::Vector3D translation = parseVector3D(cone["translate"]);
-      newCone->translate(translation);
+      newConeInf->translate(translation);
     }
-    sc.addShape(newCone);
+    if (cone.exists("material")) {
+      std::string materialName = parseString(cone["material"]);
+      if (materialName == "reflective") {
+        newConeInf->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
+    }
+    sc.addShape(newConeInf);
   }
 }
 
@@ -466,6 +494,16 @@ void Raytracer::ParserConfigFile::parseTriangles(
       Math::Vector3D translation = parseVector3D(triangle["translate"]);
       newTriangle->translate(translation);
     }
+    if (triangle.exists("material")) {
+      std::string materialName = parseString(triangle["material"]);
+      if (materialName == "reflective") {
+        newTriangle->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
+      }
+    }
     sc.addShape(newTriangle);
   }
 }
@@ -565,6 +603,30 @@ void Raytracer::ParserConfigFile::parseAmbientLight(
   lc.addLight(newAmbient);
 }
 
+void Raytracer::ParserConfigFile::parsePointLight(
+    Raytracer::LightComposite &lc, const libconfig::Setting &pointInfo) {
+  for (int i = 0; i < pointInfo.getLength(); i++) {
+    const libconfig::Setting &point = pointInfo[i];
+    const libconfig::Setting &colorInfo = point["color"];
+    auto newPoint = _factory.create<Raytracer::PointLight>("point");
+    if (newPoint == nullptr)
+      throw ParseError("Failed to create point light object from factory.");
+    Math::Point3D position = parsePoint3D(point);
+    Math::Vector3D color = parseColor(colorInfo);
+    double intensity = point.lookup("intensity");
+    if (intensity < 0) {
+      throw ParseError(
+          "Failed to set intensity. Intensity must be over 0 but it was : " +
+          std::to_string(intensity));
+    }
+    newPoint->setIntensity(intensity);
+    newPoint->setPosition(position);
+    newPoint->setColor(color);
+    newPoint->setType("PointLight");
+    lc.addLight(newPoint);
+  }
+}
+
 void Raytracer::ParserConfigFile::parseDiffuseLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &diffuseInfo) {
   double diffuseMultiplier = diffuseInfo;
@@ -603,11 +665,16 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
       checkSettings(root["lights"]["ambient"], allowedSettings);
       parseAmbientLight(lc, root["lights"]["ambient"]);
     }
-
+    // POINT
+    if (root.exists("lights") && root["lights"].exists("point")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "color", "x", "y", "z", "intensity"};
+      checkSettings(root["lights"]["point"], allowedSettings);
+      parsePointLight(lc, root["lights"]["point"]);
+    }
     // DIFFUSE
     if (root.exists("lights") && root["lights"].exists("diffuse"))
       parseDiffuseLight(lc, root["lights"]["diffuse"]);
-
     // DIRECTIONALS
     if (root.exists("lights") && root["lights"].exists("directional")) {
       static const std::unordered_set<std::string> allowedSettings = {

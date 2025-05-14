@@ -69,6 +69,11 @@ add_library(ambient SHARED
   src/lights/AmbientLight.cpp
 )
 
+add_library(point SHARED
+  src/lights/PointLight.cpp
+)
+
+
 add_library(reflection SHARED
   src/materials/Reflections.cpp
 )
@@ -92,6 +97,8 @@ set_target_properties(triangle PROPERTIES PREFIX "")
 set_target_properties(directional PROPERTIES PREFIX "")
 
 set_target_properties(ambient PROPERTIES PREFIX "")
+
+set_target_properties(point PROPERTIES PREFIX "")
 
 set_target_properties(reflection PROPERTIES PREFIX "")
 
@@ -199,6 +206,15 @@ target_include_directories(ambient PUBLIC
   ${CMAKE_SOURCE_DIR}/src/lights
 )
 
+target_link_libraries(point PRIVATE $<TARGET_OBJECTS:math_objects>)
+
+target_include_directories(point PUBLIC
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/src/maths
+        ${CMAKE_SOURCE_DIR}/src/shapes
+        ${CMAKE_SOURCE_DIR}/src/lights
+)
+
 target_link_libraries(reflection PRIVATE $<TARGET_OBJECTS:math_objects>)
 
 target_include_directories(reflection PUBLIC
@@ -234,6 +250,7 @@ if(APPLE)
   set_target_properties(triangle PROPERTIES SUFFIX ".so")
   set_target_properties(directional PROPERTIES SUFFIX ".so")
   set_target_properties(ambient PROPERTIES SUFFIX ".so")
+  set_target_properties(point PROPERTIES SUFFIX ".so")
   set_target_properties(reflection PROPERTIES SUFFIX ".so")
 elseif(UNIX AND NOT APPLE)
   find_package(SFML 2.5.1 COMPONENTS system window graphics REQUIRED)
@@ -252,6 +269,7 @@ execute_process(
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/triangle.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/directional.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/ambient.so ${PROJECT_SOURCE_DIR}/plugins/
+  COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/point.so ${PROJECT_SOURCE_DIR}/plugins/
   COMMAND ln -sf ${PROJECT_SOURCE_DIR}/.build/reflection.so ${PROJECT_SOURCE_DIR}/plugins/
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
