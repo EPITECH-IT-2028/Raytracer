@@ -1,8 +1,12 @@
 #include "Scene.hpp"
 #include <dlfcn.h>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include "Renderer.hpp"
+#include "exceptions/RaytracerException.hpp"
+
+#define EXTENSION_LENGHT 4
 
 Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
     : _inputFilePath(inputPath), _width(width), _height(height) {
@@ -33,6 +37,56 @@ void Raytracer::Scene::updateImage() {
     }
   }
   _texture.update(_image);
+}
+
+void Raytracer::Scene::writeColor(std::ofstream &file, sf::Color color) {
+  file << std::to_string(color.r) << " " << std::to_string(color.g) << " "
+       << std::to_string(color.b) << "\n";
+}
+
+void Raytracer::Scene::createOutputFileName() {
+  if (!_inputFilePath.ends_with(".cfg")) {
+    throw RaytracerError("File must have the following extension: \"*.cfg");
+  }
+  std::size_t indexCompleteFileName = 0;
+  std::size_t counterScreenshotFileName = 0;
+  std::string outputFileName;
+
+  for (std::size_t i = _inputFilePath.length(); i > 0; i--) {
+    if (_inputFilePath[i] == '/') {
+      indexCompleteFileName = i;
+      break;
+    }
+  }
+  outputFileName = _inputFilePath.substr(
+      indexCompleteFileName,
+      _inputFilePath.length() - indexCompleteFileName - EXTENSION_LENGHT);
+  for (const auto &entry :
+       std::filesystem::directory_iterator("./screenshots/")) {
+    std::string path = entry.path();
+    if (path.find(outputFileName)) {
+      counterScreenshotFileName++;
+    }
+  }
+  outputFileName =
+      "./screenshots/" + outputFileName +
+      (counterScreenshotFileName >= 1
+           ? ("(" + std::to_string(counterScreenshotFileName) + ")" + ".ppm")
+           : ".ppm");
+  _outputFilePath = outputFileName;
+}
+
+
+void Raytracer::Scene::createPPMFile() {
+  createOutputFileName();
+  std::ofstream outputFile(_outputFilePath);
+  outputFile << "P3\n";
+  outputFile << _width << " " << _height << "\n";
+  outputFile << "255\n";
+  for (auto color : _framebuffer) {
+    writeColor(outputFile, color);
+  }
+  outputFile.close();
 }
 
 void Raytracer::Scene::handleInput() {
@@ -77,6 +131,8 @@ void Raytracer::Scene::handleInput() {
     _camera.rotatePitch(-rotateSpeed);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     _userQuit = true;
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+    createPPMFile();
 }
 
 void Raytracer::Scene::changeCamQuality() {
@@ -112,6 +168,9 @@ void Raytracer::Scene::parsePlugins() {
 void Raytracer::Scene::render() {
   Raytracer::Renderer renderer(_width, _height, _inputFilePath, _camera,
                                _plugins);
+
+  renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
+  createPPMFile();
 
   while (_window.isOpen()) {
     sf::Event event;
