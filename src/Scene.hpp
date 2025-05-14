@@ -9,7 +9,7 @@ namespace Raytracer {
     public:
       Scene(int width, int height, const std::string &inputFilePath);
 
-  ~Scene();
+      ~Scene();
 
       void render();
 
@@ -19,28 +19,52 @@ namespace Raytracer {
 
       void handleInput();
 
-  void createOutputFileName(const std::string &inputFileName);
+      void parsePlugins();
 
-  void parsePlugins();
+    private:
+      /*
+       * This function is used to create the output file name thanks to the
+       * input one.
+       */
+      void createPPMFile();
 
-private:
-  std::string _inputFilePath;
-  int _width;
-  int _height;
-  sf::RenderWindow _window;
-  sf::Texture _texture;
-  sf::Sprite _sprite;
-  sf::Image _image;
-  std::vector<sf::Color> _framebuffer;
-  std::chrono::time_point<std::chrono::steady_clock> _lastMovement;
-  bool _isHighQuality = true;
-  const float _updateQuality = 0.5f;
-  std::vector<std::string> _plugins;
-  std::vector<void *> _pluginHandles;
-  Raytracer::Camera _camera;
-  void changeCamQuality();
-  bool _cameraMoved = false;
-  const std::chrono::duration<float> _qualityUpdateDelay{0.5f};
-  bool _userQuit = false;
+      /*
+       * This function is used to write colors of the image in the output file
+       */
+      void writeColor(std::ofstream &file, sf::Color color);
+
+      /*
+       * This function is used to create the name of output file name thanks to
+       * the input one.
+       */
+      void createOutputFileName();
+
+      /*
+       * This attribut is used to keep the input file during the program.
+       */
+      std::string _inputFilePath;
+
+      /*
+       * This attribut is used to keep the output file during the program.
+       */
+      std::string _outputFilePath;
+
+      int _width;
+      int _height;
+      sf::RenderWindow _window;
+      sf::Texture _texture;
+      sf::Sprite _sprite;
+      sf::Image _image;
+      std::vector<sf::Color> _framebuffer;
+      std::chrono::time_point<std::chrono::steady_clock> _lastMovement;
+      bool _isHighQuality = true;
+      const float _updateQuality = 0.5f;
+      std::vector<std::string> _plugins;
+      std::vector<void *> _pluginHandles;
+      Raytracer::Camera _camera;
+      void changeCamQuality();
+      bool _cameraMoved = false;
+      const std::chrono::duration<float> _qualityUpdateDelay{0.5f};
+      bool _userQuit = false;
   };
 }  // namespace Raytracer
