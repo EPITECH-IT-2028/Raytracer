@@ -7,6 +7,7 @@
 #include "Object.hpp"
 #include "Cylinder.hpp"
 #include "DirectionalLight.hpp"
+#include "LightComposite.hpp"
 #include "Plane.hpp"
 #include "PointLight.hpp"
 #include "Reflections.hpp"
@@ -96,7 +97,7 @@ void Raytracer::ParserConfigFile::parseObj(const std::string &obj_file, Object &
 
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)
-    : _plugins(plugins) {
+    : _plugins(plugins), _currentFilePath(filename) {
   if (!filename.ends_with(".cfg")) {
     throw ParseError(
         "Config file isn't in correct format (needs to be a *.cfg)");
@@ -563,23 +564,32 @@ void Raytracer::ParserConfigFile::checkSettings(
   }
 }
 
-void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
-                                                  ShapeComposite &sc,
-                                                  LightComposite &lc) {
-  const libconfig::Setting &root = _cfg.getRoot();
-  _factory.initFactories(_plugins);
-
-  // CAMERA
-  try {
-    parseCamera(camera, root);
-  } catch (const RaytracerError &e) {
-    throw;
-  } catch (const libconfig::ConfigException &cfgex) {
-    throw ParseError(
-        std::string("General libconfig error during camera parsing: ") +
-        cfgex.what());
+void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
+                                              LightComposite &lc,
+                                              const libconfig::Setting &root) {
+  if (root.exists("scenes")) {
+    static const std::unordered_set<std::string> allowedSettings = {
+        "scenesPaths"};
+    checkSettings(root["scenes"], allowedSettings);
+    const libconfig::Setting &scenes = root["scenes"]["scenesPaths"];
+    for (const auto &scene : scenes) {
+      std::string path = scene.lookup("path");
+      for (const auto &alreadyParsed : _fileAlreadyParse) {
+        if (alreadyParsed == path) {
+          throw ParseError("Import loop detected. File \"" + path + "\" is already imported into the current scene.");
+        }
+      }
+      _fileAlreadyParse.insert(path);
+      ParserConfigFile parser(path, _plugins);
+      parser._fileAlreadyParse = _fileAlreadyParse;
+      parser.parseConfigFile(sc, lc);
+    }
   }
+}
 
+void Raytracer::ParserConfigFile::parseInternal(ShapeComposite &sc,
+                                                LightComposite &lc,
+                                                const libconfig::Setting &root) {
   // PRIMITIVES
   try {
     parsePrimitives(sc, root);
@@ -601,4 +611,42 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
         std::string("General libconfig error during lights parsing: ") +
         cfgex.what());
   }
+
+  try {
+    parseScenes(sc, lc, root);
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during scenes parsing: ") +
+        cfgex.what());
+  }
+}
+
+void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
+                                                  ShapeComposite &sc,
+                                                  LightComposite &lc) {
+  const libconfig::Setting &root = _cfg.getRoot();
+  _factory.initFactories(_plugins);
+
+  // CAMERA
+  try {
+    parseCamera(camera, root);
+  } catch (const RaytracerError &e) {
+    throw;
+  } catch (const libconfig::ConfigException &cfgex) {
+    throw ParseError(
+        std::string("General libconfig error during camera parsing: ") +
+        cfgex.what());
+  }
+
+  parseInternal(sc, lc, root);
+}
+
+void Raytracer::ParserConfigFile::parseConfigFile(ShapeComposite &sc,
+                                                  LightComposite &lc) {
+  const libconfig::Setting &root = _cfg.getRoot();
+  _factory.initFactories(_plugins);
+
+  parseInternal(sc, lc, root);
 }

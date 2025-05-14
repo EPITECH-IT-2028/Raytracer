@@ -19,15 +19,30 @@ namespace Raytracer {
 
       ~ParserConfigFile() = default;
 
+      /**
+       * Main parsing function used throughout the project.
+       * Parses camera, primitives, lights, and scenes from the config file.
+       */
       void parseConfigFile(Camera &, ShapeComposite &, LightComposite &);
+      
+      /**
+       * Secondary parsing function used specifically by parseScenes.
+       * Parses only primitives and lights (no camera) when loading scenes referenced
+       * by other config files.
+       */
+      void parseConfigFile(ShapeComposite &, LightComposite &);
       void parseCamera(Camera &, const libconfig::Setting &);
       void parsePrimitives(ShapeComposite &, const libconfig::Setting &);
       void parseLights(LightComposite &, const libconfig::Setting &);
+      void parseScenes(ShapeComposite &, LightComposite &, const libconfig::Setting &);
 
     private:
       libconfig::Config _cfg;
       std::vector<std::string> _plugins;
+      std::unordered_set<std::string> _fileAlreadyParse;
       Factory _factory = Factory();
+      std::string _currentFilePath;
+  
 
       static std::tuple<float, float, float> parseCoordinates(
           const libconfig::Setting &setting);
@@ -36,7 +51,10 @@ namespace Raytracer {
       static Math::Vector3D parseColor(const libconfig::Setting &colorSetting);
       static std::string parseString(const libconfig::Setting &setting);
 
+      void parseInternal(ShapeComposite &, LightComposite &, const libconfig::Setting &);
+
       void parseMtl(const std::string &mtl_file, Object &object);
+
       void parseObj(const std::string &obj_file, Object &object);
 
       void parseSpheres(ShapeComposite &sc,
