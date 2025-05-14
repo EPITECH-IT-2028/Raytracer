@@ -320,6 +320,9 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
       if (materialName == "reflective") {
         newCylinderInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newCylinderInf->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -405,6 +408,9 @@ void Raytracer::ParserConfigFile::parseConesInf(
       if (materialName == "reflective") {
         newConeInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newConeInf->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -754,7 +760,8 @@ void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
       std::string path = scene.lookup("path");
       for (const auto &alreadyParsed : _fileAlreadyParse) {
         if (alreadyParsed == path) {
-          throw ParseError("Import loop detected. File \"" + path + "\" is already imported into the current scene.");
+          throw ParseError("Import loop detected. File \"" + path +
+                           "\" is already imported into the current scene.");
         }
       }
       _fileAlreadyParse.insert(path);
@@ -765,9 +772,8 @@ void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
   }
 }
 
-void Raytracer::ParserConfigFile::parseInternal(ShapeComposite &sc,
-                                                LightComposite &lc,
-                                                const libconfig::Setting &root) {
+void Raytracer::ParserConfigFile::parseInternal(
+    ShapeComposite &sc, LightComposite &lc, const libconfig::Setting &root) {
   // PRIMITIVES
   try {
     parsePrimitives(sc, root);
