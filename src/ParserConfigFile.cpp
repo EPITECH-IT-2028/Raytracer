@@ -1,99 +1,108 @@
 #include "ParserConfigFile.hpp"
+#include <iostream>
 #include <libconfig.h++>
 #include <string>
 #include <tuple>
+#include <vector>
 #include "AmbientLight.hpp"
 #include "Cone.hpp"
-#include "Object.hpp"
+#include "ConeInf.hpp"
 #include "Cylinder.hpp"
+#include "CylinderInf.hpp"
 #include "DirectionalLight.hpp"
 #include "LightComposite.hpp"
+#include "Object.hpp"
 #include "Plane.hpp"
 #include "PointLight.hpp"
 #include "Reflections.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
+#include "Triangle.hpp"
 #include "Vector3D.hpp"
 #include "exceptions/RaytracerException.hpp"
-#include <iostream>
-#include <vector>
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 
-void Raytracer::ParserConfigFile::parseObj(const std::string &obj_file, Object &object) {
-          tinyobj::attrib_t attrib;
-          std::vector<tinyobj::shape_t> shapes;
-          std::vector<tinyobj::material_t> materials;
-          std::string warn, err;
+void Raytracer::ParserConfigFile::parseObj(const std::string &obj_file,
+                                           Object &object) {
+  tinyobj::attrib_t attrib;
+  std::vector<tinyobj::shape_t> shapes;
+  std::vector<tinyobj::material_t> materials;
+  std::string warn, err;
 
-          bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, obj_file.c_str(), nullptr);
+  bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err,
+                                  obj_file.c_str(), nullptr);
 
-          if (!warn.empty()) {
-              std::cerr << "TinyObjLoader warning: " << warn << std::endl;
-          }
-          if (!err.empty()) {
-              throw std::runtime_error("TinyObjLoader error: " + err);
-          }
-          if (!success) {
-              throw std::runtime_error("Failed to load .obj file: " + obj_file);
-          }
+  if (!warn.empty()) {
+    std::cerr << "TinyObjLoader warning: " << warn << std::endl;
+  }
+  if (!err.empty()) {
+    throw std::runtime_error("TinyObjLoader error: " + err);
+  }
+  if (!success) {
+    throw std::runtime_error("Failed to load .obj file: " + obj_file);
+  }
 
-          std::vector<Object::Face> faces;
-          std::vector<Math::Point3D> vertices;
-          std::vector<Math::Vector3D> normals;
-          std::unordered_map<std::string, Object::Mtl> materials2;        
+  std::vector<Object::Face> faces;
+  std::vector<Math::Point3D> vertices;
+  std::vector<Math::Vector3D> normals;
+  std::unordered_map<std::string, Object::Mtl> materials2;
 
-          for (size_t i = 0; i < attrib.vertices.size() / 3; i++) {
-              double x = attrib.vertices[3 * i + 0];
-              double y = attrib.vertices[3 * i + 1];
-              double z = attrib.vertices[3 * i + 2];
-              vertices.emplace_back(Math::Point3D(x, y, z));
-          }
+  for (size_t i = 0; i < attrib.vertices.size() / 3; i++) {
+    double x = attrib.vertices[3 * i + 0];
+    double y = attrib.vertices[3 * i + 1];
+    double z = attrib.vertices[3 * i + 2];
+    vertices.emplace_back(Math::Point3D(x, y, z));
+  }
 
-          for (size_t i = 0; i < attrib.normals.size() / 3; i++) {
-              double x = attrib.normals[3 * i + 0];
-              double y = attrib.normals[3 * i + 1];
-              double z = attrib.normals[3 * i + 2];
-              normals.emplace_back(Math::Vector3D(x, y, z));
-          }
+  for (size_t i = 0; i < attrib.normals.size() / 3; i++) {
+    double x = attrib.normals[3 * i + 0];
+    double y = attrib.normals[3 * i + 1];
+    double z = attrib.normals[3 * i + 2];
+    normals.emplace_back(Math::Vector3D(x, y, z));
+  }
 
-          for (const auto &material : materials) {
-              Object::Mtl mtl;
-              mtl.ambient = Math::Vector3D(material.ambient[0], material.ambient[1], material.ambient[2]);
-              mtl.diffuse = Math::Vector3D(material.diffuse[0], material.diffuse[1], material.diffuse[2]);
-              mtl.specular = Math::Vector3D(material.specular[0], material.specular[1], material.specular[2]);
-              mtl.shininess = material.shininess;
-              mtl.transparency = material.dissolve;
-              mtl.illumination = material.illum;
-              materials2[material.name] = mtl;
-          }
+  for (const auto &material : materials) {
+    Object::Mtl mtl;
+    mtl.ambient = Math::Vector3D(material.ambient[0], material.ambient[1],
+                                 material.ambient[2]);
+    mtl.diffuse = Math::Vector3D(material.diffuse[0], material.diffuse[1],
+                                 material.diffuse[2]);
+    mtl.specular = Math::Vector3D(material.specular[0], material.specular[1],
+                                  material.specular[2]);
+    mtl.shininess = material.shininess;
+    mtl.transparency = material.dissolve;
+    mtl.illumination = material.illum;
+    materials2[material.name] = mtl;
+  }
 
-          for (const auto &shape : shapes) {
-              for (size_t i = 0; i < shape.mesh.indices.size(); i += 3) {
-                  Object::Face face;
+  for (const auto &shape : shapes) {
+    for (size_t i = 0; i < shape.mesh.indices.size(); i += 3) {
+      Object::Face face;
 
-                  for (size_t j = 0; j < 3; j++) {
-                      int vertex_index = shape.mesh.indices[i + j].vertex_index;
-                      face.vertex.push_back(vertex_index);
+      for (size_t j = 0; j < 3; j++) {
+        int vertex_index = shape.mesh.indices[i + j].vertex_index;
+        face.vertex.push_back(vertex_index);
 
-                      int normal_index = shape.mesh.indices[i + j].normal_index;
-                      if (normal_index >= 0) {
-                          face.normal.push_back(normal_index);
-                      }
-                  }
-
-                  int material_id = shape.mesh.material_ids[i / 3];
-                  if (material_id >= 0 && material_id<static_cast<int>(materials.size())) {
-                      face.material_name = materials[material_id].name;
-                  }
-                  faces.push_back(face);
-              }
-          }
-          object.setVertices(vertices);
-          object.setNormals(normals);
-          object.setFaces(faces);
-          object.setMaterials(materials2);
+        int normal_index = shape.mesh.indices[i + j].normal_index;
+        if (normal_index >= 0) {
+          face.normal.push_back(normal_index);
+        }
       }
+
+      int material_id = shape.mesh.material_ids[i / 3];
+      if (material_id >= 0 &&
+          material_id < static_cast<int>(materials.size())) {
+        face.material_name = materials[material_id].name;
+      }
+      faces.push_back(face);
+    }
+  }
+  object.setVertices(vertices);
+  object.setNormals(normals);
+  object.setFaces(faces);
+  object.setMaterials(materials2);
+}
 
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)
@@ -272,6 +281,47 @@ void Raytracer::ParserConfigFile::parseCylinders(
   }
 }
 
+void Raytracer::ParserConfigFile::parseCylindersInf(
+    Raytracer::ShapeComposite &sc,
+    const libconfig::Setting &cylindersInfSetting) {
+  for (int i = 0; i < cylindersInfSetting.getLength(); i++) {
+    const libconfig::Setting &cylinderInf = cylindersInfSetting[i];
+    auto newCylinderInf =
+        _factory.create<Raytracer::CylinderInf>("cylinderInf");
+    if (!newCylinderInf)
+      throw ParseError("Failed to create cylinderInf object from factory.");
+    if (!cylinderInf.exists("r"))
+      throw ParseError(std::string("CylinderInf radius not found at ") +
+                       cylinderInf.getPath());
+    if (!cylinderInf.exists("color"))
+      throw ParseError(std::string("CylinderInf color not found at ") +
+                       cylinderInf.getPath());
+
+    newCylinderInf->setCenter(parsePoint3D(cylinderInf));
+    if (cylinderInf.lookup("r").operator double() <= 0)
+      throw ParseError(std::string("CylinderInf radius must be positive at ") +
+                       cylinderInf.getPath());
+    newCylinderInf->setRadius(cylinderInf.lookup("r").operator double());
+    newCylinderInf->setColor(parseColor(cylinderInf["color"]));
+
+    // Optional options
+    if (cylinderInf.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(cylinderInf["translate"]);
+      newCylinderInf->translate(translation);
+    }
+    if (cylinderInf.exists("material")) {
+      std::string materialName = parseString(cylinderInf["material"]);
+      if (materialName == "reflective") {
+        newCylinderInf->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
+    }
+    sc.addShape(newCylinderInf);
+  }
+}
+
 void Raytracer::ParserConfigFile::parseCones(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &conesSetting) {
   for (int i = 0; i < conesSetting.getLength(); i++) {
@@ -302,7 +352,55 @@ void Raytracer::ParserConfigFile::parseCones(
       Math::Vector3D translation = parseVector3D(cone["translate"]);
       newCone->translate(translation);
     }
+    if (cone.exists("material")) {
+      std::string materialName = parseString(cone["material"]);
+      if (materialName == "reflective") {
+        newCone->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
+    }
     sc.addShape(newCone);
+  }
+}
+
+void Raytracer::ParserConfigFile::parseConesInf(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &conesInfSetting) {
+  for (int i = 0; i < conesInfSetting.getLength(); i++) {
+    const libconfig::Setting &coneInf = conesInfSetting[i];
+    auto newConeInf = _factory.create<Raytracer::ConeInf>("coneInf");
+    if (!newConeInf)
+      throw ParseError("Failed to create coneInf object from factory.");
+    if (!coneInf.exists("a"))
+      throw ParseError(std::string("ConeInf angle not found at ") +
+                       coneInf.getPath());
+    if (!coneInf.exists("color"))
+      throw ParseError(std::string("ConeInf color not found at ") +
+                       coneInf.getPath());
+
+    newConeInf->setCenter(parsePoint3D(coneInf));
+    if (coneInf.lookup("a").operator double() <= 0)
+      throw ParseError(std::string("Cone angle must be positive at ") +
+                       coneInf.getPath());
+    newConeInf->setAngle(coneInf.lookup("a").operator double());
+    newConeInf->setColor(parseColor(coneInf["color"]));
+
+    // Optional options
+    if (coneInf.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(coneInf["translate"]);
+      newConeInf->translate(translation);
+    }
+    if (coneInf.exists("material")) {
+      std::string materialName = parseString(coneInf["material"]);
+      if (materialName == "reflective") {
+        newConeInf->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw std::runtime_error("[ERROR] - Unknown material type.");
+      }
+    }
+    sc.addShape(newConeInf);
   }
 }
 
@@ -368,9 +466,52 @@ void Raytracer::ParserConfigFile::parseObjects(
     if (!object.exists("obj_file"))
       throw ParseError(std::string("Object file not found at ") +
                        object.getPath());
-    parseObj(object.lookup("obj_file").operator std::string(),
-              *newObject);
+    parseObj(object.lookup("obj_file").operator std::string(), *newObject);
     sc.addShape(newObject);
+  }
+}
+
+void Raytracer::ParserConfigFile::parseTriangles(
+    Raytracer::ShapeComposite &sc, const libconfig::Setting &trianglesSetting) {
+  for (int i = 0; i < trianglesSetting.getLength(); i++) {
+    const libconfig::Setting &triangle = trianglesSetting[i];
+    auto newTriangle = _factory.create<Raytracer::Triangle>("triangle");
+    if (!newTriangle)
+      throw ParseError("Failed to create triangle object from factory.");
+    if (!triangle.exists("p1"))
+      throw ParseError(std::string("Triangle p1 not found at ") +
+                       triangle.getPath());
+    if (!triangle.exists("p2"))
+      throw ParseError(std::string("Triangle p2 not found at ") +
+                       triangle.getPath());
+    if (!triangle.exists("p3"))
+      throw ParseError(std::string("Triangle p3 not found at ") +
+                       triangle.getPath());
+    if (!triangle.exists("color"))
+      throw ParseError(std::string("Triangle color not found at ") +
+                       triangle.getPath());
+
+    newTriangle->setP1(parsePoint3D(triangle["p1"]));
+    newTriangle->setP2(parsePoint3D(triangle["p2"]));
+    newTriangle->setP3(parsePoint3D(triangle["p3"]));
+    newTriangle->setColor(parseColor(triangle["color"]));
+
+    // Optional options
+    if (triangle.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(triangle["translate"]);
+      newTriangle->translate(translation);
+    }
+    if (triangle.exists("material")) {
+      std::string materialName = parseString(triangle["material"]);
+      if (materialName == "reflective") {
+        newTriangle->setMaterial(
+            _factory.create<Raytracer::Reflections>("reflection"));
+      } else {
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
+      }
+    }
+    sc.addShape(newTriangle);
   }
 }
 
@@ -393,12 +534,29 @@ void Raytracer::ParserConfigFile::parsePrimitives(
       parseCylinders(sc, root["primitives"]["cylinders"]);
     }
 
+    // CYLINDERSINF
+    if (root.exists("primitives") &&
+        root["primitives"].exists("cylindersInf")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "x", "y", "z", "r", "color", "translate", "material"};
+      checkSettings(root["primitives"]["cylindersInf"], allowedSettings);
+      parseCylindersInf(sc, root["primitives"]["cylindersInf"]);
+    }
+
     // CONES
     if (root.exists("primitives") && root["primitives"].exists("cones")) {
       static const std::unordered_set<std::string> allowedSettings = {
           "x", "y", "z", "r", "h", "color", "translate", "material"};
       checkSettings(root["primitives"]["cones"], allowedSettings);
       parseCones(sc, root["primitives"]["cones"]);
+    }
+
+    // CONESINF
+    if (root.exists("primitives") && root["primitives"].exists("conesInf")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "x", "y", "z", "a", "color", "translate", "material"};
+      checkSettings(root["primitives"]["conesInf"], allowedSettings);
+      parseConesInf(sc, root["primitives"]["conesInf"]);
     }
 
     // PLANES
@@ -415,6 +573,14 @@ void Raytracer::ParserConfigFile::parsePrimitives(
           "obj_file"};
       checkSettings(root["primitives"]["objects"], allowedSettings);
       parseObjects(sc, root["primitives"]["objects"]);
+    }
+
+    // TRIANGLES
+    if (root.exists("primitives") && root["primitives"].exists("triangles")) {
+      static const std::unordered_set<std::string> allowedSettings = {
+          "p1", "p2", "p3", "color", "translate", "material"};
+      checkSettings(root["primitives"]["triangles"], allowedSettings);
+      parseTriangles(sc, root["primitives"]["triangles"]);
     }
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw ParseError(std::string("Primitives config: ") + nfex.getPath() +
