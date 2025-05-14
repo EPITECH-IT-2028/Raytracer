@@ -4,8 +4,6 @@
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 
-#define EPS 1e-6
-
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::ConeInf::hits(const Raytracer::Ray &ray) const {
   Math::Vector3D cone_axis = _normal;

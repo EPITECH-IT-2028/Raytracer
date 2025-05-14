@@ -5,8 +5,6 @@
 #include "Triangle.hpp"
 #include <iostream>
 
-#define EPS 1e-6
-
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Triangle::hits(
     const Raytracer::Ray &ray) const {
 

@@ -1,11 +1,5 @@
-#include <algorithm>
-#include <fstream>
-#include <limits>
-#include <sstream>
-#include <string>
 #include <tuple>
 #include <vector>
-#include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
 #include "Vector3D.hpp"

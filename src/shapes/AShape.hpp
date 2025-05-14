@@ -5,6 +5,8 @@
 #include "Ray.hpp"
 #include "Vector3D.hpp"
 
+constexpr float EPS = 1e-6;
+
 namespace Raytracer {
 
   class AShape : public IShape {
