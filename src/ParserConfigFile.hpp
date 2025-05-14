@@ -7,7 +7,6 @@
 #include "Factory.hpp"
 #include "LightComposite.hpp"
 #include "Object.hpp"
-#include "Ray.hpp"
 #include "ShapeComposite.hpp"
 #include "string"
 
@@ -62,17 +61,17 @@ namespace Raytracer {
       void parseCylinders(ShapeComposite &sc,
                           const libconfig::Setting &cylindersSetting);
       void parseCylindersInf(ShapeComposite &sc,
-                          const libconfig::Setting &cylindersInfSetting);
+                             const libconfig::Setting &cylindersInfSetting);
       void parseCones(ShapeComposite &sc,
                       const libconfig::Setting &conesSetting);
       void parseConesInf(ShapeComposite &sc,
-                      const libconfig::Setting &conesInfSetting);
+                         const libconfig::Setting &conesInfSetting);
       void parsePlanes(ShapeComposite &sc,
                        const libconfig::Setting &planesSetting);
       void parseObjects(ShapeComposite &sc,
                         const libconfig::Setting &objectsSetting);
       void parseTriangles(ShapeComposite &sc,
-                        const libconfig::Setting &objectsSetting);
+                          const libconfig::Setting &trianglesSetting);
 
       void parseDirectionalLights(LightComposite &lc,
                                   const libconfig::Setting &lightsSetting);
@@ -82,7 +81,8 @@ namespace Raytracer {
                              const libconfig::Setting &diffuseInfo);
       void parsePointLight(LightComposite &lc,
                            const libconfig::Setting &pointInfo);
-      void checkSettings(const libconfig::Setting &setting,
-                         const std::unordered_set<std::string> &requiredFields) const;
+      void checkSettings(
+          const libconfig::Setting &setting,
+          const std::unordered_set<std::string> &requiredFields) const;
   };
 }  // namespace Raytracer
