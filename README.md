@@ -49,11 +49,11 @@ cmake -B .build && cmake --build .build
 - [x] .OBJ files
 - [x] Limited cones 
 - [x] Limited cylinders 
-- [ ] Cones 
-- [ ] Cylinders 
+- [x] Cones 
+- [x] Cylinders 
+- [x] Triangles
 - [ ] Mobius strip 
 - [ ] Fractals
-- [ ] Triangles
 - [ ] Tanglecube
 - [ ] Torus
 
@@ -77,6 +77,7 @@ cmake -B .build && cmake --build .build
 #### Bonus
 
 - [x] Free cam
+- [x] Screenshots
 
 # Contributing
 
