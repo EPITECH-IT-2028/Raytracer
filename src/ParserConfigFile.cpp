@@ -15,6 +15,7 @@
 #include "Plane.hpp"
 #include "PointLight.hpp"
 #include "Reflections.hpp"
+#include "Refractions.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
 #include "Triangle.hpp"
@@ -211,7 +212,6 @@ void Raytracer::ParserConfigFile::parseSpheres(
     if (!sphere.exists("color"))
       throw ParseError(std::string("Sphere color not found at ") +
                        sphere.getPath());
-
     newSphere->setCenter(parsePoint3D(sphere));
     if (sphere.lookup("r").operator double() <= 0)
       throw ParseError(std::string("Sphere radius must be positive at ") +
@@ -229,6 +229,9 @@ void Raytracer::ParserConfigFile::parseSpheres(
       if (materialName == "reflective") {
         newSphere->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newSphere->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
       } else {
         throw ParseError(std::string("[ERROR] - Unknown material type: ") +
                          materialName);
@@ -273,6 +276,9 @@ void Raytracer::ParserConfigFile::parseCylinders(
       if (materialName == "reflective") {
         newCylinder->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newCylinder->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -357,6 +363,9 @@ void Raytracer::ParserConfigFile::parseCones(
       if (materialName == "reflective") {
         newCone->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newCone->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -444,6 +453,9 @@ void Raytracer::ParserConfigFile::parsePlanes(
       if (materialName == "reflective") {
         newPlane->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newPlane->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
