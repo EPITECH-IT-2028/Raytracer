@@ -278,31 +278,31 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
     Raytracer::ShapeComposite &sc,
     const libconfig::Setting &cylindersInfSetting) {
   for (int i = 0; i < cylindersInfSetting.getLength(); i++) {
-    const libconfig::Setting &cylinder = cylindersInfSetting[i];
+    const libconfig::Setting &cylinderInf = cylindersInfSetting[i];
     auto newCylinderInf = _factory.create<Raytracer::CylinderInf>("cylinderInf");
     if (!newCylinderInf)
-      throw ParseError("Failed to create cylinder object from factory.");
-    if (!cylinder.exists("r"))
-      throw ParseError(std::string("Cylinder radius not found at ") +
-                       cylinder.getPath());
-    if (!cylinder.exists("color"))
-      throw ParseError(std::string("Cylinder color not found at ") +
-                       cylinder.getPath());
+      throw ParseError("Failed to create cylinderInf object from factory.");
+    if (!cylinderInf.exists("r"))
+      throw ParseError(std::string("CylinderInf radius not found at ") +
+                       cylinderInf.getPath());
+    if (!cylinderInf.exists("color"))
+      throw ParseError(std::string("CylinderInf color not found at ") +
+                       cylinderInf.getPath());
 
-    newCylinderInf->setCenter(parsePoint3D(cylinder));
-    if (cylinder.lookup("r").operator double() <= 0)
-      throw ParseError(std::string("Cylinder radius must be positive at ") +
-                       cylinder.getPath());
-    newCylinderInf->setRadius(cylinder.lookup("r").operator double());
-    newCylinderInf->setColor(parseColor(cylinder["color"]));
+    newCylinderInf->setCenter(parsePoint3D(cylinderInf));
+    if (cylinderInf.lookup("r").operator double() <= 0)
+      throw ParseError(std::string("CylinderInf radius must be positive at ") +
+                       cylinderInf.getPath());
+    newCylinderInf->setRadius(cylinderInf.lookup("r").operator double());
+    newCylinderInf->setColor(parseColor(cylinderInf["color"]));
 
     // Optional options
-    if (cylinder.exists("translate")) {
-      Math::Vector3D translation = parseVector3D(cylinder["translate"]);
+    if (cylinderInf.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(cylinderInf["translate"]);
       newCylinderInf->translate(translation);
     }
-    if (cylinder.exists("material")) {
-      std::string materialName = parseString(cylinder["material"]);
+    if (cylinderInf.exists("material")) {
+      std::string materialName = parseString(cylinderInf["material"]);
       if (materialName == "reflective") {
         newCylinderInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
@@ -360,31 +360,31 @@ void Raytracer::ParserConfigFile::parseCones(
 void Raytracer::ParserConfigFile::parseConesInf(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &conesInfSetting) {
   for (int i = 0; i < conesInfSetting.getLength(); i++) {
-    const libconfig::Setting &cone = conesInfSetting[i];
+    const libconfig::Setting &coneInf = conesInfSetting[i];
     auto newConeInf = _factory.create<Raytracer::ConeInf>("coneInf");
     if (!newConeInf)
-      throw ParseError("Failed to create cone object from factory.");
-    if (!cone.exists("a"))
-      throw ParseError(std::string("Cone angle not found at ") +
-                       cone.getPath());
-    if (!cone.exists("color"))
-      throw ParseError(std::string("Cone color not found at ") +
-                       cone.getPath());
+      throw ParseError("Failed to create coneInf object from factory.");
+    if (!coneInf.exists("a"))
+      throw ParseError(std::string("ConeInf angle not found at ") +
+                       coneInf.getPath());
+    if (!coneInf.exists("color"))
+      throw ParseError(std::string("ConeInf color not found at ") +
+                       coneInf.getPath());
 
-    newConeInf->setCenter(parsePoint3D(cone));
-    if (cone.lookup("a").operator double() <= 0)
+    newConeInf->setCenter(parsePoint3D(coneInf));
+    if (coneInf.lookup("a").operator double() <= 0)
       throw ParseError(std::string("Cone angle must be positive at ") +
-                       cone.getPath());
-    newConeInf->setAngle(cone.lookup("a").operator double());
-    newConeInf->setColor(parseColor(cone["color"]));
+                       coneInf.getPath());
+    newConeInf->setAngle(coneInf.lookup("a").operator double());
+    newConeInf->setColor(parseColor(coneInf["color"]));
 
     // Optional options
-    if (cone.exists("translate")) {
-      Math::Vector3D translation = parseVector3D(cone["translate"]);
+    if (coneInf.exists("translate")) {
+      Math::Vector3D translation = parseVector3D(coneInf["translate"]);
       newConeInf->translate(translation);
     }
-    if (cone.exists("material")) {
-      std::string materialName = parseString(cone["material"]);
+    if (coneInf.exists("material")) {
+      std::string materialName = parseString(coneInf["material"]);
       if (materialName == "reflective") {
         newConeInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
