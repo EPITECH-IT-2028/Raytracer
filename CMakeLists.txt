@@ -380,6 +380,12 @@ if(BUILD_TESTING)
       $<TARGET_OBJECTS:math_objects>
     )
 
+    add_custom_command(TARGET run_parser_tests PRE_BUILD
+      COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -delete
+      WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+      COMMENT "Cleaning old .gcda files from CMakeFiles before building run_parser_tests"
+    )
+
     if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
       target_compile_options(run_parser_tests PRIVATE --coverage)
       target_link_libraries(run_parser_tests PRIVATE --coverage)
@@ -425,7 +431,7 @@ if(BUILD_TESTING)
         )
 
         add_custom_target(coverage
-            COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -exec ${CMAKE_COMMAND} -E remove {} +
+            COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -delete
             COMMAND $<TARGET_FILE:run_parser_tests>
             COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_html
             COMMAND ${GCOVR_EXECUTABLE}
