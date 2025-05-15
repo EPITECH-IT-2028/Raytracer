@@ -55,7 +55,7 @@ TEST_F(ParserConfigFileTest, InvalidSpheresPositionFields) {
 
   EXPECT_THROW(parser4.parseConfigFile(camera4, sc4, lc4), Raytracer::ParseError);
 
-  _cfgFile = "tests/primitives/spheres/invalidFields/position/InvalidR-2.cfg";
+  _cfgFile = "tests/primitives/spheres/invalidFields/position/negativeR.cfg";
   Raytracer::ParserConfigFile parser5(_cfgFile, _plugins);
   Raytracer::Camera camera5;
   Raytracer::ShapeComposite sc5;
