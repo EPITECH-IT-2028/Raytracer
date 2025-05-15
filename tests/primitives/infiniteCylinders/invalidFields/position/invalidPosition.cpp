@@ -54,5 +54,13 @@ TEST_F(ParserConfigFileTest, InvalidInfiniteCylindersPositionFields) {
   Raytracer::LightComposite lc4;
 
   EXPECT_THROW(parser4.parseConfigFile(camera4, sc4, lc4), Raytracer::ParseError);
+
+  _cfgFile = "tests/primitives/infiniteCylinders/invalidFields/position/negativeR.cfg";
+  Raytracer::ParserConfigFile parser5(_cfgFile, _plugins);
+  Raytracer::Camera camera5;
+  Raytracer::ShapeComposite sc5;
+  Raytracer::LightComposite lc5;
+
+  EXPECT_THROW(parser5.parseConfigFile(camera5, sc5, lc5), Raytracer::ParseError);
 }
 

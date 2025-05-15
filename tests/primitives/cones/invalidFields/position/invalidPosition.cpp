@@ -62,5 +62,13 @@ TEST_F(ParserConfigFileTest, InvalidConesPositionFields) {
   Raytracer::LightComposite lc5;
     
   EXPECT_THROW(parser5.parseConfigFile(camera5, sc5, lc5), Raytracer::ParseError);
+
+  _cfgFile = "tests/primitives/cones/invalidFields/position/negativeR.cfg";
+  Raytracer::ParserConfigFile parser6(_cfgFile, _plugins);
+  Raytracer::Camera camera6;
+  Raytracer::ShapeComposite sc6;
+  Raytracer::LightComposite lc6;
+
+  EXPECT_THROW(parser6.parseConfigFile(camera6, sc6, lc6), Raytracer::ParseError);
 }
 
