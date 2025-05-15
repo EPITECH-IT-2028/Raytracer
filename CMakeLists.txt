@@ -314,7 +314,7 @@ if(BUILD_TESTING)
     file(COPY tests/ DESTINATION ${CMAKE_BINARY_DIR}/tests)
     file(COPY ${CMAKE_SOURCE_DIR}/plugins DESTINATION ${CMAKE_BINARY_DIR}/plugins)
 
-    add_executable(run_parser_tests
+    add_executable(run_tests
       tests/general/generalTests.cpp
 
       tests/camera/parseCamera.cpp
@@ -366,7 +366,7 @@ if(BUILD_TESTING)
       src/shapes/ShapeComposite.cpp
     )
 
-    target_include_directories(run_parser_tests PRIVATE
+    target_include_directories(run_tests PRIVATE
       ${CMAKE_SOURCE_DIR}/src
       ${CMAKE_SOURCE_DIR}/src/maths
       ${CMAKE_SOURCE_DIR}/src/shapes
@@ -375,44 +375,44 @@ if(BUILD_TESTING)
       ${CMAKE_SOURCE_DIR}/include
     )
 
-    target_link_libraries(run_parser_tests PRIVATE
+    target_link_libraries(run_tests PRIVATE
       GTest::gtest_main
       $<TARGET_OBJECTS:math_objects>
     )
 
-    add_custom_command(TARGET run_parser_tests PRE_BUILD
+    add_custom_command(TARGET run_tests PRE_BUILD
       COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -delete
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-      COMMENT "Cleaning old .gcda files from CMakeFiles before building run_parser_tests"
+      COMMENT "Cleaning old .gcda files from CMakeFiles before building run_tests"
     )
 
     if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-      target_compile_options(run_parser_tests PRIVATE --coverage)
-      target_link_libraries(run_parser_tests PRIVATE --coverage)
+      target_compile_options(run_tests PRIVATE --coverage)
+      target_link_libraries(run_tests PRIVATE --coverage)
     endif()
 
     if(APPLE)
       if(CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
-        target_link_libraries(run_parser_tests PRIVATE config++)
-        # target_include_directories(run_parser_tests PRIVATE /opt/homebrew/include)
+        target_link_libraries(run_tests PRIVATE config++)
+        # target_include_directories(run_tests PRIVATE /opt/homebrew/include)
         elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
           if(LIBCONFIGPP_INCLUDE_DIR)
-            target_include_directories(run_parser_tests PRIVATE ${LIBCONFIGPP_INCLUDE_DIR})
+            target_include_directories(run_tests PRIVATE ${LIBCONFIGPP_INCLUDE_DIR})
             else()
               message(WARNING "libconfig.h++ include directory not found for x86_64 macOS tests. Check LIBCONFIGPP_INCLUDE_DIR.")
             endif()
             if(LIBCONFIGPP_LIBRARY)
-              target_link_libraries(run_parser_tests PRIVATE ${LIBCONFIGPP_LIBRARY})
+              target_link_libraries(run_tests PRIVATE ${LIBCONFIGPP_LIBRARY})
             else()
               message(WARNING "libconfig++ library not found for x86_64 macOS tests. Check LIBCONFIGPP_LIBRARY.")
             endif()
         endif()
       elseif(UNIX AND NOT APPLE)
-        target_link_libraries(run_parser_tests PRIVATE config++)
+        target_link_libraries(run_tests PRIVATE config++)
     endif()
 
     include(GoogleTest)
-    gtest_discover_tests(run_parser_tests)
+    gtest_discover_tests(run_tests)
 
     # Add a custom target to run the tests
     find_program(GCOVR_EXECUTABLE NAMES gcovr)
@@ -427,12 +427,12 @@ if(BUILD_TESTING)
             directional
             ambient
             reflection
-            run_parser_tests
+            run_tests
         )
 
         add_custom_target(coverage
             COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -delete
-            COMMAND $<TARGET_FILE:run_parser_tests>
+            COMMAND $<TARGET_FILE:run_tests>
             COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/coverage_html
             COMMAND ${GCOVR_EXECUTABLE}
                     -r .
