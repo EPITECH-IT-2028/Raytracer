@@ -38,5 +38,5 @@ TEST_F(ParserConfigFileTest, TestParsePrimitives) {
            << e.what();
   }
 
-  EXPECT_EQ(sc.getShapes().size(), 5);
+  EXPECT_EQ(sc.getShapes().size(), 6);
 }
