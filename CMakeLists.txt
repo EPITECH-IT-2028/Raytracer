@@ -335,6 +335,7 @@ if(BUILD_TESTING)
       tests/primitives/cylinders/missingFields/color/missingColor.cpp
       tests/primitives/cylinders/invalidFields/position/invalidPosition.cpp
       tests/primitives/cylinders/invalidFields/color/invalidColor.cpp
+      tests/primitives/infiniteCylinders/missingFields/position/missingPosition.cpp
       tests/primitives/infiniteCylinders/missingFields/color/missingColor.cpp
       tests/primitives/infiniteCylinders/invalidFields/position/invalidPosition.cpp
       tests/primitives/infiniteCylinders/invalidFields/color/invalidColor.cpp
