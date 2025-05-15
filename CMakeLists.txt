@@ -315,6 +315,8 @@ if(BUILD_TESTING)
     file(COPY ${CMAKE_SOURCE_DIR}/plugins DESTINATION ${CMAKE_BINARY_DIR}/plugins)
 
     add_executable(run_parser_tests
+      tests/general/generalTests.cpp
+
       tests/camera/parseCamera.cpp
       tests/camera/missingFields/missingFields.cpp
       tests/camera/missingFields/position/missingPositionFields.cpp
