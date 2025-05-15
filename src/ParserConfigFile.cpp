@@ -327,12 +327,12 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
       if (materialName == "reflective") {
         newCylinderInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
-      } else if (materialName == "transparent") {
-        newCylinderInf->setMaterial(
-            _factory.create<Raytracer::Transparency>("transparent"));
       } else if (materialName == "refractive") {
         newCylinderInf->setMaterial(
             _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newCylinderInf->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -421,12 +421,12 @@ void Raytracer::ParserConfigFile::parseConesInf(
       if (materialName == "reflective") {
         newConeInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
-      } else if (materialName == "transparent") {
-        newConeInf->setMaterial(
-            _factory.create<Raytracer::Transparency>("transparent"));
       } else if (materialName == "refractive") {
         newConeInf->setMaterial(
             _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newConeInf->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
