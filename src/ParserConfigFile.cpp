@@ -18,6 +18,7 @@
 #include "Refractions.hpp"
 #include "ShapeComposite.hpp"
 #include "Sphere.hpp"
+#include "Transparency.hpp"
 #include "Triangle.hpp"
 #include "Vector3D.hpp"
 #include "exceptions/RaytracerException.hpp"
@@ -240,6 +241,9 @@ void Raytracer::ParserConfigFile::parseSpheres(
       } else if (materialName == "refractive") {
         newSphere->setMaterial(
             _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newSphere->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw ParseError(std::string("[ERROR] - Unknown material type: ") +
                          materialName);
@@ -287,6 +291,9 @@ void Raytracer::ParserConfigFile::parseCylinders(
       } else if (materialName == "refractive") {
         newCylinder->setMaterial(
             _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newCylinder->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -328,6 +335,12 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
       if (materialName == "reflective") {
         newCylinderInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newCylinderInf->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newCylinderInf->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -374,6 +387,9 @@ void Raytracer::ParserConfigFile::parseCones(
       } else if (materialName == "refractive") {
         newCone->setMaterial(
             _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newCone->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -413,6 +429,12 @@ void Raytracer::ParserConfigFile::parseConesInf(
       if (materialName == "reflective") {
         newConeInf->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newConeInf->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newConeInf->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -464,6 +486,9 @@ void Raytracer::ParserConfigFile::parsePlanes(
       } else if (materialName == "refractive") {
         newPlane->setMaterial(
             _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newPlane->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw std::runtime_error("[ERROR] - Unknown material type.");
       }
@@ -526,6 +551,12 @@ void Raytracer::ParserConfigFile::parseTriangles(
       if (materialName == "reflective") {
         newTriangle->setMaterial(
             _factory.create<Raytracer::Reflections>("reflection"));
+      } else if (materialName == "refractive") {
+        newTriangle->setMaterial(
+            _factory.create<Raytracer::Refractions>("refraction"));
+      } else if (materialName == "transparent") {
+        newTriangle->setMaterial(
+            _factory.create<Raytracer::Transparency>("transparent"));
       } else {
         throw ParseError(std::string("[ERROR] - Unknown material type: ") +
                          materialName);
@@ -762,7 +793,8 @@ void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
       std::string path = scene.lookup("path");
       for (const auto &alreadyParsed : _fileAlreadyParse) {
         if (alreadyParsed == path) {
-          throw ParseError("Import loop detected. File \"" + path + "\" is already imported into the current scene.");
+          throw ParseError("Import loop detected. File \"" + path +
+                           "\" is already imported into the current scene.");
         }
       }
       _fileAlreadyParse.insert(path);
@@ -773,9 +805,8 @@ void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
   }
 }
 
-void Raytracer::ParserConfigFile::parseInternal(ShapeComposite &sc,
-                                                LightComposite &lc,
-                                                const libconfig::Setting &root) {
+void Raytracer::ParserConfigFile::parseInternal(
+    ShapeComposite &sc, LightComposite &lc, const libconfig::Setting &root) {
   // PRIMITIVES
   try {
     parsePrimitives(sc, root);
