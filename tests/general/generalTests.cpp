@@ -22,6 +22,12 @@ class ParserConfigFileTest : public ::testing::Test {
     std::vector<std::string> _plugins;
 };
 
+TEST_F(ParserConfigFileTest, InvalidConfig) {
+  _cfgFile = "tests/general/invalidConfig.cfg";
+
+  EXPECT_THROW(Raytracer::ParserConfigFile parser(_cfgFile, _plugins);, Raytracer::ConfigError);
+}
+
 TEST_F(ParserConfigFileTest, NegativeColorValue) {
   _cfgFile = "tests/general/negativeColor.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
