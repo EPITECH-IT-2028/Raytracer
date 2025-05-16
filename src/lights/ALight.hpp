@@ -44,6 +44,6 @@ namespace Raytracer {
       std::string _type;
       Math::Vector3D _direction;
       Math::Vector3D _color;
-      double _intensity;
+      double _intensity = 0;
   };
 }  // namespace Raytracer

@@ -130,20 +130,28 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
   try {
     const libconfig::Setting &resolutionInfo = root["camera"]["resolution"];
     const libconfig::Setting &positionInfo = root["camera"]["position"];
+    const libconfig::Setting &rotationInfo = root["camera"]["rotation"];
     const libconfig::Setting &fovInfo = root["camera"];
-    int width, height, posX, posY, posZ;
+    int width, height, posX, posY, posZ, rotX, rotY, rotZ;
     double fov;
-    resolutionInfo.lookupValue("width", width);
-    resolutionInfo.lookupValue("height", height);
-    positionInfo.lookupValue("x", posX);
-    positionInfo.lookupValue("y", posY);
-    positionInfo.lookupValue("z", posZ);
+    width = resolutionInfo.lookup("width");
+    height = resolutionInfo.lookup("height");
+    posX = positionInfo.lookup("x");
+    posY = positionInfo.lookup("y");
+    posZ = positionInfo.lookup("z");
+    rotX = rotationInfo.lookup("x");
+    rotY = rotationInfo.lookup("y");
+    rotZ = rotationInfo.lookup("z");
     fov = fovInfo.lookup("fieldOfView");
     camera.setHeight(height);
     camera.setWidth(width);
     camera.origin.x = posX;
     camera.origin.y = posY;
     camera.origin.z = posZ;
+    (void)rotX; // [TODO]: Implement rotation
+    (void)rotY; // [TODO]: Implement rotation
+    (void)rotZ; // [TODO]: Implement rotation
+    // camera.setRotation(rotX, rotY, rotZ); # [TODO]: Implement rotation
     camera.setFieldOfView(fov);
   } catch (const libconfig::SettingNotFoundException &nfex) {
     throw ParseError(std::string("Camera config: ") + nfex.getPath() +

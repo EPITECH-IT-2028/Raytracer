@@ -1,10 +1,10 @@
 #pragma once
 
-#include <stdexcept>
 #include "AShape.hpp"
 #include "Point3D.hpp"
 #include "Ray.hpp"
 #include "Vector3D.hpp"
+#include "exceptions/RaytracerException.hpp"
 
 namespace Raytracer {
 
@@ -36,8 +36,9 @@ namespace Raytracer {
       };
 
       void setRadius(double radius) {
-        if (radius <= 0)
-          throw std::runtime_error("Radius must be superior to 0");
+        if (radius <= 0) {
+          throw RaytracerError("Radius of a sphere must be over 0.");
+        }
         _radius = radius;
       }
 

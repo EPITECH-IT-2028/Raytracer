@@ -1,5 +1,6 @@
 compile_commands.json
 raytracer
+run_tests
 output.ppm
 vgcore*
 .build
@@ -8,3 +9,6 @@ vgcore*
 *.so
 .idea
 cmake-build-debug
+.DS_Store
+unit_tests
+*.ppm
