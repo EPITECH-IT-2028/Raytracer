@@ -43,7 +43,7 @@ jobs:
         run: cmake --build .build
 
       - name: Run tests 
-        run: ./run_tests 
+        run: ./unit_tests
 
 
   push_to_mirror:
