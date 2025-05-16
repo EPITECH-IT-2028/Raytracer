@@ -10,3 +10,5 @@ vgcore*
 .idea
 cmake-build-debug
 .DS_Store
+unit_tests
+*.ppm
