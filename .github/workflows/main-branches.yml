@@ -26,7 +26,28 @@ jobs:
       - name: Build project
         run: cmake --build .build
 
+  check_tests:
+    needs: [check_compilation]
+    name: Check tests
+    runs-on: ubuntu-latest
+    container: 
+      image: epitechcontent/epitest-docker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure with CMake
+        run: cmake -B .build
+
+      - name: Build project
+        run: cmake --build .build
+
+      - name: Run tests 
+        run: ./unit_tests
+
+
   push_to_mirror:
+    needs: [check_compilation, check_tests]
     if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos.git' && github.ref_name == 'main'
     name: Push to Mirror Repository
     runs-on: ubuntu-latest
