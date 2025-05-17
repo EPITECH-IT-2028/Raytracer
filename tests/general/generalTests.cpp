@@ -37,5 +37,3 @@ TEST_F(ParserConfigFileTest, NegativeColorValue) {
 
   EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
 }
-
-

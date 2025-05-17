@@ -35,6 +35,8 @@ namespace Raytracer {
       void parseLights(LightComposite &, const libconfig::Setting &);
       void parseScenes(ShapeComposite &, LightComposite &, const libconfig::Setting &);
 
+      void parseObj(const std::string &obj_file, Object &object);
+
     private:
       libconfig::Config _cfg;
       std::vector<std::string> _plugins;
@@ -53,8 +55,6 @@ namespace Raytracer {
       void parseInternal(ShapeComposite &, LightComposite &, const libconfig::Setting &);
 
       void parseMtl(const std::string &mtl_file, Object &object);
-
-      void parseObj(const std::string &obj_file, Object &object);
 
       void parseSpheres(ShapeComposite &sc,
                         const libconfig::Setting &spheresSetting);

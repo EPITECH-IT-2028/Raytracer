@@ -56,6 +56,11 @@ namespace Raytracer {
 
       const std::string &getObjFile() const {return _obj_file;}
 
+      const std::vector<Math::Point3D>& getVertices() const { return _vertices; }
+      const std::vector<Math::Vector3D>& getNormals() const { return _normals; }
+      const std::vector<Face>& getFaces() const { return _faces; }
+      const std::unordered_map<std::string, Mtl>& getMaterials() const { return _materials; }
+
       Math::Vector3D getNormal(
           const Math::Point3D &hitPoint) const override {(void)hitPoint; return Math::Vector3D(0, 0, 0);};
 

@@ -377,10 +377,13 @@ if(BUILD_TESTING)
       tests/lights/invalidFields/directional/invalidFields.cpp
       tests/lights/invalidFields/invalidDiffuse.cpp
 
+      tests/obj/parseObj.cpp
+
       src/ParserConfigFile.cpp
       src/Factory.cpp
       src/lights/LightComposite.cpp
       src/shapes/ShapeComposite.cpp
+      src/shapes/Object.cpp
     )
 
     target_include_directories(unit_tests PRIVATE
