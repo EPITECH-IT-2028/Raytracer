@@ -373,6 +373,7 @@ if(BUILD_TESTING)
       tests/primitives/planes/missingFields/color/missingColor.cpp
       tests/primitives/planes/invalidFields/invalidFields.cpp
       tests/primitives/planes/invalidFields/color/invalidColor.cpp
+      tests/primitives/planes/materials/parseMaterials.cpp
 
       tests/lights/parseLights.cpp
       tests/lights/missingFields/missingFields.cpp
