@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
+#include <filesystem>
 #include <string>
 #include <vector>
 #include "Camera.hpp"
+#include "Renderer.hpp"
 
 namespace Raytracer {
   class Scene {
@@ -40,6 +42,12 @@ namespace Raytracer {
       void createOutputFileName();
 
       /*
+       * This function is used to check if the input file has been updated
+       * during the program to update scene 
+      */
+      void checkFileChange();
+
+      /*
        * This attribut is used to keep the input file during the program.
        */
       std::string _inputFilePath;
@@ -49,6 +57,7 @@ namespace Raytracer {
        */
       std::string _outputFilePath;
 
+      std::filesystem::file_time_type _ftime;
       int _width;
       int _height;
       sf::RenderWindow _window;
@@ -61,6 +70,7 @@ namespace Raytracer {
       const float _updateQuality = 0.5f;
       std::vector<std::string> _plugins;
       std::vector<void *> _pluginHandles;
+      std::unique_ptr<Raytracer::Renderer> _renderer;
       Raytracer::Camera _camera;
       void changeCamQuality();
       bool _cameraMoved = false;
