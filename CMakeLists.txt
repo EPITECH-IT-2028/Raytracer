@@ -358,6 +358,7 @@ if(BUILD_TESTING)
       tests/primitives/infiniteCylinders/missingFields/color/missingColor.cpp
       tests/primitives/infiniteCylinders/invalidFields/position/invalidPosition.cpp
       tests/primitives/infiniteCylinders/invalidFields/color/invalidColor.cpp
+      tests/primitives/infiniteCylinders/materials/parseMaterials.cpp
       tests/primitives/cones/missingFields/position/missingPosition.cpp
       tests/primitives/cones/missingFields/color/missingColor.cpp
       tests/primitives/cones/invalidFields/position/invalidPosition.cpp
