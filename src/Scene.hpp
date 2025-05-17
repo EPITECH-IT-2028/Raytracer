@@ -70,7 +70,7 @@ namespace Raytracer {
       const float _updateQuality = 0.5f;
       std::vector<std::string> _plugins;
       std::vector<void *> _pluginHandles;
-      Raytracer::Renderer _renderer;
+      std::unique_ptr<Raytracer::Renderer> _renderer;
       Raytracer::Camera _camera;
       void changeCamQuality();
       bool _cameraMoved = false;
