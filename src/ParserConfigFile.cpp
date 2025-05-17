@@ -148,9 +148,9 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
     camera.origin.x = posX;
     camera.origin.y = posY;
     camera.origin.z = posZ;
-    (void)rotX; // [TODO]: Implement rotation
-    (void)rotY; // [TODO]: Implement rotation
-    (void)rotZ; // [TODO]: Implement rotation
+    (void)rotX;  // [TODO]: Implement rotation
+    (void)rotY;  // [TODO]: Implement rotation
+    (void)rotZ;  // [TODO]: Implement rotation
     // camera.setRotation(rotX, rotY, rotZ); # [TODO]: Implement rotation
     camera.setFieldOfView(fov);
   } catch (const libconfig::SettingNotFoundException &nfex) {
