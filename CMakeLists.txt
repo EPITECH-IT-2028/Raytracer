@@ -348,6 +348,7 @@ if(BUILD_TESTING)
       tests/primitives/spheres/missingFields/color/missingColor.cpp
       tests/primitives/spheres/invalidFields/position/invalidPosition.cpp
       tests/primitives/spheres/invalidFields/color/invalidColor.cpp
+      tests/primitives/spheres/materials/parseMaterials.cpp
       tests/primitives/cylinders/missingFields/position/missingPosition.cpp
       tests/primitives/cylinders/missingFields/color/missingColor.cpp
       tests/primitives/cylinders/invalidFields/position/invalidPosition.cpp
