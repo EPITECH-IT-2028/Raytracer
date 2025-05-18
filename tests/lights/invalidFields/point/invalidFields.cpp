@@ -78,4 +78,12 @@ TEST_F(ParserConfigFileTest, InvalidLightsPointFields) {
   Raytracer::LightComposite lc8;
 
   EXPECT_THROW(parser8.parseConfigFile(camera8, sc8, lc8), Raytracer::ParseError);
+
+  _cfgFile = "tests/lights/invalidFields/point/negativeIntensity.cfg";
+  Raytracer::ParserConfigFile parser9(_cfgFile, _plugins);
+  Raytracer::Camera camera9;
+  Raytracer::ShapeComposite sc9;
+  Raytracer::LightComposite lc9;
+
+  EXPECT_THROW(parser9.parseConfigFile(camera9, sc9, lc9), Raytracer::ParseError);
 }
