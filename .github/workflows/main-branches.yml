@@ -15,14 +15,13 @@ jobs:
     name: Compare CLI 
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker:latest
-
+    if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos'
     steps:
-
       - name: Checkout GH repo
         uses: actions/checkout@v4
 
-      - name: Compare repository 
-        if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos'
+      - name: Check repository
+        run: echo "Repository check passed"
 
   check_compilation:
     needs: [compare-keys]
