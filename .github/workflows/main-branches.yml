@@ -15,21 +15,13 @@ jobs:
     name: Compare CLI 
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker:latest
-
+    if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos'
     steps:
-
       - name: Checkout GH repo
         uses: actions/checkout@v4
 
-      - name: Compare repository 
-        run: | 
-          if [ "${{ github.repository }}" == "EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos" ]; then
-            echo "Same mirror repository"
-            exit 1
-          else
-            echo "Different repository, continuing execution"
-            exit 0
-          fi
+      - name: Check repository
+        run: echo "Repository check passed"
 
   check_compilation:
     needs: [compare-keys]
@@ -58,10 +50,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure with CMake
-        run: cmake -B .build
+        run: cmake -B .build -DENABLE_TESTS=ON
 
-      - name: Build project
-        run: cmake --build .build
+      - name: Build tests
+        run: cmake --build .build --target coverage
 
       - name: Run tests 
         run: ./unit_tests
