@@ -438,6 +438,9 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
       Math::Vector3D translation = parseVector3D(cylinderInf["translate"]);
       newCylinderInf->translate(translation);
     }
+    if (cylinderInf.exists("rotate")) {
+      parseRotation(cylinderInf["rotate"], newCylinderInf);
+    }
     if (cylinderInf.exists("material")) {
       std::string materialName = parseString(cylinderInf["material"]);
       if (materialName == "reflective") {
@@ -773,7 +776,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     // CYLINDERS
     if (root.exists("primitives") && root["primitives"].exists("cylinders")) {
       static const std::unordered_set<std::string> allowedSettings = {
-          "x", "y", "z", "r", "h", "color", "translate", "rotate", "material"};
+          "x", "y", "z", "r", "h", "color", "translate", "material", "rotate"};
       checkSettings(root["primitives"]["cylinders"], allowedSettings);
       parseCylinders(sc, root["primitives"]["cylinders"]);
     }
