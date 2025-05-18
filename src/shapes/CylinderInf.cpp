@@ -7,8 +7,9 @@
  * @brief Calculates the intersection of a ray with the infinite cylinder.
  * @param ray The ray to test for intersection.
  * @return A tuple containing:
- *         - double: The distance from the ray's origin to the closest intersection point (t).
- *                   Returns 0.0 if there is no hit or if hits are behind the ray origin.
+ *         - double: The distance from the ray's origin to the closest
+ * intersection point (t). Returns 0.0 if there is no hit or if hits are behind
+ * the ray origin.
  *         - Math::Vector3D: The color of the cylinder.
  *         - const Raytracer::IShape*: A pointer to this cylinder object.
  */
@@ -47,9 +48,11 @@ Raytracer::CylinderInf::hits(const Raytracer::Ray &ray) const {
 }
 
 /**
- * @brief Gets the normal vector at a given point on the infinite cylinder's surface.
+ * @brief Gets the normal vector at a given point on the infinite cylinder's
+ * surface.
  * @param point The point on the cylinder's surface.
- * @return The normalized normal vector at that point, perpendicular to the cylinder's axis.
+ * @return The normalized normal vector at that point, perpendicular to the
+ * cylinder's axis.
  */
 Math::Vector3D Raytracer::CylinderInf::getNormal(
     const Math::Point3D &point) const {
@@ -64,12 +67,31 @@ Math::Vector3D Raytracer::CylinderInf::getNormal(
   return oc_perp.normalize();
 }
 
+/**
+ * @brief Translates the cylinder by a given offset.
+ * @param offset The vector by which to translate the cylinder's center.
+ * rotation = v.cos(angle) + (axis X v) * sin(angle) + axis * (axis . v) * (1 -
+ * cos(angle))
+ */
+void Raytracer::CylinderInf::rotate(const Math::Vector3D &axis, float angle) {
+  double radians = angle * M_PI / 180.0;
+  double cos = std::cos(radians);
+  double sin = std::sin(radians);
+
+  Math::Vector3D newNormal =
+      _normal * cos + Math::cross(axis.normalized(), _normal) * sin +
+      axis.normalized() * axis.normalized().dot(_normal) * (1 - cos);
+  _normal = newNormal.normalize();
+}
+
 extern "C" {
 /**
  * @brief Factory function to create a new CylinderInf instance.
  *
- * This function is typically used by a plugin system to instantiate shape objects.
- * @return Raytracer::IShape* A pointer to the newly created CylinderInf, or nullptr on failure.
+ * This function is typically used by a plugin system to instantiate shape
+ * objects.
+ * @return Raytracer::IShape* A pointer to the newly created CylinderInf, or
+ * nullptr on failure.
  */
 Raytracer::IShape *addShape() {
   try {

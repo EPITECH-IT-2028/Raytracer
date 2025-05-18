@@ -26,7 +26,8 @@ namespace Raytracer {
       /**
        * @brief Pure virtual method to calculate ray-shape intersections.
        * @param ray The ray to test for intersection.
-       * @return A tuple containing the distance to the hit point, the color of the shape, and a pointer to the shape itself if hit.
+       * @return A tuple containing the distance to the hit point, the color of
+       * the shape, and a pointer to the shape itself if hit.
        */
       virtual std::tuple<double, Math::Vector3D, const IShape *> hits(
           const Raytracer::Ray &ray) const override = 0;
@@ -45,6 +46,10 @@ namespace Raytracer {
        */
       virtual void translate(const Math::Vector3D &offset) override {
         _center = _center + offset;
+      }
+
+      virtual void rotate(__attribute__((unused)) const Math::Vector3D &axis,
+                          __attribute__((unused)) float angle) override {
       }
 
       /**
@@ -73,7 +78,8 @@ namespace Raytracer {
 
       /**
        * @brief Gets the material of the shape.
-       * @return std::shared_ptr<IMaterials> A shared pointer to the shape's material.
+       * @return std::shared_ptr<IMaterials> A shared pointer to the shape's
+       * material.
        */
       std::shared_ptr<IMaterials> getMaterial() const override {
         return _material;
@@ -111,10 +117,11 @@ namespace Raytracer {
       }
 
     protected:
-      Math::Point3D _center;                ///< The center point of the shape.
-      Math::Vector3D _color;                ///< The color of the shape.
-      double _shininess = 32.;              ///< The shininess property for lighting calculations.
-      std::shared_ptr<IMaterials> _material; ///< The material of the shape.
+      Math::Point3D _center;  ///< The center point of the shape.
+      Math::Vector3D _color;  ///< The color of the shape.
+      double _shininess =
+          32.;  ///< The shininess property for lighting calculations.
+      std::shared_ptr<IMaterials> _material;  ///< The material of the shape.
   };
 
 }  // namespace Raytracer
