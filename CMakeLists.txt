@@ -379,9 +379,11 @@ if(BUILD_TESTING)
       tests/lights/missingFields/missingFields.cpp
       tests/lights/missingFields/ambient/missingFields.cpp
       tests/lights/missingFields/directional/missingFields.cpp
+      tests/lights/missingFields/point/missingFields.cpp
       tests/lights/invalidFields/ambient/invalidFields.cpp
       tests/lights/invalidFields/directional/invalidFields.cpp
       tests/lights/invalidFields/invalidDiffuse.cpp
+      tests/lights/invalidFields/point/invalidFields.cpp
 
       tests/obj/parseObj.cpp
 
