@@ -3,10 +3,12 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include "Renderer.hpp"
 #include "exceptions/RaytracerException.hpp"
 
 #define EXTENSION_LENGTH 4
+
 
 Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
     : _inputFilePath(inputPath), _width(width), _height(height) {
@@ -14,9 +16,12 @@ Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
   _window.setFramerateLimit(60);
   _window.setVerticalSyncEnabled(true);
   _lastMovement = std::chrono::steady_clock::now();
+  _ftime = std::filesystem::last_write_time(inputPath);
   init();
   try {
     parsePlugins();
+    _renderer = std::make_unique<Raytracer::Renderer>(
+        _width, _height, _inputFilePath, _camera, _plugins);
   } catch (const std::exception &e) {
     std::cerr << "[ERROR] - Failed to parse plugins: " << e.what() << std::endl;
     throw;
@@ -93,6 +98,22 @@ void Raytracer::Scene::createPPMFile() {
     writeColor(outputFile, color);
   }
   outputFile.close();
+}
+
+void Raytracer::Scene::checkFileChange() {
+  std::filesystem::file_time_type updateTime = std::filesystem::last_write_time(_inputFilePath);
+
+  if (updateTime == _ftime) {
+    return;
+  }
+  _ftime = updateTime;
+  try {
+    _renderer = std::make_unique<Raytracer::Renderer>(_width, _height, _inputFilePath, _camera, _plugins);
+  } catch (const Raytracer::ParseError &e) {
+    std::cerr << "[ERROR] - Failed to update renderer: " << e.what() << std::endl;
+  } catch (const Raytracer::RaytracerError &e) {
+    std::cerr << "[ERROR] - Failed to update renderer: " << e.what() << std::endl;
+  }
 }
 
 void Raytracer::Scene::handleInput() {
@@ -172,10 +193,6 @@ void Raytracer::Scene::parsePlugins() {
 }
 
 void Raytracer::Scene::render() {
-  Raytracer::Renderer renderer(_width, _height, _inputFilePath, _camera,
-                               _plugins);
-
-  renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
   createPPMFile();
 
   while (_window.isOpen()) {
@@ -186,13 +203,13 @@ void Raytracer::Scene::render() {
            event.key.code == sf::Keyboard::Escape))
         _window.close();
     }
-    renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
+    checkFileChange();
     handleInput();
     if (_userQuit)
       return;
     changeCamQuality();
     std::fill(_framebuffer.begin(), _framebuffer.end(), sf::Color::White);
-    renderer.renderToBuffer(_framebuffer, _camera, _isHighQuality);
+    _renderer->renderToBuffer(_framebuffer, _camera, _isHighQuality);
     updateImage();
     _window.clear(sf::Color::White);
     _window.draw(_sprite);
