@@ -28,7 +28,8 @@ namespace Raytracer {
        * @param filename The path to the configuration file to parse.
        * @param plugins A list of plugin paths (used by the factory).
        * @throws ParseError if the filename does not end with ".cfg".
-       * @throws ConfigError if there's an I/O error reading the file or a parsing error in the file.
+       * @throws ConfigError if there's an I/O error reading the file or a
+       * parsing error in the file.
        */
       ParserConfigFile(const std::string &filename,
                        const std::vector<std::string> &plugins);
@@ -46,11 +47,11 @@ namespace Raytracer {
        * @param lc Reference to the LightComposite object to populate.
        */
       void parseConfigFile(Camera &, ShapeComposite &, LightComposite &);
-      
+
       /**
        * @brief Secondary parsing function for imported scenes.
-       * Parses only primitives and lights (no camera) when loading scenes referenced
-       * by other config files.
+       * Parses only primitives and lights (no camera) when loading scenes
+       * referenced by other config files.
        * @param sc Reference to the ShapeComposite object to populate.
        * @param lc Reference to the LightComposite object to populate.
        */
@@ -78,28 +79,36 @@ namespace Raytracer {
       void parseLights(LightComposite &, const libconfig::Setting &);
       /**
        * @brief Parses scene import directives from a libconfig setting.
-       * @param sc Reference to the ShapeComposite object to populate from imported scenes.
-       * @param lc Reference to the LightComposite object to populate from imported scenes.
+       * @param sc Reference to the ShapeComposite object to populate from
+       * imported scenes.
+       * @param lc Reference to the LightComposite object to populate from
+       * imported scenes.
        * @param setting The libconfig setting containing scene import data.
-       * @throws ParseError if an import loop is detected or an imported file cannot be parsed.
+       * @throws ParseError if an import loop is detected or an imported file
+       * cannot be parsed.
        */
-      void parseScenes(ShapeComposite &, LightComposite &, const libconfig::Setting &);
+      void parseScenes(ShapeComposite &, LightComposite &,
+                       const libconfig::Setting &);
 
       /**
        * @brief Parses an OBJ file and populates an Object instance.
        * @param obj_file The path to the .obj file.
        * @param object Reference to the Object to populate.
-       * @throws std::runtime_error if TinyObjLoader encounters an error or fails to load the file.
+       * @throws std::runtime_error if TinyObjLoader encounters an error or
+       * fails to load the file.
        */
       void parseObj(const std::string &obj_file, Object &object);
 
     private:
-      libconfig::Config _cfg; ///< libconfig Config object.
-      std::vector<std::string> _plugins; ///< List of plugin paths.
-      std::unordered_set<std::string> _fileAlreadyParse; ///< Set of already parsed file paths to prevent import loops.
-      Factory _factory = Factory(); ///< Factory for creating shapes and materials.
-      std::string _currentFilePath; ///< Path of the currently parsed configuration file.
-  
+      libconfig::Config _cfg;             ///< libconfig Config object.
+      std::vector<std::string> _plugins;  ///< List of plugin paths.
+      std::unordered_set<std::string>
+          _fileAlreadyParse;  ///< Set of already parsed file paths to prevent
+                              ///< import loops.
+      Factory _factory =
+          Factory();  ///< Factory for creating shapes and materials.
+      std::string _currentFilePath;  ///< Path of the currently parsed
+                                     ///< configuration file.
 
       /**
        * @brief Parses (x, y, z) coordinates from a libconfig setting.
@@ -121,18 +130,32 @@ namespace Raytracer {
        * @return Math::Vector3D The parsed vector.
        */
       static Math::Vector3D parseVector3D(const libconfig::Setting &setting);
+
+      /**
+       * @brief Parses a rotation (axis and angle) from a libconfig setting.
+       * @param setting The libconfig setting.
+       * @return std::tuple<Math::Vector3D, float> The parsed rotation axis and
+       * angle.
+       */
+      static void parseRotation(const libconfig::Setting &setting,
+                                std::shared_ptr<IShape> shape);
+
       /**
        * @brief Parses a color (r, g, b) from a libconfig setting.
        * @param colorSetting The libconfig setting for color.
-       * @return Math::Vector3D The parsed color vector (values between 0 and 1).
-       * @throws ParseError if r, g, or b fields are missing or out of range [0,1].
+       * @return Math::Vector3D The parsed color vector (values between 0 and
+       * 1).
+       * @throws ParseError if r, g, or b fields are missing or out of range
+       * [0,1].
        */
       static Math::Vector3D parseColor(const libconfig::Setting &colorSetting);
       /**
-       * @brief Parses a string value for a "type" field from a libconfig setting.
+       * @brief Parses a string value for a "type" field from a libconfig
+       * setting.
        * @param setting The libconfig setting.
        * @return std::string The parsed string.
-       * @throws libconfig::SettingNotFoundException if the "type" field is missing.
+       * @throws libconfig::SettingNotFoundException if the "type" field is
+       * missing.
        */
       static std::string parseString(const libconfig::Setting &setting);
 
@@ -142,10 +165,12 @@ namespace Raytracer {
        * @param lc LightComposite to populate.
        * @param setting The root libconfig setting.
        */
-      void parseInternal(ShapeComposite &, LightComposite &, const libconfig::Setting &);
+      void parseInternal(ShapeComposite &, LightComposite &,
+                         const libconfig::Setting &);
 
       /**
-       * @brief Parses an MTL file associated with an OBJ file. (Currently not fully implemented within this snippet)
+       * @brief Parses an MTL file associated with an OBJ file. (Currently not
+       * fully implemented within this snippet)
        * @param mtl_file The path to the .mtl file.
        * @param object Reference to the Object to populate with material data.
        */
@@ -168,7 +193,8 @@ namespace Raytracer {
       /**
        * @brief Parses infinite cylinder definitions from a libconfig setting.
        * @param sc ShapeComposite to add infinite cylinders to.
-       * @param cylindersInfSetting The libconfig setting for infinite cylinders.
+       * @param cylindersInfSetting The libconfig setting for infinite
+       * cylinders.
        */
       void parseCylindersInf(ShapeComposite &sc,
                              const libconfig::Setting &cylindersInfSetting);

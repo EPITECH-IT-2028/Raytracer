@@ -24,17 +24,22 @@ namespace Raytracer {
        * @brief Calculates the intersection of a ray with the shape.
        * @param ray The ray to test for intersection.
        * @return A tuple containing:
-       *         - double: The distance from the ray's origin to the intersection point (t).
-       *         - Math::Vector3D: The color of the shape at the intersection point.
-       *         - const IShape*: A pointer to the shape itself if an intersection occurs.
-       *         Implementations should return a t value <= 0 or a null shape pointer if no hit.
+       *         - double: The distance from the ray's origin to the
+       * intersection point (t).
+       *         - Math::Vector3D: The color of the shape at the intersection
+       * point.
+       *         - const IShape*: A pointer to the shape itself if an
+       * intersection occurs. Implementations should return a t value <= 0 or a
+       * null shape pointer if no hit.
        */
       virtual std::tuple<double, Math::Vector3D, const IShape *> hits(
           const Raytracer::Ray &ray) const = 0;
 
       /**
-       * @brief Gets the normal vector at a specific point on the shape's surface.
-       * @param hitPoint The point on the shape's surface for which to calculate the normal.
+       * @brief Gets the normal vector at a specific point on the shape's
+       * surface.
+       * @param hitPoint The point on the shape's surface for which to calculate
+       * the normal.
        * @return Math::Vector3D The normal vector at the hitPoint.
        */
       virtual Math::Vector3D getNormal(const Math::Point3D &hitPoint) const = 0;
@@ -44,6 +49,13 @@ namespace Raytracer {
        * @param offset The vector representing the translation.
        */
       virtual void translate(const Math::Vector3D &offset) = 0;
+
+      /**
+       * @brief Rotates the shape around a specified axis by a given angle.
+       * @param axis The axis of rotation.
+       * @param angle The angle of rotation in radians.
+       */
+      virtual void rotate(const Math::Vector3D &axis, float angle) = 0;
 
       /**
        * @brief Gets the center point of the shape.
@@ -62,7 +74,8 @@ namespace Raytracer {
       virtual double getShininess() const = 0;
       /**
        * @brief Gets the material of the shape.
-       * @return std::shared_ptr<IMaterials> A shared pointer to the shape's material.
+       * @return std::shared_ptr<IMaterials> A shared pointer to the shape's
+       * material.
        */
       virtual std::shared_ptr<IMaterials> getMaterial() const = 0;
 
