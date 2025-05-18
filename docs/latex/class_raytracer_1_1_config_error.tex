@@ -1,0 +1,57 @@
+\doxysection{Raytracer\+::Config\+Error Class Reference}
+\hypertarget{class_raytracer_1_1_config_error}{}\label{class_raytracer_1_1_config_error}\index{Raytracer::ConfigError@{Raytracer::ConfigError}}
+
+
+Exception class for errors related to configuration file processing. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. Can include file name and line number.  
+
+
+
+
+{\ttfamily \#include $<$Raytracer\+Exception.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Config\+Error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_config_error}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_config_error_a5499847ff025d8f4f43637d17d48ab9a}{Config\+Error}} (const std\+::string \&message, const std\+::string \&file="{}"{}, int line=-\/1)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_raytracer_1_1_config_error}{Config\+Error} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_raytracer_error}{Raytracer\+::\+Raytracer\+Error}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{Raytracer\+Error}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Exception class for errors related to configuration file processing. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. Can include file name and line number. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_config_error_a5499847ff025d8f4f43637d17d48ab9a}\index{Raytracer::ConfigError@{Raytracer::ConfigError}!ConfigError@{ConfigError}}
+\index{ConfigError@{ConfigError}!Raytracer::ConfigError@{Raytracer::ConfigError}}
+\doxysubsubsection{\texorpdfstring{ConfigError()}{ConfigError()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_config_error_a5499847ff025d8f4f43637d17d48ab9a} 
+Raytracer\+::\+Config\+Error\+::\+Config\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{, }\item[{const std\+::string \&}]{file}{ = {\ttfamily "{}"{}}, }\item[{int}]{line}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{class_raytracer_1_1_config_error}{Config\+Error} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The configuration error message. \\
+\hline
+{\em file} & The file in which the error occurred (optional). \\
+\hline
+{\em line} & The line number where the error occurred (optional). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/exceptions/\mbox{\hyperlink{_raytracer_exception_8hpp}{Raytracer\+Exception.\+hpp}}\end{DoxyCompactItemize}

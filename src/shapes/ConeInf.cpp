@@ -4,6 +4,15 @@
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 
+/**
+ * @brief Calculates the intersection of a ray with the infinite double cone.
+ * @param ray The ray to test for intersection.
+ * @return A tuple containing:
+ *         - double: The distance from the ray's origin to the closest valid intersection point (t).
+ *                   Returns 0.0 if there is no hit or if hits are behind the ray origin.
+ *         - Math::Vector3D: The color of the cone.
+ *         - const Raytracer::IShape*: A pointer to this cone object.
+ */
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::ConeInf::hits(const Raytracer::Ray &ray) const {
   Math::Vector3D cone_axis = _normal;
@@ -46,6 +55,11 @@ Raytracer::ConeInf::hits(const Raytracer::Ray &ray) const {
 }
 
 
+/**
+ * @brief Gets the normal vector at a given point on the infinite cone's surface.
+ * @param hit_point The point on the cone's surface.
+ * @return The normalized normal vector at that point.
+ */
 Math::Vector3D Raytracer::ConeInf::getNormal(
     const Math::Point3D &hit_point) const {
   Math::Vector3D cone_axis = _normal;
@@ -64,6 +78,12 @@ Math::Vector3D Raytracer::ConeInf::getNormal(
 }
 
 extern "C" {
+/**
+ * @brief Factory function to create a new ConeInf instance.
+ *
+ * This function is typically used by a plugin system to instantiate shape objects.
+ * @return Raytracer::IShape* A pointer to the newly created ConeInf, or nullptr on failure.
+ */
 Raytracer::IShape *addShape() {
   try {
     return new Raytracer::ConeInf();

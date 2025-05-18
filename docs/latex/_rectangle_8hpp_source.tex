@@ -1,0 +1,36 @@
+\doxysection{Rectangle.\+hpp}
+\hypertarget{_rectangle_8hpp_source}{}\label{_rectangle_8hpp_source}\index{src/Rectangle.hpp@{src/Rectangle.hpp}}
+\mbox{\hyperlink{_rectangle_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_point3_d_8hpp}{Point3D.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_a20a7680fac5c1505f72d6f39376caf90}{Rectangle3D}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_a20a7680fac5c1505f72d6f39376caf90}{Rectangle3D}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&origin,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&bottom\_side,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&left\_side)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ :\ \_origin(origin),\ \_bottom\_side(bottom\_side),\ \_left\_side(left\_side)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_a4072027da44df8ea6c93fbaa35e63d0c}{Rectangle3D}}()}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ :\ \_origin(-\/1,\ -\/1,\ -\/1),\ \_bottom\_side(2,\ 0,\ 0),\ \_left\_side(0,\ 2,\ 0)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_a1fbca94fbf81bf4fb948dd03191be53c}{\string~Rectangle3D}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_af67daad85469d9e0e47def1f7ceed1d7}{pointAt}}(\textcolor{keywordtype}{double}\ u,\ \textcolor{keywordtype}{double}\ v)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \_origin;\ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \_bottom\_side;\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \_left\_side;\ \ \ }
+\DoxyCodeLine{00059\ \ \ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

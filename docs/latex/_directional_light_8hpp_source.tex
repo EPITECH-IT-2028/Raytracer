@@ -1,0 +1,23 @@
+\doxysection{Directional\+Light.\+hpp}
+\hypertarget{_directional_light_8hpp_source}{}\label{_directional_light_8hpp_source}\index{src/lights/DirectionalLight.hpp@{src/lights/DirectionalLight.hpp}}
+\mbox{\hyperlink{_directional_light_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_light_8hpp}{ALight.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00007\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_directional_light_ac57081e8124d1646eab1680cad077cad}{DirectionalLight}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_light}{ALight}}\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_directional_light_ac57081e8124d1646eab1680cad077cad}{DirectionalLight}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_directional_light_a7f858093b6937df3cf2824512fc2bbd4}{\string~DirectionalLight}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_directional_light_a39982906d667b1956b880e5604135c3a}{computeLighting}}(}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&objectColor,}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&viewDir,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&shapes)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00016\ \ \ \};}
+\DoxyCodeLine{00017\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

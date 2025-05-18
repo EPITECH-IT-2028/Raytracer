@@ -1,0 +1,117 @@
+\doxysection{Raytracer\+::AMaterials Class Reference}
+\hypertarget{class_raytracer_1_1_a_materials}{}\label{class_raytracer_1_1_a_materials}\index{Raytracer::AMaterials@{Raytracer::AMaterials}}
+
+
+Abstract base class for materials.  
+
+
+
+
+{\ttfamily \#include $<$AMaterials.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::AMaterials\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_a_materials}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741}{AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_materials_a2155c255e7637b3165050a3d12d2957c}{\texorpdfstring{$\sim$}{\string~}\+AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default virtual destructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33}{compute\+Material}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&shapes, const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&lights, const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&camera, int depth, \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}} ray\+Color\+Func) const override=0
+\begin{DoxyCompactList}\small\item\em Pure virtual method to compute the material\textquotesingle{}s color at a hit point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57}{\texorpdfstring{$\sim$}{\string~}\+IMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}
+\begin{DoxyCompactList}\small\item\em Type alias for a function that computes the color of a ray. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for materials. 
+
+This class implements the \doxylink{class_raytracer_1_1_i_materials}{IMaterials} interface and serves as a base for concrete material implementations. It provides default constructor and destructor. The {\ttfamily compute\+Material} method remains pure virtual, requiring derived classes to implement their specific shading logic. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741}\index{Raytracer::AMaterials@{Raytracer::AMaterials}!AMaterials@{AMaterials}}
+\index{AMaterials@{AMaterials}!Raytracer::AMaterials@{Raytracer::AMaterials}}
+\doxysubsubsection{\texorpdfstring{AMaterials()}{AMaterials()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741} 
+Raytracer\+::\+AMaterials\+::\+AMaterials (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{class_raytracer_1_1_a_materials_a2155c255e7637b3165050a3d12d2957c}\index{Raytracer::AMaterials@{Raytracer::AMaterials}!````~AMaterials@{\texorpdfstring{$\sim$}{\string~}AMaterials}}
+\index{````~AMaterials@{\texorpdfstring{$\sim$}{\string~}AMaterials}!Raytracer::AMaterials@{Raytracer::AMaterials}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AMaterials()}{\string~AMaterials()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_a_materials_a2155c255e7637b3165050a3d12d2957c} 
+virtual Raytracer\+::\+AMaterials\+::\texorpdfstring{$\sim$}{\string~}\+AMaterials (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Default virtual destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33}\index{Raytracer::AMaterials@{Raytracer::AMaterials}!computeMaterial@{computeMaterial}}
+\index{computeMaterial@{computeMaterial}!Raytracer::AMaterials@{Raytracer::AMaterials}}
+\doxysubsubsection{\texorpdfstring{computeMaterial()}{computeMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33} 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+AMaterials\+::compute\+Material (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&}]{shapes}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&}]{lights}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&}]{camera}{, }\item[{int}]{depth}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}}]{ray\+Color\+Func}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [pure virtual]}}
+
+
+
+Pure virtual method to compute the material\textquotesingle{}s color at a hit point. 
+
+Derived classes must implement this method to define their specific appearance and interaction with light and the scene.
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The surface normal vector at the hit point. \\
+\hline
+{\em view\+Dir} & The direction vector from the hit point towards the camera. \\
+\hline
+{\em hit\+Point} & The 3D coordinates of the point on the surface. \\
+\hline
+{\em color} & The intrinsic base color of the material. \\
+\hline
+{\em shapes} & A composite object containing all shapes in the scene. \\
+\hline
+{\em lights} & A composite object containing all light sources in the scene. \\
+\hline
+{\em camera} & The scene\textquotesingle{}s camera. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing. \\
+\hline
+{\em ray\+Color\+Func} & A callback function to compute the color of secondary rays. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The computed color of the material. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_i_materials_a85699ed8a7d2fd683461775d3e705187}{Raytracer\+::\+IMaterials}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_reflections_ae4d917ce118acbc0505e4b0cd07f5715}{Raytracer\+::\+Reflections}}, \mbox{\hyperlink{class_raytracer_1_1_refractions_a432dee43635897300a5f98e7654b10fe}{Raytracer\+::\+Refractions}}, and \mbox{\hyperlink{class_raytracer_1_1_transparency_a0a446a8c3009e212bc5a2b2421763391}{Raytracer\+::\+Transparency}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/materials/\mbox{\hyperlink{_a_materials_8hpp}{AMaterials.\+hpp}}\end{DoxyCompactItemize}

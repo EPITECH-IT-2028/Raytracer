@@ -1,0 +1,52 @@
+\doxysection{Cone\+Inf.\+hpp}
+\hypertarget{_cone_inf_8hpp_source}{}\label{_cone_inf_8hpp_source}\index{src/shapes/ConeInf.hpp@{src/shapes/ConeInf.hpp}}
+\mbox{\hyperlink{_cone_inf_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_shape_8hpp}{AShape.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_point3_d_8hpp}{Point3D.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_ray_8hpp}{Ray.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_cone_inf_abc2cc6780fc941677480d7a9d1f3e65d}{ConeInf}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_shape}{AShape}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_cone_inf_abc2cc6780fc941677480d7a9d1f3e65d}{ConeInf}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&center,\ \textcolor{keywordtype}{double}\ angle,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&color)}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ :\ \_normal(normal),\ \_angle(angle)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\_center}}\ =\ center;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\_color}}\ =\ color;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_cone_inf_aabd2e60f6904475fc8ad99548e01b7c2}{ConeInf}}()\ :\ \_normal(\mbox{\hyperlink{namespace_math}{Math}}::Vector3D(0,\ 1,\ 0)),\ \_angle(1.0)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\_center}}\ =\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}(0,\ 0,\ 0);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\_color}}\ =\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}(1,\ 0,\ 0);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_cone_inf_ad211e35371088c4232bf250d73ef461f}{\string~ConeInf}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ std::tuple<double,\ Math::Vector3D,\ const\ IShape\ *>\ \mbox{\hyperlink{class_raytracer_1_1_cone_inf_adc33b89d3f1c66e2797dc9968f22d85e}{hits}}(}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer::Ray}}\ \&ray)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_cone_inf_a6e457c0467078058d72463e7b6d85e3e}{getNormal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&point)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_cone_inf_a52a42363cf3a38353c0c50ba1d944bfc}{setNormal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \_normal\ =\ normal;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_cone_inf_a82df6406a528a93890e26eca9ef2b960}{setAngle}}(\textcolor{keywordtype}{double}\ angle)\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \_angle\ =\ angle;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \_normal;\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_angle;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

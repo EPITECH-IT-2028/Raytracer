@@ -1,0 +1,142 @@
+\doxysection{Camera.\+hpp}
+\hypertarget{_camera_8hpp_source}{}\label{_camera_8hpp_source}\index{src/Camera.hpp@{src/Camera.hpp}}
+\mbox{\hyperlink{_camera_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_point3_d_8hpp}{Point3D.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_ray_8hpp}{Ray.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_rectangle_8hpp}{Rectangle.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_camera_a2a0d7f9f9a9fdc34a9253270a02d12cf}{Camera}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}};\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a515038214ce6d42557679bea850ee315}{screen}};\ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_raytracer_1_1_camera_aa44135d7ceab8ae44311d231ad7ac947}{\_yaw}}\ =\ -\/157;\ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a266c6496bac962e8a5ac8d1fb8526794}{\_pitch}}\ =\ -\/11;\ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a433f26f119efacd5290e1e3bcb9e0557}{\_right}};\ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_camera_ae618408569374849c92bc1b5132809d6}{\_up}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a6b9c5095b07235fc3e7b4618dfd8eb74}{\_forward}};\ \ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_a2a0d7f9f9a9fdc34a9253270a02d12cf}{Camera}}()\ :\ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}(0,\ 0,\ 0),\ \mbox{\hyperlink{class_raytracer_1_1_camera_a515038214ce6d42557679bea850ee315}{screen}}(\mbox{\hyperlink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}}())\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_a6bab5c32b814352906122dc9867b0f22}{Camera}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_a515038214ce6d42557679bea850ee315}{screen}})}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}(\mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}),\ \mbox{\hyperlink{class_raytracer_1_1_camera_a515038214ce6d42557679bea850ee315}{screen}}(\mbox{\hyperlink{class_raytracer_1_1_camera_a515038214ce6d42557679bea850ee315}{screen}})\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_a093aada9f93473c8dd1f2cb7616353fb}{\string~Camera}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a7d34ebdaa81af52fdffcc18ced1fa5a2}{setWidth}}(\textcolor{keyword}{const}\ std::size\_t\ \&width)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \_width\ =\ width;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a43c0acc243946b0856f8ac40d2b990eb}{setHeight}}(\textcolor{keyword}{const}\ std::size\_t\ \&height)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \_height\ =\ height;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a9280434ae40d1383db899b3a7607e490}{setZoom}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&z)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \_zoom\ =\ z;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a6a10f602cd7470e2167c3f3d63348456}{setFieldOfView}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&fov)\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \_fieldOfView\ =\ fov;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a8962389d46f499216a15d8d5d5e9f5b4}{setViewportHeight}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&vh)\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \_viewportHeight\ =\ vh;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_aa2166e422e698611c34fd30479fc3e40}{setViewportWidth}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&vw)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \_viewportWidth\ =\ vw;}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::size\_t\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_af8c5e511e5bc960c069b97eadddfbd32}{getWidth}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_width;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::size\_t\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_a28bf70f4ad969557be8f4e9dbf8c6ea5}{getHeight}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_height;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_a5041adb40e996762d713dbfd10d00838}{getZoom}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_zoom;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_add22130025e97fd07ab4e7deb4fd9fd6}{getViewportHeight}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_viewportHeight;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_a4e492d1e210dc7e787a469ed0e2b1818}{getViewportWidth}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_viewportWidth;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_aebb71eb7e1108875859a1e420a3cd2d4}{getFieldOfView}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_fieldOfView;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a2298b1eb3cb4622768413b468689c993}{updateView}}();}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_ac380cd5e25ff7ec6b32f69ededac4852}{getPixelDeltaU}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_pixelDeltaU;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_a561d3afa1518962e4237ed245444bbfe}{getPixelDeltaV}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_pixelDeltaV;}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_ad4b687938ed28cd675371c3284927825}{getViewportCenter}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_viewportCenter;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_a10c4a2d5ba7fd1152fbbfae915d39582}{getViewportUpperLeft}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_viewportUpperLeft;}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_camera_a2f8f1cafa09874077fdaafbc18bbc89d}{getPixel0Location}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_pixel0Location;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_ray}{Ray}}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a70b0d04afaa76321e0837488c6a99d95}{ray}}(\textcolor{keywordtype}{double}\ u,\ \textcolor{keywordtype}{double}\ v);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_ab9f8fb0aba6ff6010fdcf6e44f82a337}{rotateYaw}}(\textcolor{keywordtype}{float}\ a)\ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_aa44135d7ceab8ae44311d231ad7ac947}{\_yaw}}\ +=\ a;}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a808846dc68bdd2f6f34aba92b63253e8}{rotatePitch}}(\textcolor{keywordtype}{float}\ a)\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_a266c6496bac962e8a5ac8d1fb8526794}{\_pitch}}\ +=\ a;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_a266c6496bac962e8a5ac8d1fb8526794}{\_pitch}}\ =\ std::clamp(\mbox{\hyperlink{class_raytracer_1_1_camera_a266c6496bac962e8a5ac8d1fb8526794}{\_pitch}},\ -\/89.9f,\ 89.9f);}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_af0e54d08c55997b3a3dd292051f5eaec}{moveForward}}(\textcolor{keywordtype}{float}\ a)\ \{}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}\ =\ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}\ +\ \mbox{\hyperlink{class_raytracer_1_1_camera_a6b9c5095b07235fc3e7b4618dfd8eb74}{\_forward}}\ *\ a\ /\ 100;}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a6dd5d8a1a2ce542d6434b0f757587f69}{moveRight}}(\textcolor{keywordtype}{float}\ a)\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}\ =\ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}\ +\ \mbox{\hyperlink{class_raytracer_1_1_camera_a433f26f119efacd5290e1e3bcb9e0557}{\_right}}\ *\ a\ /\ 100;}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_camera_a699d27d1ffd6ba0050e3cfdaa5ef5664}{moveUp}}(\textcolor{keywordtype}{float}\ a)\ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}\ =\ \mbox{\hyperlink{class_raytracer_1_1_camera_af1ee72fe5e9931e9b9a7d0e36bcd77e3}{origin}}\ +\ \mbox{\hyperlink{class_raytracer_1_1_camera_ae618408569374849c92bc1b5132809d6}{\_up}}\ *\ a\ /\ 100;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ std::size\_t\ \_width\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ std::size\_t\ \_height\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_zoom\ =\ 2.0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_viewportHeight\ =\ 2.0;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_viewportWidth\ =\ 2.0;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \_fieldOfView\ =\ 60.0;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \_pixelDeltaU;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \_pixelDeltaV;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \_viewportCenter;\ \ \ \ \ \ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \_viewportUpperLeft;\ \ \ }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \_pixel0Location;\ \ \ \ \ \ }
+\DoxyCodeLine{00250\ \ \ \};}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

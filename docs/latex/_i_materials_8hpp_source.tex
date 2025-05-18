@@ -1,0 +1,41 @@
+\doxysection{IMaterials.\+hpp}
+\hypertarget{_i_materials_8hpp_source}{}\label{_i_materials_8hpp_source}\index{src/materials/IMaterials.hpp@{src/materials/IMaterials.hpp}}
+\mbox{\hyperlink{_i_materials_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_camera_8hpp}{Camera.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_point3_d_8hpp}{Point3D.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_renderer}{Renderer}};}
+\DoxyCodeLine{00010\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}};}
+\DoxyCodeLine{00011\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}};}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}};}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_ray}{Ray}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57}{\string~IMaterials}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{RayColorFunc}}\ =\ std::function<\mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}(}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer::Ray}}\ \&\ \textcolor{comment}{/*ray*/},\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ ray\ to\ trace}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer::ShapeComposite}}\ \&\ \textcolor{comment}{/*shapes*/},\ \textcolor{comment}{//\ Scene\ shapes}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer::LightComposite}}\ \&\ \textcolor{comment}{/*lights*/},\ \textcolor{comment}{//\ Scene\ lights}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer::Camera}}\ \&\ \textcolor{comment}{/*camera*/},\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Scene\ camera}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \textcolor{comment}{/*depth*/}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Current\ recursion\ depth}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ )>;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_i_materials_a85699ed8a7d2fd683461775d3e705187}{computeMaterial}}(}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&viewDir,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&color,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer::ShapeComposite}}\ \&shapes,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer::LightComposite}}\ \&lights,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer::Camera}}\ \&camera,\ \textcolor{keywordtype}{int}\ depth,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{RayColorFunc}}\ rayColorFunc)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00073\ \ \ \};}
+\DoxyCodeLine{00074\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

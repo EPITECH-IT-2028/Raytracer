@@ -1,0 +1,282 @@
+\doxysection{Raytracer\+::IShape Class Reference}
+\hypertarget{class_raytracer_1_1_i_shape}{}\label{class_raytracer_1_1_i_shape}\index{Raytracer::IShape@{Raytracer::IShape}}
+
+
+Interface for all drawable shapes in the \doxylink{namespace_raytracer}{Raytracer}.  
+
+
+
+
+{\ttfamily \#include $<$IShape.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::IShape\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=11.000000cm]{class_raytracer_1_1_i_shape}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c}{\texorpdfstring{$\sim$}{\string~}\+IShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_raytracer_1_1_i_shape_ad6f923262bf4c3f181266e5c4458ca55}{hits}} (const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&ray) const =0
+\begin{DoxyCompactList}\small\item\em Calculates the intersection of a ray with the shape. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_i_shape_af514466693bc30108bc9d717e2e793da}{get\+Normal}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point) const =0
+\begin{DoxyCompactList}\small\item\em Gets the normal vector at a specific point on the shape\textquotesingle{}s surface. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_raytracer_1_1_i_shape_a2738db24b27707546f50ae49c520dcb0}{translate}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&offset)=0
+\begin{DoxyCompactList}\small\item\em Translates the shape by a given offset. \end{DoxyCompactList}\item 
+virtual const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \& \mbox{\hyperlink{class_raytracer_1_1_i_shape_a148e5df10e07dd3c76e444f7caf9d6ee}{get\+Center}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the center point of the shape. \end{DoxyCompactList}\item 
+virtual const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_i_shape_a338c788ef1b7075fbdb2c442c3427f4d}{get\+Color}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the base color of the shape. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{class_raytracer_1_1_i_shape_a236569d8c3aa60f8cf76b0f2368fbda5}{get\+Shininess}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_i_shape_abffb60944a7b9f0bd2f47089fb6d7d5b}{get\+Material}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the material of the shape. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_raytracer_1_1_i_shape_a2f354c581e4c5e5259d28f747a45ff41}{set\+Center}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center)=0
+\begin{DoxyCompactList}\small\item\em Sets the center point of the shape. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_raytracer_1_1_i_shape_a0b585724f3ea38dcd62f2f7f12ab85b0}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color)=0
+\begin{DoxyCompactList}\small\item\em Sets the base color of the shape. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_raytracer_1_1_i_shape_a39d912daff07023150a1e775ed6b835c}{set\+Shininess}} (double shininess)=0
+\begin{DoxyCompactList}\small\item\em Sets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_raytracer_1_1_i_shape_a5a56bee118716496f9322d8d212c3862}{set\+Material}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ material)=0
+\begin{DoxyCompactList}\small\item\em Sets the material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for all drawable shapes in the \doxylink{namespace_raytracer}{Raytracer}. 
+
+Defines the common contract for shapes, including methods for ray intersection testing, normal calculation, transformations, and accessing properties like center, color, and material. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c}\index{Raytracer::IShape@{Raytracer::IShape}!````~IShape@{\texorpdfstring{$\sim$}{\string~}IShape}}
+\index{````~IShape@{\texorpdfstring{$\sim$}{\string~}IShape}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IShape()}{\string~IShape()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c} 
+virtual Raytracer\+::\+IShape\+::\texorpdfstring{$\sim$}{\string~}\+IShape (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_i_shape_a148e5df10e07dd3c76e444f7caf9d6ee}\index{Raytracer::IShape@{Raytracer::IShape}!getCenter@{getCenter}}
+\index{getCenter@{getCenter}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{getCenter()}{getCenter()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a148e5df10e07dd3c76e444f7caf9d6ee} 
+virtual const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \& Raytracer\+::\+IShape\+::get\+Center (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the center point of the shape. 
+
+\begin{DoxyReturn}{Returns}
+const \doxylink{class_math_1_1_point3_d}{Math\+::\+Point3D}\& A const reference to the shape\textquotesingle{}s center. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0805f80c768f1d502855ee4583f0f797}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_a338c788ef1b7075fbdb2c442c3427f4d}\index{Raytracer::IShape@{Raytracer::IShape}!getColor@{getColor}}
+\index{getColor@{getColor}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a338c788ef1b7075fbdb2c442c3427f4d} 
+virtual const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Raytracer\+::\+IShape\+::get\+Color (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the base color of the shape. 
+
+\begin{DoxyReturn}{Returns}
+const \doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}\& A const reference to the shape\textquotesingle{}s color. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_aee2fcc92765a6840d4d7a98a32d970f6}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_abffb60944a7b9f0bd2f47089fb6d7d5b}\index{Raytracer::IShape@{Raytracer::IShape}!getMaterial@{getMaterial}}
+\index{getMaterial@{getMaterial}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{getMaterial()}{getMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_abffb60944a7b9f0bd2f47089fb6d7d5b} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ Raytracer\+::\+IShape\+::get\+Material (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the material of the shape. 
+
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+IMaterials$>$ A shared pointer to the shape\textquotesingle{}s material. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a896c18dcd8b4444096414510eaf1b2cb}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_af514466693bc30108bc9d717e2e793da}\index{Raytracer::IShape@{Raytracer::IShape}!getNormal@{getNormal}}
+\index{getNormal@{getNormal}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{getNormal()}{getNormal()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_af514466693bc30108bc9d717e2e793da} 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+IShape\+::get\+Normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the normal vector at a specific point on the shape\textquotesingle{}s surface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hit\+Point} & The point on the shape\textquotesingle{}s surface for which to calculate the normal. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The normal vector at the hit\+Point. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a9cd5451bb98d4f234e00f63bbebbeb75}{Raytracer\+::\+AShape}}, \mbox{\hyperlink{class_raytracer_1_1_cone_a889a8f22277c4438897e0d56ea9ee4bb}{Raytracer\+::\+Cone}}, \mbox{\hyperlink{class_raytracer_1_1_cone_inf_a6e457c0467078058d72463e7b6d85e3e}{Raytracer\+::\+Cone\+Inf}}, \mbox{\hyperlink{class_raytracer_1_1_cylinder_a621d1e15cb9009511d97b372de1d9ae7}{Raytracer\+::\+Cylinder}}, \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a293be836ef49d13618e7340fbff6674f}{Raytracer\+::\+Cylinder\+Inf}}, \mbox{\hyperlink{class_raytracer_1_1_object_aa00852e147c7f54e96f9b8994cb9b034}{Raytracer\+::\+Object}}, \mbox{\hyperlink{class_raytracer_1_1_plane_aecae4e0c50315f5a192824baaa691bca}{Raytracer\+::\+Plane}}, \mbox{\hyperlink{class_raytracer_1_1_shape_composite_a9bf41d74a7e460037135ad8695be1e76}{Raytracer\+::\+Shape\+Composite}}, \mbox{\hyperlink{class_raytracer_1_1_sphere_ae55956e7110e1e54f3d0f8ba4e5585a4}{Raytracer\+::\+Sphere}}, and \mbox{\hyperlink{class_raytracer_1_1_triangle_afd27f4ec050e931df54454bd85c5a9d7}{Raytracer\+::\+Triangle}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_a236569d8c3aa60f8cf76b0f2368fbda5}\index{Raytracer::IShape@{Raytracer::IShape}!getShininess@{getShininess}}
+\index{getShininess@{getShininess}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{getShininess()}{getShininess()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a236569d8c3aa60f8cf76b0f2368fbda5} 
+virtual double Raytracer\+::\+IShape\+::get\+Shininess (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the shininess property of the shape\textquotesingle{}s material. 
+
+\begin{DoxyReturn}{Returns}
+double The shininess value. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_ad02fb2970274736b4e58b3f466ccbaf6}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_ad6f923262bf4c3f181266e5c4458ca55}\index{Raytracer::IShape@{Raytracer::IShape}!hits@{hits}}
+\index{hits@{hits}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{hits()}{hits()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_ad6f923262bf4c3f181266e5c4458ca55} 
+virtual std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} \texorpdfstring{$\ast$}{*} $>$ Raytracer\+::\+IShape\+::hits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&}]{ray}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Calculates the intersection of a ray with the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing\+:
+\begin{DoxyItemize}
+\item double\+: The distance from the ray\textquotesingle{}s origin to the intersection point (t).
+\item \doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}\+: The color of the shape at the intersection point.
+\item const IShape\texorpdfstring{$\ast$}{*}\+: A pointer to the shape itself if an intersection occurs. Implementations should return a t value \texorpdfstring{$<$}{<}= 0 or a null shape pointer if no hit. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a6d57486e381ac8c6481287cf72cbbe42}{Raytracer\+::\+AShape}}, \mbox{\hyperlink{class_raytracer_1_1_cone_a6d378a831ce0affd8cc9ef441bbb62a4}{Raytracer\+::\+Cone}}, \mbox{\hyperlink{class_raytracer_1_1_cone_inf_adc33b89d3f1c66e2797dc9968f22d85e}{Raytracer\+::\+Cone\+Inf}}, \mbox{\hyperlink{class_raytracer_1_1_cylinder_a4681e7efcfce52d64f38272dfae3e066}{Raytracer\+::\+Cylinder}}, \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a5066eee96eba1a6e0ed587e10f589b5e}{Raytracer\+::\+Cylinder\+Inf}}, \mbox{\hyperlink{class_raytracer_1_1_object_ad215f4c1dd94f8a68dac5ec11cb5b642}{Raytracer\+::\+Object}}, \mbox{\hyperlink{class_raytracer_1_1_plane_a4f4b6e010fd2f6ddc7744821b15d4371}{Raytracer\+::\+Plane}}, \mbox{\hyperlink{class_raytracer_1_1_shape_composite_a6fbedbcad83e7377a8f389ae64d20af2}{Raytracer\+::\+Shape\+Composite}}, \mbox{\hyperlink{class_raytracer_1_1_sphere_aef22634d545c8f86b6816015935476e1}{Raytracer\+::\+Sphere}}, and \mbox{\hyperlink{class_raytracer_1_1_triangle_aba10448bd2220c9230f1cdd6c6ad75fa}{Raytracer\+::\+Triangle}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_a2f354c581e4c5e5259d28f747a45ff41}\index{Raytracer::IShape@{Raytracer::IShape}!setCenter@{setCenter}}
+\index{setCenter@{setCenter}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{setCenter()}{setCenter()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a2f354c581e4c5e5259d28f747a45ff41} 
+virtual void Raytracer\+::\+IShape\+::set\+Center (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{center}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Sets the center point of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & The new center point. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a65411eb4bfa441711aaf30a04b2c4db2}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_a0b585724f3ea38dcd62f2f7f12ab85b0}\index{Raytracer::IShape@{Raytracer::IShape}!setColor@{setColor}}
+\index{setColor@{setColor}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a0b585724f3ea38dcd62f2f7f12ab85b0} 
+virtual void Raytracer\+::\+IShape\+::set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Sets the base color of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & The new color. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a70c67ada6ccb5cf555fb8bfe38765e5d}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_a5a56bee118716496f9322d8d212c3862}\index{Raytracer::IShape@{Raytracer::IShape}!setMaterial@{setMaterial}}
+\index{setMaterial@{setMaterial}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{setMaterial()}{setMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a5a56bee118716496f9322d8d212c3862} 
+virtual void Raytracer\+::\+IShape\+::set\+Material (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$}]{material}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Sets the material of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em material} & A shared pointer to the new material. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0a3231a8d472bb38e57ac84e516b2404}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_a39d912daff07023150a1e775ed6b835c}\index{Raytracer::IShape@{Raytracer::IShape}!setShininess@{setShininess}}
+\index{setShininess@{setShininess}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{setShininess()}{setShininess()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a39d912daff07023150a1e775ed6b835c} 
+virtual void Raytracer\+::\+IShape\+::set\+Shininess (\begin{DoxyParamCaption}\item[{double}]{shininess}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Sets the shininess property of the shape\textquotesingle{}s material. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shininess} & The new shininess value. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a23740f1a2e4d6fcf940a74bf6cdf7cf9}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_i_shape_a2738db24b27707546f50ae49c520dcb0}\index{Raytracer::IShape@{Raytracer::IShape}!translate@{translate}}
+\index{translate@{translate}!Raytracer::IShape@{Raytracer::IShape}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_shape_a2738db24b27707546f50ae49c520dcb0} 
+virtual void Raytracer\+::\+IShape\+::translate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Translates the shape by a given offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The vector representing the translation. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_shape_a3cd1fe920dd1e687694ea0e2ed0278e9}{Raytracer\+::\+AShape}}, \mbox{\hyperlink{class_raytracer_1_1_cylinder_afeebe5a0e3361ee072adf7c5b7ea2d1e}{Raytracer\+::\+Cylinder}}, \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_aae86682f880f1651870e570076bc7ede}{Raytracer\+::\+Cylinder\+Inf}}, \mbox{\hyperlink{class_raytracer_1_1_shape_composite_ac0819d3725e4f8c680e8315016d6deed}{Raytracer\+::\+Shape\+Composite}}, and \mbox{\hyperlink{class_raytracer_1_1_triangle_a2a770b5feb07f8e2d8b57542d0d83ab9}{Raytracer\+::\+Triangle}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/shapes/\mbox{\hyperlink{_i_shape_8hpp}{IShape.\+hpp}}\end{DoxyCompactItemize}

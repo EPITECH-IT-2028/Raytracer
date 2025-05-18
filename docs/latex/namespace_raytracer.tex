@@ -1,0 +1,80 @@
+\doxysection{Raytracer Namespace Reference}
+\hypertarget{namespace_raytracer}{}\label{namespace_raytracer}\index{Raytracer@{Raytracer}}
+
+
+Namespace for \doxylink{namespace_raytracer}{Raytracer} specific components.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_raytracer_1_1_a_light}{ALight}}
+\begin{DoxyCompactList}\small\item\em Abstract base class for all light sources in the \doxylink{namespace_raytracer}{Raytracer}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_a_materials}{AMaterials}}
+\begin{DoxyCompactList}\small\item\em Abstract base class for materials. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_ambient_light}{Ambient\+Light}}
+\begin{DoxyCompactList}\small\item\em Represents an ambient light source in the scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_a_shape}{AShape}}
+\begin{DoxyCompactList}\small\item\em Abstract base class for all shapes in the \doxylink{namespace_raytracer}{Raytracer}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}}
+\begin{DoxyCompactList}\small\item\em Represents a camera in the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_cone}{Cone}}
+\begin{DoxyCompactList}\small\item\em Represents a finite cone shape in the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_cone_inf}{Cone\+Inf}}
+\begin{DoxyCompactList}\small\item\em Represents an infinite double cone shape in the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_config_error}{Config\+Error}}
+\begin{DoxyCompactList}\small\item\em Exception class for errors related to configuration file processing. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. Can include file name and line number. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_cylinder}{Cylinder}}
+\begin{DoxyCompactList}\small\item\em Represents a cylinder shape in the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf}{Cylinder\+Inf}}
+\begin{DoxyCompactList}\small\item\em Represents an infinite cylinder shape in the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_directional_light}{Directional\+Light}}
+\item 
+class \mbox{\hyperlink{class_raytracer_1_1_factory}{Factory}}
+\begin{DoxyCompactList}\small\item\em A factory class for creating shapes, lights, and materials. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_i_light}{ILight}}
+\item 
+class \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}}
+\begin{DoxyCompactList}\small\item\em Interface for materials in the \doxylink{namespace_raytracer}{Raytracer}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}}
+\begin{DoxyCompactList}\small\item\em Interface for all drawable shapes in the \doxylink{namespace_raytracer}{Raytracer}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}}
+\item 
+class \mbox{\hyperlink{class_raytracer_1_1_object}{Object}}
+\begin{DoxyCompactList}\small\item\em Represents a 3D object loaded from an OBJ file. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_parse_error}{Parse\+Error}}
+\begin{DoxyCompactList}\small\item\em Exception class for errors occurring during parsing. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_parser_config_file}{Parser\+Config\+File}}
+\begin{DoxyCompactList}\small\item\em Parses configuration files for the \doxylink{namespace_raytracer}{Raytracer} scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_plane}{Plane}}
+\begin{DoxyCompactList}\small\item\em Represents an infinite plane shape in the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_plugin_error}{Plugin\+Error}}
+\begin{DoxyCompactList}\small\item\em Exception class for errors related to plugin loading or execution. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_point_light}{Point\+Light}}
+\begin{DoxyCompactList}\small\item\em Represents a point light source in the scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_ray}{Ray}}
+\begin{DoxyCompactList}\small\item\em Represents a ray in 3D space, defined by an origin and a direction. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}}
+\begin{DoxyCompactList}\small\item\em Base class for custom exceptions in the \doxylink{namespace_raytracer}{Raytracer} application. Inherits from std\+::runtime\+\_\+error. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}}
+\begin{DoxyCompactList}\small\item\em Represents a 3D rectangle defined by an origin and two side vectors. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_reflections}{Reflections}}
+\begin{DoxyCompactList}\small\item\em Represents a reflective material (e.\+g., mirror). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_refractions}{Refractions}}
+\begin{DoxyCompactList}\small\item\em Represents a refractive material (e.\+g., glass, water). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_renderer}{Renderer}}
+\begin{DoxyCompactList}\small\item\em Handles the rendering process of the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_scene}{Scene}}
+\begin{DoxyCompactList}\small\item\em Manages the overall scene, rendering, and user interaction. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}}
+\begin{DoxyCompactList}\small\item\em A composite shape that groups multiple \doxylink{class_raytracer_1_1_i_shape}{IShape} objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_sphere}{Sphere}}
+\begin{DoxyCompactList}\small\item\em Represents a sphere shape in the 3D scene. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_transparency}{Transparency}}
+\begin{DoxyCompactList}\small\item\em Represents a transparent material. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_triangle}{Triangle}}
+\begin{DoxyCompactList}\small\item\em Represents a triangle shape in the 3D scene. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Namespace for \doxylink{namespace_raytracer}{Raytracer} specific components. 

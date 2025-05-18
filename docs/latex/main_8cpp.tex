@@ -1,0 +1,35 @@
+\doxysection{src/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include "{}Scene.\+hpp"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_a0c99d968a34e803d378692bde2e3f18f}{main}} (int ac, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}av)
+\begin{DoxyCompactList}\small\item\em The main entry point for the \doxylink{namespace_raytracer}{Raytracer} application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a0c99d968a34e803d378692bde2e3f18f}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_a0c99d968a34e803d378692bde2e3f18f} 
+int main (\begin{DoxyParamCaption}\item[{int}]{ac}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{av}{}\end{DoxyParamCaption})}
+
+
+
+The main entry point for the \doxylink{namespace_raytracer}{Raytracer} application. 
+
+This function handles command-\/line arguments, initializes the scene, and starts the rendering process. It expects one argument\+: the path to a scene configuration file (\texorpdfstring{$\ast$}{*}.cfg). The -\/h flag can be used to display usage information.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ac} & The number of command-\/line arguments. \\
+\hline
+{\em av} & An array of C-\/style strings representing the command-\/line arguments. av\mbox{[}0\mbox{]} is the program name, av\mbox{[}1\mbox{]} should be the scene file path or -\/h. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 0 on successful execution, 84 on error (e.\+g., incorrect arguments, file not found, rendering error). 
+\end{DoxyReturn}

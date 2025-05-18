@@ -1,0 +1,57 @@
+\doxysection{Raytracer\+Exception.\+hpp}
+\hypertarget{_raytracer_exception_8hpp_source}{}\label{_raytracer_exception_8hpp_source}\index{src/exceptions/RaytracerException.hpp@{src/exceptions/RaytracerException.hpp}}
+\mbox{\hyperlink{_raytracer_exception_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}\ :\ \textcolor{keyword}{public}\ std::runtime\_error\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}(\textcolor{keyword}{const}\ std::string\&\ message)}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ :\ std::runtime\_error(\textcolor{stringliteral}{"{}[RaytracerError]\ "{}}\ +\ message)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_parse_error_a49ea359bdf886332c6cc39f0ba9636f6}{ParseError}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_raytracer_1_1_parse_error_a49ea359bdf886332c6cc39f0ba9636f6}{ParseError}}(\textcolor{keyword}{const}\ std::string\&\ message)}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}(\textcolor{stringliteral}{"{}ParseError:\ "{}}\ +\ message)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00040\ \ \ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_config_error_a5499847ff025d8f4f43637d17d48ab9a}{ConfigError}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_raytracer_1_1_config_error_a5499847ff025d8f4f43637d17d48ab9a}{ConfigError}}(\textcolor{keyword}{const}\ std::string\&\ message,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ file\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{int}\ line\ =\ -\/1)}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}(formatMessage(message,\ file,\ line))\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::string\ formatMessage(\textcolor{keyword}{const}\ std::string\&\ msg,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ file,\ \textcolor{keywordtype}{int}\ line\_num)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ std::ostringstream\ oss;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ oss\ <<\ \textcolor{stringliteral}{"{}ConfigError:\ "{}}\ <<\ msg;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.empty())\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ oss\ <<\ \textcolor{stringliteral}{"{}\ in\ file\ \(\backslash\)'"{}}\ <<\ file\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)'"{}};}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (line\_num\ !=\ -\/1)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ oss\ <<\ \textcolor{stringliteral}{"{}\ at\ line\ "{}}\ <<\ line\_num;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ oss.str();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_plugin_error_ab1de096e671706ad4c123467a17dd37f}{PluginError}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_raytracer_1_1_plugin_error_ab1de096e671706ad4c123467a17dd37f}{PluginError}}(\textcolor{keyword}{const}\ std::string\&\ message)}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_raytracer_1_1_raytracer_error_a79082242b577aa9fcf80d9f5b55f985e}{RaytracerError}}(\textcolor{stringliteral}{"{}PluginError:\ "{}}\ +\ message)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \};}
+\DoxyCodeLine{00095\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

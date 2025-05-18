@@ -1,0 +1,27 @@
+\doxysection{AMaterials.\+hpp}
+\hypertarget{_a_materials_8hpp_source}{}\label{_a_materials_8hpp_source}\index{src/materials/AMaterials.hpp@{src/materials/AMaterials.hpp}}
+\mbox{\hyperlink{_a_materials_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_materials_8hpp}{IMaterials.hpp}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741}{AMaterials}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741}{AMaterials}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_raytracer_1_1_a_materials_a2155c255e7637b3165050a3d12d2957c}{\string~AMaterials}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33}{computeMaterial}}(}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&viewDir,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&color,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer::ShapeComposite}}\ \&shapes,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer::LightComposite}}\ \&lights,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer::Camera}}\ \&camera,\ \textcolor{keywordtype}{int}\ depth,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{RayColorFunc}}\ rayColorFunc)\ \textcolor{keyword}{const\ override}\ =\ 0;}
+\DoxyCodeLine{00050\ \ \ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

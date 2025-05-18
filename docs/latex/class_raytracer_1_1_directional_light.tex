@@ -1,0 +1,115 @@
+\doxysection{Raytracer\+::Directional\+Light Class Reference}
+\hypertarget{class_raytracer_1_1_directional_light}{}\label{class_raytracer_1_1_directional_light}\index{Raytracer::DirectionalLight@{Raytracer::DirectionalLight}}
+
+
+{\ttfamily \#include $<$Directional\+Light.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Directional\+Light\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_directional_light}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_directional_light_ac57081e8124d1646eab1680cad077cad}{Directional\+Light}} ()=default
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_directional_light_a7f858093b6937df3cf2824512fc2bbd4}{\texorpdfstring{$\sim$}{\string~}\+Directional\+Light}} ()=default
+\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_directional_light_a39982906d667b1956b880e5604135c3a}{compute\+Lighting}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&object\+Color, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&shapes) const override
+\begin{DoxyCompactList}\small\item\em Computes the lighting contribution of this directional light at a given hit point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_light}{Raytracer\+::\+ALight}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_light_afb1f671f81f230f1fefbd801542b1f89}{\texorpdfstring{$\sim$}{\string~}\+ALight}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual default destructor for \doxylink{class_raytracer_1_1_a_light}{ALight}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a49c77bcd41fc3b7d1d3e9bd81c6f229f}{set\+Intensity}} (double intensity)
+\begin{DoxyCompactList}\small\item\em Sets the intensity of the light. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a162861bee376e5c4d90b17046d3c7f57}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color)
+\begin{DoxyCompactList}\small\item\em Sets the color of the light. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a507f38e2ff6e5e92d35d19c91f23974c}{set\+Direction}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&direction)
+\begin{DoxyCompactList}\small\item\em Sets the direction of the light (relevant for directional lights). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a78541412459b7dfd77892bcb9f9f8b73}{set\+Type}} (const std\+::string \&type)
+\begin{DoxyCompactList}\small\item\em Sets the type identifier string for the light. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{class_raytracer_1_1_a_light_a5f98ecd6544fc3ef682419507bf48c99}{get\+Type}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type identifier string of the light. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_light_afe1b14e440a2dee754a79a624ef0704d}{get\+Direction}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the direction of the light. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_light_a1714e97fc41e9a512f2b3daf31c3efc9}{get\+Color}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the color of the light. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_light_a7983ad9fa51d5ad9cb3645f5b80c6b09}{get\+Intensity}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the intensity of the light. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_light}{Raytracer\+::\+ILight}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_light_a8f8b347664941557a53713a43cf55e7a}{\texorpdfstring{$\sim$}{\string~}\+ILight}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_raytracer_1_1_a_light}{Raytracer\+::\+ALight}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_raytracer_1_1_a_light_abc12898c277cc6c49784064b7e5b239b}{\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em String identifier for the type of light. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_light_a8ecc9d3e41098fa65c45368855d845ab}{\+\_\+direction}}
+\begin{DoxyCompactList}\small\item\em Direction vector for the light (primarily for directional lights). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_light_a57e852baf8274e788fec5564647acce9}{\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em Color of the light. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_light_afd64d27f1cf3248e96c6e1b77d3088f8}{\+\_\+intensity}} = 0
+\begin{DoxyCompactList}\small\item\em Intensity of the light. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_directional_light_ac57081e8124d1646eab1680cad077cad}\index{Raytracer::DirectionalLight@{Raytracer::DirectionalLight}!DirectionalLight@{DirectionalLight}}
+\index{DirectionalLight@{DirectionalLight}!Raytracer::DirectionalLight@{Raytracer::DirectionalLight}}
+\doxysubsubsection{\texorpdfstring{DirectionalLight()}{DirectionalLight()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_directional_light_ac57081e8124d1646eab1680cad077cad} 
+Raytracer\+::\+Directional\+Light\+::\+Directional\+Light (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_raytracer_1_1_directional_light_a7f858093b6937df3cf2824512fc2bbd4}\index{Raytracer::DirectionalLight@{Raytracer::DirectionalLight}!````~DirectionalLight@{\texorpdfstring{$\sim$}{\string~}DirectionalLight}}
+\index{````~DirectionalLight@{\texorpdfstring{$\sim$}{\string~}DirectionalLight}!Raytracer::DirectionalLight@{Raytracer::DirectionalLight}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DirectionalLight()}{\string~DirectionalLight()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_directional_light_a7f858093b6937df3cf2824512fc2bbd4} 
+Raytracer\+::\+Directional\+Light\+::\texorpdfstring{$\sim$}{\string~}\+Directional\+Light (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_directional_light_a39982906d667b1956b880e5604135c3a}\index{Raytracer::DirectionalLight@{Raytracer::DirectionalLight}!computeLighting@{computeLighting}}
+\index{computeLighting@{computeLighting}!Raytracer::DirectionalLight@{Raytracer::DirectionalLight}}
+\doxysubsubsection{\texorpdfstring{computeLighting()}{computeLighting()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_directional_light_a39982906d667b1956b880e5604135c3a} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Directional\+Light\+::compute\+Lighting (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{object\+Color}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&}]{shapes}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Computes the lighting contribution of this directional light at a given hit point. 
+
+Calculates diffuse lighting based on the angle between the surface normal and the light direction. It also performs a shadow check by casting a ray from the hit point towards the light source. If an object is hit, the point is considered in shadow, and only a minimal light intensity is applied.
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The surface normal at the hit point. \\
+\hline
+{\em object\+Color} & The color of the object at the hit point. \\
+\hline
+{\em hit\+Point} & The point on the surface where the light is being calculated. \\
+\hline
+{\em view\+Dir} & The direction from the hit point to the camera (unused for this light type). \\
+\hline
+{\em shapes} & A composite of all shapes in the scene, used for shadow checking. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The calculated color contribution from this light. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_light_aba99e97db2c8b4386dd5a66ffd0b58ef}{Raytracer\+::\+ALight}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/lights/\mbox{\hyperlink{_directional_light_8hpp}{Directional\+Light.\+hpp}}\item 
+src/lights/\mbox{\hyperlink{_directional_light_8cpp}{Directional\+Light.\+cpp}}\end{DoxyCompactItemize}

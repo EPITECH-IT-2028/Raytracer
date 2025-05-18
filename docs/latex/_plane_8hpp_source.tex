@@ -1,0 +1,41 @@
+\doxysection{Plane.\+hpp}
+\hypertarget{_plane_8hpp_source}{}\label{_plane_8hpp_source}\index{src/shapes/Plane.hpp@{src/shapes/Plane.hpp}}
+\mbox{\hyperlink{_plane_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_shape_8hpp}{AShape.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_point3_d_8hpp}{Point3D.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_ray_8hpp}{Ray.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_plane_a5771c6240e59ca1c902d88cbcd547ce9}{Plane}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_shape}{AShape}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_plane_a5771c6240e59ca1c902d88cbcd547ce9}{Plane}}()\ :\ \_normal(\mbox{\hyperlink{namespace_math}{Math}}::Vector3D())\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\_center}}\ =\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\_color}}\ =\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}(1,\ 0,\ 0);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_plane_ad404133f222fd3066a70e4a85fffd6d3}{\string~Plane}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ std::tuple<double,\ Math::Vector3D,\ const\ IShape\ *>\ \mbox{\hyperlink{class_raytracer_1_1_plane_a4f4b6e010fd2f6ddc7744821b15d4371}{hits}}(}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_ray}{Ray}}\ \&ray)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_plane_aecae4e0c50315f5a192824baaa691bca}{getNormal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&point)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ (void)point;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_normal;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_plane_aa38988113d61b848f2cddcb3d429afa3}{setNormal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \_normal\ =\ normal;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \_normal;\ }
+\DoxyCodeLine{00061\ \ \ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

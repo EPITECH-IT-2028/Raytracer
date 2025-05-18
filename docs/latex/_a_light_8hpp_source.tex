@@ -1,0 +1,55 @@
+\doxysection{ALight.\+hpp}
+\hypertarget{_a_light_8hpp_source}{}\label{_a_light_8hpp_source}\index{src/lights/ALight.hpp@{src/lights/ALight.hpp}}
+\mbox{\hyperlink{_a_light_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_light_8hpp}{ILight.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_shape_composite_8hpp}{ShapeComposite.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_a_light}{ALight}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_i_light}{ILight}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_afb1f671f81f230f1fefbd801542b1f89}{\string~ALight}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_aba99e97db2c8b4386dd5a66ffd0b58ef}{computeLighting}}(}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&objectColor,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&viewDir,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&shapes)\ \textcolor{keyword}{const\ override}\ =\ 0;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a49c77bcd41fc3b7d1d3e9bd81c6f229f}{setIntensity}}(\textcolor{keywordtype}{double}\ intensity)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_light_afd64d27f1cf3248e96c6e1b77d3088f8}{\_intensity}}\ =\ intensity;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a162861bee376e5c4d90b17046d3c7f57}{setColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&color)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_light_a57e852baf8274e788fec5564647acce9}{\_color}}\ =\ color;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a507f38e2ff6e5e92d35d19c91f23974c}{setDirection}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&direction)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_light_a8ecc9d3e41098fa65c45368855d845ab}{\_direction}}\ =\ direction;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a78541412459b7dfd77892bcb9f9f8b73}{setType}}(\textcolor{keyword}{const}\ std::string\ \&type)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_light_abc12898c277cc6c49784064b7e5b239b}{\_type}}\ =\ type;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_raytracer_1_1_a_light_a5f98ecd6544fc3ef682419507bf48c99}{getType}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_abc12898c277cc6c49784064b7e5b239b}{\_type}};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_afe1b14e440a2dee754a79a624ef0704d}{getDirection}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a8ecc9d3e41098fa65c45368855d845ab}{\_direction}};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_a_light_a1714e97fc41e9a512f2b3daf31c3efc9}{getColor}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a57e852baf8274e788fec5564647acce9}{\_color}};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a7983ad9fa51d5ad9cb3645f5b80c6b09}{getIntensity}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_afd64d27f1cf3248e96c6e1b77d3088f8}{\_intensity}};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_raytracer_1_1_a_light_abc12898c277cc6c49784064b7e5b239b}{\_type}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a8ecc9d3e41098fa65c45368855d845ab}{\_direction}};\ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_a57e852baf8274e788fec5564647acce9}{\_color}};\ \ \ \ \ \ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_raytracer_1_1_a_light_afd64d27f1cf3248e96c6e1b77d3088f8}{\_intensity}}\ =\ 0;\ \ \ \ \ \ }
+\DoxyCodeLine{00099\ \ \ \};}
+\DoxyCodeLine{00100\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

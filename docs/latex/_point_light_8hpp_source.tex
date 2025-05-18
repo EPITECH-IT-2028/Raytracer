@@ -1,0 +1,28 @@
+\doxysection{Point\+Light.\+hpp}
+\hypertarget{_point_light_8hpp_source}{}\label{_point_light_8hpp_source}\index{src/lights/PointLight.hpp@{src/lights/PointLight.hpp}}
+\mbox{\hyperlink{_point_light_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_light_8hpp}{ALight.hpp}}"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_point_light_ab8bfaa2f3ef194e74acea0499f5388d5}{PointLight}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_light}{ALight}}\ \{}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_point_light_ab8bfaa2f3ef194e74acea0499f5388d5}{PointLight}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_point_light_a4ce52e9afa520deff8b785cdfa3518de}{\string~PointLight}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_point_light_ac8afe631ce09beb747dc19ad18155015}{computeLighting}}(}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&objectColor,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&viewDir,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&shapes)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_point_light_a42cf2d1dae75c05a4dba4ce995982492}{setPosition}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&position)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \_position\ =\ position;}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_point_light_a057db21e226780b3b711701471856bb4}{getPosition}}()\ \{\ \textcolor{keywordflow}{return}\ \_position;\};}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \_position;\ }
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ \}}
+
+\end{DoxyCode}

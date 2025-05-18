@@ -6,6 +6,21 @@
 #include "Object.hpp"
 #include <iostream>
 
+/**
+ * @brief Calculates the intersection of a ray with the object's faces (triangles).
+ *
+ * Iterates through each face of the object, performing a ray-triangle intersection test
+ * (Möller–Trumbore algorithm) for each. It returns the closest valid intersection.
+ *
+ * @param ray The ray to test for intersection.
+ * @return A tuple containing:
+ *         - double: The distance from the ray's origin to the closest intersection point (t).
+ *                   Returns 0.0 if there is no hit.
+ *         - Math::Vector3D: The diffuse color of the material of the hit face.
+ *                           Defaults to white (1,1,1) if material is not found.
+ *                           Returns (0,0,0) if no hit.
+ *         - const Raytracer::IShape*: A pointer to this object.
+ */
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Object::hits(
     const Raytracer::Ray &ray) const {
     double eps = 0.0001;
@@ -60,6 +75,13 @@ std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Object:
 }
 
 extern "C" {
+/**
+ * @brief Factory function to create a new Object instance.
+ *
+ * This function is typically used by a plugin system to instantiate shape objects
+ * that are loaded from OBJ files.
+ * @return Raytracer::IShape* A pointer to the newly created Object, or nullptr on failure.
+ */
 Raytracer::IShape *addShape() {
   try {
     return new Raytracer::Object();

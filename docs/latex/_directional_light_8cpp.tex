@@ -1,0 +1,27 @@
+\doxysection{src/lights/\+Directional\+Light.cpp File Reference}
+\hypertarget{_directional_light_8cpp}{}\label{_directional_light_8cpp}\index{src/lights/DirectionalLight.cpp@{src/lights/DirectionalLight.cpp}}
+{\ttfamily \#include "{}Directional\+Light.\+hpp"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include "{}Vector3\+D.\+hpp"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_i_light}{Raytracer\+::\+ILight}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_directional_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41}{add\+Light}} ()
+\begin{DoxyCompactList}\small\item\em Factory function to create a new Directional\+Light instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_directional_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41}\index{DirectionalLight.cpp@{DirectionalLight.cpp}!addLight@{addLight}}
+\index{addLight@{addLight}!DirectionalLight.cpp@{DirectionalLight.cpp}}
+\doxysubsubsection{\texorpdfstring{addLight()}{addLight()}}
+{\footnotesize\ttfamily \label{_directional_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41} 
+\mbox{\hyperlink{class_raytracer_1_1_i_light}{Raytracer\+::\+ILight}} \texorpdfstring{$\ast$}{*} add\+Light (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Factory function to create a new Directional\+Light instance. 
+
+This function is typically used by a plugin system to instantiate light objects. \begin{DoxyReturn}{Returns}
+\doxylink{class_raytracer_1_1_i_light}{Raytracer\+::\+ILight}\texorpdfstring{$\ast$}{*} A pointer to the newly created Directional\+Light, or nullptr on failure. 
+\end{DoxyReturn}

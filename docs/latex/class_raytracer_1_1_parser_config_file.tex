@@ -1,0 +1,330 @@
+\doxysection{Raytracer\+::Parser\+Config\+File Class Reference}
+\hypertarget{class_raytracer_1_1_parser_config_file}{}\label{class_raytracer_1_1_parser_config_file}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+
+
+Parses configuration files for the \doxylink{namespace_raytracer}{Raytracer} scene.  
+
+
+
+
+{\ttfamily \#include $<$Parser\+Config\+File.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a44f762ecd920a5bdee40db832f8dc779}{Parser\+Config\+File}} (const std\+::string \&filename, const std\+::vector$<$ std\+::string $>$ \&plugins)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_raytracer_1_1_parser_config_file}{Parser\+Config\+File}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_parser_config_file_ab83a21aeb9d1d4a868be01d2b4d92f7f}{\texorpdfstring{$\sim$}{\string~}\+Parser\+Config\+File}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_parser_config_file}{Parser\+Config\+File}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a66d991536fc9e6377704321c00138cd9}{parse\+Config\+File}} (\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&, \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&, \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&)
+\begin{DoxyCompactList}\small\item\em Main parsing function. Parses camera, primitives, lights, and scenes from the config file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a7a70957d303c2e185523ed79507a4bf5}{parse\+Config\+File}} (\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&, \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&)
+\begin{DoxyCompactList}\small\item\em Secondary parsing function for imported scenes. Parses only primitives and lights (no camera) when loading scenes referenced by other config files. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a5057513b9d79eb950ec7fd1d3d05d649}{parse\+Camera}} (\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&, const libconfig\+::\+Setting \&)
+\begin{DoxyCompactList}\small\item\em Parses camera settings from a libconfig setting. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_ad31016fb18959dabdfb2b9425887b290}{parse\+Primitives}} (\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&, const libconfig\+::\+Setting \&)
+\begin{DoxyCompactList}\small\item\em Parses primitive shapes from a libconfig setting. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a081cc9bae1be8ca4070b071084272ee3}{parse\+Lights}} (\mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&, const libconfig\+::\+Setting \&)
+\begin{DoxyCompactList}\small\item\em Parses light sources from a libconfig setting. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_aeead2c5a87211d8e1ac23ce7195e2617}{parse\+Scenes}} (\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&, \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&, const libconfig\+::\+Setting \&)
+\begin{DoxyCompactList}\small\item\em Parses scene import directives from a libconfig setting. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a43b1458e9dc173dd5ea8e3503ea3f0d5}{parse\+Obj}} (const std\+::string \&obj\+\_\+file, \mbox{\hyperlink{class_raytracer_1_1_object}{Object}} \&object)
+\begin{DoxyCompactList}\small\item\em Parses an OBJ file and populates an \doxylink{class_raytracer_1_1_object}{Object} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Parses configuration files for the \doxylink{namespace_raytracer}{Raytracer} scene. 
+
+This class uses libconfig++ to read and interpret .cfg files, populating \doxylink{class_raytracer_1_1_camera}{Camera}, \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite}, and \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} objects with the data found in the configuration. It supports parsing camera settings, primitives (spheres, cylinders, planes, etc.), lights (ambient, point, directional), and importing other scenes. It also handles parsing .obj files for object primitives. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_parser_config_file_a44f762ecd920a5bdee40db832f8dc779}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!ParserConfigFile@{ParserConfigFile}}
+\index{ParserConfigFile@{ParserConfigFile}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{ParserConfigFile()}{ParserConfigFile()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_a44f762ecd920a5bdee40db832f8dc779} 
+Raytracer\+::\+Parser\+Config\+File\+::\+Parser\+Config\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{plugins}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_raytracer_1_1_parser_config_file}{Parser\+Config\+File}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The path to the configuration file to parse. \\
+\hline
+{\em plugins} & A list of plugin paths (used by the factory). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if the filename does not end with "{}.\+cfg"{}. \\
+\hline
+{\em \doxylink{class_raytracer_1_1_config_error}{Config\+Error}} & if there\textquotesingle{}s an I/O error reading the file or a parsing error in the file.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The path to the configuration file. \\
+\hline
+{\em plugins} & A list of plugin paths. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_parser_config_file_ab83a21aeb9d1d4a868be01d2b4d92f7f}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!````~ParserConfigFile@{\texorpdfstring{$\sim$}{\string~}ParserConfigFile}}
+\index{````~ParserConfigFile@{\texorpdfstring{$\sim$}{\string~}ParserConfigFile}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ParserConfigFile()}{\string~ParserConfigFile()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_ab83a21aeb9d1d4a868be01d2b4d92f7f} 
+Raytracer\+::\+Parser\+Config\+File\+::\texorpdfstring{$\sim$}{\string~}\+Parser\+Config\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_parser_config_file}{Parser\+Config\+File}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_parser_config_file_a5057513b9d79eb950ec7fd1d3d05d649}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!parseCamera@{parseCamera}}
+\index{parseCamera@{parseCamera}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{parseCamera()}{parseCamera()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_a5057513b9d79eb950ec7fd1d3d05d649} 
+void Raytracer\+::\+Parser\+Config\+File\+::parse\+Camera (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&}]{camera}{, }\item[{const libconfig\+::\+Setting \&}]{root}{}\end{DoxyParamCaption})}
+
+
+
+Parses camera settings from a libconfig setting. 
+
+Parses the camera settings from the configuration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & Reference to the \doxylink{class_raytracer_1_1_camera}{Camera} object to populate. \\
+\hline
+{\em setting} & The libconfig setting containing camera data. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if required camera settings are missing or invalid.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & The \doxylink{class_raytracer_1_1_camera}{Camera} object to populate. \\
+\hline
+{\em root} & The root setting of the configuration file. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_parser_config_file_a66d991536fc9e6377704321c00138cd9}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!parseConfigFile@{parseConfigFile}}
+\index{parseConfigFile@{parseConfigFile}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{parseConfigFile()}{parseConfigFile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_a66d991536fc9e6377704321c00138cd9} 
+void Raytracer\+::\+Parser\+Config\+File\+::parse\+Config\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&}]{camera}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&}]{sc}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&}]{lc}{}\end{DoxyParamCaption})}
+
+
+
+Main parsing function. Parses camera, primitives, lights, and scenes from the config file. 
+
+Parses the entire configuration file (camera, primitives, lights, scenes).
+
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & Reference to the \doxylink{class_raytracer_1_1_camera}{Camera} object to populate. \\
+\hline
+{\em sc} & Reference to the \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} object to populate. \\
+\hline
+{\em lc} & Reference to the \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} object to populate.\\
+\hline
+\end{DoxyParams}
+This is the main entry point for parsing a configuration file when a \doxylink{class_raytracer_1_1_camera}{Camera} object also needs to be configured. It initializes the factory with plugins, then parses the camera, primitives, lights, and any imported scenes. 
+\begin{DoxyParams}{Parameters}
+{\em camera} & The \doxylink{class_raytracer_1_1_camera}{Camera} object to populate. \\
+\hline
+{\em sc} & The \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} to populate. \\
+\hline
+{\em lc} & The \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} to populate. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}} & or libconfig\+::\+Config\+Exception if any parsing step fails. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_parser_config_file_a7a70957d303c2e185523ed79507a4bf5}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!parseConfigFile@{parseConfigFile}}
+\index{parseConfigFile@{parseConfigFile}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{parseConfigFile()}{parseConfigFile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_a7a70957d303c2e185523ed79507a4bf5} 
+void Raytracer\+::\+Parser\+Config\+File\+::parse\+Config\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&}]{sc}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&}]{lc}{}\end{DoxyParamCaption})}
+
+
+
+Secondary parsing function for imported scenes. Parses only primitives and lights (no camera) when loading scenes referenced by other config files. 
+
+Parses the configuration file (primitives, lights, scenes), without camera.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sc} & Reference to the \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} object to populate. \\
+\hline
+{\em lc} & Reference to the \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} object to populate.\\
+\hline
+\end{DoxyParams}
+This entry point is used when parsing an imported scene file, where the camera configuration of the imported file is ignored. It initializes the factory and then calls the internal parsing logic for primitives, lights, and further scenes. 
+\begin{DoxyParams}{Parameters}
+{\em sc} & The \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} to populate. \\
+\hline
+{\em lc} & The \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} to populate. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}} & or libconfig\+::\+Config\+Exception if any parsing step fails. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_parser_config_file_a081cc9bae1be8ca4070b071084272ee3}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!parseLights@{parseLights}}
+\index{parseLights@{parseLights}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{parseLights()}{parseLights()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_a081cc9bae1be8ca4070b071084272ee3} 
+void Raytracer\+::\+Parser\+Config\+File\+::parse\+Lights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&}]{lc}{, }\item[{const libconfig\+::\+Setting \&}]{root}{}\end{DoxyParamCaption})}
+
+
+
+Parses light sources from a libconfig setting. 
+
+Parses all light types from the configuration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lc} & Reference to the \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} object to populate. \\
+\hline
+{\em setting} & The libconfig setting containing lights data. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if light settings are missing or invalid.\\
+\hline
+\end{DoxyExceptions}
+This function serves as a dispatcher, checking for sections like "{}ambient"{}, "{}point"{}, "{}diffuse"{}, and "{}directional"{} within the "{}lights"{} group of the configuration. It calls specific parsing functions for each type found and checks for unknown settings. 
+\begin{DoxyParams}{Parameters}
+{\em lc} & The \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} to populate with parsed lights. \\
+\hline
+{\em root} & The root libconfig setting of the configuration file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if light settings are not found, have incorrect types, or if unknown settings are present. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_parser_config_file_a43b1458e9dc173dd5ea8e3503ea3f0d5}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!parseObj@{parseObj}}
+\index{parseObj@{parseObj}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{parseObj()}{parseObj()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_a43b1458e9dc173dd5ea8e3503ea3f0d5} 
+void Raytracer\+::\+Parser\+Config\+File\+::parse\+Obj (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+\_\+file}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_object}{Object}} \&}]{object}{}\end{DoxyParamCaption})}
+
+
+
+Parses an OBJ file and populates an \doxylink{class_raytracer_1_1_object}{Object} instance. 
+
+Parses an OBJ file and populates an \doxylink{class_raytracer_1_1_object}{Object}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+\_\+file} & The path to the .obj file. \\
+\hline
+{\em object} & Reference to the \doxylink{class_raytracer_1_1_object}{Object} to populate. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if Tiny\+Obj\+Loader encounters an error or fails to load the file.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+\_\+file} & The path to the OBJ file. \\
+\hline
+{\em object} & The \doxylink{class_raytracer_1_1_object}{Object} to populate. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_parser_config_file_ad31016fb18959dabdfb2b9425887b290}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!parsePrimitives@{parsePrimitives}}
+\index{parsePrimitives@{parsePrimitives}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{parsePrimitives()}{parsePrimitives()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_ad31016fb18959dabdfb2b9425887b290} 
+void Raytracer\+::\+Parser\+Config\+File\+::parse\+Primitives (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&}]{sc}{, }\item[{const libconfig\+::\+Setting \&}]{root}{}\end{DoxyParamCaption})}
+
+
+
+Parses primitive shapes from a libconfig setting. 
+
+Parses all primitive types from the configuration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sc} & Reference to the \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} object to populate. \\
+\hline
+{\em setting} & The libconfig setting containing primitives data. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if primitive settings are missing or invalid.\\
+\hline
+\end{DoxyExceptions}
+This function serves as a dispatcher, checking for sections like "{}spheres"{}, "{}cylinders"{}, etc., within the "{}primitives"{} group of the configuration. It calls specific parsing functions (e.\+g., parse\+Spheres) for each type found. It also performs a check for unknown settings within each primitive type\textquotesingle{}s configuration. 
+\begin{DoxyParams}{Parameters}
+{\em sc} & The \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} to populate with parsed primitives. \\
+\hline
+{\em root} & The root libconfig setting of the configuration file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if settings are not found, have incorrect types, or if unknown settings are present. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_parser_config_file_aeead2c5a87211d8e1ac23ce7195e2617}\index{Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}!parseScenes@{parseScenes}}
+\index{parseScenes@{parseScenes}!Raytracer::ParserConfigFile@{Raytracer::ParserConfigFile}}
+\doxysubsubsection{\texorpdfstring{parseScenes()}{parseScenes()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_parser_config_file_aeead2c5a87211d8e1ac23ce7195e2617} 
+void Raytracer\+::\+Parser\+Config\+File\+::parse\+Scenes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&}]{sc}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&}]{lc}{, }\item[{const libconfig\+::\+Setting \&}]{root}{}\end{DoxyParamCaption})}
+
+
+
+Parses scene import directives from a libconfig setting. 
+
+Parses scene import settings from the configuration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sc} & Reference to the \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} object to populate from imported scenes. \\
+\hline
+{\em lc} & Reference to the \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} object to populate from imported scenes. \\
+\hline
+{\em setting} & The libconfig setting containing scene import data. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if an import loop is detected or an imported file cannot be parsed.\\
+\hline
+\end{DoxyExceptions}
+Looks for a "{}scenes"{} group and a "{}scenes\+Paths"{} list within it. For each path specified, it creates a new \doxylink{class_raytracer_1_1_parser_config_file}{Parser\+Config\+File} instance to parse the imported scene. It maintains a set of already parsed files (\+\_\+file\+Already\+Parse) to detect and prevent import loops. 
+\begin{DoxyParams}{Parameters}
+{\em sc} & The \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite} to populate from imported scenes. \\
+\hline
+{\em lc} & The \doxylink{class_raytracer_1_1_light_composite}{Light\+Composite} to populate from imported scenes. \\
+\hline
+{\em root} & The root libconfig setting of the configuration file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_parse_error}{Parse\+Error}} & if an import loop is detected or if an imported scene file cannot be parsed. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_parser_config_file_8hpp}{Parser\+Config\+File.\+hpp}}\item 
+src/\mbox{\hyperlink{_parser_config_file_8cpp}{Parser\+Config\+File.\+cpp}}\end{DoxyCompactItemize}

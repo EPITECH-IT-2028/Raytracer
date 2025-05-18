@@ -1,0 +1,555 @@
+\doxysection{Math\+::Vector3D Class Reference}
+\hypertarget{class_math_1_1_vector3_d}{}\label{class_math_1_1_vector3_d}\index{Math::Vector3D@{Math::Vector3D}}
+
+
+Represents a 3D vector with x, y, and z components.  
+
+
+
+
+{\ttfamily \#include $<$Vector3\+D.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d_ade49b585820ab56087527a8ac71c58b4}{Vector3D}} (float \mbox{\hyperlink{class_math_1_1_vector3_d_a0ea4805c6f93ef45b9b00e022957f36c}{x}}=0, float \mbox{\hyperlink{class_math_1_1_vector3_d_a57e159042c998f595e027edf2937c546}{y}}=0, float \mbox{\hyperlink{class_math_1_1_vector3_d_a65cbcf216f6e1594fb50c2c06989dc8d}{z}}=0)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_math_1_1_vector3_d}{Vector3D} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d_a2f86fe63d5c29cafe449d9b817d00fca}{\texorpdfstring{$\sim$}{\string~}\+Vector3D}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_adcf5b61d16eac69c0fa129d1b7335b0f}{operator+}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec) const
+\begin{DoxyCompactList}\small\item\em Adds another vector to this vector (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \& \mbox{\hyperlink{class_math_1_1_vector3_d_a434c99e584cc4f20d943f4a7f032e45f}{operator+=}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec)
+\begin{DoxyCompactList}\small\item\em Adds another vector to this vector in-\/place (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_afdfa7f17233bf40658331c6fae96b6d4}{operator-\/}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec) const
+\begin{DoxyCompactList}\small\item\em Subtracts another vector from this vector (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \& \mbox{\hyperlink{class_math_1_1_vector3_d_a57866b3d8754930ddcb5888adb48724b}{operator-\/=}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec)
+\begin{DoxyCompactList}\small\item\em Subtracts another vector from this vector in-\/place (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_a3402f4f8c3ce1be2a609c740e1c93838}{operator\texorpdfstring{$\ast$}{*}}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec) const
+\begin{DoxyCompactList}\small\item\em Multiplies this vector by another vector (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \& \mbox{\hyperlink{class_math_1_1_vector3_d_a9d39083550c51f6bda853dc48c0fcebe}{operator\texorpdfstring{$\ast$}{*}=}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec)
+\begin{DoxyCompactList}\small\item\em Multiplies this vector by another vector in-\/place (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_a77ed59889ec13daf90563f9e44746f3c}{operator/}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec) const
+\begin{DoxyCompactList}\small\item\em Divides this vector by another vector (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \& \mbox{\hyperlink{class_math_1_1_vector3_d_a77973a4e1532a154cf1188c56a3feffd}{operator/=}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec)
+\begin{DoxyCompactList}\small\item\em Divides this vector by another vector in-\/place (component-\/wise). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_a4ee8fd190f448f99beb09465fe5f4eb6}{operator\texorpdfstring{$\ast$}{*}}} (const double \&val) const
+\begin{DoxyCompactList}\small\item\em Multiplies this vector by a scalar value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \& \mbox{\hyperlink{class_math_1_1_vector3_d_aa251544a511a89eddf4af527bc3ca722}{operator\texorpdfstring{$\ast$}{*}=}} (const double \&val)
+\begin{DoxyCompactList}\small\item\em Multiplies this vector by a scalar value in-\/place. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_a3c98a8e0cbae39ecc6e826409fe8412c}{operator/}} (const double \&val) const
+\begin{DoxyCompactList}\small\item\em Divides this vector by a scalar value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \& \mbox{\hyperlink{class_math_1_1_vector3_d_a0427249b51c21d601466f2b2adb2f6c1}{operator/=}} (const double \&val)
+\begin{DoxyCompactList}\small\item\em Divides this vector by a scalar value in-\/place. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_af09836923fc3c9be86fe3146da41c8f7}{operator-\/}} () const
+\begin{DoxyCompactList}\small\item\em Negates this vector (reverses its direction). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_math_1_1_vector3_d_af7f8e74bdfb58e935a2ca320e37b087f}{dot}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec) const
+\begin{DoxyCompactList}\small\item\em Calculates the dot product of this vector with another vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \& \mbox{\hyperlink{class_math_1_1_vector3_d_a9700115dab490b6eac77f78e312f3c13}{normalize}} ()
+\begin{DoxyCompactList}\small\item\em Normalizes this vector in-\/place (scales it to unit length). If the vector is a zero vector, it remains unchanged. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_vector3_d_a598b2b7fe5b2b34c111ee68015080334}{normalized}} () const
+\begin{DoxyCompactList}\small\item\em Returns a normalized version of this vector (unit length). If the vector is a zero vector, a copy of the zero vector is returned. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_math_1_1_vector3_d_a4c208026b6867d4c99afa13ddc3b9278}{length}} () const
+\begin{DoxyCompactList}\small\item\em Calculates the length (magnitude) of this vector. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_math_1_1_vector3_d_a95200de77319db473ba69e02e87da2e3}{length\+Squared}} () const
+\begin{DoxyCompactList}\small\item\em Calculates the squared length (magnitude squared) of this vector. Useful for comparisons as it avoids a square root operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_math_1_1_vector3_d_a0ea4805c6f93ef45b9b00e022957f36c}{x}}
+\begin{DoxyCompactList}\small\item\em The x-\/component of the vector. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_math_1_1_vector3_d_a57e159042c998f595e027edf2937c546}{y}}
+\begin{DoxyCompactList}\small\item\em The y-\/component of the vector. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_math_1_1_vector3_d_a65cbcf216f6e1594fb50c2c06989dc8d}{z}}
+\begin{DoxyCompactList}\small\item\em The z-\/component of the vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a 3D vector with x, y, and z components. 
+
+This class provides common vector operations such as addition, subtraction, scalar multiplication, dot product, cross product, normalization, and length calculation. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_math_1_1_vector3_d_ade49b585820ab56087527a8ac71c58b4}\index{Math::Vector3D@{Math::Vector3D}!Vector3D@{Vector3D}}
+\index{Vector3D@{Vector3D}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{Vector3D()}{Vector3D()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_ade49b585820ab56087527a8ac71c58b4} 
+Math\+::\+Vector3\+D\+::\+Vector3D (\begin{DoxyParamCaption}\item[{float}]{x}{ = {\ttfamily 0}, }\item[{float}]{y}{ = {\ttfamily 0}, }\item[{float}]{z}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{class_math_1_1_vector3_d}{Vector3D} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The initial x-\/component (default is 0). \\
+\hline
+{\em y} & The initial y-\/component (default is 0). \\
+\hline
+{\em z} & The initial z-\/component (default is 0). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_math_1_1_vector3_d_a2f86fe63d5c29cafe449d9b817d00fca}\index{Math::Vector3D@{Math::Vector3D}!````~Vector3D@{\texorpdfstring{$\sim$}{\string~}Vector3D}}
+\index{````~Vector3D@{\texorpdfstring{$\sim$}{\string~}Vector3D}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Vector3D()}{\string~Vector3D()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a2f86fe63d5c29cafe449d9b817d00fca} 
+Math\+::\+Vector3\+D\+::\texorpdfstring{$\sim$}{\string~}\+Vector3D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_math_1_1_vector3_d_af7f8e74bdfb58e935a2ca320e37b087f}\index{Math::Vector3D@{Math::Vector3D}!dot@{dot}}
+\index{dot@{dot}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{dot()}{dot()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_af7f8e74bdfb58e935a2ca320e37b087f} 
+double Math\+::\+Vector3\+D\+::dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+
+
+Calculates the dot product of this vector with another vector. 
+
+Calculates the dot product of this vector with another vector. The dot product is a scalar value equal to {\ttfamily x1\texorpdfstring{$\ast$}{*}x2 + y1\texorpdfstring{$\ast$}{*}y2 + z1\texorpdfstring{$\ast$}{*}z2}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The other vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dot product.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The other vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dot product as a double. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a4c208026b6867d4c99afa13ddc3b9278}\index{Math::Vector3D@{Math::Vector3D}!length@{length}}
+\index{length@{length}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a4c208026b6867d4c99afa13ddc3b9278} 
+double Math\+::\+Vector3\+D\+::length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Calculates the length (magnitude) of this vector. 
+
+Calculates the length (magnitude) of this vector. The length is sqrt(x\texorpdfstring{$\ast$}{*}x + y\texorpdfstring{$\ast$}{*}y + z\texorpdfstring{$\ast$}{*}z).
+
+\begin{DoxyReturn}{Returns}
+The length of the vector.
+
+The length of the vector as a double. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a95200de77319db473ba69e02e87da2e3}\index{Math::Vector3D@{Math::Vector3D}!lengthSquared@{lengthSquared}}
+\index{lengthSquared@{lengthSquared}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{lengthSquared()}{lengthSquared()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a95200de77319db473ba69e02e87da2e3} 
+double Math\+::\+Vector3\+D\+::length\+Squared (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates the squared length (magnitude squared) of this vector. Useful for comparisons as it avoids a square root operation. 
+
+\begin{DoxyReturn}{Returns}
+The squared length of the vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a9700115dab490b6eac77f78e312f3c13}\index{Math::Vector3D@{Math::Vector3D}!normalize@{normalize}}
+\index{normalize@{normalize}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a9700115dab490b6eac77f78e312f3c13} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Math\+::\+Vector3\+D\+::normalize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Normalizes this vector in-\/place (scales it to unit length). If the vector is a zero vector, it remains unchanged. 
+
+Normalizes this vector in-\/place, scaling it to unit length. If the vector\textquotesingle{}s length is zero, it remains unchanged.
+
+\begin{DoxyReturn}{Returns}
+A reference to this modified (normalized) vector.
+
+A reference to this (now normalized) vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a598b2b7fe5b2b34c111ee68015080334}\index{Math::Vector3D@{Math::Vector3D}!normalized@{normalized}}
+\index{normalized@{normalized}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{normalized()}{normalized()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a598b2b7fe5b2b34c111ee68015080334} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Vector3\+D\+::normalized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns a normalized version of this vector (unit length). If the vector is a zero vector, a copy of the zero vector is returned. 
+
+Returns a normalized version of this vector (unit length). Does not modify the original vector. If the original vector\textquotesingle{}s length is zero, a copy of the zero vector is returned.
+
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the normalized vector.
+
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} that is the normalized version of this vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a4ee8fd190f448f99beb09465fe5f4eb6}\index{Math::Vector3D@{Math::Vector3D}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a4ee8fd190f448f99beb09465fe5f4eb6} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Vector3\+D\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const double \&}]{val}{}\end{DoxyParamCaption}) const}
+
+
+
+Multiplies this vector by a scalar value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the scaled vector.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value to multiply each component by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the scaled vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a3402f4f8c3ce1be2a609c740e1c93838}\index{Math::Vector3D@{Math::Vector3D}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a3402f4f8c3ce1be2a609c740e1c93838} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Vector3\+D\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+
+
+Multiplies this vector by another vector (component-\/wise). 
+
+Multiplies this vector by another vector (component-\/wise). This is also known as the Hadamard product.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to multiply by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the component-\/wise product. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_aa251544a511a89eddf4af527bc3ca722}\index{Math::Vector3D@{Math::Vector3D}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_aa251544a511a89eddf4af527bc3ca722} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Math\+::\+Vector3\+D\+::operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{const double \&}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies this vector by a scalar value in-\/place. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value to multiply each component by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a9d39083550c51f6bda853dc48c0fcebe}\index{Math::Vector3D@{Math::Vector3D}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a9d39083550c51f6bda853dc48c0fcebe} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Math\+::\+Vector3\+D\+::operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies this vector by another vector in-\/place (component-\/wise). 
+
+Multiplies this vector by another vector in-\/place (component-\/wise). This is also known as the Hadamard product.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to multiply by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_adcf5b61d16eac69c0fa129d1b7335b0f}\index{Math::Vector3D@{Math::Vector3D}!operator+@{operator+}}
+\index{operator+@{operator+}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_adcf5b61d16eac69c0fa129d1b7335b0f} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Vector3\+D\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+
+
+Adds another vector to this vector (component-\/wise). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the sum. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a434c99e584cc4f20d943f4a7f032e45f}\index{Math::Vector3D@{Math::Vector3D}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a434c99e584cc4f20d943f4a7f032e45f} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Math\+::\+Vector3\+D\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption})}
+
+
+
+Adds another vector to this vector in-\/place (component-\/wise). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_af09836923fc3c9be86fe3146da41c8f7}\index{Math::Vector3D@{Math::Vector3D}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_af09836923fc3c9be86fe3146da41c8f7} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} Math\+::\+Vector3\+D\+::operator-\/ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Negates this vector (reverses its direction). 
+
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the negated vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_afdfa7f17233bf40658331c6fae96b6d4}\index{Math::Vector3D@{Math::Vector3D}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_afdfa7f17233bf40658331c6fae96b6d4} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Vector3\+D\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+
+
+Subtracts another vector from this vector (component-\/wise). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the difference. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a57866b3d8754930ddcb5888adb48724b}\index{Math::Vector3D@{Math::Vector3D}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a57866b3d8754930ddcb5888adb48724b} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Math\+::\+Vector3\+D\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption})}
+
+
+
+Subtracts another vector from this vector in-\/place (component-\/wise). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_vector3_d_a3c98a8e0cbae39ecc6e826409fe8412c}\index{Math::Vector3D@{Math::Vector3D}!operator/@{operator/}}
+\index{operator/@{operator/}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a3c98a8e0cbae39ecc6e826409fe8412c} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Vector3\+D\+::operator/ (\begin{DoxyParamCaption}\item[{const double \&}]{val}{}\end{DoxyParamCaption}) const}
+
+
+
+Divides this vector by a scalar value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the scaled vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if val is zero.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value to divide each component by. Must be non-\/zero. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the scaled vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if {\ttfamily val} is zero. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_math_1_1_vector3_d_a77ed59889ec13daf90563f9e44746f3c}\index{Math::Vector3D@{Math::Vector3D}!operator/@{operator/}}
+\index{operator/@{operator/}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a77ed59889ec13daf90563f9e44746f3c} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Vector3\+D\+::operator/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+
+
+Divides this vector by another vector (component-\/wise). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to divide by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the component-\/wise division. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if any component of vec is zero.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to divide by. Each component of {\ttfamily vec} must be non-\/zero. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_vector3_d}{Vector3D} representing the component-\/wise division. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if any component of {\ttfamily vec} is zero. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_math_1_1_vector3_d_a0427249b51c21d601466f2b2adb2f6c1}\index{Math::Vector3D@{Math::Vector3D}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a0427249b51c21d601466f2b2adb2f6c1} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Math\+::\+Vector3\+D\+::operator/= (\begin{DoxyParamCaption}\item[{const double \&}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Divides this vector by a scalar value in-\/place. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if val is zero.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The scalar value to divide each component by. Must be non-\/zero. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if {\ttfamily val} is zero. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_math_1_1_vector3_d_a77973a4e1532a154cf1188c56a3feffd}\index{Math::Vector3D@{Math::Vector3D}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a77973a4e1532a154cf1188c56a3feffd} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Math\+::\+Vector3\+D\+::operator/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption})}
+
+
+
+Divides this vector by another vector in-\/place (component-\/wise). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to divide by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if any component of vec is zero.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to divide by. Each component of {\ttfamily vec} must be non-\/zero. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this modified vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if any component of {\ttfamily vec} is zero. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_math_1_1_vector3_d_a0ea4805c6f93ef45b9b00e022957f36c}\index{Math::Vector3D@{Math::Vector3D}!x@{x}}
+\index{x@{x}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a0ea4805c6f93ef45b9b00e022957f36c} 
+float Math\+::\+Vector3\+D\+::x}
+
+
+
+The x-\/component of the vector. 
+
+\Hypertarget{class_math_1_1_vector3_d_a57e159042c998f595e027edf2937c546}\index{Math::Vector3D@{Math::Vector3D}!y@{y}}
+\index{y@{y}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a57e159042c998f595e027edf2937c546} 
+float Math\+::\+Vector3\+D\+::y}
+
+
+
+The y-\/component of the vector. 
+
+\Hypertarget{class_math_1_1_vector3_d_a65cbcf216f6e1594fb50c2c06989dc8d}\index{Math::Vector3D@{Math::Vector3D}!z@{z}}
+\index{z@{z}!Math::Vector3D@{Math::Vector3D}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily \label{class_math_1_1_vector3_d_a65cbcf216f6e1594fb50c2c06989dc8d} 
+float Math\+::\+Vector3\+D\+::z}
+
+
+
+The z-\/component of the vector. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/maths/\mbox{\hyperlink{_vector3_d_8hpp}{Vector3\+D.\+hpp}}\item 
+src/maths/\mbox{\hyperlink{_vector3_d_8cpp}{Vector3\+D.\+cpp}}\end{DoxyCompactItemize}

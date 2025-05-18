@@ -1,0 +1,220 @@
+\doxysection{Raytracer\+::Sphere Class Reference}
+\hypertarget{class_raytracer_1_1_sphere}{}\label{class_raytracer_1_1_sphere}\index{Raytracer::Sphere@{Raytracer::Sphere}}
+
+
+Represents a sphere shape in the 3D scene.  
+
+
+
+
+{\ttfamily \#include $<$Sphere.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Sphere\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_sphere}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_sphere_abddb2baf28291a3c2d8adfc1a8b59b56}{Sphere}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center, double radius, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_raytracer_1_1_sphere}{Sphere} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_sphere_a2e88a61147b4e6cd7beb09268dd71f89}{Sphere}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_sphere}{Sphere}. Initializes a sphere with radius 1 at origin (0,0,0) and red color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_sphere_a8e27de87aa33efafe150a9f9f941bb1e}{\texorpdfstring{$\sim$}{\string~}\+Sphere}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_sphere}{Sphere}. \end{DoxyCompactList}\item 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_raytracer_1_1_sphere_aef22634d545c8f86b6816015935476e1}{hits}} (const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&ray) const override
+\begin{DoxyCompactList}\small\item\em Calculates the intersection of a ray with the sphere. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_sphere_ae55956e7110e1e54f3d0f8ba4e5585a4}{get\+Normal}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&point) const override
+\begin{DoxyCompactList}\small\item\em Gets the normal vector at a given point on the sphere\textquotesingle{}s surface. \end{DoxyCompactList}\item 
+const double \& \mbox{\hyperlink{class_raytracer_1_1_sphere_a2d8b2856af5fd5cfd664eb6f6152c936}{get\+Radius}} () const
+\begin{DoxyCompactList}\small\item\em Gets the radius of the sphere. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_sphere_a62e60b9f0db8ead08734491812eb0d70}{set\+Radius}} (double radius)
+\begin{DoxyCompactList}\small\item\em Sets the radius of the sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_shape_a87698328be4838861212c14a88d6ac86}{\texorpdfstring{$\sim$}{\string~}\+AShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual default destructor for \doxylink{class_raytracer_1_1_a_shape}{AShape}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a3cd1fe920dd1e687694ea0e2ed0278e9}{translate}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&offset) override
+\begin{DoxyCompactList}\small\item\em Translates the shape by a given offset. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0805f80c768f1d502855ee4583f0f797}{get\+Center}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the center point of the shape. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_aee2fcc92765a6840d4d7a98a32d970f6}{get\+Color}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_ad02fb2970274736b4e58b3f466ccbaf6}{get\+Shininess}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a896c18dcd8b4444096414510eaf1b2cb}{get\+Material}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the material of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a65411eb4bfa441711aaf30a04b2c4db2}{set\+Center}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center) override
+\begin{DoxyCompactList}\small\item\em Sets the center point of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a70c67ada6ccb5cf555fb8bfe38765e5d}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color) override
+\begin{DoxyCompactList}\small\item\em Sets the color of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a23740f1a2e4d6fcf940a74bf6cdf7cf9}{set\+Shininess}} (double shininess) override
+\begin{DoxyCompactList}\small\item\em Sets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0a3231a8d472bb38e57ac84e516b2404}{set\+Material}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ material) override
+\begin{DoxyCompactList}\small\item\em Sets the material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c}{\texorpdfstring{$\sim$}{\string~}\+IShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\+\_\+center}}
+\begin{DoxyCompactList}\small\item\em The center point of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em The color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_a75e5b8bb759f8deaf7c6fecb87c34154}{\+\_\+shininess}} = 32.
+\begin{DoxyCompactList}\small\item\em The shininess property for lighting calculations. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_aa22e131bd6c201739e01a048a4b603ed}{\+\_\+material}}
+\begin{DoxyCompactList}\small\item\em The material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a sphere shape in the 3D scene. 
+
+This class inherits from \doxylink{class_raytracer_1_1_a_shape}{AShape} and defines a spherical object with a center, radius, and color. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_sphere_abddb2baf28291a3c2d8adfc1a8b59b56}\index{Raytracer::Sphere@{Raytracer::Sphere}!Sphere@{Sphere}}
+\index{Sphere@{Sphere}!Raytracer::Sphere@{Raytracer::Sphere}}
+\doxysubsubsection{\texorpdfstring{Sphere()}{Sphere()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_sphere_abddb2baf28291a3c2d8adfc1a8b59b56} 
+Raytracer\+::\+Sphere\+::\+Sphere (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{center}{, }\item[{double}]{radius}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{class_raytracer_1_1_sphere}{Sphere} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & The center point of the sphere. \\
+\hline
+{\em radius} & The radius of the sphere. \\
+\hline
+{\em color} & The color of the sphere. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_sphere_a2e88a61147b4e6cd7beb09268dd71f89}\index{Raytracer::Sphere@{Raytracer::Sphere}!Sphere@{Sphere}}
+\index{Sphere@{Sphere}!Raytracer::Sphere@{Raytracer::Sphere}}
+\doxysubsubsection{\texorpdfstring{Sphere()}{Sphere()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_sphere_a2e88a61147b4e6cd7beb09268dd71f89} 
+Raytracer\+::\+Sphere\+::\+Sphere (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_sphere}{Sphere}. Initializes a sphere with radius 1 at origin (0,0,0) and red color. 
+
+\Hypertarget{class_raytracer_1_1_sphere_a8e27de87aa33efafe150a9f9f941bb1e}\index{Raytracer::Sphere@{Raytracer::Sphere}!````~Sphere@{\texorpdfstring{$\sim$}{\string~}Sphere}}
+\index{````~Sphere@{\texorpdfstring{$\sim$}{\string~}Sphere}!Raytracer::Sphere@{Raytracer::Sphere}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Sphere()}{\string~Sphere()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_sphere_a8e27de87aa33efafe150a9f9f941bb1e} 
+Raytracer\+::\+Sphere\+::\texorpdfstring{$\sim$}{\string~}\+Sphere (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_sphere}{Sphere}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_sphere_ae55956e7110e1e54f3d0f8ba4e5585a4}\index{Raytracer::Sphere@{Raytracer::Sphere}!getNormal@{getNormal}}
+\index{getNormal@{getNormal}!Raytracer::Sphere@{Raytracer::Sphere}}
+\doxysubsubsection{\texorpdfstring{getNormal()}{getNormal()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_sphere_ae55956e7110e1e54f3d0f8ba4e5585a4} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Sphere\+::get\+Normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{point}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the normal vector at a given point on the sphere\textquotesingle{}s surface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point on the sphere\textquotesingle{}s surface. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The normalized normal vector at that point. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a9cd5451bb98d4f234e00f63bbebbeb75}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_sphere_a2d8b2856af5fd5cfd664eb6f6152c936}\index{Raytracer::Sphere@{Raytracer::Sphere}!getRadius@{getRadius}}
+\index{getRadius@{getRadius}!Raytracer::Sphere@{Raytracer::Sphere}}
+\doxysubsubsection{\texorpdfstring{getRadius()}{getRadius()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_sphere_a2d8b2856af5fd5cfd664eb6f6152c936} 
+const double \& Raytracer\+::\+Sphere\+::get\+Radius (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the radius of the sphere. 
+
+\begin{DoxyReturn}{Returns}
+const double\& A const reference to the sphere\textquotesingle{}s radius. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_sphere_aef22634d545c8f86b6816015935476e1}\index{Raytracer::Sphere@{Raytracer::Sphere}!hits@{hits}}
+\index{hits@{hits}!Raytracer::Sphere@{Raytracer::Sphere}}
+\doxysubsubsection{\texorpdfstring{hits()}{hits()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_sphere_aef22634d545c8f86b6816015935476e1} 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} $>$ Raytracer\+::\+Sphere\+::hits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&}]{ray}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculates the intersection of a ray with the sphere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing the distance to the hit point, the color of the sphere, and a pointer to the sphere itself if hit, otherwise a very large distance and null pointer.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing\+:
+\begin{DoxyItemize}
+\item double\+: The distance from the ray\textquotesingle{}s origin to the closest intersection point (t). Returns 0.\+0 if there is no hit or if hits are behind the ray origin.
+\item \doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}\+: The color of the sphere.
+\item const \doxylink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}\texorpdfstring{$\ast$}{*}\+: A pointer to this sphere object. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a6d57486e381ac8c6481287cf72cbbe42}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_sphere_a62e60b9f0db8ead08734491812eb0d70}\index{Raytracer::Sphere@{Raytracer::Sphere}!setRadius@{setRadius}}
+\index{setRadius@{setRadius}!Raytracer::Sphere@{Raytracer::Sphere}}
+\doxysubsubsection{\texorpdfstring{setRadius()}{setRadius()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_sphere_a62e60b9f0db8ead08734491812eb0d70} 
+void Raytracer\+::\+Sphere\+::set\+Radius (\begin{DoxyParamCaption}\item[{double}]{radius}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the radius of the sphere. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The new radius for the sphere. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}} & if the radius is not positive. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/shapes/\mbox{\hyperlink{_sphere_8hpp}{Sphere.\+hpp}}\item 
+src/shapes/\mbox{\hyperlink{_sphere_8cpp}{Sphere.\+cpp}}\end{DoxyCompactItemize}

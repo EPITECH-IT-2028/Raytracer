@@ -1,0 +1,42 @@
+\doxysection{src/shapes/\+Cone.cpp File Reference}
+\hypertarget{_cone_8cpp}{}\label{_cone_8cpp}\index{src/shapes/Cone.cpp@{src/shapes/Cone.cpp}}
+{\ttfamily \#include "{}Cone.\+hpp"{}}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include "{}Point3\+D.\+hpp"{}}\newline
+{\ttfamily \#include "{}Vector3\+D.\+hpp"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}{add\+Shape}} ()
+\begin{DoxyCompactList}\small\item\em Factory function to create a new Cone instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{_cone_8cpp_a3d8c24629d725b9ef8c238cf27c9b158}{eps}} = 1e-\/6
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}\index{Cone.cpp@{Cone.cpp}!addShape@{addShape}}
+\index{addShape@{addShape}!Cone.cpp@{Cone.cpp}}
+\doxysubsubsection{\texorpdfstring{addShape()}{addShape()}}
+{\footnotesize\ttfamily \label{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa} 
+\mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} add\+Shape (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Factory function to create a new Cone instance. 
+
+This function is typically used by a plugin system to instantiate shape objects. \begin{DoxyReturn}{Returns}
+\doxylink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}\texorpdfstring{$\ast$}{*} A pointer to the newly created Cone, or nullptr on failure. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_cone_8cpp_a3d8c24629d725b9ef8c238cf27c9b158}\index{Cone.cpp@{Cone.cpp}!eps@{eps}}
+\index{eps@{eps}!Cone.cpp@{Cone.cpp}}
+\doxysubsubsection{\texorpdfstring{eps}{eps}}
+{\footnotesize\ttfamily \label{_cone_8cpp_a3d8c24629d725b9ef8c238cf27c9b158} 
+const double eps = 1e-\/6}
+

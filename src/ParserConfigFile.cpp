@@ -25,6 +25,12 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 
+/**
+ * @brief Parses an OBJ file and populates an Object.
+ *
+ * @param obj_file The path to the OBJ file.
+ * @param object The Object to populate.
+ */
 void Raytracer::ParserConfigFile::parseObj(const std::string &obj_file,
                                            Object &object) {
   tinyobj::attrib_t attrib;
@@ -106,6 +112,12 @@ void Raytracer::ParserConfigFile::parseObj(const std::string &obj_file,
   object.setMaterials(materials2);
 }
 
+/**
+ * @brief Constructor for ParserConfigFile.
+ *
+ * @param filename The path to the configuration file.
+ * @param plugins A list of plugin paths.
+ */
 Raytracer::ParserConfigFile::ParserConfigFile(
     const std::string &filename, const std::vector<std::string> &plugins)
     : _plugins(plugins), _currentFilePath(filename) {
@@ -125,6 +137,12 @@ Raytracer::ParserConfigFile::ParserConfigFile(
   }
 }
 
+/**
+ * @brief Parses the camera settings from the configuration.
+ *
+ * @param camera The Camera object to populate.
+ * @param root The root setting of the configuration file.
+ */
 void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
                                               const libconfig::Setting &root) {
   try {
@@ -162,6 +180,12 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
   }
 }
 
+/**
+ * @brief Parses coordinates (x, y, z) from a setting.
+ *
+ * @param setting The setting to parse from.
+ * @return std::tuple<float, float, float> The parsed coordinates.
+ */
 std::tuple<float, float, float> Raytracer::ParserConfigFile::parseCoordinates(
     const libconfig::Setting &setting) {
   float x, y, z;
@@ -173,18 +197,36 @@ std::tuple<float, float, float> Raytracer::ParserConfigFile::parseCoordinates(
   return {x, y, z};
 }
 
+/**
+ * @brief Parses a Point3D from a setting.
+ *
+ * @param setting The setting to parse from.
+ * @return Math::Point3D The parsed Point3D.
+ */
 Math::Point3D Raytracer::ParserConfigFile::parsePoint3D(
     const libconfig::Setting &setting) {
   auto [x, y, z] = parseCoordinates(setting);
   return {x, y, z};
 }
 
+/**
+ * @brief Parses a Vector3D from a setting.
+ *
+ * @param setting The setting to parse from.
+ * @return Math::Vector3D The parsed Vector3D.
+ */
 Math::Vector3D Raytracer::ParserConfigFile::parseVector3D(
     const libconfig::Setting &setting) {
   auto [x, y, z] = parseCoordinates(setting);
   return {x, y, z};
 }
 
+/**
+ * @brief Parses a string from a setting.
+ *
+ * @param setting The setting to parse from.
+ * @return std::string The parsed string.
+ */
 std::string Raytracer::ParserConfigFile::parseString(
     const libconfig::Setting &setting) {
   std::string str;
@@ -193,6 +235,14 @@ std::string Raytracer::ParserConfigFile::parseString(
   return str;
 }
 
+/**
+ * @brief Parses a color (r, g, b) from a libconfig setting.
+ *
+ * Ensures that color components are present and within the valid range [0, 1].
+ * @param setting The libconfig setting containing color data (expected to have 'r', 'g', 'b' members).
+ * @return Math::Vector3D The parsed color.
+ * @throws ParseError if color components are missing or out of range.
+ */
 Math::Vector3D Raytracer::ParserConfigFile::parseColor(
     const libconfig::Setting &setting) {
   float r, g, b;
@@ -208,6 +258,16 @@ Math::Vector3D Raytracer::ParserConfigFile::parseColor(
   return {r, g, b};
 }
 
+/**
+ * @brief Parses sphere primitives from the configuration.
+ *
+ * Iterates through a list of sphere settings, creates Sphere objects,
+ * sets their properties (center, radius, color), and handles optional
+ * translation and material settings.
+ * @param sc The ShapeComposite to add the parsed spheres to.
+ * @param spheresSetting The libconfig setting containing an array of sphere configurations.
+ * @throws ParseError if required sphere properties are missing or invalid (e.g., non-positive radius).
+ */
 void Raytracer::ParserConfigFile::parseSpheres(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &spheresSetting) {
   for (int i = 0; i < spheresSetting.getLength(); i++) {
@@ -253,6 +313,16 @@ void Raytracer::ParserConfigFile::parseSpheres(
   }
 }
 
+/**
+ * @brief Parses cylinder primitives from the configuration.
+ *
+ * Iterates through a list of cylinder settings, creates Cylinder objects,
+ * sets their properties (center, radius, height, color), and handles optional
+ * translation and material settings.
+ * @param sc The ShapeComposite to add the parsed cylinders to.
+ * @param cylindersSetting The libconfig setting containing an array of cylinder configurations.
+ * @throws ParseError if required cylinder properties are missing or invalid (e.g., non-positive radius).
+ */
 void Raytracer::ParserConfigFile::parseCylinders(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &cylindersSetting) {
   for (int i = 0; i < cylindersSetting.getLength(); i++) {
@@ -303,6 +373,16 @@ void Raytracer::ParserConfigFile::parseCylinders(
   }
 }
 
+/**
+ * @brief Parses infinite cylinder primitives from the configuration.
+ *
+ * Iterates through a list of infinite cylinder settings, creates CylinderInf objects,
+ * sets their properties (center, radius, color), and handles optional
+ * translation and material settings.
+ * @param sc The ShapeComposite to add the parsed infinite cylinders to.
+ * @param cylindersInfSetting The libconfig setting containing an array of infinite cylinder configurations.
+ * @throws ParseError if required infinite cylinder properties are missing or invalid (e.g., non-positive radius).
+ */
 void Raytracer::ParserConfigFile::parseCylindersInf(
     Raytracer::ShapeComposite &sc,
     const libconfig::Setting &cylindersInfSetting) {
@@ -351,6 +431,16 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
   }
 }
 
+/**
+ * @brief Parses cone primitives from the configuration.
+ *
+ * Iterates through a list of cone settings, creates Cone objects,
+ * sets their properties (center, radius, height, color), and handles optional
+ * translation and material settings.
+ * @param sc The ShapeComposite to add the parsed cones to.
+ * @param conesSetting The libconfig setting containing an array of cone configurations.
+ * @throws ParseError if required cone properties are missing or invalid (e.g., non-positive radius).
+ */
 void Raytracer::ParserConfigFile::parseCones(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &conesSetting) {
   for (int i = 0; i < conesSetting.getLength(); i++) {
@@ -401,6 +491,16 @@ void Raytracer::ParserConfigFile::parseCones(
   }
 }
 
+/**
+ * @brief Parses infinite cone primitives from the configuration.
+ *
+ * Iterates through a list of infinite cone settings, creates ConeInf objects,
+ * sets their properties (center, angle, color), and handles optional
+ * translation and material settings.
+ * @param sc The ShapeComposite to add the parsed infinite cones to.
+ * @param conesInfSetting The libconfig setting containing an array of infinite cone configurations.
+ * @throws ParseError if required infinite cone properties are missing or invalid (e.g., non-positive angle).
+ */
 void Raytracer::ParserConfigFile::parseConesInf(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &conesInfSetting) {
   for (int i = 0; i < conesInfSetting.getLength(); i++) {
@@ -447,6 +547,16 @@ void Raytracer::ParserConfigFile::parseConesInf(
   }
 }
 
+/**
+ * @brief Parses plane primitives from the configuration.
+ *
+ * Iterates through a list of plane settings, creates Plane objects,
+ * sets their properties (normal axis, offset, color), and handles optional
+ * translation and material settings.
+ * @param sc The ShapeComposite to add the parsed planes to.
+ * @param planesSettings The libconfig setting containing an array of plane configurations.
+ * @throws ParseError if required plane properties are missing or invalid (e.g., invalid normal axis).
+ */
 void Raytracer::ParserConfigFile::parsePlanes(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &planesSettings) {
   for (int i = 0; i < planesSettings.getLength(); i++) {
@@ -506,6 +616,15 @@ void Raytracer::ParserConfigFile::parsePlanes(
   }
 }
 
+/**
+ * @brief Parses object primitives (OBJ files) from the configuration.
+ *
+ * Iterates through a list of object settings, creates Object instances,
+ * and calls parseObj to load geometry from the specified .obj file.
+ * @param sc The ShapeComposite to add the parsed objects to.
+ * @param objectsSetting The libconfig setting containing an array of object configurations (each with an "obj_file" path).
+ * @throws ParseError if "obj_file" property is missing.
+ */
 void Raytracer::ParserConfigFile::parseObjects(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &objectsSetting) {
   for (int i = 0; i < objectsSetting.getLength(); i++) {
@@ -521,6 +640,16 @@ void Raytracer::ParserConfigFile::parseObjects(
   }
 }
 
+/**
+ * @brief Parses triangle primitives from the configuration.
+ *
+ * Iterates through a list of triangle settings, creates Triangle objects,
+ * sets their vertices (p1, p2, p3) and color, and handles optional
+ * translation and material settings.
+ * @param sc The ShapeComposite to add the parsed triangles to.
+ * @param trianglesSetting The libconfig setting containing an array of triangle configurations.
+ * @throws ParseError if required triangle properties (p1, p2, p3, color) are missing.
+ */
 void Raytracer::ParserConfigFile::parseTriangles(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &trianglesSetting) {
   for (int i = 0; i < trianglesSetting.getLength(); i++) {
@@ -571,6 +700,17 @@ void Raytracer::ParserConfigFile::parseTriangles(
   }
 }
 
+/**
+ * @brief Parses all primitive types from the configuration.
+ *
+ * This function serves as a dispatcher, checking for sections like "spheres",
+ * "cylinders", etc., within the "primitives" group of the configuration.
+ * It calls specific parsing functions (e.g., parseSpheres) for each type found.
+ * It also performs a check for unknown settings within each primitive type's configuration.
+ * @param sc The ShapeComposite to populate with parsed primitives.
+ * @param root The root libconfig setting of the configuration file.
+ * @throws ParseError if settings are not found, have incorrect types, or if unknown settings are present.
+ */
 void Raytracer::ParserConfigFile::parsePrimitives(
     Raytracer::ShapeComposite &sc, const libconfig::Setting &root) {
   try {
@@ -647,6 +787,15 @@ void Raytracer::ParserConfigFile::parsePrimitives(
   }
 }
 
+/**
+ * @brief Parses ambient light settings from the configuration.
+ *
+ * Creates an AmbientLight object and sets its color and intensity based on
+ * the provided libconfig setting.
+ * @param lc The LightComposite to add the ambient light to.
+ * @param ambientInfo The libconfig setting for ambient light (expected to have "color" and "intensity").
+ * @throws ParseError if ambient light properties are missing, invalid, or intensity is out of range [0,1].
+ */
 void Raytracer::ParserConfigFile::parseAmbientLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &ambientInfo) {
   const libconfig::Setting &colorInfo = ambientInfo["color"];
@@ -667,6 +816,15 @@ void Raytracer::ParserConfigFile::parseAmbientLight(
   lc.addLight(newAmbient);
 }
 
+/**
+ * @brief Parses point light settings from the configuration.
+ *
+ * Iterates through an array of point light settings, creates PointLight objects,
+ * and sets their position, color, and intensity.
+ * @param lc The LightComposite to add the point lights to.
+ * @param pointInfo The libconfig setting containing an array of point light configurations.
+ * @throws ParseError if point light properties are missing, invalid, or intensity is negative.
+ */
 void Raytracer::ParserConfigFile::parsePointLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &pointInfo) {
   for (int i = 0; i < pointInfo.getLength(); i++) {
@@ -691,6 +849,14 @@ void Raytracer::ParserConfigFile::parsePointLight(
   }
 }
 
+/**
+ * @brief Parses diffuse light settings (global diffuse multiplier) from the configuration.
+ *
+ * Sets a global diffuse multiplier for the LightComposite.
+ * @param lc The LightComposite to set the diffuse multiplier for.
+ * @param diffuseInfo The libconfig setting containing the diffuse multiplier value.
+ * @throws ParseError if the diffuse multiplier is out of range [0,1].
+ */
 void Raytracer::ParserConfigFile::parseDiffuseLight(
     Raytracer::LightComposite &lc, const libconfig::Setting &diffuseInfo) {
   double diffuseMultiplier = diffuseInfo;
@@ -702,6 +868,15 @@ void Raytracer::ParserConfigFile::parseDiffuseLight(
   lc.setDiffuse(diffuseMultiplier);
 }
 
+/**
+ * @brief Parses directional light settings from the configuration.
+ *
+ * Iterates through an array of directional light settings, creates DirectionalLight objects,
+ * and sets their direction.
+ * @param lc The LightComposite to add the directional lights to.
+ * @param lightsSetting The libconfig setting containing an array of directional light configurations.
+ * @throws ParseError if directional light properties are missing or invalid.
+ */
 void Raytracer::ParserConfigFile::parseDirectionalLights(
     Raytracer::LightComposite &lc, const libconfig::Setting &lightsSetting) {
   for (int i = 0; i < lightsSetting.getLength(); i++) {
@@ -719,6 +894,16 @@ void Raytracer::ParserConfigFile::parseDirectionalLights(
   }
 }
 
+/**
+ * @brief Parses all light types from the configuration.
+ *
+ * This function serves as a dispatcher, checking for sections like "ambient",
+ * "point", "diffuse", and "directional" within the "lights" group of the configuration.
+ * It calls specific parsing functions for each type found and checks for unknown settings.
+ * @param lc The LightComposite to populate with parsed lights.
+ * @param root The root libconfig setting of the configuration file.
+ * @throws ParseError if light settings are not found, have incorrect types, or if unknown settings are present.
+ */
 void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
                                               const libconfig::Setting &root) {
   try {
@@ -755,6 +940,15 @@ void Raytracer::ParserConfigFile::parseLights(Raytracer::LightComposite &lc,
   }
 }
 
+/**
+ * @brief Checks if the settings in a configuration group are allowed.
+ *
+ * Iterates through the members of a libconfig setting (which can be a list, array, or group)
+ * and verifies that each member's name is present in the `allowedSettings` set.
+ * @param settings The libconfig::Setting object to check. This can be a list, array, or group of settings.
+ * @param allowedSettings An unordered_set of strings containing the names of allowed settings.
+ * @throws ParseError if an unknown setting (not in `allowedSettings`) is encountered.
+ */
 void Raytracer::ParserConfigFile::checkSettings(
     const libconfig::Setting &settings,
     const std::unordered_set<std::string> &allowedSettings) const {
@@ -786,6 +980,17 @@ void Raytracer::ParserConfigFile::checkSettings(
   }
 }
 
+/**
+ * @brief Parses scene import settings from the configuration.
+ *
+ * Looks for a "scenes" group and a "scenesPaths" list within it. For each path specified,
+ * it creates a new ParserConfigFile instance to parse the imported scene.
+ * It maintains a set of already parsed files (_fileAlreadyParse) to detect and prevent import loops.
+ * @param sc The ShapeComposite to populate from imported scenes.
+ * @param lc The LightComposite to populate from imported scenes.
+ * @param root The root libconfig setting of the configuration file.
+ * @throws ParseError if an import loop is detected or if an imported scene file cannot be parsed.
+ */
 void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
                                               LightComposite &lc,
                                               const libconfig::Setting &root) {
@@ -810,6 +1015,16 @@ void Raytracer::ParserConfigFile::parseScenes(ShapeComposite &sc,
   }
 }
 
+/**
+ * @brief Internal parsing function for primitives, lights, and scenes.
+ *
+ * This function is a helper called by the public parseConfigFile methods.
+ * It orchestrates the parsing of primitives, lights, and imported scenes.
+ * @param sc The ShapeComposite to populate.
+ * @param lc The LightComposite to populate.
+ * @param root The root libconfig setting of the configuration file.
+ * @throws RaytracerError or libconfig::ConfigException if any parsing step fails.
+ */
 void Raytracer::ParserConfigFile::parseInternal(
     ShapeComposite &sc, LightComposite &lc, const libconfig::Setting &root) {
   // PRIMITIVES
@@ -845,6 +1060,17 @@ void Raytracer::ParserConfigFile::parseInternal(
   }
 }
 
+/**
+ * @brief Parses the entire configuration file (camera, primitives, lights, scenes).
+ *
+ * This is the main entry point for parsing a configuration file when a Camera object
+ * also needs to be configured. It initializes the factory with plugins, then parses
+ * the camera, primitives, lights, and any imported scenes.
+ * @param camera The Camera object to populate.
+ * @param sc The ShapeComposite to populate.
+ * @param lc The LightComposite to populate.
+ * @throws RaytracerError or libconfig::ConfigException if any parsing step fails.
+ */
 void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
                                                   ShapeComposite &sc,
                                                   LightComposite &lc) {
@@ -865,6 +1091,16 @@ void Raytracer::ParserConfigFile::parseConfigFile(Camera &camera,
   parseInternal(sc, lc, root);
 }
 
+/**
+ * @brief Parses the configuration file (primitives, lights, scenes), without camera.
+ *
+ * This entry point is used when parsing an imported scene file, where the camera
+ * configuration of the imported file is ignored. It initializes the factory
+ * and then calls the internal parsing logic for primitives, lights, and further scenes.
+ * @param sc The ShapeComposite to populate.
+ * @param lc The LightComposite to populate.
+ * @throws RaytracerError or libconfig::ConfigException if any parsing step fails.
+ */
 void Raytracer::ParserConfigFile::parseConfigFile(ShapeComposite &sc,
                                                   LightComposite &lc) {
   const libconfig::Setting &root = _cfg.getRoot();

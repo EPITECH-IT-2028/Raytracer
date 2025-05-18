@@ -1,0 +1,119 @@
+\doxysection{Raytracer\+::IMaterials Class Reference}
+\hypertarget{class_raytracer_1_1_i_materials}{}\label{class_raytracer_1_1_i_materials}\index{Raytracer::IMaterials@{Raytracer::IMaterials}}
+
+
+Interface for materials in the \doxylink{namespace_raytracer}{Raytracer}.  
+
+
+
+
+{\ttfamily \#include $<$IMaterials.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::IMaterials\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_i_materials}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}
+\begin{DoxyCompactList}\small\item\em Type alias for a function that computes the color of a ray. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57}{\texorpdfstring{$\sim$}{\string~}\+IMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_i_materials_a85699ed8a7d2fd683461775d3e705187}{compute\+Material}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&shapes, const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&lights, const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&camera, int depth, \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}} ray\+Color\+Func) const =0
+\begin{DoxyCompactList}\small\item\em Computes the visual appearance (color) of the material at a given surface point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for materials in the \doxylink{namespace_raytracer}{Raytracer}. 
+
+Defines the contract for how different materials (e.\+g., diffuse, reflective, refractive, transparent) compute their appearance based on lighting, view direction, and scene context. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}\index{Raytracer::IMaterials@{Raytracer::IMaterials}!RayColorFunc@{RayColorFunc}}
+\index{RayColorFunc@{RayColorFunc}!Raytracer::IMaterials@{Raytracer::IMaterials}}
+\doxysubsubsection{\texorpdfstring{RayColorFunc}{RayColorFunc}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e} 
+using \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Raytracer\+::\+IMaterials\+::\+Ray\+Color\+Func}}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ std::function<\mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer::Ray}}\ \&\ ,\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer::ShapeComposite}}\ \&\ ,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer::LightComposite}}\ \&\ ,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer::Camera}}\ \&\ ,\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ )>}
+
+\end{DoxyCode}
+
+
+Type alias for a function that computes the color of a ray. 
+
+This function is used by materials that need to cast secondary rays (e.\+g., for reflection, refraction) to determine the color contribution from those rays. It takes a ray, the scene\textquotesingle{}s shapes and lights, the camera, and the current recursion depth as parameters, returning the calculated color. The use of std\+::function allows passing a callable (like a lambda or member function) that encapsulates the core ray coloring logic, often from the \doxylink{class_raytracer_1_1_renderer}{Renderer}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57}\index{Raytracer::IMaterials@{Raytracer::IMaterials}!````~IMaterials@{\texorpdfstring{$\sim$}{\string~}IMaterials}}
+\index{````~IMaterials@{\texorpdfstring{$\sim$}{\string~}IMaterials}!Raytracer::IMaterials@{Raytracer::IMaterials}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IMaterials()}{\string~IMaterials()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57} 
+virtual Raytracer\+::\+IMaterials\+::\texorpdfstring{$\sim$}{\string~}\+IMaterials (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_i_materials_a85699ed8a7d2fd683461775d3e705187}\index{Raytracer::IMaterials@{Raytracer::IMaterials}!computeMaterial@{computeMaterial}}
+\index{computeMaterial@{computeMaterial}!Raytracer::IMaterials@{Raytracer::IMaterials}}
+\doxysubsubsection{\texorpdfstring{computeMaterial()}{computeMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_materials_a85699ed8a7d2fd683461775d3e705187} 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+IMaterials\+::compute\+Material (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&}]{shapes}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&}]{lights}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&}]{camera}{, }\item[{int}]{depth}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}}]{ray\+Color\+Func}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Computes the visual appearance (color) of the material at a given surface point. 
+
+This is the core method for any material. It determines the material\textquotesingle{}s color based on various factors like surface normal, viewing direction, the point itself, its base color, and interactions with scene lights and other objects (via ray\+Color\+Func for effects like reflection/refraction).
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The surface normal vector at the hit point. \\
+\hline
+{\em view\+Dir} & The direction vector from the hit point towards the camera (viewer). \\
+\hline
+{\em hit\+Point} & The 3D coordinates of the point on the surface being shaded. \\
+\hline
+{\em color} & The intrinsic base color of the material/surface. \\
+\hline
+{\em shapes} & A composite object containing all shapes in the scene, for tracing secondary rays. \\
+\hline
+{\em lights} & A composite object containing all light sources in the scene, for lighting calculations. \\
+\hline
+{\em camera} & The scene\textquotesingle{}s camera, potentially useful for view-\/dependent effects. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing (e.\+g., for reflections/refractions). \\
+\hline
+{\em ray\+Color\+Func} & A callback function (typically from the \doxylink{class_raytracer_1_1_renderer}{Renderer}) to compute the color of secondary rays. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The computed color of the material at the hit point. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33}{Raytracer\+::\+AMaterials}}, \mbox{\hyperlink{class_raytracer_1_1_reflections_ae4d917ce118acbc0505e4b0cd07f5715}{Raytracer\+::\+Reflections}}, \mbox{\hyperlink{class_raytracer_1_1_refractions_a432dee43635897300a5f98e7654b10fe}{Raytracer\+::\+Refractions}}, and \mbox{\hyperlink{class_raytracer_1_1_transparency_a0a446a8c3009e212bc5a2b2421763391}{Raytracer\+::\+Transparency}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/materials/\mbox{\hyperlink{_i_materials_8hpp}{IMaterials.\+hpp}}\end{DoxyCompactItemize}

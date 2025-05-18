@@ -1,0 +1,131 @@
+\doxysection{Raytracer\+::Ambient\+Light Class Reference}
+\hypertarget{class_raytracer_1_1_ambient_light}{}\label{class_raytracer_1_1_ambient_light}\index{Raytracer::AmbientLight@{Raytracer::AmbientLight}}
+
+
+Represents an ambient light source in the scene.  
+
+
+
+
+{\ttfamily \#include $<$Ambient\+Light.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Ambient\+Light\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_ambient_light}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_ambient_light_a820e332ca81dcf614fbf8039e0a1bd98}{Ambient\+Light}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_ambient_light}{Ambient\+Light}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_ambient_light_a86efd70dbe0a8384ba3eed3bd71f8c5b}{\texorpdfstring{$\sim$}{\string~}\+Ambient\+Light}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_ambient_light}{Ambient\+Light}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_ambient_light_a3916b057224d2625fab8200c978c9841}{compute\+Lighting}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&object\+Color, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&shapes) const override
+\begin{DoxyCompactList}\small\item\em Computes the lighting contribution of this ambient light. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_light}{Raytracer\+::\+ALight}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_light_afb1f671f81f230f1fefbd801542b1f89}{\texorpdfstring{$\sim$}{\string~}\+ALight}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual default destructor for \doxylink{class_raytracer_1_1_a_light}{ALight}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a49c77bcd41fc3b7d1d3e9bd81c6f229f}{set\+Intensity}} (double intensity)
+\begin{DoxyCompactList}\small\item\em Sets the intensity of the light. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a162861bee376e5c4d90b17046d3c7f57}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color)
+\begin{DoxyCompactList}\small\item\em Sets the color of the light. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a507f38e2ff6e5e92d35d19c91f23974c}{set\+Direction}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&direction)
+\begin{DoxyCompactList}\small\item\em Sets the direction of the light (relevant for directional lights). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_light_a78541412459b7dfd77892bcb9f9f8b73}{set\+Type}} (const std\+::string \&type)
+\begin{DoxyCompactList}\small\item\em Sets the type identifier string for the light. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{class_raytracer_1_1_a_light_a5f98ecd6544fc3ef682419507bf48c99}{get\+Type}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type identifier string of the light. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_light_afe1b14e440a2dee754a79a624ef0704d}{get\+Direction}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the direction of the light. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_light_a1714e97fc41e9a512f2b3daf31c3efc9}{get\+Color}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the color of the light. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_light_a7983ad9fa51d5ad9cb3645f5b80c6b09}{get\+Intensity}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the intensity of the light. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_light}{Raytracer\+::\+ILight}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_light_a8f8b347664941557a53713a43cf55e7a}{\texorpdfstring{$\sim$}{\string~}\+ILight}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_raytracer_1_1_a_light}{Raytracer\+::\+ALight}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_raytracer_1_1_a_light_abc12898c277cc6c49784064b7e5b239b}{\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em String identifier for the type of light. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_light_a8ecc9d3e41098fa65c45368855d845ab}{\+\_\+direction}}
+\begin{DoxyCompactList}\small\item\em Direction vector for the light (primarily for directional lights). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_light_a57e852baf8274e788fec5564647acce9}{\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em Color of the light. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_light_afd64d27f1cf3248e96c6e1b77d3088f8}{\+\_\+intensity}} = 0
+\begin{DoxyCompactList}\small\item\em Intensity of the light. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an ambient light source in the scene. 
+
+This class inherits from \doxylink{class_raytracer_1_1_a_light}{ALight} and provides a constant light contribution to all objects in the scene, regardless of their position, orientation, or shadows. It simulates indirect lighting. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_ambient_light_a820e332ca81dcf614fbf8039e0a1bd98}\index{Raytracer::AmbientLight@{Raytracer::AmbientLight}!AmbientLight@{AmbientLight}}
+\index{AmbientLight@{AmbientLight}!Raytracer::AmbientLight@{Raytracer::AmbientLight}}
+\doxysubsubsection{\texorpdfstring{AmbientLight()}{AmbientLight()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_ambient_light_a820e332ca81dcf614fbf8039e0a1bd98} 
+Raytracer\+::\+Ambient\+Light\+::\+Ambient\+Light (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_ambient_light}{Ambient\+Light}. 
+
+\Hypertarget{class_raytracer_1_1_ambient_light_a86efd70dbe0a8384ba3eed3bd71f8c5b}\index{Raytracer::AmbientLight@{Raytracer::AmbientLight}!````~AmbientLight@{\texorpdfstring{$\sim$}{\string~}AmbientLight}}
+\index{````~AmbientLight@{\texorpdfstring{$\sim$}{\string~}AmbientLight}!Raytracer::AmbientLight@{Raytracer::AmbientLight}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AmbientLight()}{\string~AmbientLight()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_ambient_light_a86efd70dbe0a8384ba3eed3bd71f8c5b} 
+Raytracer\+::\+Ambient\+Light\+::\texorpdfstring{$\sim$}{\string~}\+Ambient\+Light (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_ambient_light}{Ambient\+Light}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_ambient_light_a3916b057224d2625fab8200c978c9841}\index{Raytracer::AmbientLight@{Raytracer::AmbientLight}!computeLighting@{computeLighting}}
+\index{computeLighting@{computeLighting}!Raytracer::AmbientLight@{Raytracer::AmbientLight}}
+\doxysubsubsection{\texorpdfstring{computeLighting()}{computeLighting()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_ambient_light_a3916b057224d2625fab8200c978c9841} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Ambient\+Light\+::compute\+Lighting (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{object\+Color}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&}]{shapes}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Computes the lighting contribution of this ambient light. 
+
+For ambient light, this typically involves multiplying the object\textquotesingle{}s color by the light\textquotesingle{}s color and intensity. 
+\begin{DoxyParams}{Parameters}
+{\em normal} & The surface normal (unused for ambient light). \\
+\hline
+{\em object\+Color} & The color of the object at the hit point. \\
+\hline
+{\em hit\+Point} & The point on the surface (unused for ambient light). \\
+\hline
+{\em view\+Dir} & The direction from the hit point to the camera (unused for ambient light). \\
+\hline
+{\em shapes} & A composite of all shapes in the scene (unused for ambient light). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The calculated color contribution from this ambient light. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_light_aba99e97db2c8b4386dd5a66ffd0b58ef}{Raytracer\+::\+ALight}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/lights/\mbox{\hyperlink{_ambient_light_8hpp}{Ambient\+Light.\+hpp}}\item 
+src/lights/\mbox{\hyperlink{_ambient_light_8cpp}{Ambient\+Light.\+cpp}}\end{DoxyCompactItemize}

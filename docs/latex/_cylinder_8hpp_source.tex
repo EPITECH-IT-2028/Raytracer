@@ -1,0 +1,59 @@
+\doxysection{Cylinder.\+hpp}
+\hypertarget{_cylinder_8hpp_source}{}\label{_cylinder_8hpp_source}\index{src/shapes/Cylinder.hpp@{src/shapes/Cylinder.hpp}}
+\mbox{\hyperlink{_cylinder_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_shape_8hpp}{AShape.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_point3_d_8hpp}{Point3D.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_ray_8hpp}{Ray.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_cylinder_a1112d8f7d48cd881475521fe6f59bce7}{Cylinder}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_shape}{AShape}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_cylinder_a1112d8f7d48cd881475521fe6f59bce7}{Cylinder}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&center,\ \textcolor{keywordtype}{double}\ radius,\ \textcolor{keywordtype}{double}\ height,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&color)}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ :\ \_normal(normal),}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \_radius(radius),}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \_height(height)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\_center}}\ =\ center;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\_color}}\ =\ color;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_cylinder_a37ed7ca56ccf3f84ef85f4f63cfb073e}{Cylinder}}()}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ :\ \_normal(\mbox{\hyperlink{namespace_math}{Math}}::Vector3D(0,\ 1,\ 0)),}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \_radius(1.0),}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \_height(2.0)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\_center}}\ =\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}(0,\ 0,\ 0);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\_color}}\ =\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}(1,\ 0,\ 0);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_cylinder_abab70f57ed6fa97fced2281fa6ca13e8}{\string~Cylinder}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ std::tuple<double,\ Math::Vector3D,\ const\ IShape\ *>\ \mbox{\hyperlink{class_raytracer_1_1_cylinder_a4681e7efcfce52d64f38272dfae3e066}{hits}}(}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer::Ray}}\ \&ray)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_cylinder_a621d1e15cb9009511d97b372de1d9ae7}{getNormal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&point)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_cylinder_afeebe5a0e3361ee072adf7c5b7ea2d1e}{translate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&offset)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\_center}}\ =\ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\_center}}\ +\ offset;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_raytracer_1_1_cylinder_ac7779166ca7b2a5f0b5134bc8a42d8ee}{getRadius}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_radius;\ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_raytracer_1_1_cylinder_a40c11fb274b638edeca839c7a5d1f0db}{getHeight}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_height;\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_cylinder_a38b4c115370be447d2f4c49d87aa38c0}{setRadius}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&radius)\ \{\ \_radius\ =\ radius;\ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_cylinder_a33c9825dce638066e3fcc82b9c0e6120}{setHeight}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&h)\ \{\ \_height\ =\ h;\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \_normal;\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_radius;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_height;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00103\ \ \ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

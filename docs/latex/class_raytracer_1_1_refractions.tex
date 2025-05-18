@@ -1,0 +1,164 @@
+\doxysection{Raytracer\+::Refractions Class Reference}
+\hypertarget{class_raytracer_1_1_refractions}{}\label{class_raytracer_1_1_refractions}\index{Raytracer::Refractions@{Raytracer::Refractions}}
+
+
+Represents a refractive material (e.\+g., glass, water).  
+
+
+
+
+{\ttfamily \#include $<$Refractions.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Refractions\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_refractions}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_refractions_a0be3c89481b7462602004cb1c6b8ad1a}{Refractions}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_refractions}{Refractions} material. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_refractions_a051e30dbf93fe7878c3e05c22531afba}{\texorpdfstring{$\sim$}{\string~}\+Refractions}} () override=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_refractions}{Refractions} material. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_raytracer_1_1_refractions_a89642c2d7b6a712b42eefd40ae1ecc13}{get\+Base\+Color\+Ratio}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ratio of the base color mixed into the final refracted color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_refractions_a432dee43635897300a5f98e7654b10fe}{compute\+Material}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&shapes, const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&lights, const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&camera, int depth, \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}} ray\+Color\+Func) const override
+\begin{DoxyCompactList}\small\item\em Computes the color for a refractive material. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_materials}{Raytracer\+::\+AMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741}{AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_materials_a2155c255e7637b3165050a3d12d2957c}{\texorpdfstring{$\sim$}{\string~}\+AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57}{\texorpdfstring{$\sim$}{\string~}\+IMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}
+\begin{DoxyCompactList}\small\item\em Type alias for a function that computes the color of a ray. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a refractive material (e.\+g., glass, water). 
+
+This class implements Snell\textquotesingle{}s law to calculate the direction of a refracted ray. It also handles total internal reflection, in which case a reflected ray is computed instead. The final color is a blend of the material\textquotesingle{}s base color and the color obtained from the refracted/reflected ray. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_refractions_a0be3c89481b7462602004cb1c6b8ad1a}\index{Raytracer::Refractions@{Raytracer::Refractions}!Refractions@{Refractions}}
+\index{Refractions@{Refractions}!Raytracer::Refractions@{Raytracer::Refractions}}
+\doxysubsubsection{\texorpdfstring{Refractions()}{Refractions()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_refractions_a0be3c89481b7462602004cb1c6b8ad1a} 
+Raytracer\+::\+Refractions\+::\+Refractions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_refractions}{Refractions} material. 
+
+\Hypertarget{class_raytracer_1_1_refractions_a051e30dbf93fe7878c3e05c22531afba}\index{Raytracer::Refractions@{Raytracer::Refractions}!````~Refractions@{\texorpdfstring{$\sim$}{\string~}Refractions}}
+\index{````~Refractions@{\texorpdfstring{$\sim$}{\string~}Refractions}!Raytracer::Refractions@{Raytracer::Refractions}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Refractions()}{\string~Refractions()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_refractions_a051e30dbf93fe7878c3e05c22531afba} 
+Raytracer\+::\+Refractions\+::\texorpdfstring{$\sim$}{\string~}\+Refractions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_refractions}{Refractions} material. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_refractions_a432dee43635897300a5f98e7654b10fe}\index{Raytracer::Refractions@{Raytracer::Refractions}!computeMaterial@{computeMaterial}}
+\index{computeMaterial@{computeMaterial}!Raytracer::Refractions@{Raytracer::Refractions}}
+\doxysubsubsection{\texorpdfstring{computeMaterial()}{computeMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_refractions_a432dee43635897300a5f98e7654b10fe} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Refractions\+::compute\+Material (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&}]{shapes}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&}]{lights}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&}]{camera}{, }\item[{int}]{depth}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}}]{ray\+Color\+Func}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Computes the color for a refractive material. 
+
+Computes the color for a refractive material using Snell\textquotesingle{}s Law.
+
+Calculates the refracted ray direction using Snell\textquotesingle{}s Law. If total internal reflection occurs, it computes a reflected ray instead. A new ray is traced in the calculated direction, and its color is blended with the material\textquotesingle{}s base color.
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The normal vector at the hit point. \\
+\hline
+{\em view\+Dir} & The direction from the hit point towards the camera. \\
+\hline
+{\em hit\+Point} & The point of intersection on the surface. \\
+\hline
+{\em color} & The base color of the refractive material. \\
+\hline
+{\em shapes} & The composite of all shapes in the scene. \\
+\hline
+{\em lights} & The composite of all lights in the scene. \\
+\hline
+{\em camera} & The scene camera. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing. \\
+\hline
+{\em ray\+Color\+Func} & A callback function to compute the color of a new ray. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The final computed color.
+\end{DoxyReturn}
+Handles entering and exiting the material by adjusting the normal and refractive indices. If total internal reflection occurs, it computes a purely reflected ray. Otherwise, it computes the refracted ray. The color from the new ray (refracted or reflected) is then blended with the object\textquotesingle{}s base color.
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The surface normal at the hit point. \\
+\hline
+{\em view\+Dir} & The direction from the hit point to the camera. \\
+\hline
+{\em hit\+Point} & The point of intersection on the surface. \\
+\hline
+{\em color} & The base color of the refractive material. \\
+\hline
+{\em shapes} & The collection of shapes in the scene. \\
+\hline
+{\em lights} & The collection of lights in the scene. \\
+\hline
+{\em camera} & The camera used for rendering. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing. \\
+\hline
+{\em ray\+Color\+Func} & A function to compute the color of a ray. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The blended color resulting from refraction/reflection. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33}{Raytracer\+::\+AMaterials}}.
+
+\Hypertarget{class_raytracer_1_1_refractions_a89642c2d7b6a712b42eefd40ae1ecc13}\index{Raytracer::Refractions@{Raytracer::Refractions}!getBaseColorRatio@{getBaseColorRatio}}
+\index{getBaseColorRatio@{getBaseColorRatio}!Raytracer::Refractions@{Raytracer::Refractions}}
+\doxysubsubsection{\texorpdfstring{getBaseColorRatio()}{getBaseColorRatio()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_refractions_a89642c2d7b6a712b42eefd40ae1ecc13} 
+float Raytracer\+::\+Refractions\+::get\+Base\+Color\+Ratio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the ratio of the base color mixed into the final refracted color. 
+
+\begin{DoxyReturn}{Returns}
+float The base color ratio (e.\+g., 0.\+1f means 10\% base color, 90\% refracted/reflected color). 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/materials/\mbox{\hyperlink{_refractions_8hpp}{Refractions.\+hpp}}\item 
+src/materials/\mbox{\hyperlink{_refractions_8cpp}{Refractions.\+cpp}}\end{DoxyCompactItemize}
