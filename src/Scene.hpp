@@ -81,12 +81,12 @@ namespace Raytracer {
       /*
        * This attribut is used to keep the input file during the program.
        */
-      std::string _inputFilePath;
+      std::string _inputFilePath; ///< Path to the input scene configuration file.
 
       /*
        * This attribut is used to keep the output file during the program.
        */
-      std::string _outputFilePath;
+      std::string _outputFilePath; ///< Path to the output image file.
 
       std::filesystem::file_time_type _ftime;
       int _width; ///< Width of the scene/window.
@@ -98,14 +98,10 @@ namespace Raytracer {
       std::vector<sf::Color> _framebuffer; ///< Framebuffer storing pixel colors.
       std::chrono::time_point<std::chrono::steady_clock> _lastMovement; ///< Timestamp of the last camera movement.
       bool _isHighQuality = true; ///< Flag indicating if rendering is in high quality.
-      const float _updateQuality = 0.5f; ///< Time in seconds to update quality after movement.
       std::vector<std::string> _plugins; ///< List of plugin file paths.
       std::vector<void *> _pluginHandles; ///< Handles to loaded plugins.
       std::unique_ptr<Raytracer::Renderer> _renderer;
       Raytracer::Camera _camera; ///< The scene camera.
-
-      std::string _inputFilePath; ///< Path to the input scene configuration file.
-      std::string _outputFilePath; ///< Path to the output image file.
 
       /**
        * @brief Toggles the camera rendering quality between high and low.
