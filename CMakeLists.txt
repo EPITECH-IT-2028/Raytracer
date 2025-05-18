@@ -309,13 +309,13 @@ execute_process(
 )
 
 # Unit tests configuration
-option(BUILD_TESTING "Build the tests" ON)
+option(ENABLE_TESTS "Build the tests" OFF)
 
-if(BUILD_TESTING)
+if(ENABLE_TESTS)
     set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
     enable_testing()
 
-    if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND BUILD_TESTING)
+    if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND ENABLE_TESTS)
       add_compile_options(--coverage)
       add_link_options(--coverage)
     endif()
@@ -406,6 +406,23 @@ if(BUILD_TESTING)
     target_link_libraries(unit_tests PRIVATE
       GTest::gtest_main
       $<TARGET_OBJECTS:math_objects>
+    )
+
+    add_dependencies(unit_tests
+      sphere
+      plane
+      cylinder
+      cylinderInf
+      cone
+      coneInf
+      object
+      triangle
+      directional
+      ambient
+      point
+      reflection
+      refraction
+      transparent
     )
 
     add_custom_command(TARGET unit_tests PRE_BUILD
