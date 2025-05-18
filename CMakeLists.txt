@@ -320,13 +320,7 @@ if(BUILD_TESTING)
       add_link_options(--coverage)
     endif()
 
-    include(FetchContent)
-    FetchContent_Declare(
-      googletest
-      GIT_REPOSITORY https://github.com/google/googletest.git
-      GIT_TAG v1.17.0
-    )
-    FetchContent_MakeAvailable(googletest)
+    add_subdirectory(extern/googletest)
 
     file(COPY tests/ DESTINATION ${CMAKE_BINARY_DIR}/tests)
     file(COPY ${CMAKE_SOURCE_DIR}/plugins DESTINATION ${CMAKE_BINARY_DIR}/plugins)
