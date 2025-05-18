@@ -11,6 +11,26 @@ env:
   EXECUTABLES: "raytracer"
 
 jobs:
+  compare-keys:
+    name: Compare CLI 
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker:latest
+
+    steps:
+
+      - name: Checkout GH repo
+        uses: actions/checkout@v4
+
+      - name: Compare repository 
+        run: | 
+          if [ "${{ github.repository }}" == "EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos" ]; then
+            echo "Same mirror repository"
+            exit 1
+          else
+            echo "Different repository, continuing execution"
+            exit 0
+          fi
+
   check_compilation:
     name: Check compilation
     runs-on: ubuntu-latest
@@ -48,7 +68,7 @@ jobs:
 
   push_to_mirror:
     needs: [check_compilation, check_tests]
-    if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos.git' && github.ref_name == 'main'
+    if: github.repository != 'EpitechPromo2028/B-OOP-400-BDX-4-1-raytracer-nolann.dubos' && github.ref_name == 'main'
     name: Push to Mirror Repository
     runs-on: ubuntu-latest
     container: 
