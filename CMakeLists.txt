@@ -348,39 +348,50 @@ if(BUILD_TESTING)
       tests/primitives/spheres/missingFields/color/missingColor.cpp
       tests/primitives/spheres/invalidFields/position/invalidPosition.cpp
       tests/primitives/spheres/invalidFields/color/invalidColor.cpp
+      tests/primitives/spheres/materials/parseMaterials.cpp
       tests/primitives/cylinders/missingFields/position/missingPosition.cpp
       tests/primitives/cylinders/missingFields/color/missingColor.cpp
       tests/primitives/cylinders/invalidFields/position/invalidPosition.cpp
       tests/primitives/cylinders/invalidFields/color/invalidColor.cpp
+      tests/primitives/cylinders/materials/parseMaterials.cpp
       tests/primitives/infiniteCylinders/missingFields/position/missingPosition.cpp
       tests/primitives/infiniteCylinders/missingFields/color/missingColor.cpp
       tests/primitives/infiniteCylinders/invalidFields/position/invalidPosition.cpp
       tests/primitives/infiniteCylinders/invalidFields/color/invalidColor.cpp
+      tests/primitives/infiniteCylinders/materials/parseMaterials.cpp
       tests/primitives/cones/missingFields/position/missingPosition.cpp
       tests/primitives/cones/missingFields/color/missingColor.cpp
       tests/primitives/cones/invalidFields/position/invalidPosition.cpp
       tests/primitives/cones/invalidFields/color/invalidColor.cpp
+      tests/primitives/cones/materials/parseMaterials.cpp
       tests/primitives/infiniteCones/missingFields/position/missingPosition.cpp
       tests/primitives/infiniteCones/missingFields/color/missingColor.cpp
       tests/primitives/infiniteCones/invalidFields/position/invalidPosition.cpp
       tests/primitives/infiniteCones/invalidFields/color/invalidColor.cpp
+      tests/primitives/infiniteCones/materials/parseMaterials.cpp
       tests/primitives/planes/missingFields/missingFields.cpp
       tests/primitives/planes/missingFields/color/missingColor.cpp
       tests/primitives/planes/invalidFields/invalidFields.cpp
       tests/primitives/planes/invalidFields/color/invalidColor.cpp
+      tests/primitives/planes/materials/parseMaterials.cpp
 
       tests/lights/parseLights.cpp
       tests/lights/missingFields/missingFields.cpp
       tests/lights/missingFields/ambient/missingFields.cpp
       tests/lights/missingFields/directional/missingFields.cpp
+      tests/lights/missingFields/point/missingFields.cpp
       tests/lights/invalidFields/ambient/invalidFields.cpp
       tests/lights/invalidFields/directional/invalidFields.cpp
       tests/lights/invalidFields/invalidDiffuse.cpp
+      tests/lights/invalidFields/point/invalidFields.cpp
+
+      tests/obj/parseObj.cpp
 
       src/ParserConfigFile.cpp
       src/Factory.cpp
       src/lights/LightComposite.cpp
       src/shapes/ShapeComposite.cpp
+      src/shapes/Object.cpp
     )
 
     target_include_directories(unit_tests PRIVATE

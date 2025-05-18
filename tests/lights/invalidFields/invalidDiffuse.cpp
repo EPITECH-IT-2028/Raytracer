@@ -30,4 +30,12 @@ TEST_F(ParserConfigFileTest, InvalidLightAmbient) {
   Raytracer::LightComposite lc;
 
   EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+
+  _cfgFile = "tests/lights/invalidFields/negativeDiffuse.cfg";
+  Raytracer::ParserConfigFile parser1(_cfgFile, _plugins);
+  Raytracer::Camera camera1;
+  Raytracer::ShapeComposite sc1;
+  Raytracer::LightComposite lc1;
+
+  EXPECT_THROW(parser1.parseConfigFile(camera1, sc1, lc1), Raytracer::ParseError);
 }

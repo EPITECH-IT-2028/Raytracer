@@ -38,5 +38,5 @@ TEST_F(ParserConfigFileTest, TestParseLights) {
            << e.what();
   }
 
-  EXPECT_EQ(lc.getLights().size(), 2);
+  EXPECT_EQ(lc.getLights().size(), 3);
 }

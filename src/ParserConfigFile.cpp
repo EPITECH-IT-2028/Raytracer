@@ -148,9 +148,9 @@ void Raytracer::ParserConfigFile::parseCamera(Camera &camera,
     camera.origin.x = posX;
     camera.origin.y = posY;
     camera.origin.z = posZ;
-    (void)rotX; // [TODO]: Implement rotation
-    (void)rotY; // [TODO]: Implement rotation
-    (void)rotZ; // [TODO]: Implement rotation
+    (void)rotX;  // [TODO]: Implement rotation
+    (void)rotY;  // [TODO]: Implement rotation
+    (void)rotZ;  // [TODO]: Implement rotation
     // camera.setRotation(rotX, rotY, rotZ); # [TODO]: Implement rotation
     camera.setFieldOfView(fov);
   } catch (const libconfig::SettingNotFoundException &nfex) {
@@ -295,7 +295,8 @@ void Raytracer::ParserConfigFile::parseCylinders(
         newCylinder->setMaterial(
             _factory.create<Raytracer::Transparency>("transparent"));
       } else {
-        throw std::runtime_error("[ERROR] - Unknown material type.");
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
       }
     }
     sc.addShape(newCylinder);
@@ -342,7 +343,8 @@ void Raytracer::ParserConfigFile::parseCylindersInf(
         newCylinderInf->setMaterial(
             _factory.create<Raytracer::Transparency>("transparent"));
       } else {
-        throw std::runtime_error("[ERROR] - Unknown material type.");
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
       }
     }
     sc.addShape(newCylinderInf);
@@ -391,7 +393,8 @@ void Raytracer::ParserConfigFile::parseCones(
         newCone->setMaterial(
             _factory.create<Raytracer::Transparency>("transparent"));
       } else {
-        throw std::runtime_error("[ERROR] - Unknown material type.");
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
       }
     }
     sc.addShape(newCone);
@@ -436,7 +439,8 @@ void Raytracer::ParserConfigFile::parseConesInf(
         newConeInf->setMaterial(
             _factory.create<Raytracer::Transparency>("transparent"));
       } else {
-        throw std::runtime_error("[ERROR] - Unknown material type.");
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
       }
     }
     sc.addShape(newConeInf);
@@ -490,7 +494,8 @@ void Raytracer::ParserConfigFile::parsePlanes(
         newPlane->setMaterial(
             _factory.create<Raytracer::Transparency>("transparent"));
       } else {
-        throw std::runtime_error("[ERROR] - Unknown material type.");
+        throw ParseError(std::string("[ERROR] - Unknown material type: ") +
+                         materialName);
       }
     }
     float center = plane.lookup("offset").operator double();

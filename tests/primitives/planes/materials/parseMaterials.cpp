@@ -22,24 +22,34 @@ class ParserConfigFileTest : public ::testing::Test {
     std::vector<std::string> _plugins;
 };
 
-TEST_F(ParserConfigFileTest, InvalidConfig) {
-  _cfgFile = "tests/invalidConfig.cfg";
-
-  EXPECT_THROW(Raytracer::ParserConfigFile parser(_cfgFile, _plugins);, Raytracer::ConfigError);
-}
-
-TEST_F(ParserConfigFileTest, MissingField) {
-  _cfgFile = "tests/missingField.cfg";
+TEST_F(ParserConfigFileTest, ParsePlanesMaterials) {
+  _cfgFile = "tests/primitives/planes/materials/reflective.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
   Raytracer::LightComposite lc;
 
-  EXPECT_THROW(parser.parseConfigFile(camera, sc, lc), Raytracer::ParseError);
+  EXPECT_NO_THROW(parser.parseConfigFile(camera, sc, lc));
+
+  _cfgFile = "tests/primitives/planes/materials/refractive.cfg";
+  Raytracer::ParserConfigFile parser2(_cfgFile, _plugins);
+  Raytracer::Camera camera2;
+  Raytracer::ShapeComposite sc2;
+  Raytracer::LightComposite lc2;
+
+  EXPECT_NO_THROW(parser2.parseConfigFile(camera2, sc2, lc2));
+
+  _cfgFile = "tests/primitives/planes/materials/transparent.cfg";
+  Raytracer::ParserConfigFile parser3(_cfgFile, _plugins);
+  Raytracer::Camera camera3;
+  Raytracer::ShapeComposite sc3;
+  Raytracer::LightComposite lc3;
+
+  EXPECT_NO_THROW(parser3.parseConfigFile(camera3, sc3, lc3));
 }
 
-TEST_F(ParserConfigFileTest, InvalidField) {
-  _cfgFile = "tests/invalidField.cfg";
+TEST_F(ParserConfigFileTest, ParseInvalidPlanesMaterial) {
+  _cfgFile = "tests/primitives/planes/materials/invalid.cfg";
   Raytracer::ParserConfigFile parser(_cfgFile, _plugins);
   Raytracer::Camera camera;
   Raytracer::ShapeComposite sc;
