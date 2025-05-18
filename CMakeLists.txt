@@ -408,6 +408,23 @@ if(ENABLE_TESTS)
       $<TARGET_OBJECTS:math_objects>
     )
 
+    add_dependencies(unit_tests
+      sphere
+      plane
+      cylinder
+      cylinderInf
+      cone
+      coneInf
+      object
+      triangle
+      directional
+      ambient
+      point
+      reflection
+      refraction
+      transparent
+    )
+
     add_custom_command(TARGET unit_tests PRE_BUILD
       COMMAND find ${CMAKE_BINARY_DIR}/CMakeFiles -name '*.gcda' -delete
       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
