@@ -32,6 +32,7 @@ jobs:
           fi
 
   check_compilation:
+    needs: [compare-keys]
     name: Check compilation
     runs-on: ubuntu-latest
     container: 
