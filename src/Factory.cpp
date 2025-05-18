@@ -3,6 +3,19 @@
 #include <filesystem>
 #include <string>
 
+/**
+ * @brief Initializes the factories by loading and registering creators from plugins.
+ *
+ * This method iterates over a list of plugin file paths (shared libraries, e.g., .so files).
+ * For each plugin, it attempts to load the library and find specific factory functions:
+ *  - "addShape": For creating IShape objects.
+ *  - "addLight": For creating ILight objects.
+ *  - "addMaterial": For creating IMaterials objects.
+ * If a factory function is found, it's registered with the corresponding factory map
+ * using the plugin's filename (without extension) as the key.
+ *
+ * @param plugins A vector of strings, where each string is the path to a plugin file.
+ */
 void Raytracer::Factory::initFactories(
     const std::vector<std::string> &plugins) {
   for (const auto &plugin : plugins) {

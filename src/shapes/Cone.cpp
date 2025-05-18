@@ -4,8 +4,17 @@
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 
-const double eps = 1e-6;
+const double eps = 1e-6; // Epsilon for floating point comparisons
 
+/**
+ * @brief Calculates the intersection of a ray with the finite cone (body and base cap).
+ * @param ray The ray to test for intersection.
+ * @return A tuple containing:
+ *         - double: The distance from the ray's origin to the closest valid intersection point (t).
+ *                   Returns 0.0 if there is no hit or if hits are behind the ray origin.
+ *         - Math::Vector3D: The color of the cone.
+ *         - const Raytracer::IShape*: A pointer to this cone object.
+ */
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
   double cone_height = _height;
@@ -92,6 +101,11 @@ Raytracer::Cone::hits(const Raytracer::Ray &ray) const {
   return {final_t, _color, this};
 }
 
+/**
+ * @brief Gets the normal vector at a given point on the cone's surface (body or base).
+ * @param hit_point The point on the cone's surface.
+ * @return The normalized normal vector at that point.
+ */
 Math::Vector3D Raytracer::Cone::getNormal(
     const Math::Point3D &hit_point) const {
   double cone_height = _height;
@@ -129,6 +143,12 @@ Math::Vector3D Raytracer::Cone::getNormal(
 }
 
 extern "C" {
+/**
+ * @brief Factory function to create a new Cone instance.
+ *
+ * This function is typically used by a plugin system to instantiate shape objects.
+ * @return Raytracer::IShape* A pointer to the newly created Cone, or nullptr on failure.
+ */
 Raytracer::IShape *addShape() {
   try {
     return new Raytracer::Cone();

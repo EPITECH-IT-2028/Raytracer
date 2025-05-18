@@ -6,6 +6,16 @@
 #include "Ray.hpp"
 #include "ShapeComposite.hpp"
 
+/**
+ * @brief Calculates the color of a ray.
+ *
+ * @param r The ray to calculate the color for.
+ * @param shape The composite shape in the scene.
+ * @param light The composite light in the scene.
+ * @param cameraPos The camera position.
+ * @param depth The current recursion depth for reflections/refractions.
+ * @return Math::Vector3D The calculated color of the ray.
+ */
 Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
                                              const ShapeComposite &shape,
                                              const LightComposite &light,
@@ -39,11 +49,23 @@ Math::Vector3D Raytracer::Renderer::rayColor(Ray &r,
   return sky;
 }
 
+/**
+ * @brief Initializes the scene by parsing the configuration file.
+ *
+ * @param camera The camera object to be initialized.
+ */
 void Raytracer::Renderer::initScene(Camera &camera) {
   ParserConfigFile parser(_inputFilePath, _plugins);
   parser.parseConfigFile(camera, _shapes, _lights);
 }
 
+/**
+ * @brief Renders the scene to a framebuffer.
+ *
+ * @param framebuffer The framebuffer to render to.
+ * @param cam The camera used for rendering.
+ * @param isHighQuality Whether to render in high quality or not.
+ */
 void Raytracer::Renderer::renderToBuffer(std::vector<sf::Color> &framebuffer,
                                          Raytracer::Camera &cam,
                                          bool isHighQuality) {

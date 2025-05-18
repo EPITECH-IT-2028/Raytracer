@@ -4,6 +4,15 @@
 #include "IShape.hpp"
 #include "Vector3D.hpp"
 
+/**
+ * @brief Calculates the intersection of a ray with the sphere.
+ * @param ray The ray to test for intersection.
+ * @return A tuple containing:
+ *         - double: The distance from the ray's origin to the closest intersection point (t).
+ *                   Returns 0.0 if there is no hit or if hits are behind the ray origin.
+ *         - Math::Vector3D: The color of the sphere.
+ *         - const Raytracer::IShape*: A pointer to this sphere object.
+ */
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Sphere::hits(const Raytracer::Ray &ray) const {
   Math::Vector3D oc = ray.origin - _center;
@@ -24,6 +33,12 @@ Raytracer::Sphere::hits(const Raytracer::Ray &ray) const {
 }
 
 extern "C" {
+/**
+ * @brief Factory function to create a new Sphere instance.
+ *
+ * This function is typically used by a plugin system to instantiate shape objects.
+ * @return Raytracer::IShape* A pointer to the newly created Sphere, or nullptr on failure.
+ */
 Raytracer::IShape *addShape() {
   try {
     return new Raytracer::Sphere();

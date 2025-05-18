@@ -5,6 +5,15 @@
 #include "Triangle.hpp"
 #include <iostream>
 
+/**
+ * @brief Calculates the intersection of a ray with the triangle using the Möller–Trumbore algorithm.
+ * @param ray The ray to test for intersection.
+ * @return A tuple containing:
+ *         - double: The distance from the ray's origin to the intersection point (t).
+ *                   Returns 0.0 if there is no hit or if the hit is behind the ray origin.
+ *         - Math::Vector3D: The color of the triangle.
+ *         - const Raytracer::IShape*: A pointer to this triangle object.
+ */
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Triangle::hits(
     const Raytracer::Ray &ray) const {
 
@@ -37,6 +46,12 @@ std::tuple<double, Math::Vector3D, const Raytracer::IShape *> Raytracer::Triangl
 }
 
 extern "C" {
+/**
+ * @brief Factory function to create a new Triangle instance.
+ *
+ * This function is typically used by a plugin system to instantiate shape objects.
+ * @return Raytracer::IShape* A pointer to the newly created Triangle, or nullptr on failure.
+ */
 Raytracer::IShape *addShape() {
   try {
     return new Raytracer::Triangle();

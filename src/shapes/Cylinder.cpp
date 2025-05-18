@@ -3,6 +3,15 @@
 #include <iostream>
 #include "Vector3D.hpp"
 
+/**
+ * @brief Calculates the intersection of a ray with the finite cylinder (body and caps).
+ * @param ray The ray to test for intersection.
+ * @return A tuple containing:
+ *         - double: The distance from the ray's origin to the closest valid intersection point (t).
+ *                   Returns 0.0 if there is no hit or if hits are behind the ray origin.
+ *         - Math::Vector3D: The color of the cylinder.
+ *         - const Raytracer::IShape*: A pointer to this cylinder object.
+ */
 std::tuple<double, Math::Vector3D, const Raytracer::IShape *>
 Raytracer::Cylinder::hits(const Raytracer::Ray &ray) const {
   Math::Vector3D oc = ray.origin - _center;
@@ -46,6 +55,12 @@ Raytracer::Cylinder::hits(const Raytracer::Ray &ray) const {
   return {0.0, _color, this};
 }
 
+/**
+ * @brief Gets the normal vector at a given point on the cylinder's surface.
+ * This includes the cylindrical body and the flat end caps.
+ * @param point The point on the cylinder's surface.
+ * @return The normalized normal vector at that point.
+ */
 Math::Vector3D Raytracer::Cylinder::getNormal(
     const Math::Point3D &point) const {
   Math::Vector3D oc = point - _center;
@@ -63,6 +78,12 @@ Math::Vector3D Raytracer::Cylinder::getNormal(
 }
 
 extern "C" {
+/**
+ * @brief Factory function to create a new Cylinder instance.
+ *
+ * This function is typically used by a plugin system to instantiate shape objects.
+ * @return Raytracer::IShape* A pointer to the newly created Cylinder, or nullptr on failure.
+ */
 Raytracer::IShape *addShape() {
   try {
     return new Raytracer::Cylinder();

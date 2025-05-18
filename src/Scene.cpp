@@ -9,7 +9,13 @@
 
 #define EXTENSION_LENGTH 4
 
-
+/**
+ * @brief Constructor for the Scene class.
+ * @param width The width of the scene/window.
+ * @param height The height of the scene/window.
+ * @param inputPath The path to the scene configuration file.
+ * @throws RaytracerError if plugin parsing fails.
+ */
 Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
     : _inputFilePath(inputPath), _width(width), _height(height) {
   _window.create(sf::VideoMode(_width, _height), "Raytracer");
@@ -28,6 +34,10 @@ Raytracer::Scene::Scene(int width, int height, const std::string &inputPath)
   }
 }
 
+/**
+ * @brief Initializes the scene components.
+ * This includes creating the texture, image, framebuffer, and sprite.
+ */
 void Raytracer::Scene::init() {
   _texture.create(_width, _height);
   _image.create(_width, _height);
@@ -35,6 +45,9 @@ void Raytracer::Scene::init() {
   _sprite.setTexture(_texture);
 }
 
+/**
+ * @brief Updates the image buffer with the rendered scene from the framebuffer.
+ */
 void Raytracer::Scene::updateImage() {
   for (int y = 0; y < _height; ++y) {
     for (int x = 0; x < _width; ++x) {
@@ -44,11 +57,23 @@ void Raytracer::Scene::updateImage() {
   _texture.update(_image);
 }
 
+/**
+ * @brief Writes a color to the output file stream in PPM format.
+ * @param file The output file stream.
+ * @param color The SFML color to write.
+ */
 void Raytracer::Scene::writeColor(std::ofstream &file, sf::Color color) {
   file << std::to_string(color.r) << " " << std::to_string(color.g) << " "
        << std::to_string(color.b) << "\n";
 }
 
+/**
+ * @brief Creates the output file name for the PPM image.
+ * The name is based on the input configuration file name and stored in _outputFilePath.
+ * It also handles creating the "screenshots" directory if it doesn't exist
+ * and appends a counter to the filename if a file with the same name already exists.
+ * @throws RaytracerError if the input file does not have a ".cfg" extension.
+ */
 void Raytracer::Scene::createOutputFileName() {
   if (!_inputFilePath.ends_with(".cfg")) {
     throw RaytracerError("File must have the following extension: \"*.cfg");
@@ -84,7 +109,12 @@ void Raytracer::Scene::createOutputFileName() {
   _outputFilePath = outputFileName;
 }
 
-
+/**
+ * @brief Creates the output PPM file with the rendered image.
+ * This method calls createOutputFileName() to determine the file path,
+ * then writes the framebuffer data to the PPM file.
+ * @throws RaytracerError if the output file cannot be opened.
+ */
 void Raytracer::Scene::createPPMFile() {
   createOutputFileName();
   std::ofstream outputFile(_outputFilePath);
@@ -116,6 +146,11 @@ void Raytracer::Scene::checkFileChange() {
   }
 }
 
+/**
+ * @brief Handles user input for camera movement and other interactions.
+ * This includes moving/rotating the camera, taking screenshots (Y key),
+ * and quitting (Escape key).
+ */
 void Raytracer::Scene::handleInput() {
   const float moveSpeed = 5.0f;
   const float rotateSpeed = 2.0f;
@@ -162,6 +197,12 @@ void Raytracer::Scene::handleInput() {
     createPPMFile();
 }
 
+/**
+ * @brief Manages camera rendering quality based on movement.
+ * If the camera has moved, it switches to low quality. If the camera
+ * has been stationary for a certain duration (_qualityUpdateDelay),
+ * it switches back to high quality.
+ */
 void Raytracer::Scene::changeCamQuality() {
   if (_cameraMoved) {
     _lastMovement = std::chrono::steady_clock::now();
@@ -176,6 +217,11 @@ void Raytracer::Scene::changeCamQuality() {
   _cameraMoved = false;
 }
 
+/**
+ * @brief Parses and loads plugins from the "./plugins" directory.
+ * It looks for files with the ".so" extension and attempts to load them.
+ * Warnings are printed if a plugin fails to load.
+ */
 void Raytracer::Scene::parsePlugins() {
   for (const auto &entry : std::filesystem::directory_iterator("./plugins")) {
     if (entry.path().extension() == ".so")
@@ -192,6 +238,13 @@ void Raytracer::Scene::parsePlugins() {
   }
 }
 
+/**
+ * @brief Renders the scene and handles the main event loop.
+ * Initializes the renderer, renders an initial frame, creates a PPM file,
+ * and then enters the main loop. In the loop, it polls for events,
+ * handles input, updates camera quality, re-renders the scene,
+ * updates the image, and displays it.
+ */
 void Raytracer::Scene::render() {
   createPPMFile();
 
@@ -217,6 +270,10 @@ void Raytracer::Scene::render() {
   }
 }
 
+/**
+ * @brief Destructor for the Scene class.
+ * Closes any loaded plugin handles.
+ */
 Raytracer::Scene::~Scene() {
   for (auto &handle : _pluginHandles) {
     dlclose(handle);

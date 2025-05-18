@@ -3,11 +3,24 @@
 #include "Ray.hpp"
 #include "Rectangle.hpp"
 
+/**
+ * @brief Generates a ray from the camera origin through a point (u,v) on the screen plane.
+ * @param u The horizontal parametric coordinate on the screen plane (typically [0,1]).
+ * @param v The vertical parametric coordinate on the screen plane (typically [0,1]).
+ * @return Raytracer::Ray The generated ray.
+ */
 Raytracer::Ray Raytracer::Camera::ray(double u, double v) {
   Math::Vector3D direction = screen.pointAt(u, v) - origin;
   return Ray(origin, direction);
 }
 
+/**
+ * @brief Updates the camera's view parameters based on its current orientation and position.
+ *
+ * This method recalculates the forward, right, and up vectors, the viewport center,
+ * and pixel delta vectors. This should be called whenever the camera's position,
+ * orientation (pitch, yaw), or zoom changes.
+ */
 void Raytracer::Camera::updateView() {
   const float DEG_TO_RAD = M_PI / 180.0f;
   float pitch_rad = _pitch * DEG_TO_RAD;

@@ -3,6 +3,25 @@
 #include <cmath>
 #include <iostream>
 
+/**
+ * @brief Computes the color for a refractive material using Snell's Law.
+ *
+ * Handles entering and exiting the material by adjusting the normal and refractive indices.
+ * If total internal reflection occurs, it computes a purely reflected ray. Otherwise,
+ * it computes the refracted ray. The color from the new ray (refracted or reflected)
+ * is then blended with the object's base color.
+ *
+ * @param normal The surface normal at the hit point.
+ * @param viewDir The direction from the hit point to the camera.
+ * @param hitPoint The point of intersection on the surface.
+ * @param color The base color of the refractive material.
+ * @param shapes The collection of shapes in the scene.
+ * @param lights The collection of lights in the scene.
+ * @param camera The camera used for rendering.
+ * @param depth The current recursion depth for ray tracing.
+ * @param rayColorFunc A function to compute the color of a ray.
+ * @return Math::Vector3D The blended color resulting from refraction/reflection.
+ */
 Math::Vector3D Raytracer::Refractions::computeMaterial(
     const Math::Vector3D &normal, const Math::Vector3D &viewDir,
     const Math::Point3D &hitPoint, const Math::Vector3D &color,
@@ -44,6 +63,12 @@ Math::Vector3D Raytracer::Refractions::computeMaterial(
 }
 
 extern "C" {
+/**
+ * @brief Factory function to create a new Refractions material instance.
+ *
+ * This function is typically used by a plugin system to instantiate material objects.
+ * @return Raytracer::IMaterials* A pointer to the newly created Refractions material, or nullptr on failure.
+ */
 Raytracer::IMaterials *addMaterial() {
   try {
     return new Raytracer::Refractions();

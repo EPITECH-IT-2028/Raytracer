@@ -12,34 +12,56 @@ namespace Raytracer {
   class Camera;
   class Ray;
 
+  /**
+   * @brief Interface for materials in the Raytracer.
+   *
+   * Defines the contract for how different materials (e.g., diffuse, reflective,
+   * refractive, transparent) compute their appearance based on lighting,
+   * view direction, and scene context.
+   */
   class IMaterials {
     public:
+      /**
+       * @brief Virtual destructor.
+       */
       virtual ~IMaterials() = default;
 
-      /*
+      /**
        * @brief Type alias for a function that computes the color of a ray.
-       * This function takes a ray, a collection of shapes, a collection of
-       * lights, a camera and a recursion depth as parameters and returns a
-       * Math::Vector3D representing the color.
-       * We need to use a lambda for the circular dependency between IMaterials
-       * and Renderer.
+       *
+       * This function is used by materials that need to cast secondary rays (e.g., for
+       * reflection, refraction) to determine the color contribution from those rays.
+       * It takes a ray, the scene's shapes and lights, the camera, and the current
+       * recursion depth as parameters, returning the calculated color.
+       * The use of std::function allows passing a callable (like a lambda or member function)
+       * that encapsulates the core ray coloring logic, often from the Renderer.
        */
       using RayColorFunc = std::function<Math::Vector3D(
-          Raytracer::Ray &, const Raytracer::ShapeComposite &,
-          const Raytracer::LightComposite &, const Raytracer::Camera &, int)>;
+          Raytracer::Ray & /*ray*/,             // The ray to trace
+          const Raytracer::ShapeComposite & /*shapes*/, // Scene shapes
+          const Raytracer::LightComposite & /*lights*/, // Scene lights
+          const Raytracer::Camera & /*camera*/,         // Scene camera
+          int /*depth*/                       // Current recursion depth
+          )>;
 
-      /*
-       * @brief Computes the color of a material at a given hit point.
-       * @param normal The normal vector at the hit point.
-       * @param viewDir The direction from the hit point to the camera.
-       * @param hitPoint The hit point in 3D space.
-       * @param color The base color of the material.
-       * @param shapes The collection of shapes in the scene.
-       * @param lights The collection of lights in the scene.
-       * @param camera The camera used for rendering.
-       * @param depth The current recursion depth for ray tracing.
-       * @param rayColorFunc A function to compute the color of a ray.
-       * @return The computed color of the material at the hit point.
+      /**
+       * @brief Computes the visual appearance (color) of the material at a given surface point.
+       *
+       * This is the core method for any material. It determines the material's color
+       * based on various factors like surface normal, viewing direction, the point itself,
+       * its base color, and interactions with scene lights and other objects (via rayColorFunc
+       * for effects like reflection/refraction).
+       *
+       * @param normal The surface normal vector at the hit point.
+       * @param viewDir The direction vector from the hit point towards the camera (viewer).
+       * @param hitPoint The 3D coordinates of the point on the surface being shaded.
+       * @param color The intrinsic base color of the material/surface.
+       * @param shapes A composite object containing all shapes in the scene, for tracing secondary rays.
+       * @param lights A composite object containing all light sources in the scene, for lighting calculations.
+       * @param camera The scene's camera, potentially useful for view-dependent effects.
+       * @param depth The current recursion depth for ray tracing (e.g., for reflections/refractions).
+       * @param rayColorFunc A callback function (typically from the Renderer) to compute the color of secondary rays.
+       * @return Math::Vector3D The computed color of the material at the hit point.
        */
       virtual Math::Vector3D computeMaterial(
           const Math::Vector3D &normal, const Math::Vector3D &viewDir,
