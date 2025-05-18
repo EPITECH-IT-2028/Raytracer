@@ -1,0 +1,94 @@
+\doxysection{Raytracer\+::ILight Class Reference}
+\hypertarget{class_raytracer_1_1_i_light}{}\label{class_raytracer_1_1_i_light}\index{Raytracer::ILight@{Raytracer::ILight}}
+
+
+{\ttfamily \#include $<$ILight.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::ILight\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.470588cm]{class_raytracer_1_1_i_light}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_light_a8f8b347664941557a53713a43cf55e7a}{\texorpdfstring{$\sim$}{\string~}\+ILight}} ()=default
+\item 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_i_light_a44b72e14a9782deda68a00e694acc92c}{compute\+Lighting}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&object\+Color, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&shapes) const =0
+\item 
+virtual const std\+::string \& \mbox{\hyperlink{class_raytracer_1_1_i_light_a3d93d84fc291d092c1b8f58168a70843}{get\+Type}} () const =0
+\item 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_i_light_af4c8c2b27f8129d49f4189265addab6f}{get\+Direction}} () const =0
+\item 
+virtual const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_i_light_a69fa70c359e84fa934a678c2399a230f}{get\+Color}} () const =0
+\item 
+virtual double \mbox{\hyperlink{class_raytracer_1_1_i_light_a16e059b13450e38196fb3a99bce1a6c3}{get\+Intensity}} () const =0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_i_light_a8f8b347664941557a53713a43cf55e7a}\index{Raytracer::ILight@{Raytracer::ILight}!````~ILight@{\texorpdfstring{$\sim$}{\string~}ILight}}
+\index{````~ILight@{\texorpdfstring{$\sim$}{\string~}ILight}!Raytracer::ILight@{Raytracer::ILight}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ILight()}{\string~ILight()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_light_a8f8b347664941557a53713a43cf55e7a} 
+virtual Raytracer\+::\+ILight\+::\texorpdfstring{$\sim$}{\string~}\+ILight (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_i_light_a44b72e14a9782deda68a00e694acc92c}\index{Raytracer::ILight@{Raytracer::ILight}!computeLighting@{computeLighting}}
+\index{computeLighting@{computeLighting}!Raytracer::ILight@{Raytracer::ILight}}
+\doxysubsubsection{\texorpdfstring{computeLighting()}{computeLighting()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_light_a44b72e14a9782deda68a00e694acc92c} 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+ILight\+::compute\+Lighting (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{object\+Color}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&}]{shapes}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_light_aba99e97db2c8b4386dd5a66ffd0b58ef}{Raytracer\+::\+ALight}}, \mbox{\hyperlink{class_raytracer_1_1_ambient_light_a3916b057224d2625fab8200c978c9841}{Raytracer\+::\+Ambient\+Light}}, \mbox{\hyperlink{class_raytracer_1_1_directional_light_a39982906d667b1956b880e5604135c3a}{Raytracer\+::\+Directional\+Light}}, \mbox{\hyperlink{class_raytracer_1_1_light_composite_a0ea31c52f5f4b08ca32ce8751ed283de}{Raytracer\+::\+Light\+Composite}}, and \mbox{\hyperlink{class_raytracer_1_1_point_light_ac8afe631ce09beb747dc19ad18155015}{Raytracer\+::\+Point\+Light}}.
+
+\Hypertarget{class_raytracer_1_1_i_light_a69fa70c359e84fa934a678c2399a230f}\index{Raytracer::ILight@{Raytracer::ILight}!getColor@{getColor}}
+\index{getColor@{getColor}!Raytracer::ILight@{Raytracer::ILight}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_light_a69fa70c359e84fa934a678c2399a230f} 
+virtual const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& Raytracer\+::\+ILight\+::get\+Color (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_light_a1714e97fc41e9a512f2b3daf31c3efc9}{Raytracer\+::\+ALight}}.
+
+\Hypertarget{class_raytracer_1_1_i_light_af4c8c2b27f8129d49f4189265addab6f}\index{Raytracer::ILight@{Raytracer::ILight}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!Raytracer::ILight@{Raytracer::ILight}}
+\doxysubsubsection{\texorpdfstring{getDirection()}{getDirection()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_light_af4c8c2b27f8129d49f4189265addab6f} 
+virtual \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+ILight\+::get\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_light_afe1b14e440a2dee754a79a624ef0704d}{Raytracer\+::\+ALight}}.
+
+\Hypertarget{class_raytracer_1_1_i_light_a16e059b13450e38196fb3a99bce1a6c3}\index{Raytracer::ILight@{Raytracer::ILight}!getIntensity@{getIntensity}}
+\index{getIntensity@{getIntensity}!Raytracer::ILight@{Raytracer::ILight}}
+\doxysubsubsection{\texorpdfstring{getIntensity()}{getIntensity()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_light_a16e059b13450e38196fb3a99bce1a6c3} 
+virtual double Raytracer\+::\+ILight\+::get\+Intensity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_light_a7983ad9fa51d5ad9cb3645f5b80c6b09}{Raytracer\+::\+ALight}}.
+
+\Hypertarget{class_raytracer_1_1_i_light_a3d93d84fc291d092c1b8f58168a70843}\index{Raytracer::ILight@{Raytracer::ILight}!getType@{getType}}
+\index{getType@{getType}!Raytracer::ILight@{Raytracer::ILight}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_i_light_a3d93d84fc291d092c1b8f58168a70843} 
+virtual const std\+::string \& Raytracer\+::\+ILight\+::get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_raytracer_1_1_a_light_a5f98ecd6544fc3ef682419507bf48c99}{Raytracer\+::\+ALight}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/lights/\mbox{\hyperlink{_i_light_8hpp}{ILight.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,85 @@
+\doxysection{Parser\+Config\+File.\+hpp}
+\hypertarget{_parser_config_file_8hpp_source}{}\label{_parser_config_file_8hpp_source}\index{src/ParserConfigFile.hpp@{src/ParserConfigFile.hpp}}
+\mbox{\hyperlink{_parser_config_file_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <libconfig.h++>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_camera_8hpp}{Camera.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_factory_8hpp}{Factory.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_light_composite_8hpp}{LightComposite.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_object_8hpp}{Object.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_shape_composite_8hpp}{ShapeComposite.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}string"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a44f762ecd920a5bdee40db832f8dc779}{ParserConfigFile}}\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a44f762ecd920a5bdee40db832f8dc779}{ParserConfigFile}}(\textcolor{keyword}{const}\ std::string\ \&filename,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&plugins);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_ab83a21aeb9d1d4a868be01d2b4d92f7f}{\string~ParserConfigFile}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a66d991536fc9e6377704321c00138cd9}{parseConfigFile}}(\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}}\ \&,\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&,\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a66d991536fc9e6377704321c00138cd9}{parseConfigFile}}(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&,\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a5057513b9d79eb950ec7fd1d3d05d649}{parseCamera}}(\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}}\ \&,\ \textcolor{keyword}{const}\ libconfig::Setting\ \&);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_ad31016fb18959dabdfb2b9425887b290}{parsePrimitives}}(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&,\ \textcolor{keyword}{const}\ libconfig::Setting\ \&);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a081cc9bae1be8ca4070b071084272ee3}{parseLights}}(\mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&,\ \textcolor{keyword}{const}\ libconfig::Setting\ \&);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_aeead2c5a87211d8e1ac23ce7195e2617}{parseScenes}}(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&,\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&,\ \textcolor{keyword}{const}\ libconfig::Setting\ \&);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_parser_config_file_a43b1458e9dc173dd5ea8e3503ea3f0d5}{parseObj}}(\textcolor{keyword}{const}\ std::string\ \&obj\_file,\ \mbox{\hyperlink{class_raytracer_1_1_object}{Object}}\ \&\textcolor{keywordtype}{object});}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ libconfig::Config\ \_cfg;\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ std::vector<std::string>\ \_plugins;\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ std::unordered\_set<std::string>\ \_fileAlreadyParse;\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_factory}{Factory}}\ \_factory\ =\ \mbox{\hyperlink{class_raytracer_1_1_factory}{Factory}}();\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ std::string\ \_currentFilePath;\ }
+\DoxyCodeLine{00102\ \ \ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::tuple<float,\ float,\ float>\ parseCoordinates(}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&setting);}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ parsePoint3D(\textcolor{keyword}{const}\ libconfig::Setting\ \&setting);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ parseVector3D(\textcolor{keyword}{const}\ libconfig::Setting\ \&setting);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ parseColor(\textcolor{keyword}{const}\ libconfig::Setting\ \&colorSetting);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \textcolor{keyword}{static}\ std::string\ parseString(\textcolor{keyword}{const}\ libconfig::Setting\ \&setting);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseInternal(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&,\ \mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&,\ \textcolor{keyword}{const}\ libconfig::Setting\ \&);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseMtl(\textcolor{keyword}{const}\ std::string\ \&mtl\_file,\ \mbox{\hyperlink{class_raytracer_1_1_object}{Object}}\ \&\textcolor{keywordtype}{object});}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseSpheres(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&spheresSetting);}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseCylinders(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&cylindersSetting);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseCylindersInf(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&cylindersInfSetting);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseCones(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&conesSetting);}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseConesInf(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&conesInfSetting);}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parsePlanes(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&planesSetting);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseObjects(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&objectsSetting);}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseTriangles(\mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&sc,}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&trianglesSetting);}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseDirectionalLights(\mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&lc,}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&lightsSetting);}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseAmbientLight(\mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&lc,}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&ambientInfo);}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parseDiffuseLight(\mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&lc,}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&diffuseInfo);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ parsePointLight(\mbox{\hyperlink{class_raytracer_1_1_light_composite}{LightComposite}}\ \&lc,}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&pointInfo);}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ checkSettings(}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ libconfig::Setting\ \&setting,}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_set<std::string>\ \&requiredFields)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00248\ \ \ \};}
+\DoxyCodeLine{00249\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

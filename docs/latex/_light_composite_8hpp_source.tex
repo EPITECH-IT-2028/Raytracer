@@ -1,0 +1,44 @@
+\doxysection{Light\+Composite.\+hpp}
+\hypertarget{_light_composite_8hpp_source}{}\label{_light_composite_8hpp_source}\index{src/lights/LightComposite.hpp@{src/lights/LightComposite.hpp}}
+\mbox{\hyperlink{_light_composite_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_light_8hpp}{ALight.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_shape_composite_8hpp}{ShapeComposite.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_light_composite_ab1e2d04cf66c010a54415cd50b2cf3cc}{LightComposite}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_light}{ALight}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_light_composite_ab1e2d04cf66c010a54415cd50b2cf3cc}{LightComposite}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_light_composite_af63c7b6d6ec54317aca175553852de99}{\string~LightComposite}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_ambient_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41}{addLight}}(\textcolor{keyword}{const}\ std::shared\_ptr<ILight>\ \&);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite_a0ea31c52f5f4b08ca32ce8751ed283de}{computeLighting}}(}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&objectColor,}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&viewDir,}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&shapes)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ILight>>\ \&\mbox{\hyperlink{class_raytracer_1_1_light_composite_a242516f532de3154f77968045eca42df}{getLights}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_lights;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite_aee89df7e79289d5e781f216524e81e0c}{setDiffuse}}(\textcolor{keywordtype}{double}\ diffuse)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \_diffuse\ =\ diffuse;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite_a284e3c6e3b5a95bc891ce574dba0bd36}{getDiffuse}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_diffuse;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_light_composite_a3d9c5d80fb74fdf8347e0a6ea51fb109}{reflect}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&light,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ std::vector<std::shared\_ptr<ILight>>\ \_lights;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \_diffuse\ =\ 0;}
+\DoxyCodeLine{00037\ \ \ \};}
+\DoxyCodeLine{00038\ \};\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

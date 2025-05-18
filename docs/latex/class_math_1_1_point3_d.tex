@@ -1,0 +1,196 @@
+\doxysection{Math\+::Point3D Class Reference}
+\hypertarget{class_math_1_1_point3_d}{}\label{class_math_1_1_point3_d}\index{Math::Point3D@{Math::Point3D}}
+
+
+Represents a point in 3D space with x, y, and z coordinates.  
+
+
+
+
+{\ttfamily \#include $<$Point3\+D.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_math_1_1_point3_d_adedb5ab9e5fe75ff2214553888df0bc3}{Point3D}} (float \mbox{\hyperlink{class_math_1_1_point3_d_aef46736d4d572c8d3183ddf6c5ef1c05}{x}}=0, float \mbox{\hyperlink{class_math_1_1_point3_d_a1cf560eae06bbc97adc84f56f09f06d7}{y}}=0, float \mbox{\hyperlink{class_math_1_1_point3_d_a7c82aa23984086f26620eb8c151b3f4a}{z}}=0)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_math_1_1_point3_d}{Point3D} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_point3_d_a6906e1f4b72bcfed3f0ec4edecb7ca86}{\texorpdfstring{$\sim$}{\string~}\+Point3D}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Point3D}} \mbox{\hyperlink{class_math_1_1_point3_d_a72a78fbe1470d4d509e454601ce6321c}{operator+}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec) const
+\begin{DoxyCompactList}\small\item\em Adds a vector to this point, resulting in a new point. This represents translating the point by the vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Point3D}} \mbox{\hyperlink{class_math_1_1_point3_d_ad986ca3516fd53cee6a3b5c49e1d7f0a}{operator-\/}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&vec) const
+\begin{DoxyCompactList}\small\item\em Subtracts a vector from this point, resulting in a new point. This represents translating the point by the negative of the vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \mbox{\hyperlink{class_math_1_1_point3_d_a75e700b5080bcf1a7b5107ea91b063b9}{operator-\/}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Point3D}} \&point) const
+\begin{DoxyCompactList}\small\item\em Subtracts another point from this point, resulting in a vector. This vector represents the direction and distance from the other point to this point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_math_1_1_point3_d_aef46736d4d572c8d3183ddf6c5ef1c05}{x}}
+\begin{DoxyCompactList}\small\item\em The x-\/coordinate of the point. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_math_1_1_point3_d_a1cf560eae06bbc97adc84f56f09f06d7}{y}}
+\begin{DoxyCompactList}\small\item\em The y-\/coordinate of the point. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_math_1_1_point3_d_a7c82aa23984086f26620eb8c151b3f4a}{z}}
+\begin{DoxyCompactList}\small\item\em The z-\/coordinate of the point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a point in 3D space with x, y, and z coordinates. 
+
+This class provides basic operations for points, such as addition/subtraction with vectors, and subtraction between points to get a vector. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_math_1_1_point3_d_adedb5ab9e5fe75ff2214553888df0bc3}\index{Math::Point3D@{Math::Point3D}!Point3D@{Point3D}}
+\index{Point3D@{Point3D}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{Point3D()}{Point3D()}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_adedb5ab9e5fe75ff2214553888df0bc3} 
+Math\+::\+Point3\+D\+::\+Point3D (\begin{DoxyParamCaption}\item[{float}]{x}{ = {\ttfamily 0}, }\item[{float}]{y}{ = {\ttfamily 0}, }\item[{float}]{z}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{class_math_1_1_point3_d}{Point3D} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The initial x-\/coordinate (default is 0). \\
+\hline
+{\em y} & The initial y-\/coordinate (default is 0). \\
+\hline
+{\em z} & The initial z-\/coordinate (default is 0). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_math_1_1_point3_d_a6906e1f4b72bcfed3f0ec4edecb7ca86}\index{Math::Point3D@{Math::Point3D}!````~Point3D@{\texorpdfstring{$\sim$}{\string~}Point3D}}
+\index{````~Point3D@{\texorpdfstring{$\sim$}{\string~}Point3D}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Point3D()}{\string~Point3D()}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_a6906e1f4b72bcfed3f0ec4edecb7ca86} 
+Math\+::\+Point3\+D\+::\texorpdfstring{$\sim$}{\string~}\+Point3D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_math_1_1_point3_d_a72a78fbe1470d4d509e454601ce6321c}\index{Math::Point3D@{Math::Point3D}!operator+@{operator+}}
+\index{operator+@{operator+}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_a72a78fbe1470d4d509e454601ce6321c} 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} Math\+::\+Point3\+D\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+
+
+Adds a vector to this point, resulting in a new point. This represents translating the point by the vector. 
+
+Translates a point by adding a vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_point3_d}{Point3D} representing the translated point.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to add to the point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_point3_d}{Point3D} representing the original point translated by the vector. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_point3_d_a75e700b5080bcf1a7b5107ea91b063b9}\index{Math::Point3D@{Math::Point3D}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_a75e700b5080bcf1a7b5107ea91b063b9} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Math\+::\+Point3\+D\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Point3D}} \&}]{point}{}\end{DoxyParamCaption}) const}
+
+
+
+Subtracts another point from this point, resulting in a vector. This vector represents the direction and distance from the other point to this point. 
+
+Computes the vector from another point to this point.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \doxylink{class_math_1_1_vector3_d}{Vector3D} from {\ttfamily point} to this point.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The starting point of the resulting vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \doxylink{class_math_1_1_vector3_d}{Vector3D} directed from {\ttfamily point} to this point. 
+\end{DoxyReturn}
+\Hypertarget{class_math_1_1_point3_d_ad986ca3516fd53cee6a3b5c49e1d7f0a}\index{Math::Point3D@{Math::Point3D}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_ad986ca3516fd53cee6a3b5c49e1d7f0a} 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} Math\+::\+Point3\+D\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Vector3D}} \&}]{vec}{}\end{DoxyParamCaption}) const}
+
+
+
+Subtracts a vector from this point, resulting in a new point. This represents translating the point by the negative of the vector. 
+
+Translates a point by subtracting a vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_point3_d}{Point3D} representing the translated point.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to subtract from the point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{class_math_1_1_point3_d}{Point3D} representing the original point translated by the negative of the vector. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_math_1_1_point3_d_aef46736d4d572c8d3183ddf6c5ef1c05}\index{Math::Point3D@{Math::Point3D}!x@{x}}
+\index{x@{x}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_aef46736d4d572c8d3183ddf6c5ef1c05} 
+float Math\+::\+Point3\+D\+::x}
+
+
+
+The x-\/coordinate of the point. 
+
+\Hypertarget{class_math_1_1_point3_d_a1cf560eae06bbc97adc84f56f09f06d7}\index{Math::Point3D@{Math::Point3D}!y@{y}}
+\index{y@{y}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_a1cf560eae06bbc97adc84f56f09f06d7} 
+float Math\+::\+Point3\+D\+::y}
+
+
+
+The y-\/coordinate of the point. 
+
+\Hypertarget{class_math_1_1_point3_d_a7c82aa23984086f26620eb8c151b3f4a}\index{Math::Point3D@{Math::Point3D}!z@{z}}
+\index{z@{z}!Math::Point3D@{Math::Point3D}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily \label{class_math_1_1_point3_d_a7c82aa23984086f26620eb8c151b3f4a} 
+float Math\+::\+Point3\+D\+::z}
+
+
+
+The z-\/coordinate of the point. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/maths/\mbox{\hyperlink{_point3_d_8hpp}{Point3\+D.\+hpp}}\item 
+src/maths/\mbox{\hyperlink{_point3_d_8cpp}{Point3\+D.\+cpp}}\end{DoxyCompactItemize}

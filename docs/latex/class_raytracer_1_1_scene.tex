@@ -1,0 +1,135 @@
+\doxysection{Raytracer\+::Scene Class Reference}
+\hypertarget{class_raytracer_1_1_scene}{}\label{class_raytracer_1_1_scene}\index{Raytracer::Scene@{Raytracer::Scene}}
+
+
+Manages the overall scene, rendering, and user interaction.  
+
+
+
+
+{\ttfamily \#include $<$Scene.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_scene_a066bcb737defbe9e8cc1bfbfe4a7d78f}{Scene}} (int width, int height, const std\+::string \&input\+File\+Path)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_raytracer_1_1_scene}{Scene} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_scene_a0f397a7ad05cce8102523c483623b39d}{\texorpdfstring{$\sim$}{\string~}\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_raytracer_1_1_scene}{Scene} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_scene_ab62c172a27d4a24a6926c12993f08077}{render}} ()
+\begin{DoxyCompactList}\small\item\em Renders the scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_scene_a0b1272b2042c86e8dd9574f9e9d71dcd}{init}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the scene components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_scene_a8259d2def8d4654e2e0b733528631682}{update\+Image}} ()
+\begin{DoxyCompactList}\small\item\em Updates the image buffer with the rendered scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_scene_abe162102085fd916d56b6adfe7e248dc}{handle\+Input}} ()
+\begin{DoxyCompactList}\small\item\em Handles user input for camera movement and other interactions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_scene_ae49e7958eb58da3f14331d993e01419d}{parse\+Plugins}} ()
+\begin{DoxyCompactList}\small\item\em Parses and loads plugins. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the overall scene, rendering, and user interaction. 
+
+This class is responsible for initializing the scene from a configuration file, handling user input for camera control, managing the rendering loop, and displaying the rendered image. It also handles plugin loading. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_scene_a066bcb737defbe9e8cc1bfbfe4a7d78f}\index{Raytracer::Scene@{Raytracer::Scene}!Scene@{Scene}}
+\index{Scene@{Scene}!Raytracer::Scene@{Raytracer::Scene}}
+\doxysubsubsection{\texorpdfstring{Scene()}{Scene()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_scene_a066bcb737defbe9e8cc1bfbfe4a7d78f} 
+Raytracer\+::\+Scene\+::\+Scene (\begin{DoxyParamCaption}\item[{int}]{width}{, }\item[{int}]{height}{, }\item[{const std\+::string \&}]{input\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_raytracer_1_1_scene}{Scene} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & The width of the scene/window. \\
+\hline
+{\em height} & The height of the scene/window. \\
+\hline
+{\em input\+File\+Path} & The path to the scene configuration file.\\
+\hline
+{\em width} & The width of the scene/window. \\
+\hline
+{\em height} & The height of the scene/window. \\
+\hline
+{\em input\+Path} & The path to the scene configuration file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}} & if plugin parsing fails. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_scene_a0f397a7ad05cce8102523c483623b39d}\index{Raytracer::Scene@{Raytracer::Scene}!````~Scene@{\texorpdfstring{$\sim$}{\string~}Scene}}
+\index{````~Scene@{\texorpdfstring{$\sim$}{\string~}Scene}!Raytracer::Scene@{Raytracer::Scene}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Scene()}{\string~Scene()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_scene_a0f397a7ad05cce8102523c483623b39d} 
+Raytracer\+::\+Scene\+::\texorpdfstring{$\sim$}{\string~}\+Scene (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{class_raytracer_1_1_scene}{Scene} class. 
+
+Destructor for the \doxylink{class_raytracer_1_1_scene}{Scene} class. Closes any loaded plugin handles. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_scene_abe162102085fd916d56b6adfe7e248dc}\index{Raytracer::Scene@{Raytracer::Scene}!handleInput@{handleInput}}
+\index{handleInput@{handleInput}!Raytracer::Scene@{Raytracer::Scene}}
+\doxysubsubsection{\texorpdfstring{handleInput()}{handleInput()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_scene_abe162102085fd916d56b6adfe7e248dc} 
+void Raytracer\+::\+Scene\+::handle\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Handles user input for camera movement and other interactions. 
+
+Handles user input for camera movement and other interactions. This includes moving/rotating the camera, taking screenshots (Y key), and quitting (Escape key). \Hypertarget{class_raytracer_1_1_scene_a0b1272b2042c86e8dd9574f9e9d71dcd}\index{Raytracer::Scene@{Raytracer::Scene}!init@{init}}
+\index{init@{init}!Raytracer::Scene@{Raytracer::Scene}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_scene_a0b1272b2042c86e8dd9574f9e9d71dcd} 
+void Raytracer\+::\+Scene\+::init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the scene components. 
+
+Initializes the scene components. This includes creating the texture, image, framebuffer, and sprite. \Hypertarget{class_raytracer_1_1_scene_ae49e7958eb58da3f14331d993e01419d}\index{Raytracer::Scene@{Raytracer::Scene}!parsePlugins@{parsePlugins}}
+\index{parsePlugins@{parsePlugins}!Raytracer::Scene@{Raytracer::Scene}}
+\doxysubsubsection{\texorpdfstring{parsePlugins()}{parsePlugins()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_scene_ae49e7958eb58da3f14331d993e01419d} 
+void Raytracer\+::\+Scene\+::parse\+Plugins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Parses and loads plugins. 
+
+Parses and loads plugins from the "{}./plugins"{} directory. It looks for files with the "{}.\+so"{} extension and attempts to load them. Warnings are printed if a plugin fails to load. \Hypertarget{class_raytracer_1_1_scene_ab62c172a27d4a24a6926c12993f08077}\index{Raytracer::Scene@{Raytracer::Scene}!render@{render}}
+\index{render@{render}!Raytracer::Scene@{Raytracer::Scene}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_scene_ab62c172a27d4a24a6926c12993f08077} 
+void Raytracer\+::\+Scene\+::render (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Renders the scene. 
+
+Renders the scene and handles the main event loop. Initializes the renderer, renders an initial frame, creates a PPM file, and then enters the main loop. In the loop, it polls for events, handles input, updates camera quality, re-\/renders the scene, updates the image, and displays it. \Hypertarget{class_raytracer_1_1_scene_a8259d2def8d4654e2e0b733528631682}\index{Raytracer::Scene@{Raytracer::Scene}!updateImage@{updateImage}}
+\index{updateImage@{updateImage}!Raytracer::Scene@{Raytracer::Scene}}
+\doxysubsubsection{\texorpdfstring{updateImage()}{updateImage()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_scene_a8259d2def8d4654e2e0b733528631682} 
+void Raytracer\+::\+Scene\+::update\+Image (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the image buffer with the rendered scene. 
+
+Updates the image buffer with the rendered scene from the framebuffer. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_scene_8hpp}{Scene.\+hpp}}\item 
+src/\mbox{\hyperlink{_scene_8cpp}{Scene.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,246 @@
+\doxysection{Raytracer\+::Cylinder\+Inf Class Reference}
+\hypertarget{class_raytracer_1_1_cylinder_inf}{}\label{class_raytracer_1_1_cylinder_inf}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+
+
+Represents an infinite cylinder shape in the 3D scene.  
+
+
+
+
+{\ttfamily \#include $<$Cylinder\+Inf.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Cylinder\+Inf\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_cylinder_inf}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a3444d1d3bea48591298d827f29bd01b6}{Cylinder\+Inf}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center, double radius, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color)
+\begin{DoxyCompactList}\small\item\em Constructs an infinite \doxylink{class_raytracer_1_1_cylinder}{Cylinder} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a216285f8c6bf3d92ee27a3bd5a9947b0}{Cylinder\+Inf}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_cylinder_inf}{Cylinder\+Inf}. Initializes an infinite cylinder with radius 1, centered at origin (0,0,0), oriented along the Y-\/axis, and with red color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a04cb282ea2b7e2de2756cc9a23a3147d}{\texorpdfstring{$\sim$}{\string~}\+Cylinder\+Inf}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_cylinder_inf}{Cylinder\+Inf}. \end{DoxyCompactList}\item 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a5066eee96eba1a6e0ed587e10f589b5e}{hits}} (const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&ray) const override
+\begin{DoxyCompactList}\small\item\em Calculates the intersection of a ray with the infinite cylinder. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a293be836ef49d13618e7340fbff6674f}{get\+Normal}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&point) const override
+\begin{DoxyCompactList}\small\item\em Gets the normal vector at a given point on the cylinder\textquotesingle{}s surface. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_aae86682f880f1651870e570076bc7ede}{translate}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&offset) override
+\begin{DoxyCompactList}\small\item\em Translates the infinite cylinder by a given offset. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_a4b71b01430518766599fdd9cb9983a06}{get\+Radius}} () const
+\begin{DoxyCompactList}\small\item\em Gets the radius of the infinite cylinder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_cylinder_inf_aa157c6f9b30f9a1c8fed449a86c20b99}{set\+Radius}} (const double \&radius)
+\begin{DoxyCompactList}\small\item\em Sets the radius of the infinite cylinder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_shape_a87698328be4838861212c14a88d6ac86}{\texorpdfstring{$\sim$}{\string~}\+AShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual default destructor for \doxylink{class_raytracer_1_1_a_shape}{AShape}. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0805f80c768f1d502855ee4583f0f797}{get\+Center}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the center point of the shape. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_aee2fcc92765a6840d4d7a98a32d970f6}{get\+Color}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_ad02fb2970274736b4e58b3f466ccbaf6}{get\+Shininess}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a896c18dcd8b4444096414510eaf1b2cb}{get\+Material}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the material of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a65411eb4bfa441711aaf30a04b2c4db2}{set\+Center}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center) override
+\begin{DoxyCompactList}\small\item\em Sets the center point of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a70c67ada6ccb5cf555fb8bfe38765e5d}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color) override
+\begin{DoxyCompactList}\small\item\em Sets the color of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a23740f1a2e4d6fcf940a74bf6cdf7cf9}{set\+Shininess}} (double shininess) override
+\begin{DoxyCompactList}\small\item\em Sets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0a3231a8d472bb38e57ac84e516b2404}{set\+Material}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ material) override
+\begin{DoxyCompactList}\small\item\em Sets the material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c}{\texorpdfstring{$\sim$}{\string~}\+IShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\+\_\+center}}
+\begin{DoxyCompactList}\small\item\em The center point of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em The color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_a75e5b8bb759f8deaf7c6fecb87c34154}{\+\_\+shininess}} = 32.
+\begin{DoxyCompactList}\small\item\em The shininess property for lighting calculations. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_aa22e131bd6c201739e01a048a4b603ed}{\+\_\+material}}
+\begin{DoxyCompactList}\small\item\em The material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an infinite cylinder shape in the 3D scene. 
+
+This class inherits from \doxylink{class_raytracer_1_1_a_shape}{AShape} and defines an infinitely long cylindrical object with a center (point on its axis), radius, normal vector (axis orientation), and color. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_cylinder_inf_a3444d1d3bea48591298d827f29bd01b6}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!CylinderInf@{CylinderInf}}
+\index{CylinderInf@{CylinderInf}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{CylinderInf()}{CylinderInf()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_a3444d1d3bea48591298d827f29bd01b6} 
+Raytracer\+::\+Cylinder\+Inf\+::\+Cylinder\+Inf (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{center}{, }\item[{double}]{radius}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an infinite \doxylink{class_raytracer_1_1_cylinder}{Cylinder} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & A point on the axis of the cylinder. \\
+\hline
+{\em radius} & The radius of the cylinder. \\
+\hline
+{\em normal} & The normal vector indicating the orientation of the cylinder\textquotesingle{}s axis. \\
+\hline
+{\em color} & The color of the cylinder. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_cylinder_inf_a216285f8c6bf3d92ee27a3bd5a9947b0}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!CylinderInf@{CylinderInf}}
+\index{CylinderInf@{CylinderInf}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{CylinderInf()}{CylinderInf()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_a216285f8c6bf3d92ee27a3bd5a9947b0} 
+Raytracer\+::\+Cylinder\+Inf\+::\+Cylinder\+Inf (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_cylinder_inf}{Cylinder\+Inf}. Initializes an infinite cylinder with radius 1, centered at origin (0,0,0), oriented along the Y-\/axis, and with red color. 
+
+\Hypertarget{class_raytracer_1_1_cylinder_inf_a04cb282ea2b7e2de2756cc9a23a3147d}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!````~CylinderInf@{\texorpdfstring{$\sim$}{\string~}CylinderInf}}
+\index{````~CylinderInf@{\texorpdfstring{$\sim$}{\string~}CylinderInf}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CylinderInf()}{\string~CylinderInf()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_a04cb282ea2b7e2de2756cc9a23a3147d} 
+Raytracer\+::\+Cylinder\+Inf\+::\texorpdfstring{$\sim$}{\string~}\+Cylinder\+Inf (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_cylinder_inf}{Cylinder\+Inf}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_cylinder_inf_a293be836ef49d13618e7340fbff6674f}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!getNormal@{getNormal}}
+\index{getNormal@{getNormal}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{getNormal()}{getNormal()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_a293be836ef49d13618e7340fbff6674f} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Cylinder\+Inf\+::get\+Normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{point}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the normal vector at a given point on the cylinder\textquotesingle{}s surface. 
+
+Gets the normal vector at a given point on the infinite cylinder\textquotesingle{}s surface.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point on the cylinder\textquotesingle{}s surface. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The normalized normal vector at that point.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point on the cylinder\textquotesingle{}s surface. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The normalized normal vector at that point, perpendicular to the cylinder\textquotesingle{}s axis. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a9cd5451bb98d4f234e00f63bbebbeb75}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_cylinder_inf_a4b71b01430518766599fdd9cb9983a06}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!getRadius@{getRadius}}
+\index{getRadius@{getRadius}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{getRadius()}{getRadius()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_a4b71b01430518766599fdd9cb9983a06} 
+double Raytracer\+::\+Cylinder\+Inf\+::get\+Radius (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the radius of the infinite cylinder. 
+
+\begin{DoxyReturn}{Returns}
+double The radius of the cylinder. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_cylinder_inf_a5066eee96eba1a6e0ed587e10f589b5e}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!hits@{hits}}
+\index{hits@{hits}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{hits()}{hits()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_a5066eee96eba1a6e0ed587e10f589b5e} 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} $>$ Raytracer\+::\+Cylinder\+Inf\+::hits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&}]{ray}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculates the intersection of a ray with the infinite cylinder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing the distance to the hit point, the color of the cylinder, and a pointer to the cylinder itself if hit, otherwise a very large distance and null pointer.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing\+:
+\begin{DoxyItemize}
+\item double\+: The distance from the ray\textquotesingle{}s origin to the closest intersection point (t). Returns 0.\+0 if there is no hit or if hits are behind the ray origin.
+\item \doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}\+: The color of the cylinder.
+\item const \doxylink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}\texorpdfstring{$\ast$}{*}\+: A pointer to this cylinder object. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a6d57486e381ac8c6481287cf72cbbe42}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_cylinder_inf_aa157c6f9b30f9a1c8fed449a86c20b99}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!setRadius@{setRadius}}
+\index{setRadius@{setRadius}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{setRadius()}{setRadius()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_aa157c6f9b30f9a1c8fed449a86c20b99} 
+void Raytracer\+::\+Cylinder\+Inf\+::set\+Radius (\begin{DoxyParamCaption}\item[{const double \&}]{radius}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the radius of the infinite cylinder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The new radius for the cylinder. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_cylinder_inf_aae86682f880f1651870e570076bc7ede}\index{Raytracer::CylinderInf@{Raytracer::CylinderInf}!translate@{translate}}
+\index{translate@{translate}!Raytracer::CylinderInf@{Raytracer::CylinderInf}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_cylinder_inf_aae86682f880f1651870e570076bc7ede} 
+void Raytracer\+::\+Cylinder\+Inf\+::translate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Translates the infinite cylinder by a given offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The vector by which to translate the cylinder\textquotesingle{}s center point. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_raytracer_1_1_a_shape_a3cd1fe920dd1e687694ea0e2ed0278e9}{Raytracer\+::\+AShape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/shapes/\mbox{\hyperlink{_cylinder_inf_8hpp}{Cylinder\+Inf.\+hpp}}\item 
+src/shapes/\mbox{\hyperlink{_cylinder_inf_8cpp}{Cylinder\+Inf.\+cpp}}\end{DoxyCompactItemize}

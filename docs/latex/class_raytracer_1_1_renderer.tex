@@ -1,0 +1,226 @@
+\doxysection{Raytracer\+::Renderer Class Reference}
+\hypertarget{class_raytracer_1_1_renderer}{}\label{class_raytracer_1_1_renderer}\index{Raytracer::Renderer@{Raytracer::Renderer}}
+
+
+Handles the rendering process of the 3D scene.  
+
+
+
+
+{\ttfamily \#include $<$Renderer.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_renderer_afdd30706eca4e83e3054be37453a9a92}{Renderer}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_renderer}{Renderer}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_renderer_ace69fe0f2c8dfb21922b46aa0bd1182a}{Renderer}} (int width, int height, const std\+::string \&input\+File\+Path, \mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&cam, const std\+::vector$<$ std\+::string $>$ \&plugins)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_raytracer_1_1_renderer}{Renderer} object and initializes the scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_renderer_a1a2bc5964d22027b31970a645682a7e8}{write\+In\+File}} (const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Writes the rendered scene to a file (not fully implemented). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_renderer_afdd60325110666d1af7968e1e59ca4fc}{init\+Scene}} (\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&camera)
+\begin{DoxyCompactList}\small\item\em Initializes the scene by parsing the configuration file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_renderer_a17d2b21507f8c3d78eff4cfaca0b41b3}{ray\+Color}} (\mbox{\hyperlink{class_raytracer_1_1_ray}{Ray}} \&r, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&s, const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&light, const \mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&camera\+Pos, int depth)
+\begin{DoxyCompactList}\small\item\em Calculates the color of a ray after interacting with the scene. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{class_raytracer_1_1_renderer_af48a3c972ab7af6f0f1835b24674e570}{get\+Input\+File\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Gets the input file path for the scene configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_renderer_a06e3590ae7082923305e4cb420fff9a2}{render\+To\+Buffer}} (std\+::vector$<$ sf\+::\+Color $>$ \&framebuffer, \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&cam, bool is\+High\+Quality)
+\begin{DoxyCompactList}\small\item\em Renders the scene to a framebuffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_renderer_a3877f31134de8d1a00cd495b5c6fc552}{set\+Width}} (int width)
+\begin{DoxyCompactList}\small\item\em Sets the width of the rendering viewport. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_renderer_add47e9847fba02c8b2b288ab9c8bc967}{set\+Height}} (int height)
+\begin{DoxyCompactList}\small\item\em Sets the height of the rendering viewport. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the rendering process of the 3D scene. 
+
+This class is responsible for initializing the scene from a configuration file, casting rays, calculating colors based on intersections and lighting, and outputting the final image to a buffer or file. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_renderer_afdd30706eca4e83e3054be37453a9a92}\index{Raytracer::Renderer@{Raytracer::Renderer}!Renderer@{Renderer}}
+\index{Renderer@{Renderer}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{Renderer()}{Renderer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_afdd30706eca4e83e3054be37453a9a92} 
+Raytracer\+::\+Renderer\+::\+Renderer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_renderer}{Renderer}. 
+
+\Hypertarget{class_raytracer_1_1_renderer_ace69fe0f2c8dfb21922b46aa0bd1182a}\index{Raytracer::Renderer@{Raytracer::Renderer}!Renderer@{Renderer}}
+\index{Renderer@{Renderer}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{Renderer()}{Renderer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_ace69fe0f2c8dfb21922b46aa0bd1182a} 
+Raytracer\+::\+Renderer\+::\+Renderer (\begin{DoxyParamCaption}\item[{int}]{width}{, }\item[{int}]{height}{, }\item[{const std\+::string \&}]{input\+File\+Path}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&}]{cam}{, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{plugins}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{class_raytracer_1_1_renderer}{Renderer} object and initializes the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & The width of the rendering viewport. \\
+\hline
+{\em height} & The height of the rendering viewport. \\
+\hline
+{\em input\+File\+Path} & The path to the scene configuration file. \\
+\hline
+{\em cam} & A reference to the camera object. \\
+\hline
+{\em plugins} & A list of plugin file paths. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_renderer_af48a3c972ab7af6f0f1835b24674e570}\index{Raytracer::Renderer@{Raytracer::Renderer}!getInputFilePath@{getInputFilePath}}
+\index{getInputFilePath@{getInputFilePath}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{getInputFilePath()}{getInputFilePath()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_af48a3c972ab7af6f0f1835b24674e570} 
+const std\+::string \& Raytracer\+::\+Renderer\+::get\+Input\+File\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the input file path for the scene configuration. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::string\& A const reference to the input file path. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_renderer_afdd60325110666d1af7968e1e59ca4fc}\index{Raytracer::Renderer@{Raytracer::Renderer}!initScene@{initScene}}
+\index{initScene@{initScene}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{initScene()}{initScene()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_afdd60325110666d1af7968e1e59ca4fc} 
+void Raytracer\+::\+Renderer\+::init\+Scene (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&}]{camera}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the scene by parsing the configuration file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & A reference to the camera to be configured.\\
+\hline
+{\em camera} & The camera object to be initialized. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_renderer_a17d2b21507f8c3d78eff4cfaca0b41b3}\index{Raytracer::Renderer@{Raytracer::Renderer}!rayColor@{rayColor}}
+\index{rayColor@{rayColor}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{rayColor()}{rayColor()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_a17d2b21507f8c3d78eff4cfaca0b41b3} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Renderer\+::ray\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_raytracer_1_1_ray}{Ray}} \&}]{r}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Shape\+Composite}} \&}]{shape}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Light\+Composite}} \&}]{light}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_camera}{Camera}} \&}]{camera\+Pos}{, }\item[{int}]{depth}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the color of a ray after interacting with the scene. 
+
+Calculates the color of a ray.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The ray to trace. \\
+\hline
+{\em s} & The composite of shapes in the scene. \\
+\hline
+{\em light} & The composite of lights in the scene. \\
+\hline
+{\em camera\+Pos} & The camera object (used for view-\/dependent effects like specular highlights). \\
+\hline
+{\em depth} & The current recursion depth for reflections/refractions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The calculated color for the ray.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The ray to calculate the color for. \\
+\hline
+{\em shape} & The composite shape in the scene. \\
+\hline
+{\em light} & The composite light in the scene. \\
+\hline
+{\em camera\+Pos} & The camera position. \\
+\hline
+{\em depth} & The current recursion depth for reflections/refractions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The calculated color of the ray. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_renderer_a06e3590ae7082923305e4cb420fff9a2}\index{Raytracer::Renderer@{Raytracer::Renderer}!renderToBuffer@{renderToBuffer}}
+\index{renderToBuffer@{renderToBuffer}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{renderToBuffer()}{renderToBuffer()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_a06e3590ae7082923305e4cb420fff9a2} 
+void Raytracer\+::\+Renderer\+::render\+To\+Buffer (\begin{DoxyParamCaption}\item[{std\+::vector$<$ sf\+::\+Color $>$ \&}]{framebuffer}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&}]{cam}{, }\item[{bool}]{is\+High\+Quality}{}\end{DoxyParamCaption})}
+
+
+
+Renders the scene to a framebuffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em framebuffer} & A reference to the vector of SFML colors representing the framebuffer. \\
+\hline
+{\em cam} & A reference to the camera used for rendering. \\
+\hline
+{\em is\+High\+Quality} & A boolean indicating whether to render in high quality.\\
+\hline
+{\em framebuffer} & The framebuffer to render to. \\
+\hline
+{\em cam} & The camera used for rendering. \\
+\hline
+{\em is\+High\+Quality} & Whether to render in high quality or not. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_renderer_add47e9847fba02c8b2b288ab9c8bc967}\index{Raytracer::Renderer@{Raytracer::Renderer}!setHeight@{setHeight}}
+\index{setHeight@{setHeight}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{setHeight()}{setHeight()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_add47e9847fba02c8b2b288ab9c8bc967} 
+void Raytracer\+::\+Renderer\+::set\+Height (\begin{DoxyParamCaption}\item[{int}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the height of the rendering viewport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & The new height. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_renderer_a3877f31134de8d1a00cd495b5c6fc552}\index{Raytracer::Renderer@{Raytracer::Renderer}!setWidth@{setWidth}}
+\index{setWidth@{setWidth}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{setWidth()}{setWidth()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_a3877f31134de8d1a00cd495b5c6fc552} 
+void Raytracer\+::\+Renderer\+::set\+Width (\begin{DoxyParamCaption}\item[{int}]{width}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the width of the rendering viewport. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & The new width. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_renderer_a1a2bc5964d22027b31970a645682a7e8}\index{Raytracer::Renderer@{Raytracer::Renderer}!writeInFile@{writeInFile}}
+\index{writeInFile@{writeInFile}!Raytracer::Renderer@{Raytracer::Renderer}}
+\doxysubsubsection{\texorpdfstring{writeInFile()}{writeInFile()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_renderer_a1a2bc5964d22027b31970a645682a7e8} 
+void Raytracer\+::\+Renderer\+::write\+In\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename}{}\end{DoxyParamCaption})}
+
+
+
+Writes the rendered scene to a file (not fully implemented). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file to write to. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_renderer_8hpp}{Renderer.\+hpp}}\item 
+src/\mbox{\hyperlink{_renderer_8cpp}{Renderer.\+cpp}}\end{DoxyCompactItemize}

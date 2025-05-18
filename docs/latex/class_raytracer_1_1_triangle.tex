@@ -1,0 +1,261 @@
+\doxysection{Raytracer\+::Triangle Class Reference}
+\hypertarget{class_raytracer_1_1_triangle}{}\label{class_raytracer_1_1_triangle}\index{Raytracer::Triangle@{Raytracer::Triangle}}
+
+
+Represents a triangle shape in the 3D scene.  
+
+
+
+
+{\ttfamily \#include $<$Triangle.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Triangle\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_triangle}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_triangle_a7e3699ae1c4cc128b1d25e139eee4c8e}{Triangle}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&p1, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&p2, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&p3, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_raytracer_1_1_triangle}{Triangle} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_triangle_a907f16188e602d1abaef9a9d39d8de59}{Triangle}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_triangle}{Triangle}. Initializes a triangle with default vertices, normal, and red color. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_triangle_a323ce0ecfb84d780e9876bd13597a8cf}{\texorpdfstring{$\sim$}{\string~}\+Triangle}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_triangle}{Triangle}. \end{DoxyCompactList}\item 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_raytracer_1_1_triangle_aba10448bd2220c9230f1cdd6c6ad75fa}{hits}} (const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&ray) const override
+\begin{DoxyCompactList}\small\item\em Calculates the intersection of a ray with the triangle. Uses the Möller–\+Trumbore intersection algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_triangle_afd27f4ec050e931df54454bd85c5a9d7}{get\+Normal}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&point) const override
+\begin{DoxyCompactList}\small\item\em Gets the normal vector of the triangle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_triangle_a2a770b5feb07f8e2d8b57542d0d83ab9}{translate}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&offset) override
+\begin{DoxyCompactList}\small\item\em Translates the triangle by a given offset. This implementation only translates the center. For full triangle translation, vertices p1, p2, and p3 should also be translated. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_triangle_ae95a08e0c633480f900d44221b4f8adf}{set\+P1}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&p1)
+\begin{DoxyCompactList}\small\item\em Sets the first vertex of the triangle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_triangle_a2c6926709a760b58a2e314a2a20785f2}{set\+P2}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&p2)
+\begin{DoxyCompactList}\small\item\em Sets the second vertex of the triangle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_triangle_aa586468b1634f1b0b254e02f16fc4b61}{set\+P3}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&p3)
+\begin{DoxyCompactList}\small\item\em Sets the third vertex of the triangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_shape_a87698328be4838861212c14a88d6ac86}{\texorpdfstring{$\sim$}{\string~}\+AShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual default destructor for \doxylink{class_raytracer_1_1_a_shape}{AShape}. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0805f80c768f1d502855ee4583f0f797}{get\+Center}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the center point of the shape. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_aee2fcc92765a6840d4d7a98a32d970f6}{get\+Color}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_ad02fb2970274736b4e58b3f466ccbaf6}{get\+Shininess}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a896c18dcd8b4444096414510eaf1b2cb}{get\+Material}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the material of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a65411eb4bfa441711aaf30a04b2c4db2}{set\+Center}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center) override
+\begin{DoxyCompactList}\small\item\em Sets the center point of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a70c67ada6ccb5cf555fb8bfe38765e5d}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color) override
+\begin{DoxyCompactList}\small\item\em Sets the color of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a23740f1a2e4d6fcf940a74bf6cdf7cf9}{set\+Shininess}} (double shininess) override
+\begin{DoxyCompactList}\small\item\em Sets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0a3231a8d472bb38e57ac84e516b2404}{set\+Material}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ material) override
+\begin{DoxyCompactList}\small\item\em Sets the material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c}{\texorpdfstring{$\sim$}{\string~}\+IShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\+\_\+center}}
+\begin{DoxyCompactList}\small\item\em The center point of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em The color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_a75e5b8bb759f8deaf7c6fecb87c34154}{\+\_\+shininess}} = 32.
+\begin{DoxyCompactList}\small\item\em The shininess property for lighting calculations. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_aa22e131bd6c201739e01a048a4b603ed}{\+\_\+material}}
+\begin{DoxyCompactList}\small\item\em The material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a triangle shape in the 3D scene. 
+
+This class inherits from \doxylink{class_raytracer_1_1_a_shape}{AShape} and defines a triangular object specified by three vertices (p1, p2, p3), a normal vector, and a color. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_triangle_a7e3699ae1c4cc128b1d25e139eee4c8e}\index{Raytracer::Triangle@{Raytracer::Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{Triangle()}{Triangle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_a7e3699ae1c4cc128b1d25e139eee4c8e} 
+Raytracer\+::\+Triangle\+::\+Triangle (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{center}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{p1}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{p2}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{p3}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{class_raytracer_1_1_triangle}{Triangle} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & The center point of the triangle (often calculated as the centroid). \\
+\hline
+{\em p1} & The first vertex of the triangle. \\
+\hline
+{\em p2} & The second vertex of the triangle. \\
+\hline
+{\em p3} & The third vertex of the triangle. \\
+\hline
+{\em normal} & The normal vector of the triangle\textquotesingle{}s surface. \\
+\hline
+{\em color} & The color of the triangle. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_triangle_a907f16188e602d1abaef9a9d39d8de59}\index{Raytracer::Triangle@{Raytracer::Triangle}!Triangle@{Triangle}}
+\index{Triangle@{Triangle}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{Triangle()}{Triangle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_a907f16188e602d1abaef9a9d39d8de59} 
+Raytracer\+::\+Triangle\+::\+Triangle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_triangle}{Triangle}. Initializes a triangle with default vertices, normal, and red color. 
+
+\Hypertarget{class_raytracer_1_1_triangle_a323ce0ecfb84d780e9876bd13597a8cf}\index{Raytracer::Triangle@{Raytracer::Triangle}!````~Triangle@{\texorpdfstring{$\sim$}{\string~}Triangle}}
+\index{````~Triangle@{\texorpdfstring{$\sim$}{\string~}Triangle}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Triangle()}{\string~Triangle()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_a323ce0ecfb84d780e9876bd13597a8cf} 
+Raytracer\+::\+Triangle\+::\texorpdfstring{$\sim$}{\string~}\+Triangle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_triangle}{Triangle}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_triangle_afd27f4ec050e931df54454bd85c5a9d7}\index{Raytracer::Triangle@{Raytracer::Triangle}!getNormal@{getNormal}}
+\index{getNormal@{getNormal}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{getNormal()}{getNormal()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_afd27f4ec050e931df54454bd85c5a9d7} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Triangle\+::get\+Normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{point}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the normal vector of the triangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point on the triangle\textquotesingle{}s surface (unused, as triangle has a constant normal). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The normal vector of the triangle. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a9cd5451bb98d4f234e00f63bbebbeb75}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_triangle_aba10448bd2220c9230f1cdd6c6ad75fa}\index{Raytracer::Triangle@{Raytracer::Triangle}!hits@{hits}}
+\index{hits@{hits}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{hits()}{hits()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_aba10448bd2220c9230f1cdd6c6ad75fa} 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} $>$ Raytracer\+::\+Triangle\+::hits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&}]{ray}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculates the intersection of a ray with the triangle. Uses the Möller–\+Trumbore intersection algorithm. 
+
+Calculates the intersection of a ray with the triangle using the Möller–\+Trumbore algorithm.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing the distance to the hit point, the color of the triangle, and a pointer to the triangle itself if hit, otherwise a zero distance and null pointer.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing\+:
+\begin{DoxyItemize}
+\item double\+: The distance from the ray\textquotesingle{}s origin to the intersection point (t). Returns 0.\+0 if there is no hit or if the hit is behind the ray origin.
+\item \doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}\+: The color of the triangle.
+\item const \doxylink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}\texorpdfstring{$\ast$}{*}\+: A pointer to this triangle object. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a6d57486e381ac8c6481287cf72cbbe42}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_triangle_ae95a08e0c633480f900d44221b4f8adf}\index{Raytracer::Triangle@{Raytracer::Triangle}!setP1@{setP1}}
+\index{setP1@{setP1}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{setP1()}{setP1()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_ae95a08e0c633480f900d44221b4f8adf} 
+void Raytracer\+::\+Triangle\+::set\+P1 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{p1}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the first vertex of the triangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & The new first vertex. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_triangle_a2c6926709a760b58a2e314a2a20785f2}\index{Raytracer::Triangle@{Raytracer::Triangle}!setP2@{setP2}}
+\index{setP2@{setP2}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{setP2()}{setP2()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_a2c6926709a760b58a2e314a2a20785f2} 
+void Raytracer\+::\+Triangle\+::set\+P2 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{p2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the second vertex of the triangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p2} & The new second vertex. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_triangle_aa586468b1634f1b0b254e02f16fc4b61}\index{Raytracer::Triangle@{Raytracer::Triangle}!setP3@{setP3}}
+\index{setP3@{setP3}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{setP3()}{setP3()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_aa586468b1634f1b0b254e02f16fc4b61} 
+void Raytracer\+::\+Triangle\+::set\+P3 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{p3}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the third vertex of the triangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p3} & The new third vertex. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_triangle_a2a770b5feb07f8e2d8b57542d0d83ab9}\index{Raytracer::Triangle@{Raytracer::Triangle}!translate@{translate}}
+\index{translate@{translate}!Raytracer::Triangle@{Raytracer::Triangle}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_triangle_a2a770b5feb07f8e2d8b57542d0d83ab9} 
+void Raytracer\+::\+Triangle\+::translate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Translates the triangle by a given offset. This implementation only translates the center. For full triangle translation, vertices p1, p2, and p3 should also be translated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The vector by which to translate the triangle\textquotesingle{}s center. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_raytracer_1_1_a_shape_a3cd1fe920dd1e687694ea0e2ed0278e9}{Raytracer\+::\+AShape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/shapes/\mbox{\hyperlink{_triangle_8hpp}{Triangle.\+hpp}}\item 
+src/shapes/\mbox{\hyperlink{_triangle_8cpp}{Triangle.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,26 @@
+\doxysection{ILight.\+hpp}
+\hypertarget{_i_light_8hpp_source}{}\label{_i_light_8hpp_source}\index{src/lights/ILight.hpp@{src/lights/ILight.hpp}}
+\mbox{\hyperlink{_i_light_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_shape_composite_8hpp}{ShapeComposite.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00007\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_i_light}{ILight}}\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_raytracer_1_1_i_light_a8f8b347664941557a53713a43cf55e7a}{\string~ILight}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_i_light_a44b72e14a9782deda68a00e694acc92c}{computeLighting}}(}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&objectColor,}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&viewDir,}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{ShapeComposite}}\ \&shapes)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_raytracer_1_1_i_light_a3d93d84fc291d092c1b8f58168a70843}{getType}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_i_light_af4c8c2b27f8129d49f4189265addab6f}{getDirection}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&\mbox{\hyperlink{class_raytracer_1_1_i_light_a69fa70c359e84fa934a678c2399a230f}{getColor}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_raytracer_1_1_i_light_a16e059b13450e38196fb3a99bce1a6c3}{getIntensity}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00019\ \ \ \};}
+\DoxyCodeLine{00020\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

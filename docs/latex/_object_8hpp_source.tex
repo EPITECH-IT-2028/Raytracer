@@ -1,0 +1,81 @@
+\doxysection{Object.\+hpp}
+\hypertarget{_object_8hpp_source}{}\label{_object_8hpp_source}\index{src/shapes/Object.hpp@{src/shapes/Object.hpp}}
+\mbox{\hyperlink{_object_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_shape_8hpp}{AShape.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_point3_d_8hpp}{Point3D.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_ray_8hpp}{Ray.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_object_a65d0da165a691b06fc26155f417e32a9}{Object}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_shape}{AShape}}\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl}{Mtl}}\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl_ae8f223071ddb3023bd5318340d20c0ee}{ambient}};\ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl_a2db5240e1c44e5e0683e5da746cbb828}{diffuse}};\ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl_a16f68ce366ee319cf41017f623fd1a4b}{specular}};\ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl_ab9fa7437c8257cab6a0780a22330aa0c}{shininess}}\ =\ 10.0;\ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl_a2ffca436ee907daff1da7e0e993c10aa}{transparency}}\ =\ 1.0;\ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl_ad94b03f656ee9878c64e6eb297742a94}{illumination}}\ =\ 2;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face}{Face}}\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::vector<int>\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face_a78fe0a29fd94dbef319d8d3256c882aa}{vertex}};\ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::vector<int>\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face_a86eaabcce2853470dac30a105383e828}{normal}};\ \ \ \ \ \ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face_a4f5b5190db585af96847acff48f53e05}{material\_name}};\ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_object_a65d0da165a691b06fc26155f417e32a9}{Object}}()\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ :\ \_obj\_file\{\},\ \_vertices\{\},\ \_faces\{\},\ \_materials\{\}\ \{\}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_object_aba010b4d869d1ed15f86b3b3cda93d00}{\string~Object}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ std::tuple<double,\ Math::Vector3D,\ const\ Raytracer::IShape\ *>\ \mbox{\hyperlink{class_raytracer_1_1_object_ad215f4c1dd94f8a68dac5ec11cb5b642}{hits}}(}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer::Ray}}\ \&ray)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_object_a1cc89c6f6e83c6b56c12c6eaaf34f299}{setObjFile}}(\textcolor{keyword}{const}\ std::string\ \&obj\_file)\ \{\_obj\_file\ =\ obj\_file;\}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_object_a2e6f63ac00d435a0ab4ae52d1551e81d}{setMaterials}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ Mtl>\ \&materials)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \_materials\ =\ materials;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_object_abd7e47f9b76ee766cef8441eec0b0419}{setVertices}}(\textcolor{keyword}{const}\ std::vector<Math::Point3D>\ \&vertices)\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \_vertices\ =\ vertices;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_object_aadf131c82a2de85f06bd1b6afc4dc0ab}{setNormals}}(\textcolor{keyword}{const}\ std::vector<Math::Vector3D>\ \&normals)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \_normals\ =\ normals;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_object_a332ae013dc6a6b7c753be8b3aa23e5d3}{setFaces}}(\textcolor{keyword}{const}\ std::vector<Face>\ \&faces)\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \_faces\ =\ faces;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{class_raytracer_1_1_object_a327264ef803e69d5e185d08f132eb2cc}{getObjFile}}()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_obj\_file;\}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Math::Point3D>\&\ \mbox{\hyperlink{class_raytracer_1_1_object_a95fca50bb9a0738876082dfdcbd36851}{getVertices}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_vertices;\ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Math::Vector3D>\&\ \mbox{\hyperlink{class_raytracer_1_1_object_a44910a3c1faa17aed1b456fd56096b75}{getNormals}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_normals;\ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Face>\&\ \mbox{\hyperlink{class_raytracer_1_1_object_a9419833df52141b601e20462e397ddc6}{getFaces}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_faces;\ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ Mtl>\&\ \mbox{\hyperlink{class_raytracer_1_1_object_a12fab243ef129d6bc6bb01ed8bab7c24}{getMaterials}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_materials;\ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_object_aa00852e147c7f54e96f9b8994cb9b034}{getNormal}}(}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&hitPoint)\textcolor{keyword}{\ const\ override\ }\{(void)hitPoint;\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}(0,\ 0,\ 0);\};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ std::string\ \_obj\_file;\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ std::vector<Math::Point3D>\ \_vertices;\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ std::vector<Math::Vector3D>\ \_normals;\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ std::vector<Face>\ \_faces;\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ std::unordered\_map<std::string,\ Mtl>\ \_materials;\ }
+\DoxyCodeLine{00146\ \ \ \};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

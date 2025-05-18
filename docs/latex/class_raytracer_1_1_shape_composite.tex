@@ -1,0 +1,212 @@
+\doxysection{Raytracer\+::Shape\+Composite Class Reference}
+\hypertarget{class_raytracer_1_1_shape_composite}{}\label{class_raytracer_1_1_shape_composite}\index{Raytracer::ShapeComposite@{Raytracer::ShapeComposite}}
+
+
+A composite shape that groups multiple \doxylink{class_raytracer_1_1_i_shape}{IShape} objects.  
+
+
+
+
+{\ttfamily \#include $<$Shape\+Composite.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Shape\+Composite\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_shape_composite}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_shape_composite_a391db69c75c234a55428e505ebb726d2}{Shape\+Composite}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_shape_composite_aeb7d1db4398865e62499897f5ee85b13}{add\+Shape}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Adds a shape to the composite. \end{DoxyCompactList}\item 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_raytracer_1_1_shape_composite_a6fbedbcad83e7377a8f389ae64d20af2}{hits}} (const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&ray) const override
+\begin{DoxyCompactList}\small\item\em Calculates the closest intersection of a ray with any shape in the composite. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_shape_composite_a9bf41d74a7e460037135ad8695be1e76}{get\+Normal}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&point) const override
+\begin{DoxyCompactList}\small\item\em Gets the normal vector at a given point. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} $>$ $>$ \& \mbox{\hyperlink{class_raytracer_1_1_shape_composite_ae5edcd56dea595ac71aebad742300f36}{get\+Shapes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the collection of shapes in this composite. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_shape_composite_ac0819d3725e4f8c680e8315016d6deed}{translate}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&offset) override
+\begin{DoxyCompactList}\small\item\em Translates all shapes within the composite by a given offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_shape_a87698328be4838861212c14a88d6ac86}{\texorpdfstring{$\sim$}{\string~}\+AShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual default destructor for \doxylink{class_raytracer_1_1_a_shape}{AShape}. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0805f80c768f1d502855ee4583f0f797}{get\+Center}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the center point of the shape. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_aee2fcc92765a6840d4d7a98a32d970f6}{get\+Color}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_ad02fb2970274736b4e58b3f466ccbaf6}{get\+Shininess}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a896c18dcd8b4444096414510eaf1b2cb}{get\+Material}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the material of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a65411eb4bfa441711aaf30a04b2c4db2}{set\+Center}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center) override
+\begin{DoxyCompactList}\small\item\em Sets the center point of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a70c67ada6ccb5cf555fb8bfe38765e5d}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color) override
+\begin{DoxyCompactList}\small\item\em Sets the color of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a23740f1a2e4d6fcf940a74bf6cdf7cf9}{set\+Shininess}} (double shininess) override
+\begin{DoxyCompactList}\small\item\em Sets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0a3231a8d472bb38e57ac84e516b2404}{set\+Material}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ material) override
+\begin{DoxyCompactList}\small\item\em Sets the material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c}{\texorpdfstring{$\sim$}{\string~}\+IShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\+\_\+center}}
+\begin{DoxyCompactList}\small\item\em The center point of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em The color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_a75e5b8bb759f8deaf7c6fecb87c34154}{\+\_\+shininess}} = 32.
+\begin{DoxyCompactList}\small\item\em The shininess property for lighting calculations. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_aa22e131bd6c201739e01a048a4b603ed}{\+\_\+material}}
+\begin{DoxyCompactList}\small\item\em The material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A composite shape that groups multiple \doxylink{class_raytracer_1_1_i_shape}{IShape} objects. 
+
+This class inherits from \doxylink{class_raytracer_1_1_a_shape}{AShape} and allows treating a collection of shapes as a single entity. It delegates operations like ray intersection testing and transformations to its child shapes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_shape_composite_a391db69c75c234a55428e505ebb726d2}\index{Raytracer::ShapeComposite@{Raytracer::ShapeComposite}!ShapeComposite@{ShapeComposite}}
+\index{ShapeComposite@{ShapeComposite}!Raytracer::ShapeComposite@{Raytracer::ShapeComposite}}
+\doxysubsubsection{\texorpdfstring{ShapeComposite()}{ShapeComposite()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_shape_composite_a391db69c75c234a55428e505ebb726d2} 
+Raytracer\+::\+Shape\+Composite\+::\+Shape\+Composite (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_shape_composite}{Shape\+Composite}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_shape_composite_aeb7d1db4398865e62499897f5ee85b13}\index{Raytracer::ShapeComposite@{Raytracer::ShapeComposite}!addShape@{addShape}}
+\index{addShape@{addShape}!Raytracer::ShapeComposite@{Raytracer::ShapeComposite}}
+\doxysubsubsection{\texorpdfstring{addShape()}{addShape()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_shape_composite_aeb7d1db4398865e62499897f5ee85b13} 
+void Raytracer\+::\+Shape\+Composite\+::add\+Shape (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} $>$ \&}]{shape}{}\end{DoxyParamCaption})}
+
+
+
+Adds a shape to the composite. 
+
+Adds a shape to the composite collection.
+
+
+\begin{DoxyParams}{Parameters}
+{\em shape} & A shared pointer to the \doxylink{class_raytracer_1_1_i_shape}{IShape} object to add.\\
+\hline
+{\em shape} & A shared pointer to the \doxylink{class_raytracer_1_1_i_shape}{IShape} object to be added. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_shape_composite_a9bf41d74a7e460037135ad8695be1e76}\index{Raytracer::ShapeComposite@{Raytracer::ShapeComposite}!getNormal@{getNormal}}
+\index{getNormal@{getNormal}!Raytracer::ShapeComposite@{Raytracer::ShapeComposite}}
+\doxysubsubsection{\texorpdfstring{getNormal()}{getNormal()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_shape_composite_a9bf41d74a7e460037135ad8695be1e76} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Shape\+Composite\+::get\+Normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{point}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the normal vector at a given point. 
+
+\begin{DoxyNote}{Note}
+This implementation is a placeholder and returns a zero vector. A proper implementation would require identifying the specific child shape that was hit and calling its get\+Normal method. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point on a shape\textquotesingle{}s surface. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The normal vector (currently a zero vector). 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a9cd5451bb98d4f234e00f63bbebbeb75}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_shape_composite_ae5edcd56dea595ac71aebad742300f36}\index{Raytracer::ShapeComposite@{Raytracer::ShapeComposite}!getShapes@{getShapes}}
+\index{getShapes@{getShapes}!Raytracer::ShapeComposite@{Raytracer::ShapeComposite}}
+\doxysubsubsection{\texorpdfstring{getShapes()}{getShapes()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_shape_composite_ae5edcd56dea595ac71aebad742300f36} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_shape}{IShape}} $>$ $>$ \& Raytracer\+::\+Shape\+Composite\+::get\+Shapes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the collection of shapes in this composite. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::vector$<$std\+::shared\+\_\+ptr$<$\+IShape$>$$>$\& A const reference to the vector of child shapes. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_shape_composite_a6fbedbcad83e7377a8f389ae64d20af2}\index{Raytracer::ShapeComposite@{Raytracer::ShapeComposite}!hits@{hits}}
+\index{hits@{hits}!Raytracer::ShapeComposite@{Raytracer::ShapeComposite}}
+\doxysubsubsection{\texorpdfstring{hits()}{hits()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_shape_composite_a6fbedbcad83e7377a8f389ae64d20af2} 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} $>$ Raytracer\+::\+Shape\+Composite\+::hits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&}]{ray}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculates the closest intersection of a ray with any shape in the composite. 
+
+Calculates the closest intersection of a ray with the shapes in this composite.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing the distance to the closest hit point, the color of the hit shape, and a pointer to the hit shape itself. If no shape is hit, returns a very large distance and null pointer.
+\end{DoxyReturn}
+Iterates through all shapes in the composite, calls their {\ttfamily hits} method, and returns the information for the closest intersection point found in front of the ray.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing\+:
+\begin{DoxyItemize}
+\item double\+: The distance to the closest hit point (t). If no intersection, this value will be 0.\+0 (or a large initial value if logic changes).
+\item \doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}\+: The color of the shape at the closest hit point. (0,0,0) if no hit.
+\item const IShape\texorpdfstring{$\ast$}{*}\+: A pointer to the shape that was hit. Nullptr if no hit. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a6d57486e381ac8c6481287cf72cbbe42}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_shape_composite_ac0819d3725e4f8c680e8315016d6deed}\index{Raytracer::ShapeComposite@{Raytracer::ShapeComposite}!translate@{translate}}
+\index{translate@{translate}!Raytracer::ShapeComposite@{Raytracer::ShapeComposite}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_shape_composite_ac0819d3725e4f8c680e8315016d6deed} 
+void Raytracer\+::\+Shape\+Composite\+::translate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{offset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Translates all shapes within the composite by a given offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The vector by which to translate the shapes. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_raytracer_1_1_a_shape_a3cd1fe920dd1e687694ea0e2ed0278e9}{Raytracer\+::\+AShape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/shapes/\mbox{\hyperlink{_shape_composite_8hpp}{Shape\+Composite.\+hpp}}\item 
+src/shapes/\mbox{\hyperlink{_shape_composite_8cpp}{Shape\+Composite.\+cpp}}\end{DoxyCompactItemize}

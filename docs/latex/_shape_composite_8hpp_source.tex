@@ -1,0 +1,43 @@
+\doxysection{Shape\+Composite.\+hpp}
+\hypertarget{_shape_composite_8hpp_source}{}\label{_shape_composite_8hpp_source}\index{src/shapes/ShapeComposite.hpp@{src/shapes/ShapeComposite.hpp}}
+\mbox{\hyperlink{_shape_composite_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_shape_8hpp}{AShape.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector3_d_8hpp}{Vector3D.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_shape_composite_a391db69c75c234a55428e505ebb726d2}{ShapeComposite}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_raytracer_1_1_a_shape}{AShape}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_shape_composite_a391db69c75c234a55428e505ebb726d2}{ShapeComposite}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}{addShape}}(\textcolor{keyword}{const}\ std::shared\_ptr<IShape>\ \&shape);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ std::tuple<double,\ Math::Vector3D,\ const\ IShape\ *>\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite_a6fbedbcad83e7377a8f389ae64d20af2}{hits}}(}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer::Ray}}\ \&ray)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite_a9bf41d74a7e460037135ad8695be1e76}{getNormal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_point3_d}{Math::Point3D}}\ \&point)\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ (void)point;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}(0,\ 0,\ 0);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<IShape>>\ \&\mbox{\hyperlink{class_raytracer_1_1_shape_composite_ae5edcd56dea595ac71aebad742300f36}{getShapes}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ shapes;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_shape_composite_ac0819d3725e4f8c680e8315016d6deed}{translate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math::Vector3D}}\ \&offset)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&shape\ :\ shapes)}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ shape-\/>translate(offset);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ std::vector<std::shared\_ptr<IShape>>\ shapes;\ }
+\DoxyCodeLine{00070\ \ \ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

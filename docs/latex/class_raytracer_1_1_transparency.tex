@@ -1,0 +1,147 @@
+\doxysection{Raytracer\+::Transparency Class Reference}
+\hypertarget{class_raytracer_1_1_transparency}{}\label{class_raytracer_1_1_transparency}\index{Raytracer::Transparency@{Raytracer::Transparency}}
+
+
+Represents a transparent material.  
+
+
+
+
+{\ttfamily \#include $<$Transparency.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Transparency\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_transparency}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_transparency_a86e85f24f17787c110d7927d94e8a161}{Transparency}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_transparency}{Transparency} material. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_transparency_a3b07d74adffa99efc3b5f0613d627397}{\texorpdfstring{$\sim$}{\string~}\+Transparency}} () override=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_transparency}{Transparency} material. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_transparency_a0a446a8c3009e212bc5a2b2421763391}{compute\+Material}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&shapes, const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&lights, const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&camera, int depth, \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}} ray\+Color\+Func) const override
+\begin{DoxyCompactList}\small\item\em Computes the color for a transparent material. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_materials}{Raytracer\+::\+AMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741}{AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_materials_a2155c255e7637b3165050a3d12d2957c}{\texorpdfstring{$\sim$}{\string~}\+AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57}{\texorpdfstring{$\sim$}{\string~}\+IMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}
+\begin{DoxyCompactList}\small\item\em Type alias for a function that computes the color of a ray. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a transparent material. 
+
+This class implements a simple transparency effect by blending the object\textquotesingle{}s base color with the color of whatever is behind it, traced by a new ray. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_transparency_a86e85f24f17787c110d7927d94e8a161}\index{Raytracer::Transparency@{Raytracer::Transparency}!Transparency@{Transparency}}
+\index{Transparency@{Transparency}!Raytracer::Transparency@{Raytracer::Transparency}}
+\doxysubsubsection{\texorpdfstring{Transparency()}{Transparency()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_transparency_a86e85f24f17787c110d7927d94e8a161} 
+Raytracer\+::\+Transparency\+::\+Transparency (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_transparency}{Transparency} material. 
+
+\Hypertarget{class_raytracer_1_1_transparency_a3b07d74adffa99efc3b5f0613d627397}\index{Raytracer::Transparency@{Raytracer::Transparency}!````~Transparency@{\texorpdfstring{$\sim$}{\string~}Transparency}}
+\index{````~Transparency@{\texorpdfstring{$\sim$}{\string~}Transparency}!Raytracer::Transparency@{Raytracer::Transparency}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Transparency()}{\string~Transparency()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_transparency_a3b07d74adffa99efc3b5f0613d627397} 
+Raytracer\+::\+Transparency\+::\texorpdfstring{$\sim$}{\string~}\+Transparency (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_transparency}{Transparency} material. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_transparency_a0a446a8c3009e212bc5a2b2421763391}\index{Raytracer::Transparency@{Raytracer::Transparency}!computeMaterial@{computeMaterial}}
+\index{computeMaterial@{computeMaterial}!Raytracer::Transparency@{Raytracer::Transparency}}
+\doxysubsubsection{\texorpdfstring{computeMaterial()}{computeMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_transparency_a0a446a8c3009e212bc5a2b2421763391} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Transparency\+::compute\+Material (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&}]{shapes}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&}]{lights}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&}]{camera}{, }\item[{int}]{depth}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}}]{ray\+Color\+Func}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Computes the color for a transparent material. 
+
+It calculates the color by tracing a new ray in the view direction from the hit point (slightly offset) to find the color of the object behind. This color is then blended with the material\textquotesingle{}s base color based on a fixed transparency factor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The normal vector at the hit point (unused in this simple implementation). \\
+\hline
+{\em view\+Dir} & The direction from the hit point towards the camera. \\
+\hline
+{\em hit\+Point} & The point of intersection on the surface. \\
+\hline
+{\em color} & The base color of the transparent material. \\
+\hline
+{\em shapes} & The composite of all shapes in the scene. \\
+\hline
+{\em lights} & The composite of all lights in the scene. \\
+\hline
+{\em camera} & The scene camera. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing. \\
+\hline
+{\em ray\+Color\+Func} & A callback function to compute the color of a new ray. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The final computed color, blending the material\textquotesingle{}s color with the background color.
+\end{DoxyReturn}
+If the recursion depth is not exhausted, it casts a new ray from the hit point in the direction opposite to the view vector (as if looking through the object). The color obtained from this new ray is then blended with the object\textquotesingle{}s own color using a fixed transparency factor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The surface normal at the hit point (marked as unused). \\
+\hline
+{\em view\+Dir} & The direction from the hit point to the camera. \\
+\hline
+{\em hit\+Point} & The point of intersection on the surface. \\
+\hline
+{\em color} & The base color of the transparent material. \\
+\hline
+{\em shapes} & The collection of shapes in the scene. \\
+\hline
+{\em lights} & The collection of lights in the scene. \\
+\hline
+{\em camera} & The camera used for rendering. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing. \\
+\hline
+{\em ray\+Color\+Func} & A function to compute the color of a ray. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The blended color of the transparent surface. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33}{Raytracer\+::\+AMaterials}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/materials/\mbox{\hyperlink{_transparency_8hpp}{Transparency.\+hpp}}\item 
+src/materials/\mbox{\hyperlink{_transparency_8cpp}{Transparency.\+cpp}}\end{DoxyCompactItemize}

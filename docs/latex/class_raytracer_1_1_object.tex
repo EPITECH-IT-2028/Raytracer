@@ -1,0 +1,336 @@
+\doxysection{Raytracer\+::Object Class Reference}
+\hypertarget{class_raytracer_1_1_object}{}\label{class_raytracer_1_1_object}\index{Raytracer::Object@{Raytracer::Object}}
+
+
+Represents a 3D object loaded from an OBJ file.  
+
+
+
+
+{\ttfamily \#include $<$Object.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_object}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face}{Face}}
+\begin{DoxyCompactList}\small\item\em Structure to represent a face (triangle) of the object. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl}{Mtl}}
+\begin{DoxyCompactList}\small\item\em Structure to hold material properties. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_object_a65d0da165a691b06fc26155f417e32a9}{Object}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_object}{Object}. Initializes an empty object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_object_aba010b4d869d1ed15f86b3b3cda93d00}{\texorpdfstring{$\sim$}{\string~}\+Object}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_object}{Object}. \end{DoxyCompactList}\item 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_raytracer_1_1_object_ad215f4c1dd94f8a68dac5ec11cb5b642}{hits}} (const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&ray) const override
+\begin{DoxyCompactList}\small\item\em Calculates the intersection of a ray with the object\textquotesingle{}s faces. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_object_a1cc89c6f6e83c6b56c12c6eaaf34f299}{set\+Obj\+File}} (const std\+::string \&obj\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Sets the path to the OBJ file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_object_a2e6f63ac00d435a0ab4ae52d1551e81d}{set\+Materials}} (const std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl}{Mtl}} $>$ \&materials)
+\begin{DoxyCompactList}\small\item\em Sets the materials for the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_object_abd7e47f9b76ee766cef8441eec0b0419}{set\+Vertices}} (const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} $>$ \&vertices)
+\begin{DoxyCompactList}\small\item\em Sets the vertices of the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_object_aadf131c82a2de85f06bd1b6afc4dc0ab}{set\+Normals}} (const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} $>$ \&normals)
+\begin{DoxyCompactList}\small\item\em Sets the normals of the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_object_a332ae013dc6a6b7c753be8b3aa23e5d3}{set\+Faces}} (const std\+::vector$<$ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face}{Face}} $>$ \&faces)
+\begin{DoxyCompactList}\small\item\em Sets the faces of the object. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{class_raytracer_1_1_object_a327264ef803e69d5e185d08f132eb2cc}{get\+Obj\+File}} () const
+\begin{DoxyCompactList}\small\item\em Gets the path to the OBJ file. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} $>$ \& \mbox{\hyperlink{class_raytracer_1_1_object_a95fca50bb9a0738876082dfdcbd36851}{get\+Vertices}} () const
+\begin{DoxyCompactList}\small\item\em Gets the vertices of the object. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} $>$ \& \mbox{\hyperlink{class_raytracer_1_1_object_a44910a3c1faa17aed1b456fd56096b75}{get\+Normals}} () const
+\begin{DoxyCompactList}\small\item\em Gets the normals of the object. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face}{Face}} $>$ \& \mbox{\hyperlink{class_raytracer_1_1_object_a9419833df52141b601e20462e397ddc6}{get\+Faces}} () const
+\begin{DoxyCompactList}\small\item\em Gets the faces of the object. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl}{Mtl}} $>$ \& \mbox{\hyperlink{class_raytracer_1_1_object_a12fab243ef129d6bc6bb01ed8bab7c24}{get\+Materials}} () const
+\begin{DoxyCompactList}\small\item\em Gets the materials of the object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_object_aa00852e147c7f54e96f9b8994cb9b034}{get\+Normal}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point) const override
+\begin{DoxyCompactList}\small\item\em Gets the normal vector at a given point on the object\textquotesingle{}s surface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_shape_a87698328be4838861212c14a88d6ac86}{\texorpdfstring{$\sim$}{\string~}\+AShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual default destructor for \doxylink{class_raytracer_1_1_a_shape}{AShape}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a3cd1fe920dd1e687694ea0e2ed0278e9}{translate}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&offset) override
+\begin{DoxyCompactList}\small\item\em Translates the shape by a given offset. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0805f80c768f1d502855ee4583f0f797}{get\+Center}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the center point of the shape. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \& \mbox{\hyperlink{class_raytracer_1_1_a_shape_aee2fcc92765a6840d4d7a98a32d970f6}{get\+Color}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_ad02fb2970274736b4e58b3f466ccbaf6}{get\+Shininess}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_a896c18dcd8b4444096414510eaf1b2cb}{get\+Material}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the material of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a65411eb4bfa441711aaf30a04b2c4db2}{set\+Center}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&center) override
+\begin{DoxyCompactList}\small\item\em Sets the center point of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a70c67ada6ccb5cf555fb8bfe38765e5d}{set\+Color}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color) override
+\begin{DoxyCompactList}\small\item\em Sets the color of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a23740f1a2e4d6fcf940a74bf6cdf7cf9}{set\+Shininess}} (double shininess) override
+\begin{DoxyCompactList}\small\item\em Sets the shininess property of the shape\textquotesingle{}s material. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_a_shape_a0a3231a8d472bb38e57ac84e516b2404}{set\+Material}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ material) override
+\begin{DoxyCompactList}\small\item\em Sets the material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_shape_a56a2da5f45b3243bfb2f4c016b79ef5c}{\texorpdfstring{$\sim$}{\string~}\+IShape}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_raytracer_1_1_a_shape}{Raytracer\+::\+AShape}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_a885e4d6b091f99c5aa6eebadbbab1d3c}{\+\_\+center}}
+\begin{DoxyCompactList}\small\item\em The center point of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_a_shape_afd195d1b1f7e65d658e05d001cee36c3}{\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em The color of the shape. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_raytracer_1_1_a_shape_a75e5b8bb759f8deaf7c6fecb87c34154}{\+\_\+shininess}} = 32.
+\begin{DoxyCompactList}\small\item\em The shininess property for lighting calculations. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_raytracer_1_1_i_materials}{IMaterials}} $>$ \mbox{\hyperlink{class_raytracer_1_1_a_shape_aa22e131bd6c201739e01a048a4b603ed}{\+\_\+material}}
+\begin{DoxyCompactList}\small\item\em The material of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a 3D object loaded from an OBJ file. 
+
+This class inherits from \doxylink{class_raytracer_1_1_a_shape}{AShape} and stores geometry (vertices, faces, normals) and material information loaded from an OBJ file and its associated MTL file. It provides methods for ray intersection testing and retrieving object data. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_object_a65d0da165a691b06fc26155f417e32a9}\index{Raytracer::Object@{Raytracer::Object}!Object@{Object}}
+\index{Object@{Object}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{Object()}{Object()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a65d0da165a691b06fc26155f417e32a9} 
+Raytracer\+::\+Object\+::\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_object}{Object}. Initializes an empty object. 
+
+\Hypertarget{class_raytracer_1_1_object_aba010b4d869d1ed15f86b3b3cda93d00}\index{Raytracer::Object@{Raytracer::Object}!````~Object@{\texorpdfstring{$\sim$}{\string~}Object}}
+\index{````~Object@{\texorpdfstring{$\sim$}{\string~}Object}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Object()}{\string~Object()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_aba010b4d869d1ed15f86b3b3cda93d00} 
+Raytracer\+::\+Object\+::\texorpdfstring{$\sim$}{\string~}\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_object}{Object}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_object_a9419833df52141b601e20462e397ddc6}\index{Raytracer::Object@{Raytracer::Object}!getFaces@{getFaces}}
+\index{getFaces@{getFaces}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{getFaces()}{getFaces()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a9419833df52141b601e20462e397ddc6} 
+const std\+::vector$<$ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face}{Face}} $>$ \& Raytracer\+::\+Object\+::get\+Faces (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the faces of the object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::vector$<$\+Face$>$\& A const reference to the vector of faces. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_object_a12fab243ef129d6bc6bb01ed8bab7c24}\index{Raytracer::Object@{Raytracer::Object}!getMaterials@{getMaterials}}
+\index{getMaterials@{getMaterials}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{getMaterials()}{getMaterials()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a12fab243ef129d6bc6bb01ed8bab7c24} 
+const std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl}{Mtl}} $>$ \& Raytracer\+::\+Object\+::get\+Materials (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the materials of the object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::unordered\+\_\+map$<$std\+::string, Mtl$>$\& A const reference to the map of materials. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_object_aa00852e147c7f54e96f9b8994cb9b034}\index{Raytracer::Object@{Raytracer::Object}!getNormal@{getNormal}}
+\index{getNormal@{getNormal}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{getNormal()}{getNormal()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_aa00852e147c7f54e96f9b8994cb9b034} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Object\+::get\+Normal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the normal vector at a given point on the object\textquotesingle{}s surface. 
+
+\begin{DoxyNote}{Note}
+This implementation is a placeholder and returns a zero vector. A proper implementation would require finding the specific face hit and interpolating vertex normals or using face normals. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em hit\+Point} & The point on the object\textquotesingle{}s surface. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The normal vector (currently a zero vector). 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a9cd5451bb98d4f234e00f63bbebbeb75}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_object_a44910a3c1faa17aed1b456fd56096b75}\index{Raytracer::Object@{Raytracer::Object}!getNormals@{getNormals}}
+\index{getNormals@{getNormals}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{getNormals()}{getNormals()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a44910a3c1faa17aed1b456fd56096b75} 
+const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} $>$ \& Raytracer\+::\+Object\+::get\+Normals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the normals of the object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::vector$<$\+Math\+::\+Vector3\+D$>$\& A const reference to the vector of normals. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_object_a327264ef803e69d5e185d08f132eb2cc}\index{Raytracer::Object@{Raytracer::Object}!getObjFile@{getObjFile}}
+\index{getObjFile@{getObjFile}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{getObjFile()}{getObjFile()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a327264ef803e69d5e185d08f132eb2cc} 
+const std\+::string \& Raytracer\+::\+Object\+::get\+Obj\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the path to the OBJ file. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::string\& A const reference to the OBJ file path. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_object_a95fca50bb9a0738876082dfdcbd36851}\index{Raytracer::Object@{Raytracer::Object}!getVertices@{getVertices}}
+\index{getVertices@{getVertices}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{getVertices()}{getVertices()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a95fca50bb9a0738876082dfdcbd36851} 
+const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} $>$ \& Raytracer\+::\+Object\+::get\+Vertices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the vertices of the object. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::vector$<$\+Math\+::\+Point3\+D$>$\& A const reference to the vector of vertices. 
+\end{DoxyReturn}
+\Hypertarget{class_raytracer_1_1_object_ad215f4c1dd94f8a68dac5ec11cb5b642}\index{Raytracer::Object@{Raytracer::Object}!hits@{hits}}
+\index{hits@{hits}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{hits()}{hits()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_ad215f4c1dd94f8a68dac5ec11cb5b642} 
+std\+::tuple$<$ double, \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}}, const \mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} $>$ Raytracer\+::\+Object\+::hits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_raytracer_1_1_ray}{Raytracer\+::\+Ray}} \&}]{ray}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculates the intersection of a ray with the object\textquotesingle{}s faces. 
+
+Calculates the intersection of a ray with the object\textquotesingle{}s faces (triangles).
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing the distance to the hit point, the color of the hit face\textquotesingle{}s material, and a pointer to this object if hit, otherwise a very large distance and null pointer.
+\end{DoxyReturn}
+Iterates through each face of the object, performing a ray-\/triangle intersection test (Möller–\+Trumbore algorithm) for each. It returns the closest valid intersection.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray} & The ray to test for intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing\+:
+\begin{DoxyItemize}
+\item double\+: The distance from the ray\textquotesingle{}s origin to the closest intersection point (t). Returns 0.\+0 if there is no hit.
+\item \doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}\+: The diffuse color of the material of the hit face. Defaults to white (1,1,1) if material is not found. Returns (0,0,0) if no hit.
+\item const \doxylink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}\texorpdfstring{$\ast$}{*}\+: A pointer to this object. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_shape_a6d57486e381ac8c6481287cf72cbbe42}{Raytracer\+::\+AShape}}.
+
+\Hypertarget{class_raytracer_1_1_object_a332ae013dc6a6b7c753be8b3aa23e5d3}\index{Raytracer::Object@{Raytracer::Object}!setFaces@{setFaces}}
+\index{setFaces@{setFaces}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{setFaces()}{setFaces()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a332ae013dc6a6b7c753be8b3aa23e5d3} 
+void Raytracer\+::\+Object\+::set\+Faces (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_face}{Face}} $>$ \&}]{faces}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the faces of the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em faces} & A vector of \doxylink{struct_raytracer_1_1_object_1_1_face}{Face} structs representing the faces. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_object_a2e6f63ac00d435a0ab4ae52d1551e81d}\index{Raytracer::Object@{Raytracer::Object}!setMaterials@{setMaterials}}
+\index{setMaterials@{setMaterials}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{setMaterials()}{setMaterials()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a2e6f63ac00d435a0ab4ae52d1551e81d} 
+void Raytracer\+::\+Object\+::set\+Materials (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{struct_raytracer_1_1_object_1_1_mtl}{Mtl}} $>$ \&}]{materials}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the materials for the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em materials} & An unordered\+\_\+map of material names to \doxylink{struct_raytracer_1_1_object_1_1_mtl}{Mtl} structs. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_object_aadf131c82a2de85f06bd1b6afc4dc0ab}\index{Raytracer::Object@{Raytracer::Object}!setNormals@{setNormals}}
+\index{setNormals@{setNormals}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{setNormals()}{setNormals()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_aadf131c82a2de85f06bd1b6afc4dc0ab} 
+void Raytracer\+::\+Object\+::set\+Normals (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} $>$ \&}]{normals}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the normals of the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em normals} & A vector of Vector3D representing the normals. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_object_a1cc89c6f6e83c6b56c12c6eaaf34f299}\index{Raytracer::Object@{Raytracer::Object}!setObjFile@{setObjFile}}
+\index{setObjFile@{setObjFile}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{setObjFile()}{setObjFile()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_a1cc89c6f6e83c6b56c12c6eaaf34f299} 
+void Raytracer\+::\+Object\+::set\+Obj\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+\_\+file}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the path to the OBJ file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+\_\+file} & The OBJ file path. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_object_abd7e47f9b76ee766cef8441eec0b0419}\index{Raytracer::Object@{Raytracer::Object}!setVertices@{setVertices}}
+\index{setVertices@{setVertices}!Raytracer::Object@{Raytracer::Object}}
+\doxysubsubsection{\texorpdfstring{setVertices()}{setVertices()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_object_abd7e47f9b76ee766cef8441eec0b0419} 
+void Raytracer\+::\+Object\+::set\+Vertices (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} $>$ \&}]{vertices}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the vertices of the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & A vector of Point3D representing the vertices. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/shapes/\mbox{\hyperlink{_object_8hpp}{Object.\+hpp}}\item 
+src/shapes/\mbox{\hyperlink{_object_8cpp}{Object.\+cpp}}\end{DoxyCompactItemize}

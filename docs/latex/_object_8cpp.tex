@@ -1,0 +1,30 @@
+\doxysection{src/shapes/\+Object.cpp File Reference}
+\hypertarget{_object_8cpp}{}\label{_object_8cpp}\index{src/shapes/Object.cpp@{src/shapes/Object.cpp}}
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}Point3\+D.\+hpp"{}}\newline
+{\ttfamily \#include "{}Ray.\+hpp"{}}\newline
+{\ttfamily \#include "{}Vector3\+D.\+hpp"{}}\newline
+{\ttfamily \#include "{}Object.\+hpp"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_object_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}{add\+Shape}} ()
+\begin{DoxyCompactList}\small\item\em Factory function to create a new Object instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_object_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}\index{Object.cpp@{Object.cpp}!addShape@{addShape}}
+\index{addShape@{addShape}!Object.cpp@{Object.cpp}}
+\doxysubsubsection{\texorpdfstring{addShape()}{addShape()}}
+{\footnotesize\ttfamily \label{_object_8cpp_a30e8b9aed42268c2a95c4a7637e32efa} 
+\mbox{\hyperlink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}} \texorpdfstring{$\ast$}{*} add\+Shape (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Factory function to create a new Object instance. 
+
+This function is typically used by a plugin system to instantiate shape objects that are loaded from OBJ files. \begin{DoxyReturn}{Returns}
+\doxylink{class_raytracer_1_1_i_shape}{Raytracer\+::\+IShape}\texorpdfstring{$\ast$}{*} A pointer to the newly created Object, or nullptr on failure. 
+\end{DoxyReturn}

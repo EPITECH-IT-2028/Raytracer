@@ -1,0 +1,147 @@
+\doxysection{Raytracer\+::Reflections Class Reference}
+\hypertarget{class_raytracer_1_1_reflections}{}\label{class_raytracer_1_1_reflections}\index{Raytracer::Reflections@{Raytracer::Reflections}}
+
+
+Represents a reflective material (e.\+g., mirror).  
+
+
+
+
+{\ttfamily \#include $<$Reflections.\+hpp$>$}
+
+Inheritance diagram for Raytracer\+::Reflections\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_raytracer_1_1_reflections}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_reflections_a76c9b62d831111b451fe41121983d470}{Reflections}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_reflections}{Reflections} material. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_reflections_a841902ee64514ee6f9fd04ad916698be}{\texorpdfstring{$\sim$}{\string~}\+Reflections}} () override=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_reflections}{Reflections} material. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \mbox{\hyperlink{class_raytracer_1_1_reflections_ae4d917ce118acbc0505e4b0cd07f5715}{compute\+Material}} (const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&normal, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&view\+Dir, const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&hit\+Point, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&color, const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&shapes, const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&lights, const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&camera, int depth, \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}} ray\+Color\+Func) const override
+\begin{DoxyCompactList}\small\item\em Computes the color for a reflective material. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_a_materials}{Raytracer\+::\+AMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_a_materials_a8d09ebaff68a9dfb3b8580b9aa982741}{AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_a_materials_a2155c255e7637b3165050a3d12d2957c}{\texorpdfstring{$\sim$}{\string~}\+AMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Default virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_raytracer_1_1_i_materials_a3bdf9f46e954544a31f4d92ecabd5a57}{\texorpdfstring{$\sim$}{\string~}\+IMaterials}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}}}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}
+\begin{DoxyCompactList}\small\item\em Type alias for a function that computes the color of a ray. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a reflective material (e.\+g., mirror). 
+
+This class implements perfect reflection. The color of the material is determined by tracing a new ray in the reflection direction and blending its result with the material\textquotesingle{}s base color. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_reflections_a76c9b62d831111b451fe41121983d470}\index{Raytracer::Reflections@{Raytracer::Reflections}!Reflections@{Reflections}}
+\index{Reflections@{Reflections}!Raytracer::Reflections@{Raytracer::Reflections}}
+\doxysubsubsection{\texorpdfstring{Reflections()}{Reflections()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_reflections_a76c9b62d831111b451fe41121983d470} 
+Raytracer\+::\+Reflections\+::\+Reflections (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_reflections}{Reflections} material. 
+
+\Hypertarget{class_raytracer_1_1_reflections_a841902ee64514ee6f9fd04ad916698be}\index{Raytracer::Reflections@{Raytracer::Reflections}!````~Reflections@{\texorpdfstring{$\sim$}{\string~}Reflections}}
+\index{````~Reflections@{\texorpdfstring{$\sim$}{\string~}Reflections}!Raytracer::Reflections@{Raytracer::Reflections}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Reflections()}{\string~Reflections()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_reflections_a841902ee64514ee6f9fd04ad916698be} 
+Raytracer\+::\+Reflections\+::\texorpdfstring{$\sim$}{\string~}\+Reflections (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_reflections}{Reflections} material. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_reflections_ae4d917ce118acbc0505e4b0cd07f5715}\index{Raytracer::Reflections@{Raytracer::Reflections}!computeMaterial@{computeMaterial}}
+\index{computeMaterial@{computeMaterial}!Raytracer::Reflections@{Raytracer::Reflections}}
+\doxysubsubsection{\texorpdfstring{computeMaterial()}{computeMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_reflections_ae4d917ce118acbc0505e4b0cd07f5715} 
+\mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} Raytracer\+::\+Reflections\+::compute\+Material (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{normal}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{view\+Dir}{, }\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{hit\+Point}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{color}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_shape_composite}{Raytracer\+::\+Shape\+Composite}} \&}]{shapes}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_light_composite}{Raytracer\+::\+Light\+Composite}} \&}]{lights}{, }\item[{const \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer\+::\+Camera}} \&}]{camera}{, }\item[{int}]{depth}{, }\item[{\mbox{\hyperlink{class_raytracer_1_1_i_materials_a121637a74f3daaf1e249d21fd689a86e}{Ray\+Color\+Func}}}]{ray\+Color\+Func}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Computes the color for a reflective material. 
+
+Calculates the reflection direction based on the surface normal and view direction. A new ray is traced in this reflection direction, and its color is blended with the material\textquotesingle{}s base color using a fixed reflectivity factor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The normal vector at the hit point. \\
+\hline
+{\em view\+Dir} & The direction from the hit point towards the camera. \\
+\hline
+{\em hit\+Point} & The point of intersection on the surface. \\
+\hline
+{\em color} & The base color of the reflective material. \\
+\hline
+{\em shapes} & The composite of all shapes in the scene. \\
+\hline
+{\em lights} & The composite of all lights in the scene. \\
+\hline
+{\em camera} & The scene camera. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing. \\
+\hline
+{\em ray\+Color\+Func} & A callback function to compute the color of a new ray. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The final computed color, blending the material\textquotesingle{}s color with the reflected color.
+\end{DoxyReturn}
+If the recursion depth is not exhausted, it calculates the reflection direction and casts a new ray from the hit point (slightly offset) in that direction. The color obtained from this reflected ray is then blended with the object\textquotesingle{}s own color using a fixed reflectivity factor (0.\+9 for reflected, 0.\+1 for base color).
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal} & The surface normal at the hit point. \\
+\hline
+{\em view\+Dir} & The direction from the hit point to the camera. \\
+\hline
+{\em hit\+Point} & The point of intersection on the surface. \\
+\hline
+{\em color} & The base color of the reflective material. \\
+\hline
+{\em shapes} & The collection of shapes in the scene. \\
+\hline
+{\em lights} & The collection of lights in the scene. \\
+\hline
+{\em camera} & The camera used for rendering. \\
+\hline
+{\em depth} & The current recursion depth for ray tracing. \\
+\hline
+{\em ray\+Color\+Func} & A function to compute the color of a ray. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_vector3_d}{Math\+::\+Vector3D} The blended color of the reflective surface. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_raytracer_1_1_a_materials_a0cfd3700ca06ad1171ba62934f57ce33}{Raytracer\+::\+AMaterials}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/materials/\mbox{\hyperlink{_reflections_8hpp}{Reflections.\+hpp}}\item 
+src/materials/\mbox{\hyperlink{_reflections_8cpp}{Reflections.\+cpp}}\end{DoxyCompactItemize}

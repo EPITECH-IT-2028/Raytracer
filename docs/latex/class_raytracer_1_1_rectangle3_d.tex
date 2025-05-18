@@ -1,0 +1,112 @@
+\doxysection{Raytracer\+::Rectangle3D Class Reference}
+\hypertarget{class_raytracer_1_1_rectangle3_d}{}\label{class_raytracer_1_1_rectangle3_d}\index{Raytracer::Rectangle3D@{Raytracer::Rectangle3D}}
+
+
+Represents a 3D rectangle defined by an origin and two side vectors.  
+
+
+
+
+{\ttfamily \#include $<$Rectangle.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_a20a7680fac5c1505f72d6f39376caf90}{Rectangle3D}} (const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&origin, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&bottom\+\_\+side, const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&left\+\_\+side)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_raytracer_1_1_rectangle3_d}{Rectangle3D} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_a4072027da44df8ea6c93fbaa35e63d0c}{Rectangle3D}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}. Initializes a 2x2 rectangle in the XY plane, centered around (-\/0,-\/0,-\/1) if origin is (-\/1,-\/1,-\/1). More precisely, it creates a rectangle from (-\/1,-\/1,-\/1) to (1,1,-\/1) if left\+\_\+side was (0,2,0) and bottom\+\_\+side was (2,0,0). The default values define a rectangle from P0=(-\/1,-\/1,-\/1) (origin) to P1=P0+bottom\+\_\+side = (1,-\/1,-\/1) to P2=P0+left\+\_\+side = (-\/1,1,-\/1) to P3=P0+bottom\+\_\+side+left\+\_\+side = (1,1,-\/1). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_a1fbca94fbf81bf4fb948dd03191be53c}{\texorpdfstring{$\sim$}{\string~}\+Rectangle3D}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor for \doxylink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \mbox{\hyperlink{class_raytracer_1_1_rectangle3_d_af67daad85469d9e0e47def1f7ceed1d7}{point\+At}} (double u, double v) const
+\begin{DoxyCompactList}\small\item\em Calculates a point on the rectangle based on parametric coordinates u and v. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a 3D rectangle defined by an origin and two side vectors. 
+
+This class can be used to define a rectangular area in 3D space, for example, as a screen plane for a camera or a simple rectangular light source. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_rectangle3_d_a20a7680fac5c1505f72d6f39376caf90}\index{Raytracer::Rectangle3D@{Raytracer::Rectangle3D}!Rectangle3D@{Rectangle3D}}
+\index{Rectangle3D@{Rectangle3D}!Raytracer::Rectangle3D@{Raytracer::Rectangle3D}}
+\doxysubsubsection{\texorpdfstring{Rectangle3D()}{Rectangle3D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_rectangle3_d_a20a7680fac5c1505f72d6f39376caf90} 
+Raytracer\+::\+Rectangle3\+D\+::\+Rectangle3D (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} \&}]{origin}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{bottom\+\_\+side}{, }\item[{const \mbox{\hyperlink{class_math_1_1_vector3_d}{Math\+::\+Vector3D}} \&}]{left\+\_\+side}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{class_raytracer_1_1_rectangle3_d}{Rectangle3D} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & The origin point of the rectangle (e.\+g., bottom-\/left corner). \\
+\hline
+{\em bottom\+\_\+side} & A vector representing the direction and length of the bottom side. \\
+\hline
+{\em left\+\_\+side} & A vector representing the direction and length of the left side. Typically, bottom\+\_\+side and left\+\_\+side are perpendicular. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_rectangle3_d_a4072027da44df8ea6c93fbaa35e63d0c}\index{Raytracer::Rectangle3D@{Raytracer::Rectangle3D}!Rectangle3D@{Rectangle3D}}
+\index{Rectangle3D@{Rectangle3D}!Raytracer::Rectangle3D@{Raytracer::Rectangle3D}}
+\doxysubsubsection{\texorpdfstring{Rectangle3D()}{Rectangle3D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_rectangle3_d_a4072027da44df8ea6c93fbaa35e63d0c} 
+Raytracer\+::\+Rectangle3\+D\+::\+Rectangle3D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor for \doxylink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}. Initializes a 2x2 rectangle in the XY plane, centered around (-\/0,-\/0,-\/1) if origin is (-\/1,-\/1,-\/1). More precisely, it creates a rectangle from (-\/1,-\/1,-\/1) to (1,1,-\/1) if left\+\_\+side was (0,2,0) and bottom\+\_\+side was (2,0,0). The default values define a rectangle from P0=(-\/1,-\/1,-\/1) (origin) to P1=P0+bottom\+\_\+side = (1,-\/1,-\/1) to P2=P0+left\+\_\+side = (-\/1,1,-\/1) to P3=P0+bottom\+\_\+side+left\+\_\+side = (1,1,-\/1). 
+
+\Hypertarget{class_raytracer_1_1_rectangle3_d_a1fbca94fbf81bf4fb948dd03191be53c}\index{Raytracer::Rectangle3D@{Raytracer::Rectangle3D}!````~Rectangle3D@{\texorpdfstring{$\sim$}{\string~}Rectangle3D}}
+\index{````~Rectangle3D@{\texorpdfstring{$\sim$}{\string~}Rectangle3D}!Raytracer::Rectangle3D@{Raytracer::Rectangle3D}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Rectangle3D()}{\string~Rectangle3D()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_rectangle3_d_a1fbca94fbf81bf4fb948dd03191be53c} 
+Raytracer\+::\+Rectangle3\+D\+::\texorpdfstring{$\sim$}{\string~}\+Rectangle3D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor for \doxylink{class_raytracer_1_1_rectangle3_d}{Rectangle3D}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_rectangle3_d_af67daad85469d9e0e47def1f7ceed1d7}\index{Raytracer::Rectangle3D@{Raytracer::Rectangle3D}!pointAt@{pointAt}}
+\index{pointAt@{pointAt}!Raytracer::Rectangle3D@{Raytracer::Rectangle3D}}
+\doxysubsubsection{\texorpdfstring{pointAt()}{pointAt()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_rectangle3_d_af67daad85469d9e0e47def1f7ceed1d7} 
+\mbox{\hyperlink{class_math_1_1_point3_d}{Math\+::\+Point3D}} Raytracer\+::\+Rectangle3\+D\+::point\+At (\begin{DoxyParamCaption}\item[{double}]{u}{, }\item[{double}]{v}{}\end{DoxyParamCaption}) const}
+
+
+
+Calculates a point on the rectangle based on parametric coordinates u and v. 
+
+Calculates a point on the surface of the 3D rectangle.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & The parametric coordinate along the bottom\+\_\+side (typically in \mbox{[}0, 1\mbox{]}). \\
+\hline
+{\em v} & The parametric coordinate along the left\+\_\+side (typically in \mbox{[}0, 1\mbox{]}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_point3_d}{Math\+::\+Point3D} The calculated point on the rectangle.
+\end{DoxyReturn}
+The point is determined by parametric coordinates u and v, which scale the {\ttfamily \+\_\+bottom\+\_\+side} and {\ttfamily \+\_\+left\+\_\+side} vectors respectively. P(u,v) = origin + u \texorpdfstring{$\ast$}{*} bottom\+\_\+side + v \texorpdfstring{$\ast$}{*} left\+\_\+side.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & Parameter along the {\ttfamily \+\_\+bottom\+\_\+side} vector (typically \mbox{[}0,1\mbox{]}). \\
+\hline
+{\em v} & Parameter along the {\ttfamily \+\_\+left\+\_\+side} vector (typically \mbox{[}0,1\mbox{]}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{class_math_1_1_point3_d}{Math\+::\+Point3D} The point on the rectangle corresponding to u and v. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_rectangle_8hpp}{Rectangle.\+hpp}}\item 
+src/\mbox{\hyperlink{_rectangle_8cpp}{Rectangle.\+cpp}}\end{DoxyCompactItemize}

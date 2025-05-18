@@ -1,0 +1,207 @@
+\doxysection{Raytracer\+::Factory Class Reference}
+\hypertarget{class_raytracer_1_1_factory}{}\label{class_raytracer_1_1_factory}\index{Raytracer::Factory@{Raytracer::Factory}}
+
+
+A factory class for creating shapes, lights, and materials.  
+
+
+
+
+{\ttfamily \#include $<$Factory.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_factory_ae563578d2297594f99f0b54bd0d25d3b}{Factory}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_raytracer_1_1_factory_a87fa984c3c3c2263a74a6b1306a5dc15}{\texorpdfstring{$\sim$}{\string~}\+Factory}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{class_raytracer_1_1_factory_a6499fab009d9f9d97d66f362908c3fa2}{register\+Shape}} (const std\+::string \&name, std\+::function$<$ T \texorpdfstring{$\ast$}{*}()$>$ \mbox{\hyperlink{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}{add\+Shape}})
+\begin{DoxyCompactList}\small\item\em Registers a shape creation function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{class_raytracer_1_1_factory_a8f263b9106ddad348a26a284b0353669}{register\+Light}} (const std\+::string \&name, std\+::function$<$ T \texorpdfstring{$\ast$}{*}()$>$ \mbox{\hyperlink{_ambient_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41}{add\+Light}})
+\begin{DoxyCompactList}\small\item\em Registers a light creation function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{class_raytracer_1_1_factory_a9635debaee77c84939ff1547d37b4001}{register\+Material}} (const std\+::string \&name, std\+::function$<$ T \texorpdfstring{$\ast$}{*}()$>$ \mbox{\hyperlink{_reflections_8cpp_a48272a1881eb3d0abcf355899db4ca9c}{add\+Material}})
+\begin{DoxyCompactList}\small\item\em Registers a material creation function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{class_raytracer_1_1_factory_a9f546a3dc0dec1cbbbe641849da4eb11}{create}} (const std\+::string \&type)
+\begin{DoxyCompactList}\small\item\em Creates an instance of a registered type (shape, light, or material). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_raytracer_1_1_factory_ae9f9d9a91da1a698dce1531de799cc47}{init\+Factories}} (const std\+::vector$<$ std\+::string $>$ \&plugins)
+\begin{DoxyCompactList}\small\item\em Initializes factories by loading creators from plugins. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A factory class for creating shapes, lights, and materials. 
+
+This factory uses registered creation functions (typically from plugins or compiled-\/in types) to instantiate objects based on a string identifier. It supports \doxylink{class_raytracer_1_1_i_shape}{IShape}, \doxylink{class_raytracer_1_1_i_light}{ILight}, and \doxylink{class_raytracer_1_1_i_materials}{IMaterials} types. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_raytracer_1_1_factory_ae563578d2297594f99f0b54bd0d25d3b}\index{Raytracer::Factory@{Raytracer::Factory}!Factory@{Factory}}
+\index{Factory@{Factory}!Raytracer::Factory@{Raytracer::Factory}}
+\doxysubsubsection{\texorpdfstring{Factory()}{Factory()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_factory_ae563578d2297594f99f0b54bd0d25d3b} 
+Raytracer\+::\+Factory\+::\+Factory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{class_raytracer_1_1_factory_a87fa984c3c3c2263a74a6b1306a5dc15}\index{Raytracer::Factory@{Raytracer::Factory}!````~Factory@{\texorpdfstring{$\sim$}{\string~}Factory}}
+\index{````~Factory@{\texorpdfstring{$\sim$}{\string~}Factory}!Raytracer::Factory@{Raytracer::Factory}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Factory()}{\string~Factory()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_factory_a87fa984c3c3c2263a74a6b1306a5dc15} 
+Raytracer\+::\+Factory\+::\texorpdfstring{$\sim$}{\string~}\+Factory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_raytracer_1_1_factory_a9f546a3dc0dec1cbbbe641849da4eb11}\index{Raytracer::Factory@{Raytracer::Factory}!create@{create}}
+\index{create@{create}!Raytracer::Factory@{Raytracer::Factory}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_factory_a9f546a3dc0dec1cbbbe641849da4eb11} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ Raytracer\+::\+Factory\+::create (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an instance of a registered type (shape, light, or material). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The base type of the object to create (\doxylink{class_raytracer_1_1_i_shape}{IShape}, \doxylink{class_raytracer_1_1_i_light}{ILight}, or \doxylink{class_raytracer_1_1_i_materials}{IMaterials}). \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The string identifier of the concrete type to create. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+T$>$ A shared pointer to the created object. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the type is not registered or T is not a supported base type. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_factory_ae9f9d9a91da1a698dce1531de799cc47}\index{Raytracer::Factory@{Raytracer::Factory}!initFactories@{initFactories}}
+\index{initFactories@{initFactories}!Raytracer::Factory@{Raytracer::Factory}}
+\doxysubsubsection{\texorpdfstring{initFactories()}{initFactories()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_factory_ae9f9d9a91da1a698dce1531de799cc47} 
+void Raytracer\+::\+Factory\+::init\+Factories (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{plugins}{}\end{DoxyParamCaption})}
+
+
+
+Initializes factories by loading creators from plugins. 
+
+Initializes the factories by loading and registering creators from plugins.
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugins} & A list of plugin file paths to load.\\
+\hline
+\end{DoxyParams}
+This method iterates over a list of plugin file paths (shared libraries, e.\+g., .so files). For each plugin, it attempts to load the library and find specific factory functions\+:
+\begin{DoxyItemize}
+\item "{}add\+Shape"{}\+: For creating \doxylink{class_raytracer_1_1_i_shape}{IShape} objects.
+\item "{}add\+Light"{}\+: For creating \doxylink{class_raytracer_1_1_i_light}{ILight} objects.
+\item "{}add\+Material"{}\+: For creating \doxylink{class_raytracer_1_1_i_materials}{IMaterials} objects. If a factory function is found, it\textquotesingle{}s registered with the corresponding factory map using the plugin\textquotesingle{}s filename (without extension) as the key.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em plugins} & A vector of strings, where each string is the path to a plugin file. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_raytracer_1_1_factory_a8f263b9106ddad348a26a284b0353669}\index{Raytracer::Factory@{Raytracer::Factory}!registerLight@{registerLight}}
+\index{registerLight@{registerLight}!Raytracer::Factory@{Raytracer::Factory}}
+\doxysubsubsection{\texorpdfstring{registerLight()}{registerLight()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_factory_a8f263b9106ddad348a26a284b0353669} 
+template$<$typename T$>$ \\
+void Raytracer\+::\+Factory\+::register\+Light (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::function$<$ T \texorpdfstring{$\ast$}{*}()$>$}]{add\+Light}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Registers a light creation function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The concrete light type, must derive from \doxylink{class_raytracer_1_1_i_light}{ILight}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The string identifier for this light type. \\
+\hline
+{\em add\+Light} & A function pointer or lambda that creates an instance of T. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if T does not derive from \doxylink{class_raytracer_1_1_i_light}{ILight}. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_factory_a9635debaee77c84939ff1547d37b4001}\index{Raytracer::Factory@{Raytracer::Factory}!registerMaterial@{registerMaterial}}
+\index{registerMaterial@{registerMaterial}!Raytracer::Factory@{Raytracer::Factory}}
+\doxysubsubsection{\texorpdfstring{registerMaterial()}{registerMaterial()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_factory_a9635debaee77c84939ff1547d37b4001} 
+template$<$typename T$>$ \\
+void Raytracer\+::\+Factory\+::register\+Material (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::function$<$ T \texorpdfstring{$\ast$}{*}()$>$}]{add\+Material}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Registers a material creation function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The concrete material type, must derive from \doxylink{class_raytracer_1_1_i_materials}{IMaterials}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The string identifier for this material type. \\
+\hline
+{\em add\+Material} & A function pointer or lambda that creates an instance of T. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if T does not derive from \doxylink{class_raytracer_1_1_i_materials}{IMaterials}. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_raytracer_1_1_factory_a6499fab009d9f9d97d66f362908c3fa2}\index{Raytracer::Factory@{Raytracer::Factory}!registerShape@{registerShape}}
+\index{registerShape@{registerShape}!Raytracer::Factory@{Raytracer::Factory}}
+\doxysubsubsection{\texorpdfstring{registerShape()}{registerShape()}}
+{\footnotesize\ttfamily \label{class_raytracer_1_1_factory_a6499fab009d9f9d97d66f362908c3fa2} 
+template$<$typename T$>$ \\
+void Raytracer\+::\+Factory\+::register\+Shape (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::function$<$ T \texorpdfstring{$\ast$}{*}()$>$}]{add\+Shape}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Registers a shape creation function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The concrete shape type, must derive from \doxylink{class_raytracer_1_1_i_shape}{IShape}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The string identifier for this shape type. \\
+\hline
+{\em add\+Shape} & A function pointer or lambda that creates an instance of T. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if T does not derive from \doxylink{class_raytracer_1_1_i_shape}{IShape}. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_factory_8hpp}{Factory.\+hpp}}\item 
+src/\mbox{\hyperlink{_factory_8cpp}{Factory.\+cpp}}\end{DoxyCompactItemize}

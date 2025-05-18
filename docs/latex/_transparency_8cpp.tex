@@ -1,0 +1,29 @@
+\doxysection{src/materials/\+Transparency.cpp File Reference}
+\hypertarget{_transparency_8cpp}{}\label{_transparency_8cpp}\index{src/materials/Transparency.cpp@{src/materials/Transparency.cpp}}
+{\ttfamily \#include "{}Transparency.\+hpp"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include "{}Camera.\+hpp"{}}\newline
+{\ttfamily \#include "{}Light\+Composite.\+hpp"{}}\newline
+{\ttfamily \#include "{}Shape\+Composite.\+hpp"{}}\newline
+{\ttfamily \#include "{}Vector3\+D.\+hpp"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_transparency_8cpp_a48272a1881eb3d0abcf355899db4ca9c}{add\+Material}} ()
+\begin{DoxyCompactList}\small\item\em Factory function to create a new Transparency material instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_transparency_8cpp_a48272a1881eb3d0abcf355899db4ca9c}\index{Transparency.cpp@{Transparency.cpp}!addMaterial@{addMaterial}}
+\index{addMaterial@{addMaterial}!Transparency.cpp@{Transparency.cpp}}
+\doxysubsubsection{\texorpdfstring{addMaterial()}{addMaterial()}}
+{\footnotesize\ttfamily \label{_transparency_8cpp_a48272a1881eb3d0abcf355899db4ca9c} 
+\mbox{\hyperlink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}} \texorpdfstring{$\ast$}{*} add\+Material (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Factory function to create a new Transparency material instance. 
+
+This function is typically used by a plugin system to instantiate material objects. \begin{DoxyReturn}{Returns}
+\doxylink{class_raytracer_1_1_i_materials}{Raytracer\+::\+IMaterials}\texorpdfstring{$\ast$}{*} A pointer to the newly created Transparency material, or nullptr on failure. 
+\end{DoxyReturn}

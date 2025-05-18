@@ -1,0 +1,102 @@
+\doxysection{Factory.\+hpp}
+\hypertarget{_factory_8hpp_source}{}\label{_factory_8hpp_source}\index{src/Factory.hpp@{src/Factory.hpp}}
+\mbox{\hyperlink{_factory_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_light_8hpp}{ILight.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_shape_8hpp}{IShape.hpp}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_factory_ae563578d2297594f99f0b54bd0d25d3b}{Factory}}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_factory_ae563578d2297594f99f0b54bd0d25d3b}{Factory}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_factory_a87fa984c3c3c2263a74a6b1306a5dc15}{\string~Factory}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_factory_a6499fab009d9f9d97d66f362908c3fa2}{registerShape}}(\textcolor{keyword}{const}\ std::string\&\ name,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T*()>\ \mbox{\hyperlink{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}{addShape}})\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_base\_of\_v<IShape,\ T>)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \_shapeFactories[name]\ =\ [\mbox{\hyperlink{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}{addShape}}]()\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::shared\_ptr<IShape>(\mbox{\hyperlink{_cone_8cpp_a30e8b9aed42268c2a95c4a7637e32efa}{addShape}}());}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}T\ must\ be\ derived\ from\ IShape"{}});}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_factory_a8f263b9106ddad348a26a284b0353669}{registerLight}}(\textcolor{keyword}{const}\ std::string\&\ name,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T*()>\ \mbox{\hyperlink{_ambient_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41}{addLight}})\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_base\_of\_v<ILight,\ T>)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \_lightFactories[name]\ =\ [\mbox{\hyperlink{_ambient_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41}{addLight}}]()\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::shared\_ptr<ILight>(\mbox{\hyperlink{_ambient_light_8cpp_a9b5c5fb2bcdf86cc8a727fb8659d3b41}{addLight}}());}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}T\ must\ be\ derived\ from\ ILight"{}});}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_factory_a9635debaee77c84939ff1547d37b4001}{registerMaterial}}(\textcolor{keyword}{const}\ std::string\&\ name,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T*()>\ \mbox{\hyperlink{_reflections_8cpp_a48272a1881eb3d0abcf355899db4ca9c}{addMaterial}})\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_base\_of\_v<IMaterials,\ T>)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \_materialFactories[name]\ =\ [\mbox{\hyperlink{_reflections_8cpp_a48272a1881eb3d0abcf355899db4ca9c}{addMaterial}}]()\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::shared\_ptr<IMaterials>(\mbox{\hyperlink{_reflections_8cpp_a48272a1881eb3d0abcf355899db4ca9c}{addMaterial}}());}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}T\ must\ be\ derived\ from\ IMaterials"{}});}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{class_raytracer_1_1_factory_a9f546a3dc0dec1cbbbe641849da4eb11}{create}}(\textcolor{keyword}{const}\ std::string\&\ type)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ T\ is\ a\ shape\ type}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_base\_of\_v<IShape,\ T>)\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \_shapeFactories.find(type);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \_shapeFactories.end())\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::static\_pointer\_cast<T>(it-\/>second());}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Shape\ is\ not\ registered"{}});}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ T\ is\ a\ light\ type}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_base\_of\_v<ILight,\ T>)\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \_lightFactories.find(type);}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \_lightFactories.end())\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::static\_pointer\_cast<T>(it-\/>second());}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Light\ is\ not\ registered"{}});}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ T\ is\ a\ material\ type}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_base\_of\_v<IMaterials,\ T>)\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \_materialFactories.find(type);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \_materialFactories.end())\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::static\_pointer\_cast<T>(it-\/>second());}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Material\ is\ not\ registered:\ "{}}\ +\ type);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_factory_ae9f9d9a91da1a698dce1531de799cc47}{initFactories}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ plugins);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ std::map<std::string,\ std::function<std::shared\_ptr<IShape>()>>}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \_shapeFactories;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ std::map<std::string,\ std::function<std::shared\_ptr<ILight>()>>}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \_lightFactories;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ std::map<std::string,\ std::function<std::shared\_ptr<IMaterials>()>>}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \_materialFactories;}
+\DoxyCodeLine{00140\ \ \ \};}
+\DoxyCodeLine{00141\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

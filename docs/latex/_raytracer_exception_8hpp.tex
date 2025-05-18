@@ -1,0 +1,21 @@
+\doxysection{src/exceptions/\+Raytracer\+Exception.hpp File Reference}
+\hypertarget{_raytracer_exception_8hpp}{}\label{_raytracer_exception_8hpp}\index{src/exceptions/RaytracerException.hpp@{src/exceptions/RaytracerException.hpp}}
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_raytracer_1_1_raytracer_error}{Raytracer\+::\+Raytracer\+Error}}
+\begin{DoxyCompactList}\small\item\em Base class for custom exceptions in the \doxylink{namespace_raytracer}{Raytracer} application. Inherits from std\+::runtime\+\_\+error. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_parse_error}{Raytracer\+::\+Parse\+Error}}
+\begin{DoxyCompactList}\small\item\em Exception class for errors occurring during parsing. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_config_error}{Raytracer\+::\+Config\+Error}}
+\begin{DoxyCompactList}\small\item\em Exception class for errors related to configuration file processing. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. Can include file name and line number. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_raytracer_1_1_plugin_error}{Raytracer\+::\+Plugin\+Error}}
+\begin{DoxyCompactList}\small\item\em Exception class for errors related to plugin loading or execution. Inherits from \doxylink{class_raytracer_1_1_raytracer_error}{Raytracer\+Error}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_raytracer}{Raytracer}}
+\begin{DoxyCompactList}\small\item\em Namespace for \doxylink{namespace_raytracer}{Raytracer} specific components. \end{DoxyCompactList}\end{DoxyCompactItemize}

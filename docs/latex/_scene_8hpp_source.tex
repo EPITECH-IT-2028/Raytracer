@@ -1,0 +1,57 @@
+\doxysection{Scene.\+hpp}
+\hypertarget{_scene_8hpp_source}{}\label{_scene_8hpp_source}\index{src/Scene.hpp@{src/Scene.hpp}}
+\mbox{\hyperlink{_scene_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_camera_8hpp}{Camera.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_raytracer}{Raytracer}}\ \{}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_raytracer_1_1_scene_a066bcb737defbe9e8cc1bfbfe4a7d78f}{Scene}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_scene_a066bcb737defbe9e8cc1bfbfe4a7d78f}{Scene}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ std::string\ \&inputFilePath);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_scene_a0f397a7ad05cce8102523c483623b39d}{\string~Scene}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_scene_ab62c172a27d4a24a6926c12993f08077}{render}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_scene_a0b1272b2042c86e8dd9574f9e9d71dcd}{init}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_scene_a8259d2def8d4654e2e0b733528631682}{updateImage}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_scene_abe162102085fd916d56b6adfe7e248dc}{handleInput}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_raytracer_1_1_scene_ae49e7958eb58da3f14331d993e01419d}{parsePlugins}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ createPPMFile();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ writeColor(std::ofstream\ \&file,\ sf::Color\ color);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ createOutputFileName();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ std::string\ \_inputFilePath;\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ std::string\ \_outputFilePath;\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_width;\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_height;\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ sf::RenderWindow\ \_window;\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ sf::Texture\ \_texture;\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ sf::Sprite\ \_sprite;\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ sf::Image\ \_image;\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ std::vector<sf::Color>\ \_framebuffer;\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ std::chrono::time\_point<std::chrono::steady\_clock>\ \_lastMovement;\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_isHighQuality\ =\ \textcolor{keyword}{true};\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \_updateQuality\ =\ 0.5f;\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ std::vector<std::string>\ \_plugins;\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ std::vector<void\ *>\ \_pluginHandles;\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \mbox{\hyperlink{class_raytracer_1_1_camera}{Raytracer::Camera}}\ \_camera;\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ changeCamQuality();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_cameraMoved\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::chrono::duration<float>\ \_qualityUpdateDelay\{0.5f\};\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_userQuit\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00100\ \ \ \};}
+\DoxyCodeLine{00101\ \}\ \ \textcolor{comment}{//\ namespace\ Raytracer}}
+
+\end{DoxyCode}

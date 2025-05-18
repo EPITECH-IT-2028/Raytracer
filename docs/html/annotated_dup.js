@@ -1,0 +1,42 @@
+var annotated_dup =
+[
+    [ "Math", "namespace_math.html", [
+      [ "Point3D", "class_math_1_1_point3_d.html", "class_math_1_1_point3_d" ],
+      [ "Vector3D", "class_math_1_1_vector3_d.html", "class_math_1_1_vector3_d" ]
+    ] ],
+    [ "Raytracer", "namespace_raytracer.html", [
+      [ "ALight", "class_raytracer_1_1_a_light.html", "class_raytracer_1_1_a_light" ],
+      [ "AMaterials", "class_raytracer_1_1_a_materials.html", "class_raytracer_1_1_a_materials" ],
+      [ "AmbientLight", "class_raytracer_1_1_ambient_light.html", "class_raytracer_1_1_ambient_light" ],
+      [ "AShape", "class_raytracer_1_1_a_shape.html", "class_raytracer_1_1_a_shape" ],
+      [ "Camera", "class_raytracer_1_1_camera.html", "class_raytracer_1_1_camera" ],
+      [ "Cone", "class_raytracer_1_1_cone.html", "class_raytracer_1_1_cone" ],
+      [ "ConeInf", "class_raytracer_1_1_cone_inf.html", "class_raytracer_1_1_cone_inf" ],
+      [ "ConfigError", "class_raytracer_1_1_config_error.html", "class_raytracer_1_1_config_error" ],
+      [ "Cylinder", "class_raytracer_1_1_cylinder.html", "class_raytracer_1_1_cylinder" ],
+      [ "CylinderInf", "class_raytracer_1_1_cylinder_inf.html", "class_raytracer_1_1_cylinder_inf" ],
+      [ "DirectionalLight", "class_raytracer_1_1_directional_light.html", "class_raytracer_1_1_directional_light" ],
+      [ "Factory", "class_raytracer_1_1_factory.html", "class_raytracer_1_1_factory" ],
+      [ "ILight", "class_raytracer_1_1_i_light.html", "class_raytracer_1_1_i_light" ],
+      [ "IMaterials", "class_raytracer_1_1_i_materials.html", "class_raytracer_1_1_i_materials" ],
+      [ "IShape", "class_raytracer_1_1_i_shape.html", "class_raytracer_1_1_i_shape" ],
+      [ "LightComposite", "class_raytracer_1_1_light_composite.html", "class_raytracer_1_1_light_composite" ],
+      [ "Object", "class_raytracer_1_1_object.html", "class_raytracer_1_1_object" ],
+      [ "ParseError", "class_raytracer_1_1_parse_error.html", "class_raytracer_1_1_parse_error" ],
+      [ "ParserConfigFile", "class_raytracer_1_1_parser_config_file.html", "class_raytracer_1_1_parser_config_file" ],
+      [ "Plane", "class_raytracer_1_1_plane.html", "class_raytracer_1_1_plane" ],
+      [ "PluginError", "class_raytracer_1_1_plugin_error.html", "class_raytracer_1_1_plugin_error" ],
+      [ "PointLight", "class_raytracer_1_1_point_light.html", "class_raytracer_1_1_point_light" ],
+      [ "Ray", "class_raytracer_1_1_ray.html", "class_raytracer_1_1_ray" ],
+      [ "RaytracerError", "class_raytracer_1_1_raytracer_error.html", "class_raytracer_1_1_raytracer_error" ],
+      [ "Rectangle3D", "class_raytracer_1_1_rectangle3_d.html", "class_raytracer_1_1_rectangle3_d" ],
+      [ "Reflections", "class_raytracer_1_1_reflections.html", "class_raytracer_1_1_reflections" ],
+      [ "Refractions", "class_raytracer_1_1_refractions.html", "class_raytracer_1_1_refractions" ],
+      [ "Renderer", "class_raytracer_1_1_renderer.html", "class_raytracer_1_1_renderer" ],
+      [ "Scene", "class_raytracer_1_1_scene.html", "class_raytracer_1_1_scene" ],
+      [ "ShapeComposite", "class_raytracer_1_1_shape_composite.html", "class_raytracer_1_1_shape_composite" ],
+      [ "Sphere", "class_raytracer_1_1_sphere.html", "class_raytracer_1_1_sphere" ],
+      [ "Transparency", "class_raytracer_1_1_transparency.html", "class_raytracer_1_1_transparency" ],
+      [ "Triangle", "class_raytracer_1_1_triangle.html", "class_raytracer_1_1_triangle" ]
+    ] ]
+];
