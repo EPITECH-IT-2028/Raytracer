@@ -561,6 +561,9 @@ void Raytracer::ParserConfigFile::parseConesInf(
       Math::Vector3D translation = parseVector3D(coneInf["translate"]);
       newConeInf->translate(translation);
     }
+    if (coneInf.exists("rotate")) {
+      parseRotation(coneInf["rotate"], newConeInf);
+    }
     if (coneInf.exists("material")) {
       std::string materialName = parseString(coneInf["material"]);
       if (materialName == "reflective") {
@@ -795,7 +798,7 @@ void Raytracer::ParserConfigFile::parsePrimitives(
     // CONESINF
     if (root.exists("primitives") && root["primitives"].exists("conesInf")) {
       static const std::unordered_set<std::string> allowedSettings = {
-          "x", "y", "z", "a", "color", "translate", "material"};
+          "x", "y", "z", "a", "color", "translate", "material", "rotate"};
       checkSettings(root["primitives"]["conesInf"], allowedSettings);
       parseConesInf(sc, root["primitives"]["conesInf"]);
     }

@@ -77,6 +77,13 @@ namespace Raytracer {
         _angle = angle;
       }
 
+      /**
+       * @brief Rotates the infinite cone around a specified axis by a given angle.
+       * @param axis The axis of rotation.
+       * @param angle The angle of rotation in radians.
+       */
+      void rotate(const Math::Vector3D &axis, float angle) override;
+
     private:
       Math::Vector3D _normal; ///< The normal vector defining the cone's axis.
       double _angle;          ///< The half-angle of the cone in radians.

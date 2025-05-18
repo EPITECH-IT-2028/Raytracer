@@ -77,6 +77,17 @@ Math::Vector3D Raytracer::ConeInf::getNormal(
   return normal;
 }
 
+void Raytracer::ConeInf::rotate(const Math::Vector3D &axis, float angle) {
+  double radians = angle * M_PI / 180.0;
+  double cos = std::cos(radians);
+  double sin = std::sin(radians);
+
+  Math::Vector3D newNormal =
+      _normal * cos + Math::cross(axis.normalized(), _normal) * sin +
+      axis.normalized() * axis.normalized().dot(_normal) * (1 - cos);
+  _normal = newNormal.normalize();
+}
+
 extern "C" {
 /**
  * @brief Factory function to create a new ConeInf instance.
